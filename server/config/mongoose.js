@@ -9,7 +9,7 @@ module.exports = {
 };
 
 // database name
-mongoose.connect('mongodb://localhost/Tabbs');
+mongoose.connect('mongodb://localhost/Vibe');
 
 // create a variable that points to the path where all of the models live
 var models_path = path.join(__dirname, '../models');

@@ -8,12 +8,11 @@ var flash 				= require('connect-flash');
 var morgan 				= require('morgan');
 var cookieParser 	= require('cookie-parser');
 var session 			= require('express-session');
-
+// require('angular')
 
 require('./server/config/mongoose.js');
 var passport = require('./server/config/passport.js');
-
-app.use(express.static(path.join(__dirname, "./clients/static")));
+app.use(express.static(path.join(__dirname, "./client")));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(morgan('dev')); //logs every request to console

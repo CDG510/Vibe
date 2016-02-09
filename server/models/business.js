@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var bcrypt = require('bcrypt-nodejs');
+// var bcrypt = require('bcrypt-nodejs');
 var Schema = mongoose.Schema;
 
 var BusinessSchema = new mongoose.Schema({
@@ -14,8 +14,7 @@ var BusinessSchema = new mongoose.Schema({
     messages_recieved: Number,
     messages_sent: Number,
     tabbs: [{type: Schema.Types.ObjectId, ref: 'Tabb'}],
-    messages: [{type: Schema.Types.ObjectId, ref: 'Message'}],
-    employees: [{type: Schema.Types.ObjectId, ref: 'Employee'}]
+    messages: [{type: Schema.Types.ObjectId, ref: 'Message'}]
   }
 })
 
