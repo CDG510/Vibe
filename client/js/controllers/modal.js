@@ -10,6 +10,7 @@ vibe.controller("ModalInstanceCtrl", function ($scope, $uibModalInstance, newStu
         		console.log(output)
         	});
             console.log('user form is in scope with', $scope.form.newStudio);
+            
             $uibModalInstance.close($scope.newStudio);
 
         } else {

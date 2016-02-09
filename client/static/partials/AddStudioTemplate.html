@@ -4,77 +4,42 @@
 <form name="form.newStudio" ng-submit="submitForm()" novalidate>
     <div class="modal-body">
         <!-- NAME -->
-        <div class="form-group">
-            <label>Name</label>
-            <input type="text" name="name" class="form-control" ng-model="newStudio.name" ng-minlength="3" ng-maxlength="30" required>
-            <p ng-show="form.newStudio.name.$invalid && !form.newStudio.name.$pristine" class="help-block">You name is required.</p>
-        </div>
+        <div class="form-group ">
+            <div class="studioFormName" >
+                <label>First Name</label>
+                <input type="text" name="firstName" class="form-control " ng-model="newStudio.firstName" ng-minlength="3" ng-maxlength="30" required>
+                <p ng-show="form.newStudio.firstName.$invalid && !form.newStudio.firstName.$pristine" class="help-block">Your first name is required.</p>
+            </div>
+            <div class="studioFormName">
+                <label>Last Name</label>
+                <input type="text" name="lastName" class="form-control " ng-model="newStudio.lastlastName" ng-minlength="3" ng-maxlength="30" required>
+                <p ng-show="form.newStudio.lastName.$invalid && !form.newStudio.lastName.$pristine" class="help-block">Your last name is required.</p>
+            </div>
 
-        <!-- LOCATION -->
-        <div class="form-group">
-            <label>Location</label>
-            <input type="text" name="username" class="form-control" ng-model="newStudio.location" ng-minlength="3" ng-maxlength="30" required>
-            <p ng-show="form.newStudio.location.$error.minlength" class="help-block">Location is too short.</p>
-            <p ng-show="form.newStudio.location.$error.maxlength" class="help-block">Location is too long.</p>
-        </div>
-
-        <!-- Specialty -->
-        <div class="form-group">
-            <label>Specialty</label>
-            <input type="text" name="specialty" class="form-control" ng-model="newStudio.specialty" ng-minlength="3" ng-maxlength="30" required>
-            <p ng-show="form.newStudio.specialty.$error.minlength" class="help-block">specialty is too short.</p>
-            <p ng-show="form.newStudio.specialty.$error.maxlength" class="help-block">specialty is too long.</p>
-        </div>
-        
-        <!-- img -->
-        <div class="form-group">
-            <label>Profile Photo URL</label>
-            <input type="text" name="photo" class="form-control" ng-model="newStudio.photo" ng-minlength="3">
-            <p ng-show="form.newStudio.photo.$error.minlength" class="help-block">photo url is too short.</p>
-
-        </div>
-
-        <!-- social -->
-        <div class="form-group">
-            <label>Facebook URL</label>
-            <input type="text" name="websites" class="form-control" ng-model="newStudio.websites" ng-minlength="3">
-            <p ng-show="form.newStudio.websites.$error.minlength" class="help-block">url is too short.</p>
-        </div>
-
-        <!-- PhoneNUmber -->
-        <div class="form-group">
-            <label>Phone Number</label>
-            <input type="phone" name="phone" class="form-control" ng-model="newStudio.phone" ng-pattern="phoneNumbr" placeholder="Phone Number" required>
-            <p ng-show="form.newStudio.phone.$invalid && !form.newStudio.phone.$pristine" class="help-block">Enter a valid Phone nUmber.</p>
         </div>
 
         <!-- EMAIL -->
         <div class="form-group">
-            <label>Email</label>
-            <input type="email" name="email" class="form-control" ng-model="newStudio.email" required>
-            <p ng-show="form.newStudio.email.$invalid && !form.newStudio.email.$pristine" class="help-block">Enter a valid email.</p>
+            <div class="studioFormName">
+                <label>Email</label>
+                <input type="email" name="email" class="form-control" ng-model="newStudio.email" required>
+                <p ng-show="form.newStudio.email.$invalid && !form.newStudio.email.$pristine" class="help-block">Enter a valid email.</p>
+            </div>
+            <!-- PASSWORD -->
+            <div class="studioFormName">
+                <label>Password</label>
+                <input type="password" name="password" class="form-control" ng-model="newStudio.password" required>
+                <p ng-show="form.newStudio.password.$invalid && !form.newStudio.password.$pristine" class="help-block">Enter a valid password.</p>
+            </div>
         </div>
+<!-- 
+        <div class="form-group">
+            
+        </div> -->
 
     </div>
     <div class="modal-footer">
         <button type="submit" class="btn btn-default btn-lg" ng-disabled="form.newStudio.$invalid">OK</button>
         <button class="btn btn-cancel btn-lg" ng-click="cancel()">Cancel</button>
+        </form>
     </div>
-</form>
-
-<!-- name: String,
-    mainContact: String,
-    technicians: Array,
-    specialty: String,
-    websites: Array,
-    email: String,
-    password: String,
-    shortBio: String,
-    fullBio: String,
-    profileImage: String,
-    location: String,
-    phone: String,
-    ratings: Array,
-    schedule: Object,
-    price: Number -->
-         

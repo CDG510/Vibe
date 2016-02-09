@@ -1,8 +1,8 @@
 vibe.controller("StudiosController", function ($scope, $location, $routeParams, StudiosFactory, $uibModal, $log, ezfb) {
-	$scope.openModal = false
+	// $scope.openModal = false
 	
 
-
+	$scope.successAdd = false
 	 //  $scope.items = ['item1', 'item2', 'item3'];
 
   // $scope.animationsEnabled = true;
@@ -29,15 +29,20 @@ vibe.controller("StudiosController", function ($scope, $location, $routeParams, 
                 }
             });
 
-            modalInstance.result.then(function (selectedItem) {
-                $scope.selected = selectedItem;
-                
-
-                console.log($scope.selected, "after promise/result")
+            modalInstance.result.then(function (studioForm) {
+                $scope.newStudio = studioForm;
+                console.log($scope.newStudio, "after promise/result")
+                $scope.successAdd = true
             }, function () {
                 $log.info('Modal dismissed at: ' + new Date());
-                            });
+                $scope.successAdd = false
+              });
         };
+
+        $scope.toProfile = function() {
+        	console.log($scope.newStudio)
+			$location.path('/profile').search({studio: $scope.newStudio});
+        }
 
 
 
