@@ -1,0 +1,19 @@
+{
+  "name": "",
+  "version": "0.1",
+  "description": "Connect Musicans & Recording Studios Togeather",
+  "repository": {
+  "type": "git",
+  "url": "https://github.com/SuragSheth/Vibe"
+  },
+  "dependencies": {
+    "body-parser": "^1.14.2",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.1",
+    "express": "^4.13.4",
+    "express-session": "^1.13.0",
+    "mongoose": "^4.4.1",
+    "morgan": "^1.6.1",
+    "path": "^0.12.7"
+  }
+}
