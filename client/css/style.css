@@ -491,6 +491,16 @@ body {
     background-color: black
 }
 
+#successfulAddStudio {
+    margin-top: 30px;
+}
+
+.studioFormName {
+    width: 45%;
+    display: inline-block;
+}
+
+
 /*.modal {
     background-color: black;
 }*/

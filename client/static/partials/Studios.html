@@ -59,10 +59,17 @@
                 <div class="page-body">
                 <!-- this should open up to facebook OAuth -->
                     <button class="btn btn-default btn-lg" ng-click="showForm()">Add your studio</button>
-                </div>  
+                </div> 
 
-    
-   
+                <div ng-show="successAdd" id="successfulAddStudio"> 
+                    <p>Thank you {{newStudio.firstName}}, check for a confirmation to complete your registration.</p>
+                  <!--   <p>Until then, would you like to go to your temporary profile page?</p>
+                    <button ng-click="toProfile()" class="btn btn-default btn-lg">OK</button>
+                    <button class="btn btn-cancel btn-lg" >No thanks</button> -->
+                </div>
+
+                
+                </div>
             </div>
         </div>
     </section>

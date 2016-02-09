@@ -1,0 +1,25 @@
+<div class='modal-content'>
+
+<div class="modal-header">
+    <h2 class="text-center">Set your Schedule</h2>
+</div>
+    <div class="modal-body">
+        <!-- NAME -->
+        <form name="form.studioSchedule" ng-submit="confirm()" novalidate>
+
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" name="name" class="form-control" ng-model="studioSchedule.name" ng-minlength="3" ng-maxlength="30" required>
+            <p ng-show="form.studioSchedule.name.$invalid && !form.studioSchedule.name.$pristine" class="help-block">You name is required.</p>
+        </div>
+
+        <!-- LOCATION -->
+        
+
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-default btn-lg" ng-disabled="form.studioSchedule.$invalid" ng-click="confirm()">OK</button>
+        <button class="btn btn-cancel btn-lg" ng-click="cancel()">Cancel</button>
+        </form>
+    </div>
+</div>

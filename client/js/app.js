@@ -7,6 +7,7 @@ vibe.config(function ($routeProvider, $locationProvider, ezfbProvider) {
     .when('/', {templateUrl: "/static/partials/homePage.html"})
     .when('/artists', {templateUrl: "/static/partials/Artists.html"})
     .when('/studios', {templateUrl: "/static/partials/Studios.html"})
+    .when('/profile', {templateUrl: "/static/partials/studioPage.html"})
     .otherwise({
         redirectTo: '/'
     });
