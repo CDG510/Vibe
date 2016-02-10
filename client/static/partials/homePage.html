@@ -1,25 +1,37 @@
 <div ng-controller = "HomeController">
 <!-- nav bar -->
-    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation" id='top'>
 
         <div class="container">
-            
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand page-scroll" ng-click="scrollTo('introTop')">
+                    <i class="fa fa-play-circle"></i>
+                    <ul class="nav navbar-nav">
+                        <li du-scrollspy="anchor"><a class="page-scroll" ng-click="scrollTo('introTop')">Home</a></li>
+                    </ul>
+                </a>
+            </div>
+
         <!-- need to use angular directives to collapse header -->
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
                 <ul class="nav navbar-nav">
                     <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+
                     <li>
-                        <a class="page-scroll" href="/#/">Home</a>
+                        <a class="page-scroll" ng-click="scrollTo('intro-Artist')">Artists</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="/#/artists">Artists</a>
+                        <a class="page-scroll" ng-click="scrollTo('intro-Studio')">Studios</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="/#/studios">Studios</a>
+                        <a class="page-scroll" href="/#/login">Login</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#contact">Connect</a>
+                        <a class="page-scroll" href="/#/signUp">Sign Up</a>
                     </li>
                 </ul>
             </div>
@@ -29,18 +41,14 @@
     </nav>
 
     <!-- end navbar -->
-
-    <header class="intro">
+<!-- intro content -->
+    <header class="intro" id="introTop">
         <div class="intro-body">
             <div class="container">
                 <div class="row" id="introInfo">
                     <div class="col-md-8 col-md-offset-2">
                         <h1 class="brand-heading">Vibe</h1>
                         <p class="intro-text">A music service to find who you need</p>
-                        
-                       <!--  <a href="#about" class="btn btn-circle page-scroll">
-                            <i class="fa fa-angle-double-down animated"></i>
-                        </a> -->
                     </div>
                 </div>
             </div>
@@ -59,19 +67,22 @@
         </div>
     </section>
 
-    <!-- Search Section -->
-    <section id="download" class="content-section text-center">
+    <!-- Artist-Search Studio Section -->
+    <section id="intro-Artist" class="content-section text-center">
         <div class="download-section">
             <div class="container">
                 <div class='row'>
                     <div class="col-lg-8 col-lg-offset-2">
-                        <h2>Find Studios</h2>
+                        <h2>Artists</h2>
                         <form role="form">
+                        <p>Find studios, get recording</p>
                             <div class="form-group" ng-submit="findStudioSearch()">
-                                <input type="text" class="form-control input-sm" id="exampleInputEmail1" ng-model="studioSearch.searchTerm" />
+                                <input type="text" class="form-control input-sm" id="exampleInputEmail1" ng-model="studioSearch.searchTerm" placeholder="Desired location" />
+                                <!-- add geolocator button -->
                             </div>
 
                             <button type="submit" class="btn btn-default btn-lg" id="submitSearchButton" ng-click="findStudioSearch()" >Search for Studios</button>
+
                             <!-- on submit this should perform a search of studios, whether by name, location, genre, etc etc, ideally redirect to a results page OR just show stuff below -->
                         </form>
                     </div>
@@ -80,11 +91,12 @@
         </div>
     </section>
 
+    <!-- contact -->
     <section id="contact" class="container content-section text-center">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2">
+            <div class="col-lg-8 col-lg-offset-2" id="contactInfo">
                 <h2>Contact Vibe</h2>
-                <p>Feel free to email us to let us know about anything we missed</p>
+                <p>Feel free to collab with us to let us to make musicians lives everywhere better</p>
                 <!-- <p><a href="mailto:feedback@startbootstrap.com">feedback@startbootstrap.com</a> -->
                 </p>
                 <ul class="list-inline banner-social-buttons">
@@ -101,6 +113,21 @@
             </div>
         </div>
     </section>
+
+<!-- studio Add user section -->
+    <header id="intro-Studio" class="intro">
+        <div class="intro-body">
+            <div class="container">
+                <div class="row" id="introInfo">
+                    <div class="col-md-8 col-md-offset-2">
+                        <h1>Studios</h1>
+                        <p class="intro-text">Set your Schedule. Reap your rewards</p>
+                        <button class="btn btn-default btn-lg" ng-click="showForm()">Add your studio</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
         
 <!--     <div id="map"></div>
  -->

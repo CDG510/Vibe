@@ -1,8 +1,8 @@
-var vibe = angular.module('vibe', ['ngRoute', 'ui.bootstrap', 'ezfb']);
+var vibe = angular.module('vibe', ['ngRoute', 'ui.bootstrap', 'duScroll']).value('duScrollDuration', 1500);;
 
 var PHONE_REGEXP = /^[(]{0,1}[0-9]{3}[)\.\- ]{0,1}[0-9]{3}[\.\- ]{0,1}[0-9]{4}$/;
 
-vibe.config(function ($routeProvider, $locationProvider, ezfbProvider) {
+vibe.config(function ($routeProvider, $locationProvider) {
     $routeProvider
     .when('/', {templateUrl: "/static/partials/homePage.html"})
     .when('/artists', {templateUrl: "/static/partials/Artists.html"})
@@ -27,6 +27,3 @@ vibe.config(function ($routeProvider, $locationProvider, ezfbProvider) {
 
    //  })
 });
-
-
-// , 'ngAnimate'

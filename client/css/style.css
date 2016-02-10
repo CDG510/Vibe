@@ -57,6 +57,9 @@ p {
     font-size: 16px;
     color: #fff;
 }
+.navbar-nav {
+    margin-left: ;
+}
 
 .navbar-custom .navbar-brand .navbar-toggle:focus,
 .navbar-custom .navbar-brand .navbar-toggle:active {
@@ -120,7 +123,7 @@ p {
     display: table;
     width: 100%;
     height: auto;
-    padding: 150px 0px 250px 0;
+    padding: 200px 0px 200px 0;
     text-align: center;
     color: #fff;
     background: url(../img/metatrons.jpg) no-repeat top center scroll;
@@ -398,8 +401,8 @@ body {
 }
 
 #introInfo {
-/*     padding: 100px 0px 100px 0;*/
-     margin-bottom: 200px;
+     padding: 100px 0px 100px 0;
+     margin-bottom: 130px;
 }
 
 #about {
@@ -410,7 +413,7 @@ body {
 #download {
     vertical-align: middle;
     width: 100%;
-    padding:  200px 0 200px 0;
+    padding:  130px 0 120px 0;
     color: #fff;
     background: url(../img/studioBackground.jpeg) no-repeat center center scroll;
     background-color: #000;
@@ -422,21 +425,25 @@ body {
     margin: 0 auto;
 }
 #exampleInputEmail1 {
-    width: 50%;
+    width: 25%;
     text-align:left;
     vertical-align: middle;
     margin: 0 auto;
 }
 
 #contact {
-    padding: 200px 0px 200px 0px;
+    padding: 260px 0px 200px 0px;
 }
+    #contactInfo {
+            margin-top: 100px 0 100px 0;
+
+    }
 
 #intro-Studio {
     display: table;
     width: 100%;
     height: auto;
-    padding: 100px 0px 20px 0;
+    padding: 100px 0px 0 0;
     text-align: center;
     color: #fff;
     background: url(../img/studioHands.jpg) no-repeat bottom center scroll;
@@ -446,15 +453,18 @@ body {
     background-size: cover;
     -o-background-size: cover;
 }
+#intro-Studio h1 {
+    font-size: 40px;
+}
 
 #intro-Artist {
     display: table;
     width: 100%;
     height: auto;
-    padding: 100px 0px 20px 0;
+    padding: 125px 0px 125px 0;
     text-align: center;
     color: #fff;
-    background: url(../img/guitarImg.jpeg) no-repeat bottom center scroll;
+    background: url(../img/bassist.jpeg) no-repeat bottom center scroll;
     background-color: #000;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -499,10 +509,5 @@ body {
     width: 45%;
     display: inline-block;
 }
-
-
-/*.modal {
-    background-color: black;
-}*/
 
 
