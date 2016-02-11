@@ -11,8 +11,7 @@ html {
     width: 100%;
     height: 100%;
     color: green;
-/*    background-color: red;
-*/}
+}
 
 h1,
 h2,
@@ -32,9 +31,11 @@ p {
     margin: 0 0 25px;
     font-size: 18px;
     line-height: 1.5;
-/*    color: red;
-*/}
+}
 
+#top {
+    display: inline-block;
+}
 
 .navbar-custom {
     margin-bottom: 0;
@@ -42,6 +43,7 @@ p {
     text-transform: uppercase;
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
     background-color: #000;
+    width: 100%;
 }
 
 .navbar-custom .navbar-brand {
@@ -54,11 +56,24 @@ p {
 
 .navbar-custom .navbar-brand .navbar-toggle {
     padding: 4px 6px;
-    font-size: 16px;
-    color: #fff;
+    font-size: 24px;
+
 }
-.navbar-nav {
-    margin-left: ;
+#toggleButton {
+    color: white;
+    background-color: black;
+}
+
+#droDownMenu {
+    float: right;
+    background-color: black;
+    color: white;
+}
+.dropDownMenu li, a:hover {
+    outline: 0;
+    color: rgba(255,255,255,.8);
+    background-color: transparent;
+
 }
 
 .navbar-custom .navbar-brand .navbar-toggle:focus,
@@ -70,6 +85,13 @@ p {
     color: #fff;
 }
 
+.navbar-header {
+    width: 100%;
+    display: inline;
+}
+.navbar-head {
+    display: inline-block;
+}
 .navbar-custom .nav li a {
     -webkit-transition: background .3s ease-in-out;
     -moz-transition: background .3s ease-in-out;
@@ -154,7 +176,7 @@ p {
 
 @media(min-width:768px) {
     .intro {
-        height: 100%;
+        height: 400px;
         padding: 0;
     }
 
@@ -250,26 +272,7 @@ p {
     padding: 10px 0 100px 0;
 }
 
-/*.download-section {
-    width: 100%;
-    padding: 100px 100px 100px 100px;
-    color: #fff;
-    background: url(../img/studioHands.jpg) no-repeat center center scroll;
-    background-color: #000;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover;
-    -o-background-size: cover;
-    display: block;
-    margin: 0 auto;
-}*/
 
-
-/*#map {
-    width: 100%;
-    height: 200px;
-    margin-top: 100px;
-}*/
 
 #download {
     display: table-cell;
@@ -406,8 +409,8 @@ body {
 }
 
 #about {
-    padding: 100px 0 200px 0;
-    margin-top: 100px;
+    padding: 200px 0 200px 0;
+    /*margin: 100px 50px 0px 50px;*/
 }
 
 #download {
@@ -432,7 +435,7 @@ body {
 }
 
 #contact {
-    padding: 260px 0px 200px 0px;
+    padding: 260px 0px 250px 0px;
 }
     #contactInfo {
             margin-top: 100px 0 100px 0;
@@ -506,8 +509,28 @@ body {
 }
 
 .studioFormName {
-    width: 45%;
-    display: inline-block;
+    width: 50%;
+    text-align: center;
+    vertical-align: middle;
+
 }
 
+#loginInput {
+    text-align: center;
+margin: 20px 50px 20px 50px;
 
+}
+
+#login {
+    padding: 100px 0 200px 0;
+    margin: 100px 50px 0px 50px;
+}
+
+#signUp {
+    padding: 100px 0 200px 0;
+    margin: 100px 50px 0px 50px;
+}
+
+.submitButtons {
+    margin-top: 20px;
+}

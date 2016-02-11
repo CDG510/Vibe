@@ -3,21 +3,32 @@
     <nav class="navbar navbar-custom navbar-fixed-top" role="navigation" id='top'>
 
         <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
-                    <i class="fa fa-bars"></i>
-                </button>
-                <a class="navbar-brand page-scroll" ng-click="scrollTo('introTop')">
-                    <i class="fa fa-play-circle"></i>
-                    <ul class="nav navbar-nav">
-                        <li du-scrollspy="anchor"><a class="page-scroll" ng-click="scrollTo('introTop')">Home</a></li>
+            <div class="navbar-head">
+                
+                <div class="btn-group" uib-dropdown is-open="status.isopen" id="toggleButton" >
+                    <button type="button"  class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse" uib-dropdown-toggle><span class="glyphicon glyphicon-align-justify"></span></button>
+                    <ul class="droDownMenu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                        <li role="menuitem"><a class="page-scroll" ng-click="scrollTo('intro-Artist')">Artists</a></li>
+                        <li role="menuitem"><a class="page-scroll" ng-click="scrollTo('intro-Studio')">Studios</a></li>
+                        <li role="menuitem"><a class="page-scroll" href="/#/login">Login</a></li>
+                        <li role="menuitem"><a class="page-scroll" href="/#/signUp">Sign Up</a></li>
                     </ul>
-                </a>
+                    <!-- <ul class="droDownMenu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                        <li role="menuitem"><a class="page-scroll" ng-click="scrollTo('intro-Artist')">Artists</a></li>
+                        <li role="menuitem"><a class="page-scroll" ng-click="scrollTo('intro-Studio')">Studios</a></li>
+                        <li role="menuitem"><a class="page-scroll" href="/#/login">Login</a></li>
+                        <li role="menuitem"><a class="page-scroll" href="/#/signUp">Sign Up</a></li>
+                    </ul> -->
+                </div>
+                <a class="navbar-brand page-scroll" ng-click="scrollTo('introTop')">Home</a>
+                <!-- dropdown-append-to="appendToEl" -->
+                
             </div>
+
 
         <!-- need to use angular directives to collapse header -->
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse" collapse="navCollapsed" id="collapsedLinks">
                 <ul class="nav navbar-nav">
                     <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
 

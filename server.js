@@ -7,6 +7,7 @@ var flash 				= require('connect-flash');
 var morgan 				= require('morgan');
 var cookieParser 	= require('cookie-parser');
 var session 			= require('express-session');
+var _ = require("underscore");
 var passport = require('./server/config/passport.js');
 
 // require('angular')

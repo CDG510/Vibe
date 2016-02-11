@@ -1,4 +1,4 @@
-var vibe = angular.module('vibe', ['ngRoute', 'ui.bootstrap', 'duScroll']).value('duScrollDuration', 1500);;
+var vibe = angular.module('vibe', ['ngRoute', 'ui.bootstrap', 'duScroll']).value('duScrollDuration', 500);;
 
 var PHONE_REGEXP = /^[(]{0,1}[0-9]{3}[)\.\- ]{0,1}[0-9]{3}[\.\- ]{0,1}[0-9]{4}$/;
 
@@ -8,22 +8,10 @@ vibe.config(function ($routeProvider, $locationProvider) {
     .when('/artists', {templateUrl: "/static/partials/Artists.html"})
     .when('/studios', {templateUrl: "/static/partials/Studios.html"})
     .when('/profile', {templateUrl: "/static/partials/studioPage.html"})
+    .when('/login', {templateUrl: "/static/partials/login.html"})
+    .when("/signUp", {templateUrl: "/static/partials/signUp.html"})
     .otherwise({
         redirectTo: '/'
     });
-  //    ezfbProvider.setInitParams({
-  //   appId: '1530701907226627'
-  // }); 
-    // or
-    // $window.FB.init(ezfbInitParams);
 
-  //   $rootScope.$broadcast('en_US');
-  // };
-
-  	// ezfbProvider.setInitFunction(myInitFunction);
-   //  ezfbProvider.setLocale('zh_TW')
-   //  ezfbProvider.setInitParams({
-   //  	appId: '1530701907226627'
-
-   //  })
 });

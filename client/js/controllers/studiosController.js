@@ -9,14 +9,7 @@ vibe.controller("StudiosController", function ($scope, $location, $routeParams, 
   	$scope.showForm = function () {
             $scope.message = "Show Form Button Clicked";
             console.log($scope.message);
-    //         ezfb.login(function (res) {
-    //   /**
-    //    * no manual $scope.$apply, I got that handled
-    //    */
-    //   if (res.authResponse) {
-    //     updateLoginStatus(updateApiMe);
-    //   }
-    // }, {scope: 'email,user_likes'});
+   
             var modalInstance = $uibModal.open({
                 templateUrl: 'static/partials/AddStudioTemplate.html',
                 controller: 'ModalInstanceCtrl',

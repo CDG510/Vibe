@@ -2,12 +2,16 @@ vibe.controller("HomeController", function ($scope, $location, $routeParams, $do
 
 
 // figure out how to animate the nav bar and make the collapsible menu nav bar thing
-
+$scope.showlist = false
 $scope.findStudioSearch = function() {
 	console.log($scope.studioSearch)
 	$location.path('/artists').search({search: $scope.studioSearch});
 
 }
+
+ $scope.status = {
+    isopen: false
+  };
 
 $scope.showForm = function () {
             $scope.message = "Show Form Button Clicked";
@@ -35,6 +39,11 @@ $scope.showForm = function () {
               });
         };
 
+        $scope.showLinks = function() {
+        	console.log('open da list')
+        	$scope.showlist = true
+        }
+
   
 $scope.scrollTo = function(id) {
       var thisLocation = $location.hash(id);
@@ -44,14 +53,15 @@ $scope.scrollTo = function(id) {
     $document.scrollToElementAnimated(someElement);
       // $anchorScroll();
    }
-// function collapseNavbar() {
-//     if ($(".navbar").offset().top > 50) {
-//         $(".navbar-fixed-top").addClass("top-nav-collapse");
-//     } else {
-//         $(".navbar-fixed-top").removeClass("top-nav-collapse");
-//     }
-// }
+$scope.appendToEl = angular.element(document.querySelector('#toggleButton'))
 
-// $(window).scroll(collapseNavbar);
-// $(document).ready(collapseNavbar);
+   $(window).on("resize.doResize", _.throttle(function (){
+            console.log(window.innerWidth);
+            if (window.innerWidth > 768) {
+            	$scope.isopen = false
+            }
+            // $scope.$apply(function(){
+            //    //do something to update current scope based on the new innerWidth and let angular update the view.
+            // });
+        },100));
 });
