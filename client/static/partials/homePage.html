@@ -5,11 +5,11 @@
         <div class="container">
             <div class="navbar-head">
                 <div class="row">
-                
+
                 <div class="btn-group"  id="toggleButton" >
                 <a class="navbar-brand page-scroll" ng-click="scrollTo('introTop')">Home</a>
                     <button type="button"  class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse" ng-click="dropDown=!dropDown" id="dropDownMenu"><span class="glyphicon glyphicon-align-justify"></span></button>
-                   
+
                     </div>
                     <!-- <ul class="droDownMenu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
                         <li role="menuitem"><a class="page-scroll" ng-click="scrollTo('intro-Artist')">Artists</a></li>
@@ -17,7 +17,7 @@
                         <li role="menuitem"><a class="page-scroll" href="/#/login">Login</a></li>
                         <li role="menuitem"><a class="page-scroll" href="/#/signUp">Sign Up</a></li>
                     </ul> -->
-                    
+
                     <div class="row">
                         <ul class="droDownMenu text-left animate-show"  role="menu" aria-labelledby="single-button" ng-hide="dropDown">
                             <li role="menuitem"><a class="page-scroll" ng-click="scrollTo('intro-Artist')">Artists</a></li>
@@ -27,9 +27,9 @@
                         </ul>
                     </div>
                 </div>
-                
+
                 <!-- dropdown-append-to="appendToEl" -->
-                
+
             </div>
 
 
@@ -109,6 +109,22 @@
         </div>
     </section>
 
+    <!-- studio Add user section -->
+        <header id="intro-Studio" class="intro">
+            <div class="intro-body">
+                <div class="container">
+                    <div class="row" id="introInfo">
+                        <div class="col-md-8 col-md-offset-2">
+                            <h1>Studios</h1>
+                            <p class="intro-text">Set your Schedule. Reap your rewards</p>
+                            <button class="btn btn-default btn-lg" ng-click="showForm()">Add your studio</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+
     <!-- contact -->
     <section id="contact" class="container content-section text-center">
         <div class="row">
@@ -132,21 +148,7 @@
         </div>
     </section>
 
-<!-- studio Add user section -->
-    <header id="intro-Studio" class="intro">
-        <div class="intro-body">
-            <div class="container">
-                <div class="row" id="introInfo">
-                    <div class="col-md-8 col-md-offset-2">
-                        <h1>Studios</h1>
-                        <p class="intro-text">Set your Schedule. Reap your rewards</p>
-                        <button class="btn btn-default btn-lg" ng-click="showForm()">Add your studio</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-        
+
 <!--     <div id="map"></div>
  -->
 
