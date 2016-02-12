@@ -33,6 +33,10 @@ p {
     line-height: 1.5;
 }
 
+li {
+    list-style-type:none
+}
+
 #top {
     display: inline-block;
 }
@@ -48,6 +52,7 @@ p {
 
 .navbar-custom .navbar-brand {
     font-weight: 700;
+    background-color: transparent;
 }
 
 .navbar-custom .navbar-brand:focus {
@@ -61,10 +66,12 @@ p {
 }
 #toggleButton {
     color: white;
-    background-color: black;
+    background-color: transparent;
+    display: row;
+     transition: all linear 0.5s;
 }
 
-#droDownMenu {
+#dropDownMenu {
     float: right;
     background-color: black;
     color: white;
@@ -446,7 +453,7 @@ body {
     display: table;
     width: 100%;
     height: auto;
-    padding: 100px 0px 0 0;
+    padding: 110px 0px 10px 0;
     text-align: center;
     color: #fff;
     background: url(../img/studioHands.jpg) no-repeat bottom center scroll;
@@ -512,6 +519,7 @@ body {
     width: 50%;
     text-align: center;
     vertical-align: middle;
+    text-align:center;
 
 }
 

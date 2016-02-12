@@ -7,7 +7,12 @@ vibe.controller("studioProfileController", function ($scope, $location, $routePa
 		$scope.searched = true
 	}
 
+	//function to edit information
 
+	//function to delete 
 
+	//function to add/setup account information like dates/hours/payment etc
+
+	
 
 });

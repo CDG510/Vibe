@@ -3,9 +3,11 @@ vibe.factory("StudiosFactory", function ($http) {
 	var factory = {}
 
 	//function to find searched studios
-	factory.findStudios = function(search, callback) {
+	factory.searchStudios = function(search, callback) {
+		console.log("in the factory with", search)
+		// api call to DB for search results would go here
 		callback(search)
-		// $http.get("#", search)
+		// callback should really be using DB results
 	};
 
 	//function to add studios of interest

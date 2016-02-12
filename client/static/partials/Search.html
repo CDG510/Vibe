@@ -1,10 +1,8 @@
-<div ng-controller = "loginController" >
-
+<div ng-controller="SearchController">
 	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation" id='top'>
 
         <div class="container">
             <div class="navbar-head">
-                
                 <div class="btn-group" uib-dropdown is-open="status.isopen" id="toggleButton" >
                     <button type="button"  class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse" uib-dropdown-toggle><span class="glyphicon glyphicon-align-justify"></span></button>
                     <ul class="droDownMenu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
@@ -13,14 +11,11 @@
                     </ul>
    
                 </div>
-                <a class="navbar-brand page-scroll" href="/#/">Home</a>
-                <!-- dropdown-append-to="appendToEl" -->
-                
+                <a class="navbar-brand page-scroll" href="/#/">Home</a>                
             </div>
 
             <div class="collapse navbar-collapse navbar-right navbar-main-collapse" collapse="navCollapsed" id="collapsedLinks">
                 <ul class="nav navbar-nav">
-                 
                     <li>
                         <a class="page-scroll" href="/#/login">Login</a>
                     </li>
@@ -34,33 +29,25 @@
         <!-- /.container -->
     </nav>
 
-<section id="login" class="container content-section text-center">
+    <section id="login" class="container content-section ">
         <div class="row">
             <div class="col-xs-4 col-xs-offset-4 ">
-                <h1>Login</h1>
+                <h1 class="text-center">You searched for: {{searchTerm}}</h1>
                 <div class="row">
-				  <form class="form" role="form">
-					<div class="form-group">
-			            <div class= "loginInput ">
-			                <label>Email</label>
-			                <input type="email" name="email" class="form-control" ng-model="newStudio.email" required>
-			                <p ng-show="form.newStudio.email.$invalid && !form.newStudio.email.$pristine" class="help-block">Enter a valid email.</p>
-			            </div>
-			            <!-- PASSWORD -->
-			            <div class="loginInput" >
-			                <label>Password</label>
-			                <input type="password" name="password" class="form-control " ng-model="newStudio.password" required>
-			                <p ng-show="form.newStudio.password.$invalid && !form.newStudio.password.$pristine" class="help-block">Enter a valid password.</p>
-			            </div>
-			            <div class="row submitButtons" >
-                            <button type="submit" class="btn btn-default btn-lg" ng-disabled="form.newStudio.$invalid">OK</button>
-                            <button class="btn btn-cancel btn-lg" ng-click="cancel()">Cancel</button>
-                        </div>
-			        </div>
-				</form>
-		        </div>
-		        </div>
+					<p class="text-center"> results</p>
 
+					<div class="row">
+						<ul ng-repeat="studio in tempStudios">
+							<li><h4>{{studio.name}}</h4></li>
+							<li><p>{{studio.specialty}}</p></li>
+							<li><p>{{studio.website}}</p></li>
+							<li><p>{{studio.phone}}</p></li>
+							<li><p>{{studio.price}}</p></li>
+							<li><button class="btn btn-default btn-lg" ng-click="seeProfile()">See Studio</button>
+						</ul>
+		        	</div>
+		    	</div>
             </div>
     </section>
- </div>
+	
+</div>
