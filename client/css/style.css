@@ -67,8 +67,9 @@ li {
 #toggleButton {
     color: white;
     background-color: transparent;
-    display: row;
+    display: inline-block;
      transition: all linear 0.5s;
+     float: right;
 }
 
 #dropDownMenu {
@@ -94,7 +95,7 @@ li {
 
 .navbar-header {
     width: 100%;
-    display: inline;
+    display: inline-block;
 }
 .navbar-head {
     display: inline-block;

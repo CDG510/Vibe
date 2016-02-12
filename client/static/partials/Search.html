@@ -36,13 +36,13 @@
                 <div class="row">
 					<p class="text-center"> results</p>
 
-					<div class="row">
-						<ul ng-repeat="studio in tempStudios">
-							<li><h4>{{studio.name}}</h4></li>
-							<li><p>{{studio.specialty}}</p></li>
-							<li><p>{{studio.website}}</p></li>
-							<li><p>{{studio.phone}}</p></li>
-							<li><p>{{studio.price}}</p></li>
+					<div class="row" class="text-center">
+						<ul ng-repeat="studio in tempStudios" >
+							<li><h3>{{studio.name}}</h3></li>
+							<li><p>Speciality: {{studio.specialty}}</p></li>
+							<li><p>Websites:{{studio.website}}</p></li>
+							<li><p>Phone #:{{studio.phone}}</p></li>
+							<li><p>Hourly rate: {{studio.price}}$</p></li>
 							<li><button class="btn btn-default btn-lg" ng-click="seeProfile()">See Studio</button>
 						</ul>
 		        	</div>

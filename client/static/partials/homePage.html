@@ -6,24 +6,24 @@
             <div class="navbar-head">
                 <div class="row">
                 
+                <!-- this is the collapsed list -->
+                <a class="navbar-brand page-scroll" ng-click="scrollTo('introTop')">Vibe</a>
+   
+                      
                 <div class="btn-group"  id="toggleButton" >
-                <a class="navbar-brand page-scroll" ng-click="scrollTo('introTop')">Home</a>
-                    <button type="button"  class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse" ng-click="dropDown=!dropDown" id="dropDownMenu"><span class="glyphicon glyphicon-align-justify"></span></button>
+                
+                    <button type="button"  class="navbar-toggle pull-right" data-toggle="collapse" data-target=".navbar-main-collapse" ng-click="dropDown=!dropDown" id="dropDownMenu"><span class="glyphicon glyphicon-align-justify"></span></button>
                    
-                    </div>
-                    <!-- <ul class="droDownMenu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
-                        <li role="menuitem"><a class="page-scroll" ng-click="scrollTo('intro-Artist')">Artists</a></li>
-                        <li role="menuitem"><a class="page-scroll" ng-click="scrollTo('intro-Studio')">Studios</a></li>
-                        <li role="menuitem"><a class="page-scroll" href="/#/login">Login</a></li>
-                        <li role="menuitem"><a class="page-scroll" href="/#/signUp">Sign Up</a></li>
-                    </ul> -->
+                </div>
                     
                     <div class="row">
-                        <ul class="droDownMenu text-left animate-show"  role="menu" aria-labelledby="single-button" ng-hide="dropDown">
+
+                        <ul class="droDownMenu text-right animate-show"  role="menu" aria-labelledby="single-button" ng-hide="dropDown">
+                        <li><a class="page-scroll" ng-click="scrollTo('introTop')">Home</a></li>
                             <li role="menuitem"><a class="page-scroll" ng-click="scrollTo('intro-Artist')">Artists</a></li>
                             <li role="menuitem"><a class="page-scroll" ng-click="scrollTo('intro-Studio')">Studios</a></li>
                             <li role="menuitem"><a class="page-scroll" href="/#/login">Login</a></li>
-                            <li role="menuitem"><a class="page-scroll" href="/#/signUp">Sign Up</a></li>
+<!--                             <li role="menuitem"><a class="page-scroll" href="/#/signUp">Sign Up</a></li> -->
                         </ul>
                     </div>
                 </div>
@@ -33,12 +33,12 @@
             </div>
 
 
-        <!-- need to use angular directives to collapse header -->
-            <!-- Collect the nav links, forms, and other content for toggling -->
+    <!-- this is the wide screen list -->
+
             <div class="collapse navbar-collapse navbar-right navbar-main-collapse" collapse="navCollapsed" id="collapsedLinks">
                 <ul class="nav navbar-nav">
                     <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
-
+                    <li><a class="page-scroll" ng-click="scrollTo('introTop')">wut</a></li>
                     <li>
                         <a class="page-scroll" ng-click="scrollTo('intro-Artist')">Artists</a>
                     </li>
@@ -48,9 +48,9 @@
                     <li>
                         <a class="page-scroll" href="/#/login">Login</a>
                     </li>
-                    <li>
+ <!--                    <li>
                         <a class="page-scroll" href="/#/signUp">Sign Up</a>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
