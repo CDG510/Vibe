@@ -7,20 +7,11 @@ var flash 				= require('connect-flash');
 var morgan 				= require('morgan');
 var cookieParser 	= require('cookie-parser');
 var session 			= require('express-session');
-<<<<<<< HEAD
-var _ = require("underscore");
-=======
->>>>>>> b5480aae2259c473d9284f0478d9dacc100fbff3
 var passport = require('./server/config/passport.js');
 
-// require('angular')
-('./server/config/mongoose.js');
 
-<<<<<<< HEAD
-=======
 require('./server/config/mongoose.js');
 
->>>>>>> b5480aae2259c473d9284f0478d9dacc100fbff3
 app.use(express.static(path.join(__dirname, "./client")));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
