@@ -64,23 +64,27 @@ li {
     font-size: 24px;
 
 }
-#toggleButton {
+#menuToggleButton {
     color: white;
     background-color: transparent;
     display: inline-block;
      transition: all linear 0.5s;
      float: right;
+     vertical-align: top;
 }
 
-#dropDownMenu {
+#dropDownMenuList {
     float: right;
     background-color: black;
     color: white;
+    display:row;
+    max-width: 30px;
 }
 .dropDownMenu li, a:hover {
     outline: 0;
     color: rgba(255,255,255,.8);
     background-color: transparent;
+    display: inline;
 
 }
 
@@ -94,11 +98,12 @@ li {
 }
 
 .navbar-header {
-    width: 100%;
-    display: inline-block;
+    /*width: 100%;*/
+
+    display: inline;
 }
-.navbar-head {
-    display: inline-block;
+.navbar-collapsed-list{
+    display: inline;
 }
 .navbar-custom .nav li a {
     -webkit-transition: background .3s ease-in-out;
@@ -242,7 +247,7 @@ li {
 }
 
 
-@-webkit-keyframes pulse {    
+@-webkit-keyframes pulse {
     0% {
         -webkit-transform: scale(1);
         transform: scale(1);
@@ -259,7 +264,7 @@ li {
     }
 }
 
-@-moz-keyframes pulse {    
+@-moz-keyframes pulse {
     0% {
         -moz-transform: scale(1);
         transform: scale(1);
@@ -526,20 +531,28 @@ body {
 
 #loginInput {
     text-align: center;
-margin: 20px 50px 20px 50px;
+    /*padding: 20px 0 20px 0;*/
 
 }
 
 #login {
-    padding: 100px 0 200px 0;
+    padding: 100px 0 50px 0;
     margin: 100px 50px 0px 50px;
 }
 
 #signUp {
-    padding: 100px 0 200px 0;
+    /*padding: 100px 0 200px 0;*/
     margin: 100px 50px 0px 50px;
 }
 
 .submitButtons {
     margin-top: 20px;
+}
+
+#loginConfirmButton {
+    margin: 20px 0 0 0;
+    width: 100%;
+    text-align: center;
+    display: block;
+
 }
