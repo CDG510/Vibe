@@ -1,5 +1,8 @@
-vibe.controller("studioProfileController", function ($scope, $location, $routeParams, StudiosFactory, $uibModal, $log, ezfb) {
+vibe.controller("studioProfileController", function ($scope, $location, $routeParams, StudiosFactory, $uibModal, $log, SessionsFactory, moment) {
 		console.log($routeParams.studio)
+		$scope.profile = $routeParams.studio
+		$scope.dropDown = true;
+
 	if ($routeParams.studio == undefined) {
 		$scope.searched = false
 	} else {
@@ -7,12 +10,247 @@ vibe.controller("studioProfileController", function ($scope, $location, $routePa
 		$scope.searched = true
 	}
 
+function createDateAsUTC(date) {
+    return new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()));
+}
+
+function convertDateToUTC(date) { 
+    return new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds()); 
+}
+
+function getThenParse(date, hours) {
+	console.log(date, hours, "is what I'm working with")
+	var sessionHours = hours.getHours()
+	var sessionMinutes = hours.getMinutes()
+	console.log(sessionHours, sessionMinutes)
+	date.setHours(sessionHours)
+	date.setMinutes(sessionMinutes)
+	console.log(date.getTime(), date, "is getting returned")
+	return date.getTime()
+}
+
+function unParseThenSet (parsed) {
+	console.log(parsed, "is what i'm bouto fuckup with")
+	var unparsed = parseInt(parsed);
+	console.log(unparsed, "was unparsed")
+	var realTime = new Date()
+	realTime.setTime(unparsed)
+	console.log(realTime, "getting sent back d00d")
+	return realTime
+}
 	//function to edit information
 
-	//function to delete 
+	//function to delete
 
 	//function to add/setup account information like dates/hours/payment etc
 
+
 	
+	$scope.requestDates = function(){
+
+		if ($scope.session.startHour == null || $scope.session.endHour == null) {
+			console.log('NAH BRUH')
+			$scope.fail = true;
+		}
+
+		else {
+			$scope.fail = false;
+				$scope.success = true;
+					console.log($scope.session);
+
+				var parsedStartTime = getThenParse($scope.session.startDate, $scope.session.startHour)
+
+				 // var parsedStartTime = sessionStart ;
+				 var parsedEndTime = getThenParse($scope.session.endDate, $scope.session.endHour);
+				 // var parsedEndTime = sessionEnd;
+				 console.log(parsedStartTime, parsedEndTime, "are the parsed times...")
+				 // packaging for DB
+				session = {startTime: parsedStartTime, startHour:  $scope.session.startHour.toString(), endHour:  $scope.session.endHour.toString(), endTime: parsedEndTime, info: $scope.session.info, artist: $scope.session.artist, studio: $scope.profile._id};
+				console.log(session);
+				SessionsFactory.addSession(session, function(output){
+					console.log(output)
+				}) 
+				$scope.session = {};
+		}
+	}
+
+	$scope.openSchedule = function(){
+		console.log('show me the calendar!')
+		$scope.calendar = true;
+		console.log("going to find sessions for ", $scope.profile._id)
+    	SessionsFactory.getSessions({studio: $scope.profile._id},  function(output) {
+      //this output will populate the schedule table
+      console.log(output, "IS WE WE GOT FOR SESSIONS")
+      if (output.sessions.length == 0) {
+      	console.log("WE GOt notHING")
+      	$scope.noSessions = true;
+      } else {
+      	
+      	for(session in output.sessions) {
+	      	console.log(output.sessions[session]);
+	      	//recombine date and time
+
+	      	//make dates out of dateStrings
+	      	var newStartHour = unParseThenSet(output.sessions[session].startsAt);
+	      	output.sessions[session].startsAt = newStartHour
+
+	      	var newEndHour = output.sessions[session].endsAt
+	      	var endTime = unParseThenSet(newEndHour)
+
+	      	// var endHours = endHour.getHours();
+	      	// var endMind = endHour.getUTCMinutes();
+	      	// console.log(endHour, endDay, "ARE THE DATES")
+	      	// console.log(endHours, endMind, "ARE THE END DATA")
+	      	// endDay.setUTCHours(endHours);
+	      	// endDay.setUTCMinutes(endMind);
+
+	      	output.sessions[session].endsAt =  endTime;
+	      	
+	      	console.log(output.sessions[session]);
+	      };
+	      
+	      $scope.eventSource = output.sessions;
+    	};
+      // 2016-02-25T08:00:00.000Z 
+     
+		})
+    };
+
+	//for calendar events
+
+    $scope.calendarView ="month";
+    $scope.calendarTitle = $scope.profile.name
+    $scope.viewDate = moment();
+    $scope.events = $scope.eventSource;
+
+    $scopeisCellOpen = true;
+
+    $scope.eventClicked = function(event) {
+      alert.show('Clicked', event);
+    };
+
+    $scope.eventEdited = function(event) {
+      alert.show('Edited', event);
+    };
+
+    $scope.eventClicked = function(event) {
+      alert.show('Clicked', event);
+    };
+
+
+    // $scope.eventDeleted = function(event) {
+    //   alert.show('Deleted', event);
+    // };
+
+    // $scope.eventTimesChanged = function(event) {
+    //   alert.show('Dropped or resized', event);
+    // };
+
+    $scope.toggle = function($event, field, event) {
+      $event.preventDefault();
+      $event.stopPropagation();
+      event[field] = !event[field];
+    };
+
+	$scope.today = function() {
+    $scope.dt = new Date();
+  };
+  $scope.today();
+
+  $scope.clear = function() {
+    $scope.dt = null;
+  };
+
+  // Disable weekend selection
+
+  // for the datepicker
+  $scope.disabled = function(date, mode) {
+    return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
+  };
+
+  $scope.toggleMin = function() {
+    $scope.minDate = $scope.minDate ? null : new Date();
+  };
+
+  $scope.toggleMin();
+  $scope.maxDate = new Date(2020, 5, 22);
+
+  $scope.open1 = function() {
+    $scope.popup1.opened = true;
+  };
+
+  $scope.open2 = function() {
+    $scope.popup2.opened = true;
+  };
+
+  $scope.setDate = function(year, month, day) {
+    $scope.session.startDate = new Date(year, month, day);
+  };
+
+  $scope.dateOptions = {
+    formatYear: 'yy',
+    startingDay: 1
+  };
+
+  $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+  $scope.format = $scope.formats[3];
+  $scope.altInputFormats = ['M!/d!/yyyy'];
+
+  $scope.popup1 = {
+    opened: false
+  };
+
+  $scope.popup2 = {
+    opened: false
+  };
+
+  $scope.Zone = {
+  	timeZone: null
+  }
+
+
+ $scope.hstep = 1;
+  $scope.mstep = 30;
+
+  $scope.options = {
+    hstep: [1, 2, 3],
+    mstep: [1, 5, 10, 15, 25, 30]
+  };
+
+  $scope.ismeridian = true;
+  $scope.toggleMode = function() {
+    $scope.ismeridian = ! $scope.ismeridian;
+  };
+
+  // $scope.update = function() {
+  //   var d = new Date();
+  //   d.setHours( 14 );
+  //   d.setMinutes( 0 );
+  //   $scope.mytime = d;
+  // };
+
+///FOR THE CALENDAR
+  // $scope.changed = function () {
+  //   $log.log('Time changed to: ' + $scope.mytime);
+  // };
+
+  // var tomorrow = new Date();
+  // tomorrow.setDate(tomorrow.getDate() + 1);
+  // var afterTomorrow = new Date();
+  // afterTomorrow.setDate(tomorrow.getDate() + 1);
+  // $scope.events =
+  //   [
+  //     {
+  //       date: tomorrow,
+  //       status: 'full'
+  //     },
+  //     {
+  //       date: afterTomorrow,
+  //       status: 'partially'
+  //     }
+  //   ];
+
 
 });
+
+

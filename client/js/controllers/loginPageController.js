@@ -1,15 +1,26 @@
-vibe.controller("loginController", function ($scope, $location, $routeParams, $document, $window, $anchorScroll, $uibModal, $log){
+vibe.controller("loginController", function ($scope, $location, $routeParams, $document, $window, $anchorScroll, $uibModal, $log, usersFactory){
 
 //function to send form information to user/studio factory, route to profile page when successful
 
 //
 $scope.dropDown = true;
 
+
+$scope.signUp = function() {
+    console.log("trying to sign up with", $scope.newUser);
+    usersFactory.addUser($scope.newUser, function(output) {
+    })
+    // facebookService.getMyLastName($scope.newUser, function(output) {
+    //     console.log(output)
+    // })
+}
+
+
+$scope.login = function() {
+}
 $scope.scrollTo = function(id) {
       var thisLocation = $location.hash(id);
       var someElement = angular.element(document.getElementById(id));
-      console.log(thisLocation)
-      console.log(someElement)
     $document.scrollToElementAnimated(someElement);
    }
 $scope.appendToEl = angular.element(document.querySelector('#toggleButton'))

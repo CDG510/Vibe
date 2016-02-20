@@ -1,0 +1,20 @@
+{
+  "name": "Vibe",
+  "description": "Connect Musicans & Recording Studios Togeather",
+  "main": "server",
+  "authors": [
+    "Christian Gonzalez <christian.d.gonzalez.92@gmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "Vibin"
+  ],
+  "homepage": "https://github.com/SuragSheth/Vibe",
+  "moduleType": [],
+  "private": true,
+  "dependencies": {
+    "angular-bootstrap-calendar": "^0.18.9",
+    "moment": "^2.11.2",
+    "moment-timezone": "^0.5.0"
+  }
+}

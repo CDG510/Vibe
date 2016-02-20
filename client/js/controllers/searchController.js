@@ -1,31 +1,47 @@
 vibe.controller("SearchController", function ($scope, $routeParams, $uibModal, $log, $location, $document, $window, StudiosFactory) {
 
-	$scope.searchTerm = $routeParams.studioSearch
+	$scope.searchTerm = $routeParams.searchTerm
+	console.log($routeParams.studioSearch)
+
+	if ($routeParams.studioSearch == '') {
+			$scope.noneFound = true
+	} else {
+		$scope.tempStudios = $routeParams.studioSearch
+
+	}
 	$scope.dropDown = true;
 	//for testing purposed	
-	$scope.tempStudios = [
-		{name: "the best",
-		specialty: "everything",
-		website: "www.thebestmayne.com",
-		phone: "510-939-2341",
-		price: 100
-		},
-		{name: "not the best",
-		specialty: "nothing",
-		website: "www.nothtebest.com",
-		phone: "642-939-4352",
-		price: 25}
-	]
+
 
 
 	//function to show found studios information when selected
-	$scope.seeProfile = function(id) {
-		console.log("go to this profile page")
+	$scope.seeProfile = function(studio) {
+		console.log("go to this profile page" , studio)
+		$location.path('/profile').search({studio: studio});
 	}
 
 
 
 	//function to adjust search term/results
+
+	$scope.search = function(){
+			console.log($scope.searchPlace.location)
+			// yelpFactory.searchStudios(searchArea, function(output) {
+			// 		console.log(output)
+			// 	})
+			StudiosFactory.findStudios($scope.searchPlace, function(output){
+				console.log(output)
+				if (output.length < 1) {
+					$scope.noneFound = true;
+					$scope.searchPlace = {}
+				}
+				else {
+					$scope.noneFound = false;
+					$scope.tempStudios = output;
+					$scope.searchPlace = {}
+				}
+			});
+		}
 
 	//function to add studio of interest
 

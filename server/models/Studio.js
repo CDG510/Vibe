@@ -1,5 +1,5 @@
-var mongoose = require("mongoose")
-var Schema = mongoose.Schema
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
 var StudioSchema = new mongoose.Schema({
     name: String,
@@ -16,7 +16,8 @@ var StudioSchema = new mongoose.Schema({
 	phone: String,
 	ratings: Array,
 	schedule: Object,
-    price: Number
+    price: Number,
+    sessions: [{type: Schema.ObjectId, ref: 'Session'}]
 })
 
-mongoose.model("Studio", StudioSchema)
+var Studio = mongoose.model('Studio', StudioSchema);

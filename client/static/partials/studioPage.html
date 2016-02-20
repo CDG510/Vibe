@@ -2,167 +2,60 @@
 
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
 
-    <style>
-
-        body
-        {
-            font-family: 'Lato', 'sans-serif';
-        }
-        .profile 
-        {
-            min-height: 355px;
-            background-color: black;
-            color: white;
-            /*;*/
-        }
-        figcaption.ratings
-        {
-            margin-top:20px;
-        }
-        figcaption.ratings a
-        {
-            color:#f1c40f;
-            font-size:11px;
-            vertical-align: top;
-            display: inline-block;
-        }
-        figcaption.ratings a:hover
-        {
-            color:#f39c12;
-            text-decoration:none;
-        }
-        .divider 
-        {
-            border-top:1px solid rgba(0,0,0,0.1);
-        }
-        .emphasis 
-        {
-            border-top: 4px solid transparent;
-            display: inline-block;
-            padding: 10px;
-            vertical-align: top;
-/*    border: 2px solid green;
-*/    }
-.emphasis:hover 
-{
-    border-top: 4px solid #1abc9c;
-}
-.emphasis h2
-{
-    margin-bottom:0;
-}
-span.tags 
-{
-    background: #1abc9c;
-    border-radius: 2px;
-    color: #f5f5f5;
-    font-weight: bold;
-    padding: 2px 4px;
-}
-.dropdown-menu 
-{
-    background-color: #34495e;    
-    box-shadow: none;
-    -webkit-box-shadow: none;
-    width: 250px;
-    margin-left: -125px;
-    left: 50%;
-}
-.dropdown-menu .divider 
-{
-    background:none;    
-}
-.dropdown-menu>li>a
-{
-    color:#f5f5f5;
-}
-.dropup .dropdown-menu 
-{
-    margin-bottom:10px;
-}
-.dropup .dropdown-menu:before 
-{
-    content: "";
-    border-top: 10px solid #34495e;
-    border-right: 10px solid transparent;
-    border-left: 10px solid transparent;
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    margin-left: -10px;
-    z-index: 10;
-}
-
-img {
-    height: 150px;
-}
-
-#profilePhoto {
-    display: inline-block;
-    vertical-align: top;
-/*    border: 1px solid red;
-*/    float: right;
-}
-
-#aboutInfo {
-    display: inline-block;
-    vertical-align: top;
-/*    border: 1px solid orange;
-*/    text-justify: inter-word;
-text-align: justify
-}
-
-button {
-    padding: 3px;
-}
-
-#calendar {
-    margin-top: 20px;
-}
-
-.full button span {
-    background-color: limegreen;
-    border-radius: 32px;
-    color: black;
-}
-.partially button span {
-    background-color: orange;
-    border-radius: 32px;
-    color: black;
-}
-
-#schedule {
-    display: inline-block;
-    vertical-align: top
-}
-
-.well {
-    background-color: black;
-}
-
-.calendario{
-    display: inline-block;
-}
-
-#profile_container {
-    padding-top: 100px;
-    padding-bottom: 100px;
-}
-
-#submitSessionDate{
-    margin-top: 20px;
-}
-
-</style>
-
 
 
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
 
+<nav class="navbar navbar-custom navbar-fixed-top" role="navigation" id='top'>
+
+    <div class="container">
+
+        <div class="navbar-header">
+
+            <!-- this is the wideScreen list -->
+            <a class="navbar-brand page-scroll" href="/#/">Vibe</a>
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse" collapse="navCollapsed" id="collapsedLinks">
+                <ul class="nav navbar-nav">
+                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                    
+                    <li>
+                        <a class="page-scroll" href="/#/login">Login</a>
+                    </li>
+ <!--                    <li>
+                        <a class="page-scroll" href="/#/signUp">Sign Up</a>
+                    </li> -->
+                </ul>
+            </div>
+            <!-- this is the collapsed list -->
+
+            <div class="btn-group"  id="menuToggleButton" >
+                <button type="button"  class="navbar-toggle pull-right" data-toggle="collapse" data-target=".navbar-main-collapse" ng-click="dropDown=!dropDown" id="dropDownMenu"><span class="glyphicon glyphicon-align-justify"></span></button>
+                <div class="row">
+                    <!--this list needs to be floated right  -->
+                    <div class="container">
+
+                    <ul class="droDownMenuList text-right animate-show"  role="menu" aria-labelledby="single-button" ng-hide="dropDown">
+                        <li><a class="page-scroll" ng-click="scrollTo('introTop')">Home</a></li>
+                        <li role="menuitem"><a class="page-scroll" ng-click="scrollTo('intro-Artist')">Artists</a></li>
+                        <li role="menuitem"><a class="page-scroll" ng-click="scrollTo('intro-Studio')">Studios</a></li>
+                        <li role="menuitem"><a class="page-scroll" href="/#/login">Login</a></li>
+<!--                             <li role="menuitem"><a class="page-scroll" href="/#/signUp">Sign Up</a></li> -->
+                    </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+
 <div class="container" id = 'profile_container'>
     <div class="row">
         <div class="col-md-12 col-lg-12">
-           <div class="well profile">
+           <!-- <div class="well profile"> -->
 
             <div class="col-sm-12 col-md-12 col-lg-12">
                 <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 text-left" id="aboutInfo">
@@ -171,7 +64,7 @@ button {
                     <p><strong>Contact: </strong> {{profile.contact}}</p>
                     <p><strong>Phone: </strong> {{profile.phone}}</p>
                     <p><strong>Rating: </strong> {{profile.rating}}/5</p>
-                    <p><strong>Specialty: </strong> <span class="tags">{{profile.specialty}}</span> 
+                    <p><strong>Specialty: </strong> <span class="tags">{{profile.specialty}}</span>
                     </p>
                     <p class="text-justify"><strong>People Recorded:</strong> PEOPLE OF INTEREST </p>
                 </div>
@@ -195,7 +88,7 @@ button {
                                 </a>
                                 <a href="#">
                                    <span class="fa fa-star-o"></span>
-                               </a> 
+                               </a>
                            </p>
                        </figcaption>
                    </figure>
@@ -205,17 +98,18 @@ button {
            <div class="row">
                <div class="col-xs-12 divider text-center">
                 <div class="col-xs-12 col-sm-4 emphasis">
-                    <h2><strong> 20,7K </strong></h2>                    
+                    <h2><strong> 20,7K </strong></h2>
                     <p><small>Recordings</small></p>
+                    <!-- THIS MESSAGE BUTTON SHOULD BE A MODAL, if not lead to messenger service-->
                     <button class="btn btn-success btn-block"><span class="fa fa-plus-circle"></span> Message </button>
                 </div>
                 <div class="col-xs-12 col-sm-4 emphasis">
-                    <h2><strong>245</strong></h2>                    
+                    <h2><strong>245</strong></h2>
                     <p><small>Following</small></p>
                     <button class="btn btn-info btn-block" ng-click="openSchedule()"><span class="fa fa-user"></span> View Schedule </button>
                 </div>
                 <div class="col-xs-12 col-sm-4 emphasis">
-                    <h2><strong>Availability</strong></h2>                    
+                    <h2><strong>Availability</strong></h2>
                     <p><small>yes</small></p>
                     <div class="btn-group dropup btn-block">
                       <button type="button" class="btn btn-primary"><span class="fa fa-gear"></span> Options </button>
@@ -238,73 +132,106 @@ button {
 
     <div class="row" id="calendar" ng-show="calendar">
 
-        <div class="col-md-12">
-            <h2> Current Schedule for {{profile.name }}</h2>
-            <table class="table table-striped">
-            <!-- this data table should eventually pull all the dates in the db -->
-                <thead>
-                  <tr>
-                    <th>Band</th>
-                    <th>Date</th>
-                    <th>Start</th>
-                    <th>End</th>
-                </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Guns n Roses</td>
-                <td>1/23</td>
-                <td>2pm</td>
-                <td>8pm</td>
-            </tr>
-            <tr>
-                <td>Necrophagist</td>
-                <td>1/23</td>
-                <td>8pm</td>
-                <td>1am</td>
-            </tr>
-            <tr>
-                <td>Simon and Garfunkel</td>
-                <td>1/24</td>
-                <td>8am</td>
-                <td>10pm</td>
-            </tr>
-        </tbody>
-    </table>
-
-</div>
-
+        
 <div class="col-md-12 calendario">
-    <h3>Request a Session!</h3>
-    <div class="row">
+    
+     <div class="col-md-6 text-center">
+      <div class="btn-group">
+
+        <button
+          class="btn btn-primary"
+          mwl-date-modifier
+          date="vm.viewDate"
+          decrement="vm.calendarView">
+          Previous
+        </button>
+        <button
+          class="btn btn-default"
+          mwl-date-modifier
+          date="vm.viewDate"
+          set-to-today>
+          Today
+        </button>
+        <button
+          class="btn btn-primary"
+          mwl-date-modifier
+          date="vm.viewDate"
+          increment="vm.calendarView">
+          Next
+        </button>
+      </div>
+    </div>
+
+    <br class="visible-xs visible-sm">
+
+    <div class="col-md-6 text-center">
+      <div class="btn-group">
+        <label class="btn btn-primary" ng-model="vm.calendarView" uib-btn-radio="'year'">Year</label>
+        <label class="btn btn-primary" ng-model="vm.calendarView" uib-btn-radio="'month'">Month</label>
+        <label class="btn btn-primary" ng-model="vm.calendarView" uib-btn-radio="'week'">Week</label>
+        <label class="btn btn-primary" ng-model="vm.calendarView" uib-btn-radio="'day'">Day</label>
+      </div>
+    </div>
+
+
+    <mwl-calendar
+    events="eventSource"
+    view="calendarView"
+    view-title="vm.calendarTitle"
+    view-date="viewDate"
+    on-event-click="eventClicked(calendarEvent)"
+    on-event-times-changed="vm.eventTimesChanged(calendarEvent); calendarEvent.startsAt = calendarNewEventStart; calendarEvent.endsAt = calendarNewEventEnd"
+    edit-event-html="'<i class=\'glyphicon glyphicon-pencil\'></i>'"
+    delete-event-html="'<i class=\'glyphicon glyphicon-remove\'></i>'"
+    on-edit-event-click="vm.eventEdited(calendarEvent)"
+    on-delete-event-click="vm.eventDeleted(calendarEvent)"
+    cell-is-open="vm.isCellOpen"
+    day-view-start="06:00"
+    day-view-end="22:00"
+    day-view-split="30"
+    cell-modifier="vm.modifyCell(calendarCell)"
+    >
+  </mwl-calendar>
+
+    
+</div>
+<!-- end of calendar row -->
+<h3>Request a Session with {{profile.name }} !</h3>
+<div class="row">
     <p class="input-group">
         <div class="col-md-4">
             <label>Arist Name</label>
             <input type = text class='form-control'  Placeholder="Artist Name" ng-model="session.artist" >
         </div>
         <div class="col-md-4">
-            <label>Session Date</label>
-            <input type="text" class="form-control" uib-datepicker-popup="{{format}}"  is-open="status.opened1" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" ng-model="session.date"/>
+            <label>Session Start Date</label>
+            <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="session.startDate" is-open="popup1.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-model-options="{timezone: null}" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+        </div>
+         <div class="col-md-4">
+            <label>Session End Date</label>
+            <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="session.endDate" is-open="popup2.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" alt-input-formats="altInputFormats" ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
 
         </div>
-        <div class="col-md-4">
-            <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="open1($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-            </span>
-        </div>
+        
         </p>
     </div>
 
     <div class="row">
         <div class="col-md-4">
             <h5>Start Time</h5>
-            <uib-timepicker  ng-change="changed()" hour-step="hstep" minute-step="mstep" ng-model="session.start" show-meridian="ismeridian"></uib-timepicker>
-            <span class="pull-right" style="color: red;" ng-show="session.error"><h4>Please pick a valid time!</h4></span>
+            <uib-timepicker  ng-change="changed()" hour-step="hstep" minute-step="mstep" ng-model="session.startHour" show-meridian="ismeridian"></uib-Hourpicker>
+            <span class="pull-right" style="color: red;" ng-show="session.error"><h4>Please pick a valid Hour!</h4></span>
         </div>
 
         <div class='col-md-14'>
           <h5>End Time</h5>
-          <uib-timepicker  ng-change="changed()" hour-step="hstep" minute-step="mstep" ng-model="session.end " format="date | shortTime" show-meridian="ismeridian"></uib-timepicker>
+          <uib-timepicker  ng-change="changed()" hour-step="hstep" minute-step="mstep" ng-model="session.endHour " format="date | shortTime" show-meridian="ismeridian"></uib-timepicker>
         </div>
 
     </div>
@@ -313,9 +240,8 @@ button {
         <div class='col-md-12'>
             <label>Notes and Other info for the studio</label>
             <textarea class='form-control col-md-6'  placeholder="Details & other requests..." ng-model="session.info"></textarea>
-            <span class="pull-left" style="color: red;" ng-show="fail"><h4>Please pick a valid time!</h4></span>
-            <span class="pull-left" style="color: green;" ng-show="fail"><h4>Please pick a valid time!</h4></span>
-        </div>
+            <!-- <span class="pull-left" style="color: red;" ng-show="fail"><h4>Please pick a valid time!</h4></span>
+            <span class="pull-left" style="color: green;" ng-show="fail"><h4>Please pick a valid time!</h4></span> -->
         </div>
     </div>
 
@@ -326,12 +252,10 @@ button {
                 </div>
             </div>
 
-        </div>
-    </div>                 
+        <!-- </div> -->
+    </div>
 </div>
 </div>
 </div>
 
 </div>
-
-

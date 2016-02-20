@@ -7,20 +7,27 @@ vibe.controller("HomeController", function ($scope, $location, $routeParams, $do
 // 	$location.path('/artists').search({search: $scope.studioSearch});
 
 // }
-
+$scope.failSearch = false;
 //
 $scope.dropDown = true;
 
 //function for studio search
 $scope.searchStudios = function() {
     //go to factory, to api call, get results, transfer to next partial
-
-    console.log("off to the factory with", $scope.studioSearch.searchTerm)
-    StudiosFactory.searchStudios($scope.studioSearch.searchTerm, function(output){
+    console.log($scope.studioSearch)
+    if ($scope.studioSearch == undefined) {
+        //show fail message
+        $scope.failSearch = true
+        return
+    } else {
+        $scope.failSearch = false;
+    StudiosFactory.searchStudios({location: $scope.studioSearch.searchTerm}, function(output){
         console.log(output)
-        $location.path('/searchRequest').search({studioSearch: output});
+        $location.path('/searchRequest').search({studioSearch: output, searchTerm: $scope.studioSearch.searchTerm});
     })
-    
+     
+    }
+   
 
 }
 
