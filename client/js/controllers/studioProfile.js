@@ -1,7 +1,8 @@
-vibe.controller("studioProfileController", function ($scope, $location, $routeParams, StudiosFactory, $uibModal, $log, SessionsFactory, moment) {
+vibe.controller("studioProfileController", function ($scope, $location, $routeParams, StudiosFactory, $uibModal, $log, SessionsFactory, moment, alert) {
 		console.log($routeParams.studio)
 		$scope.profile = $routeParams.studio
 		$scope.dropDown = true;
+		$scope.existsFail = false
 
 	if ($routeParams.studio == undefined) {
 		$scope.searched = false
@@ -59,25 +60,25 @@ function unParseThenSet (parsed) {
 					console.log($scope.session);
 
 				var parsedStartTime = getThenParse($scope.session.startDate, $scope.session.startHour)
-
 				 // var parsedStartTime = sessionStart ;
 				 var parsedEndTime = getThenParse($scope.session.endDate, $scope.session.endHour);
-				 // var parsedEndTime = sessionEnd;
-				 console.log(parsedStartTime, parsedEndTime, "are the parsed times...")
 				 // packaging for DB
 				session = {startTime: parsedStartTime, startHour:  $scope.session.startHour.toString(), endHour:  $scope.session.endHour.toString(), endTime: parsedEndTime, info: $scope.session.info, artist: $scope.session.artist, studio: $scope.profile._id};
 				console.log(session);
 				SessionsFactory.addSession(session, function(output){
-					console.log(output)
+					if (output == "exists") {
+						$scope.existsFail = true;
+					} else {
+						$scope.existsFail = false;
+						$scope.session = {};
+					}
 				}) 
-				$scope.session = {};
+			}
 		}
-	}
 
 	$scope.openSchedule = function(){
 		console.log('show me the calendar!')
 		$scope.calendar = true;
-		console.log("going to find sessions for ", $scope.profile._id)
     	SessionsFactory.getSessions({studio: $scope.profile._id},  function(output) {
       //this output will populate the schedule table
       console.log(output, "IS WE WE GOT FOR SESSIONS")
@@ -88,7 +89,7 @@ function unParseThenSet (parsed) {
       	
       	for(session in output.sessions) {
 	      	console.log(output.sessions[session]);
-	      	//recombine date and time
+	      	//recombine date and time for calendar display
 
 	      	//make dates out of dateStrings
 	      	var newStartHour = unParseThenSet(output.sessions[session].startsAt);
@@ -97,22 +98,13 @@ function unParseThenSet (parsed) {
 	      	var newEndHour = output.sessions[session].endsAt
 	      	var endTime = unParseThenSet(newEndHour)
 
-	      	// var endHours = endHour.getHours();
-	      	// var endMind = endHour.getUTCMinutes();
-	      	// console.log(endHour, endDay, "ARE THE DATES")
-	      	// console.log(endHours, endMind, "ARE THE END DATA")
-	      	// endDay.setUTCHours(endHours);
-	      	// endDay.setUTCMinutes(endMind);
-
 	      	output.sessions[session].endsAt =  endTime;
 	      	
 	      	console.log(output.sessions[session]);
 	      };
-	      
+	      //set event source for calendar
 	      $scope.eventSource = output.sessions;
-    	};
-      // 2016-02-25T08:00:00.000Z 
-     
+    	};     
 		})
     };
 
@@ -126,16 +118,17 @@ function unParseThenSet (parsed) {
     $scopeisCellOpen = true;
 
     $scope.eventClicked = function(event) {
-      alert.show('Clicked', event);
+    	console.log(event)
+      alert.show("Clicked", event);
     };
 
     $scope.eventEdited = function(event) {
       alert.show('Edited', event);
     };
 
-    $scope.eventClicked = function(event) {
-      alert.show('Clicked', event);
-    };
+    // $scope.eventClicked = function(event) {
+    //   alert.show('Clicked', event);
+    // };
 
 
     // $scope.eventDeleted = function(event) {
@@ -222,34 +215,7 @@ function unParseThenSet (parsed) {
     $scope.ismeridian = ! $scope.ismeridian;
   };
 
-  // $scope.update = function() {
-  //   var d = new Date();
-  //   d.setHours( 14 );
-  //   d.setMinutes( 0 );
-  //   $scope.mytime = d;
-  // };
-
-///FOR THE CALENDAR
-  // $scope.changed = function () {
-  //   $log.log('Time changed to: ' + $scope.mytime);
-  // };
-
-  // var tomorrow = new Date();
-  // tomorrow.setDate(tomorrow.getDate() + 1);
-  // var afterTomorrow = new Date();
-  // afterTomorrow.setDate(tomorrow.getDate() + 1);
-  // $scope.events =
-  //   [
-  //     {
-  //       date: tomorrow,
-  //       status: 'full'
-  //     },
-  //     {
-  //       date: afterTomorrow,
-  //       status: 'partially'
-  //     }
-  //   ];
-
+  
 
 });
 

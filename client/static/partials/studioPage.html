@@ -4,23 +4,23 @@
 
 
 
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
 
-<nav class="navbar navbar-custom navbar-fixed-top" role="navigation" id='top'>
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation" id='top'>
 
-    <div class="container">
+        <div class="container">
 
-        <div class="navbar-header">
+            <div class="navbar-header">
 
-            <!-- this is the wideScreen list -->
-            <a class="navbar-brand page-scroll" href="/#/">Vibe</a>
-            <div class="collapse navbar-collapse navbar-right navbar-main-collapse" collapse="navCollapsed" id="collapsedLinks">
-                <ul class="nav navbar-nav">
-                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
-                    
-                    <li>
-                        <a class="page-scroll" href="/#/login">Login</a>
-                    </li>
+                <!-- this is the wideScreen list -->
+                <a class="navbar-brand page-scroll" href="/#/">Vibe</a>
+                <div class="collapse navbar-collapse navbar-right navbar-main-collapse" collapse="navCollapsed" id="collapsedLinks">
+                    <ul class="nav navbar-nav">
+                        <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+
+                        <li>
+                            <a class="page-scroll" href="/#/login">Login</a>
+                        </li>
  <!--                    <li>
                         <a class="page-scroll" href="/#/signUp">Sign Up</a>
                     </li> -->
@@ -34,13 +34,13 @@
                     <!--this list needs to be floated right  -->
                     <div class="container">
 
-                    <ul class="droDownMenuList text-right animate-show"  role="menu" aria-labelledby="single-button" ng-hide="dropDown">
-                        <li><a class="page-scroll" ng-click="scrollTo('introTop')">Home</a></li>
-                        <li role="menuitem"><a class="page-scroll" ng-click="scrollTo('intro-Artist')">Artists</a></li>
-                        <li role="menuitem"><a class="page-scroll" ng-click="scrollTo('intro-Studio')">Studios</a></li>
-                        <li role="menuitem"><a class="page-scroll" href="/#/login">Login</a></li>
-<!--                             <li role="menuitem"><a class="page-scroll" href="/#/signUp">Sign Up</a></li> -->
-                    </ul>
+                        <ul class="droDownMenuList text-right animate-show"  role="menu" aria-labelledby="single-button" ng-hide="dropDown">
+                            <li><a class="page-scroll" ng-click="scrollTo('introTop')">Home</a></li>
+                            <li role="menuitem"><a class="page-scroll" ng-click="scrollTo('intro-Artist')">Artists</a></li>
+                            <li role="menuitem"><a class="page-scroll" ng-click="scrollTo('intro-Studio')">Studios</a></li>
+                            <li role="menuitem"><a class="page-scroll" href="/#/login">Login</a></li>
+                            <!--                             <li role="menuitem"><a class="page-scroll" href="/#/signUp">Sign Up</a></li> -->
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -55,145 +55,143 @@
 <div class="container" id = 'profile_container'>
     <div class="row">
         <div class="col-md-12 col-lg-12">
-           <!-- <div class="well profile"> -->
+         <!-- <div class="well profile"> -->
 
-            <div class="col-sm-12 col-md-12 col-lg-12">
-                <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 text-left" id="aboutInfo">
-                    <h1>{{profile.name }}</h1>
-                    <p><h3>Address: </h3>{{profile.location}}</p>
-                    <p><strong>Contact: </strong> {{profile.contact}}</p>
-                    <p><strong>Phone: </strong> {{profile.phone}}</p>
-                    <p><strong>Rating: </strong> {{profile.rating}}/5</p>
-                    <p><strong>Specialty: </strong> <span class="tags">{{profile.specialty}}</span>
-                    </p>
-                    <p class="text-justify"><strong>People Recorded:</strong> PEOPLE OF INTEREST </p>
-                </div>
+         <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 text-left" id="aboutInfo">
+                <h1>{{profile.name }}</h1>
+                <p><h3>Address: </h3>{{profile.location}}</p>
+                <p><strong>Contact: </strong> {{profile.contact}}</p>
+                <p><strong>Phone: </strong> {{profile.phone}}</p>
+                <p><strong>Rating: </strong> {{profile.rating}}/5</p>
+                <p><strong>Specialty: </strong> <span class="tags">{{profile.specialty}}</span>
+                </p>
+                <p class="text-justify"><strong>People Recorded:</strong> PEOPLE OF INTEREST </p>
+            </div>
 
-                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 text-center" id="profilePhoto">
-                    <figure>
-                        <img src="img/profile_default.png" alt="" class="img-circle img-responsive">
-                        <figcaption class="ratings">
-                            <p>Ratings
-                                <a href="#">
-                                    <span class="fa fa-star"></span>
-                                </a>
-                                <a href="#">
-                                    <span class="fa fa-star"></span>
-                                </a>
-                                <a href="#">
-                                    <span class="fa fa-star"></span>
-                                </a>
-                                <a href="#">
-                                    <span class="fa fa-star"></span>
-                                </a>
-                                <a href="#">
-                                   <span class="fa fa-star-o"></span>
-                               </a>
-                           </p>
-                       </figcaption>
-                   </figure>
-               </div>
-           </div>
+            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 text-center" id="profilePhoto">
+                <figure>
+                    <img src="img/profile_default.png" alt="" class="img-circle img-responsive">
+                    <figcaption class="ratings">
+                        <p>Ratings
+                            <a href="#">
+                                <span class="fa fa-star"></span>
+                            </a>
+                            <a href="#">
+                                <span class="fa fa-star"></span>
+                            </a>
+                            <a href="#">
+                                <span class="fa fa-star"></span>
+                            </a>
+                            <a href="#">
+                                <span class="fa fa-star"></span>
+                            </a>
+                            <a href="#">
+                             <span class="fa fa-star-o"></span>
+                         </a>
+                     </p>
+                 </figcaption>
+             </figure>
+         </div>
+     </div>
 
-           <div class="row">
-               <div class="col-xs-12 divider text-center">
-                <div class="col-xs-12 col-sm-4 emphasis">
-                    <h2><strong> 20,7K </strong></h2>
-                    <p><small>Recordings</small></p>
-                    <!-- THIS MESSAGE BUTTON SHOULD BE A MODAL, if not lead to messenger service-->
-                    <button class="btn btn-success btn-block"><span class="fa fa-plus-circle"></span> Message </button>
-                </div>
-                <div class="col-xs-12 col-sm-4 emphasis">
-                    <h2><strong>245</strong></h2>
-                    <p><small>Following</small></p>
-                    <button class="btn btn-info btn-block" ng-click="openSchedule()"><span class="fa fa-user"></span> View Schedule </button>
-                </div>
-                <div class="col-xs-12 col-sm-4 emphasis">
-                    <h2><strong>Availability</strong></h2>
-                    <p><small>yes</small></p>
-                    <div class="btn-group dropup btn-block">
-                      <button type="button" class="btn btn-primary"><span class="fa fa-gear"></span> Options </button>
-                      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                        <span class="caret"></span>
-                        <span class="sr-only">Toggle Dropdown</span>
-                    </button>
-                    <ul class="dropdown-menu text-left" role="menu">
-                        <li><a href="#"><span class="fa fa-envelope pull-right"></span> Send an email </a></li>
-                        <li><a href="#"><span class="fa fa-list pull-right"></span> Add or remove from a list  </a></li>
-                        <li class="divider"></li>
-                        <li><a href="#"><span class="fa fa-warning pull-right"></span>Report this user for spam</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#" class="btn disabled" role="button"> Unfollow </a></li>
-                    </ul>
-                </div>
+     <div class="row">
+         <div class="col-xs-12 divider text-center">
+            <div class="col-xs-12 col-sm-4 emphasis">
+                <h2><strong> 20,7K </strong></h2>
+                <p><small>Recordings</small></p>
+                <!-- THIS MESSAGE BUTTON SHOULD BE A MODAL, if not lead to messenger service-->
+                <button class="btn btn-success btn-block"><span class="fa fa-plus-circle"></span> Message </button>
+            </div>
+            <div class="col-xs-12 col-sm-4 emphasis">
+                <h2><strong>245</strong></h2>
+                <p><small>Following</small></p>
+                <button class="btn btn-info btn-block" ng-click="openSchedule()"><span class="fa fa-user"></span> View Schedule </button>
+            </div>
+            <div class="col-xs-12 col-sm-4 emphasis">
+                <h2><strong>Availability</strong></h2>
+                <p><small>yes</small></p>
+                <div class="btn-group dropup btn-block">
+                  <button type="button" class="btn btn-primary"><span class="fa fa-gear"></span> Options </button>
+                  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                    <span class="caret"></span>
+                    <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu text-left" role="menu">
+                    <li><a href="#"><span class="fa fa-envelope pull-right"></span> Send an email </a></li>
+                    <li><a href="#"><span class="fa fa-list pull-right"></span> Add or remove from a list  </a></li>
+                    <li class="divider"></li>
+                    <li><a href="#"><span class="fa fa-warning pull-right"></span>Report this user for spam</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#" class="btn disabled" role="button"> Unfollow </a></li>
+                </ul>
             </div>
         </div>
     </div>
+</div>
 
-    <div class="row" id="calendar" ng-show="calendar">
+<div class="row" id="calendar" ng-show="calendar">
+    <div class="col-md-12 calendario">
 
-        
-<div class="col-md-12 calendario">
-    
-     <div class="col-md-6 text-center">
-      <div class="btn-group">
+       <div class="col-md-6 text-center">
+          <div class="btn-group">
 
-        <button
-          class="btn btn-primary"
-          mwl-date-modifier
-          date="vm.viewDate"
-          decrement="vm.calendarView">
-          Previous
-        </button>
-        <button
-          class="btn btn-default"
-          mwl-date-modifier
-          date="vm.viewDate"
-          set-to-today>
-          Today
-        </button>
-        <button
-          class="btn btn-primary"
-          mwl-date-modifier
-          date="vm.viewDate"
-          increment="vm.calendarView">
-          Next
-        </button>
-      </div>
+            <button
+            class="btn btn-primary"
+            mwl-date-modifier
+            date="vm.viewDate"
+            decrement="vm.calendarView">
+            Previous
+            </button>
+            <button
+            class="btn btn-default"
+            mwl-date-modifier
+            date="vm.viewDate"
+            set-to-today>
+            Today
+            </button>
+            <button
+            class="btn btn-primary"
+            mwl-date-modifier
+            date="vm.viewDate"
+            increment="vm.calendarView">
+            Next
+            </button>
+        </div>
     </div>
 
-    <br class="visible-xs visible-sm">
+<br class="visible-xs visible-sm">
 
-    <div class="col-md-6 text-center">
-      <div class="btn-group">
+<div class="col-md-6 text-center">
+    <div class="btn-group">
         <label class="btn btn-primary" ng-model="vm.calendarView" uib-btn-radio="'year'">Year</label>
         <label class="btn btn-primary" ng-model="vm.calendarView" uib-btn-radio="'month'">Month</label>
         <label class="btn btn-primary" ng-model="vm.calendarView" uib-btn-radio="'week'">Week</label>
         <label class="btn btn-primary" ng-model="vm.calendarView" uib-btn-radio="'day'">Day</label>
-      </div>
     </div>
+</div>
 
 
-    <mwl-calendar
-    events="eventSource"
-    view="calendarView"
-    view-title="vm.calendarTitle"
-    view-date="viewDate"
-    on-event-click="eventClicked(calendarEvent)"
-    on-event-times-changed="vm.eventTimesChanged(calendarEvent); calendarEvent.startsAt = calendarNewEventStart; calendarEvent.endsAt = calendarNewEventEnd"
-    edit-event-html="'<i class=\'glyphicon glyphicon-pencil\'></i>'"
-    delete-event-html="'<i class=\'glyphicon glyphicon-remove\'></i>'"
-    on-edit-event-click="vm.eventEdited(calendarEvent)"
-    on-delete-event-click="vm.eventDeleted(calendarEvent)"
-    cell-is-open="vm.isCellOpen"
-    day-view-start="06:00"
-    day-view-end="22:00"
-    day-view-split="30"
-    cell-modifier="vm.modifyCell(calendarCell)"
-    >
-  </mwl-calendar>
+<mwl-calendar
+events="eventSource"
+view="calendarView"
+view-title="vm.calendarTitle"
+view-date="viewDate"
+on-event-click="eventClicked(calendarEvent)"
+on-event-times-changed="vm.eventTimesChanged(calendarEvent); calendarEvent.startsAt = calendarNewEventStart; calendarEvent.endsAt = calendarNewEventEnd"
+edit-event-html="'<i class=\'glyphicon glyphicon-pencil\'></i>'"
+delete-event-html="'<i class=\'glyphicon glyphicon-remove\'></i>'"
+on-edit-event-click="vm.eventEdited(calendarEvent)"
+on-delete-event-click="vm.eventDeleted(calendarEvent)"
+cell-is-open="isCellOpen"
+day-view-start="06:00"
+day-view-end="22:00"
+day-view-split="30"
+cell-modifier="vm.modifyCell(calendarCell)"
+>
+</mwl-calendar>
 
-    
+
 </div>
 <!-- end of calendar row -->
 <h3>Request a Session with {{profile.name }} !</h3>
@@ -206,56 +204,58 @@
         <div class="col-md-4">
             <label>Session Start Date</label>
             <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="session.startDate" is-open="popup1.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-model-options="{timezone: null}" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
-              <span class="input-group-btn">
+            <span class="input-group-btn">
                 <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
-              </span>
+            </span>
         </div>
-         <div class="col-md-4">
+        <div class="col-md-4">
             <label>Session End Date</label>
             <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="session.endDate" is-open="popup2.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" alt-input-formats="altInputFormats" ng-required="true" close-text="Close" />
-              <span class="input-group-btn">
+            <span class="input-group-btn">
                 <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
-              </span>
+            </span>
 
         </div>
         
-        </p>
+    </p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h5>Start Time</h5>
+        <uib-timepicker  ng-change="changed()" hour-step="hstep" minute-step="mstep" ng-model="session.startHour" show-meridian="ismeridian"></uib-Hourpicker>
+        <span class="pull-right" style="color: red;" ng-show="session.error"><h4>Please pick a valid Hour!</h4></span>
     </div>
 
-    <div class="row">
-        <div class="col-md-4">
-            <h5>Start Time</h5>
-            <uib-timepicker  ng-change="changed()" hour-step="hstep" minute-step="mstep" ng-model="session.startHour" show-meridian="ismeridian"></uib-Hourpicker>
-            <span class="pull-right" style="color: red;" ng-show="session.error"><h4>Please pick a valid Hour!</h4></span>
-        </div>
+    <div class='col-md-4'>
+      <h5>End Time</h5>
+      <uib-timepicker  ng-change="changed()" hour-step="hstep" minute-step="mstep" ng-model="session.endHour " format="date | shortTime" show-meridian="ismeridian"></uib-timepicker>
+    </div>
 
-        <div class='col-md-14'>
-          <h5>End Time</h5>
-          <uib-timepicker  ng-change="changed()" hour-step="hstep" minute-step="mstep" ng-model="session.endHour " format="date | shortTime" show-meridian="ismeridian"></uib-timepicker>
-        </div>
+    <div class='col-md-4'>
+        <p>Notes and Other info for the studio</p>
+        <textarea class='form-control col-md-6'  placeholder="Details & other requests..." ng-model="session.info"></textarea>
 
     </div>
 
-    <div class='row'>
-        <div class='col-md-12'>
-            <label>Notes and Other info for the studio</label>
-            <textarea class='form-control col-md-6'  placeholder="Details & other requests..." ng-model="session.info"></textarea>
-            <!-- <span class="pull-left" style="color: red;" ng-show="fail"><h4>Please pick a valid time!</h4></span>
-            <span class="pull-left" style="color: green;" ng-show="fail"><h4>Please pick a valid time!</h4></span> -->
-        </div>
-    </div>
+</div>
 
-                <div class='col-md-4'>
-                 <div class="row" id="schedule">
-                     <button type="submit" class="btn btn-success" id="submitSessionDate" ng-click="requestDates()">Request Dates!</button>
-                </div>
-                </div>
-            </div>
+<div class='row'>
+    <div class="col-md-12">
+        <span class="pull-left" style="color: red;" ng-show="fail"><h4>Please pick a valid time!</h4></span>
+        <span class="pull-left" style="color: red;" ng-show="existsFail"><h4>We're sorry, there's already a session booked for that time. Try another timeframe?</h4></span>
 
-        <!-- </div> -->
-    </div>
+        <div class="row pull-right" id="schedule">
+           <button type="submit" class="btn btn-success" id="submitSessionDate" ng-click="requestDates()">Request Dates!</button>
+
+       </div>
+   </div>
+</div>
+
+<!-- </div> -->
 </div>
 </div>
 </div>
-
+<!-- </div>
+ -->
 </div>

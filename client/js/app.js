@@ -1,9 +1,9 @@
 var vibe = angular.module('vibe', ['ngRoute', 'ui.bootstrap', 'mwl.calendar', 
- 'duScroll', 'ngAnimate']).value('duScrollDuration', 500);;
+ 'duScroll', 'ngAnimate']).value('duScrollDuration', 1500);;
 
 var PHONE_REGEXP = /^[(]{0,1}[0-9]{3}[)\.\- ]{0,1}[0-9]{3}[\.\- ]{0,1}[0-9]{4}$/;
 
-vibe.config(function ($routeProvider, $locationProvider) {
+vibe.config(function ($routeProvider, $locationProvider, calendarConfig) {
     $routeProvider
     .when('/', {templateUrl: "/static/partials/homePage.html"})
     .when('/artists', {templateUrl: "/static/partials/Artists.html"})
@@ -19,8 +19,16 @@ vibe.config(function ($routeProvider, $locationProvider) {
     var scrollContent = function() {
         $('html, body').animate({ scrollTop: 0 }, 100);
 };
+    console.log(calendarConfig)
+    calendarConfig.displayEventEndTimes = true;
+    calendarConfig.allDateFormats.moment.date.hour = 'HH:mm';
 
 });
+
+// vibe.config(function(calendarConfig){
+//     console.log(calendarConfig)
+//     calendarConfig.displayEventEndTimes = true;
+// });
 
 vibe.run(function($rootScope, $window) {
 

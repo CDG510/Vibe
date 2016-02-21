@@ -50,12 +50,12 @@ $scope.showForm = function () {
 
             //on return
             modalInstance.result.then(function (studioForm) {
-                $scope.newStudio = studioForm;
-                console.log($scope.newStudio, "after promise/result")
-                $scope.successAdd = true
+                // $scope.newStudio = studioForm;
+                // console.log($scope.newStudio, "after promise/result")
+                // $scope.successAdd = true
             }, function () {
                 $log.info('Modal dismissed at: ' + new Date());
-                $scope.successAdd = false
+                // $scope.successAdd = false
               });
         };
 
