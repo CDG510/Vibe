@@ -16,7 +16,6 @@ vibe.controller("SearchController", function ($scope, $routeParams, $uibModal, $
 
 	//function to show found studios information when selected
 	$scope.seeProfile = function(studio) {
-		console.log("go to this profile page" , studio)
 		$location.path('/profile').search({studio: studio});
 	}
 
@@ -25,7 +24,6 @@ vibe.controller("SearchController", function ($scope, $routeParams, $uibModal, $
 	//function to adjust search term/results
 
 	$scope.search = function(){
-			console.log($scope.searchPlace.location)
 			// yelpFactory.searchStudios(searchArea, function(output) {
 			// 		console.log(output)
 			// 	})

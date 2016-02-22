@@ -20,23 +20,17 @@ function convertDateToUTC(date) {
 }
 
 function getThenParse(date, hours) {
-	console.log(date, hours, "is what I'm working with")
 	var sessionHours = hours.getHours()
 	var sessionMinutes = hours.getMinutes()
-	console.log(sessionHours, sessionMinutes)
 	date.setHours(sessionHours)
 	date.setMinutes(sessionMinutes)
-	console.log(date.getTime(), date, "is getting returned")
 	return date.getTime()
 }
 
 function unParseThenSet (parsed) {
-	console.log(parsed, "is what i'm bouto fuckup with")
 	var unparsed = parseInt(parsed);
-	console.log(unparsed, "was unparsed")
 	var realTime = new Date()
 	realTime.setTime(unparsed)
-	console.log(realTime, "getting sent back d00d")
 	return realTime
 }
 	//function to edit information
@@ -45,26 +39,20 @@ function unParseThenSet (parsed) {
 
 	//function to add/setup account information like dates/hours/payment etc
 
-
-	
 	$scope.requestDates = function(){
 
 		if ($scope.session.startHour == null || $scope.session.endHour == null) {
-			console.log('NAH BRUH')
 			$scope.fail = true;
 		}
 
 		else {
 			$scope.fail = false;
 				$scope.success = true;
-					console.log($scope.session);
-
 				var parsedStartTime = getThenParse($scope.session.startDate, $scope.session.startHour)
 				 // var parsedStartTime = sessionStart ;
 				 var parsedEndTime = getThenParse($scope.session.endDate, $scope.session.endHour);
 				 // packaging for DB
 				session = {startTime: parsedStartTime, startHour:  $scope.session.startHour.toString(), endHour:  $scope.session.endHour.toString(), endTime: parsedEndTime, info: $scope.session.info, artist: $scope.session.artist, studio: $scope.profile._id};
-				console.log(session);
 				SessionsFactory.addSession(session, function(output){
 					if (output == "exists") {
 						$scope.existsFail = true;
@@ -76,21 +64,18 @@ function unParseThenSet (parsed) {
 			}
 		}
 
+///open schedule should toggle, not
+
 	$scope.openSchedule = function(){
-		console.log('show me the calendar!')
 		$scope.calendar = true;
     	SessionsFactory.getSessions({studio: $scope.profile._id},  function(output) {
       //this output will populate the schedule table
-      console.log(output, "IS WE WE GOT FOR SESSIONS")
       if (output.sessions.length == 0) {
-      	console.log("WE GOt notHING")
       	$scope.noSessions = true;
       } else {
       	
       	for(session in output.sessions) {
-	      	console.log(output.sessions[session]);
 	      	//recombine date and time for calendar display
-
 	      	//make dates out of dateStrings
 	      	var newStartHour = unParseThenSet(output.sessions[session].startsAt);
 	      	output.sessions[session].startsAt = newStartHour
@@ -99,9 +84,7 @@ function unParseThenSet (parsed) {
 	      	var endTime = unParseThenSet(newEndHour)
 
 	      	output.sessions[session].endsAt =  endTime;
-	      	
-	      	console.log(output.sessions[session]);
-	      };
+	  	      };
 	      //set event source for calendar
 	      $scope.eventSource = output.sessions;
     	};     
@@ -118,7 +101,6 @@ function unParseThenSet (parsed) {
     $scopeisCellOpen = true;
 
     $scope.eventClicked = function(event) {
-    	console.log(event)
       alert.show("Clicked", event);
     };
 

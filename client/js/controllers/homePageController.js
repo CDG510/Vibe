@@ -68,8 +68,6 @@ $scope.showForm = function () {
     $scope.scrollTo = function(id) {
           var thisLocation = $location.hash(id);
           var someElement = angular.element(document.getElementById(id));
-          console.log(thisLocation)
-          console.log(someElement)
         $document.scrollToElementAnimated(someElement);
        }
     $scope.appendToEl = angular.element(document.querySelector('#toggleButton'))

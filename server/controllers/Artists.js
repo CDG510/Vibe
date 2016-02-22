@@ -17,8 +17,6 @@ module.exports = (function(){
 		},
 
 		create: function(req, res){
-			console.log('starting with......')
-			 console.log(req.body)
 			 var artist = new Artist({name: req.body.name, genre: req.body.genre, location: req.body.location, bio: req.body.bio});
 			 artist.save(function(err, result){
 			 	if(err){

@@ -19,7 +19,6 @@ module.exports = (function(){
 		},
 ///add
 		create: function(req, res){
-			 console.log(req.body)
 			 var studio = new Studio({name: req.body.name, contact: req.body.contact, specialty: req.body.specialty, phone: req.body.phone, location: req.body.location, rating: [parseInt(req.body.rating)]});
 			 studio.save(function(err, result){
 			 	if(err){
@@ -33,7 +32,6 @@ module.exports = (function(){
 		},
 //get 9he
 		findOne: function(req, res){
-			console.log(req.body.studio, "is used to get found")
 			Studio.findOne({_id: req.body.studio}, function(err, studio){
 				if (err){
 					console.log(err)
@@ -47,7 +45,6 @@ module.exports = (function(){
 		},
 ///get all sessions for one studio
 		findSessions: function(req, res){
-			console.log(req.body.studio);
 			Studio
 				.findOne({_id: req.body.studio})
 				.populate("sessions")
@@ -63,8 +60,7 @@ module.exports = (function(){
 		},
 ///search query for any of these terms
 		findSearch: function(req, res){
-			console.log(req.body)
-			console.log(req.body.location);
+			
 			Studio.find({$text: {$search: req.body.location+' '+req.body.name+' '+req.body.specialty} }, function (err, foundStudio){
 			 	if(err){
 			 		console.log(err)
@@ -78,7 +74,6 @@ module.exports = (function(){
 	},
 //probably to update ratings
 		update: function(req, res){
-			console.log(req.body);
 			Studio.find({name: req.body.name}, function(err, foundStudio){
 				if (err){
 					console.log(err)

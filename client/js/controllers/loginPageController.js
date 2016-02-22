@@ -7,7 +7,6 @@ $scope.dropDown = true;
 
 
 $scope.signUp = function() {
-    console.log("trying to sign up with", $scope.newUser);
     usersFactory.addUser($scope.newUser, function(output) {
     })
     // facebookService.getMyLastName($scope.newUser, function(output) {

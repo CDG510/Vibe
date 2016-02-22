@@ -19,16 +19,10 @@ vibe.config(function ($routeProvider, $locationProvider, calendarConfig) {
     var scrollContent = function() {
         $('html, body').animate({ scrollTop: 0 }, 100);
 };
-    console.log(calendarConfig)
     calendarConfig.displayEventEndTimes = true;
     calendarConfig.allDateFormats.moment.date.hour = 'HH:mm';
 
 });
-
-// vibe.config(function(calendarConfig){
-//     console.log(calendarConfig)
-//     calendarConfig.displayEventEndTimes = true;
-// });
 
 vibe.run(function($rootScope, $window) {
 

@@ -5,7 +5,6 @@ vibe.controller("ModalInstanceCtrl", function ($scope, $uibModalInstance, newStu
     $scope.form = {}
     $scope.submitForm = function () {
         if ($scope.form.newStudio.$valid) {
-        	console.log($scope.newStudio)
         	StudiosFactory.addStudioUser($scope.newStudio, function(output) {
         		console.log(output)
         	});

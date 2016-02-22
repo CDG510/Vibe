@@ -4,19 +4,17 @@ vibe.factory("StudiosFactory", function ($http) {
 
 	//function to find searched studios
 	factory.searchStudios = function(search, callback) {
-		console.log("in the factory with", search)
 		// api call to DB for search results would go here
 		$http.post('/findStudios', search).success(function(output){
-			 	console.log(output)
 			 	callback(output);
 			 })
 		// callback should really be using DB results
 	};
 
 	factory.findStudios = function (search, callback){
-			console.log(search)
+			
 			 $http.post('/findStudios', search).success(function(output){
-			 	console.log(output)
+			
 			 	callback(output);
 			 })
 		}

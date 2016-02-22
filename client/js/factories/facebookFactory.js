@@ -13,9 +13,6 @@ vibe.factory('facebookService', function($q) {
             });
             return deferred.promise;
         }
-
-
-
         return factory
 
     });

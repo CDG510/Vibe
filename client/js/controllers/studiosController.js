@@ -8,8 +8,7 @@ vibe.controller("StudiosController", function ($scope, $location, $routeParams, 
   // $scope.animationsEnabled = true;
   	$scope.showForm = function () {
             $scope.message = "Show Form Button Clicked";
-            console.log($scope.message);
-   
+       
             var modalInstance = $uibModal.open({
                 templateUrl: 'static/partials/AddStudioTemplate.html',
                 controller: 'ModalInstanceCtrl',
