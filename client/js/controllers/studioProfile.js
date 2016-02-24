@@ -1,23 +1,25 @@
 vibe.controller("studioProfileController", function ($scope, $location, $routeParams, StudiosFactory, $uibModal, $log, SessionsFactory, moment, alert) {
-		console.log($routeParams.studio)
-		$scope.profile = $routeParams.studio
+		// console.log($routeParams.studio)
+
+		// $scope.profile = $routeParams.studio
 		$scope.dropDown = true;
 		$scope.existsFail = false
 
-	if ($routeParams.studio == undefined) {
-		$scope.searched = false
+	if ($routeParams.studio === undefined) {
+		// $scope.searched = false
+    $scope.profile = $routeParams.newUser;
 	} else {
 		$scope.profile = $routeParams.studio
-		$scope.searched = true
+		// $scope.searched = true
 	}
 
-function createDateAsUTC(date) {
-    return new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()));
-}
+// function createDateAsUTC(date) {
+//     return new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()));
+// }
 
-function convertDateToUTC(date) { 
-    return new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds()); 
-}
+// function convertDateToUTC(date) { 
+//     return new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds()); 
+// }
 
 function getThenParse(date, hours) {
 	var sessionHours = hours.getHours()

@@ -12,8 +12,10 @@ var SessionSchema = new mongoose.Schema({
 	info: String, 
 	title: String,
 	allDay: Boolean,
-	created_at: {type: Date, default: new Date}
-
+	created_at: {type: Date, default: new Date},
+	hash: String,
+	salt: String,
+	_artist: {type: mongoose.Schema.Types.ObjectId, ref: "Artist"}
 })
 
 

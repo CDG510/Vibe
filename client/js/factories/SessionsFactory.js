@@ -14,24 +14,39 @@ vibe.factory('SessionsFactory', function ($http) {
 			})
 		}
 
-		factory.addSession = function(info , callback){
-			for (session in Sessions) {
+		factory.addSession = function(requestedSession , callback){
+			if (Sessions.length > 0) {
+				for (session in Sessions) {
 				//if requested session is after an exisiting start time & before an exisiting endTime (aka during)
-				var newStartHour = ParseIt(Sessions[session].startsAt)
-				var newEndHour = ParseIt(Sessions[session].endsAt)
-				if (info.startTime >= newStartHour && info.endTime < newEndHour) {
-					//show callbacka failure
-					callback("exists")
-					return
-				}
-				//if a session is scheduled to end after another to star
-				if (info.endTime > newStartHour && info.startTime < newEndHour) {
-					callback("exists");
-					return
-				}
+				//parse existing times and requested dates for comparison
+					var existingParsedStart = ParseIt(Sessions[session].startsAt)
+					var existingParsedEnd = ParseIt(Sessions[session].endsAt)
+					//can't start& end during an existing session
+					if (requestedSession.startTime >= existingParsedStart && requestedSession.endTime < existingParsedEnd) {
+						//show callbacka failure
+						callback("exists")
+						return
+					}
+					//can't start during and end after an existing
+					if (requestedSession.startTime >= existingParsedStart && requestedSession.endTime >= existingParsedEnd) {
+						callback("exists");
+						return
+					}
+					//can't run into an existing session (overlap into it)
+					if  (requestedSession.startTime < existingParsedStart && requestedSession.endTime > existingParsedStart) {
+						callback("exists");
+						return
+					}
+					//can't overtake an existing one
+					if (requestedSession.startTime <= existingParsedStart && requestedSession.endTime >= existingParsedEnd) {
+						callback("exists");
+						return
+					}
 				//other checks
+				}
 			}
-			$http.post("/addSession", info).success(function(output) {
+			
+			$http.post("/addSession", requestedSession).success(function(output) {
 				callback(output)
 			})
 		}

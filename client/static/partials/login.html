@@ -76,8 +76,12 @@
 			                <p ng-show="form.actualUser.password.$invalid && !form.actualUser.password.$pristine" class="help-block">Enter a valid password.</p>
 			            </div>
 						<button type="submit" id="loginConfirmButton" class="btn btn-default btn-lg pull-right" ng-disabled="form.actualUser.$invalid">Submit</button>
+						
 			        </div>
 				</form>
+				<div ng-show="error" class="alert alert-danger row">
+						    <span>{{ error.message }}</span>
+						</div>
 		        </div>
 		        </div>
 
@@ -97,7 +101,7 @@
                                 <p ng-show="form.newUser.firstName.$invalid && !form.newUser.firstName.$pristine" class="help-block">Your first name is required.</p>
                             </div>
                             <div class="loginInput">
-                                <input type="text"placeholder="Last Name" name="lastName" class="form-control " ng-model="newUser.lastlastName" ng-minlength="3" ng-maxlength="30" required>
+                                <input type="text"placeholder="Last Name" name="lastName" class="form-control " ng-model="newUser.lastName" ng-minlength="3" ng-maxlength="30" required>
                                 <p ng-show="form.newUser.lastName.$invalid && !form.newUser.lastName.$pristine" class="help-block">Your last name is required.</p>
                             </div>
     			            <div class= "loginInput ">
@@ -109,6 +113,13 @@
     			                <input type="password" placeholder="Password" name="password" class="form-control " ng-model="newUser.password" required>
     			                <p ng-show="form.newUser.password.$invalid && !form.newUser.password.$pristine" class="help-block">Enter a valid password.</p>
     			            </div>
+    			            <br>
+    			            <h5>Create profile as {{newUser.preference }}</h5>
+	    			           <div class="btn-group">
+	    			            <button type="button" class="btn btn-default btn-lg pull-left " autofocus="true" ng-model="newUser.preference" ng-click="makeArtist()" active uib-btn-radio="artist">Artist</button>
+	    			            <button type="button" class="btn btn-default btn-lg pull-right"  ng-model="newUser.preference" ng-click="makeStudio()" uib-btn-radio="studio">Studio</button>
+    			            </div>
+    			            <br>
 							<button type="submit" id="loginConfirmButton" class="btn btn-default btn-lg pull-right" ng-disabled="form.newStudio.$invalid">Submit</button>
     			        </div>
     				</form>

@@ -1,43 +1,60 @@
 var passport          = require('passport');
-var mongoose          = require('mongoose');
 // var Business          = mongoose.model('Business');
 var LocalStrategy     = require('passport-local').Strategy;
-var FacebookStrategy  = require('passport-facebook').Strategy;
+// var FacebookStrategy  = require('passport-facebook').Strategy;
+var mongoose          = require('mongoose');
 // var Studio = mongoose.model('Studio');
 // var Artist = mongoose.model("Artist");
-// var User = mongoose.model("User")
+var User = mongoose.model("User")
 
-passport.use(new FacebookStrategy({
-    clientID: '1530701907226627',
-    clientSecret: '38823705332f301c68dfe0984d8f5dd6',
-    callbackURL: "http://localhost:8080/auth/facebook/callback"
-  },
-  function(accessToken, refreshToken, profile, done) {
-    User.findOne({ oauthID: profile.id }, function(err, user) {
-      if(err) {
-        console.log(err);  // handle errors!
+
+
+passport.use(new LocalStrategy(
+  function(username, password, done) {
+    User.findOne({ username: username }, function (err, user) {
+      if (err) { return done(err); }
+      if (!user) {
+        return done(null, false, { message: 'Incorrect username.' });
       }
-      if (!err && user !== null) {
-        done(null, user);
-      } else {
-        user = new User({
-          oauthID: profile.id,
-          name: profile.displayName,
-          created: Date.now()
-        });
-        user.save(function(err) {
-          if(err) {
-            console.log(err);  // handle errors!
-          } else {
-            console.log("saving user ...");
-            done(null, user);
-          }
-        });
+      if (!user.validPassword(password)) {
+        return done(null, false, { message: 'Incorrect password.' });
       }
+      return done(null, user);
     });
   }
-
 ));
+
+// passport.use(new FacebookStrategy({
+//     clientID: '1530701907226627',
+//     clientSecret: '38823705332f301c68dfe0984d8f5dd6',
+//     callbackURL: "http://localhost:8080/auth/facebook/callback"
+//   },
+//   function(accessToken, refreshToken, profile, done) {
+//     User.findOne({ oauthID: profile.id }, function(err, user) {
+//       if(err) {
+//         console.log(err);  // handle errors!
+//       }
+//       if (!err && user !== null) {
+//         done(null, user);
+//       } else {
+//         user = new User({
+//           oauthID: profile.id,
+//           name: profile.displayName,
+//           created: Date.now()
+//         });
+//         user.save(function(err) {
+//           if(err) {
+//             console.log(err);  // handle errors!
+//           } else {
+//             console.log("saving user ...");
+//             done(null, user);
+//           }
+//         });
+//       }
+//     });
+//   }
+
+// ));
 // =========================================================================
 // passport session setup ==================================================
 // =========================================================================

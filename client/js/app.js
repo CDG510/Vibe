@@ -9,8 +9,8 @@ vibe.config(function ($routeProvider, $locationProvider, calendarConfig) {
     .when('/artists', {templateUrl: "/static/partials/Artists.html"})
     .when('/studios', {templateUrl: "/static/partials/Studios.html"})
     .when('/profile', {templateUrl: "/static/partials/studioPage.html"})
-    .when('/login', {templateUrl: "/static/partials/login.html"})
-    .when("/signUp", {templateUrl: "/static/partials/signUp.html"})
+    .when('/login', {templateUrl: "/static/partials/login.html", controller: 'loginController'})
+    // .when("/signUp", {templateUrl: "/static/partials/signUp.html"})
     .when("/searchRequest", {templateUrl: "/static/partials/Search.html", onEnter: scrollContent} )
     .otherwise({
         redirectTo: '/'
@@ -25,6 +25,7 @@ vibe.config(function ($routeProvider, $locationProvider, calendarConfig) {
 });
 
 vibe.run(function($rootScope, $window) {
+    
 
   $rootScope.$on('$routeChangeSuccess', function () {
 

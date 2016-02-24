@@ -15,12 +15,13 @@ $scope.dropDown = true;
 $scope.searchStudios = function() {
     //go to factory, to api call, get results, transfer to next partial
     console.log($scope.studioSearch)
-    if ($scope.studioSearch == undefined) {
+    if ($scope.studioSearch === undefined) {
         //show fail message
         $scope.failSearch = true
         return
     } else {
         $scope.failSearch = false;
+
     StudiosFactory.searchStudios({location: $scope.studioSearch.searchTerm}, function(output){
         console.log(output)
         $location.path('/searchRequest').search({studioSearch: output, searchTerm: $scope.studioSearch.searchTerm});

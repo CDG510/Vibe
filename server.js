@@ -8,10 +8,11 @@ var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var _ = require("underscore");
-var passport = require('./server/config/passport.js');
 var config = require('./oauth.js');
 var FacebookStrategy = require('passport-facebook').Strategy;
 var moment = require('moment');
+var jwt = require('express-jwt');
+// var auth = jwt({secret: 'SECRET', userProperty: 'payload'})
 moment().format();
 
 
@@ -23,15 +24,16 @@ app.use(morgan('dev')); //logs every request to console
 app.use(cookieParser()); //read cookies (needed for auth)
 app.use(express.static(path.join(__dirname, "./client")));
 
+
+require('./server/config/mongoose.js');//for mongoose usage
+require('./server/config/routes.js')(app);
+
 var passport = require('./server/config/passport.js');
+// require('./models/Users');
 
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
-
-// require('angular')
-require('./server/config/mongoose.js');//for mongoose usage
-require('./server/config/routes.js')(app);
 
 
 var hostname = process.env.HOSTNAME || 'localhost', port = 8080;
