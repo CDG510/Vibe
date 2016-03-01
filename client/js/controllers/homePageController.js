@@ -1,69 +1,44 @@
-vibe.controller("HomeController", function ($scope, $location, $routeParams, $document, $window, $anchorScroll, $uibModal, $log, StudiosFactory) {
+vibe.controller("HomeController", function ($scope, $location, $routeParams, $document, $window, $anchorScroll, $uibModal, $log, StudiosFactory, auth, usersFactory) {
 
-
-// figure out how to animate the nav bar and make the collapsible menu nav bar thing
-// $scope.findStudioSearch = function() {
-// 	console.log($scope.studioSearch)
-// 	$location.path('/artists').search({search: $scope.studioSearch});
-
-// }
 $scope.failSearch = false;
 //
 $scope.dropDown = true;
+$scope.isLoggedIn = auth.isLoggedIn;
+
+    var user = auth.currentUser()
+    user.User = user._id
+//get logged in user Info
+usersFactory.getUserInfo(user, function(output){
+        $scope.currentUser = output
+    });
 
 //function for studio search
 $scope.searchStudios = function() {
     //go to factory, to api call, get results, transfer to next partial
-    console.log($scope.studioSearch)
     if ($scope.studioSearch === undefined) {
         //show fail message
         $scope.failSearch = true
         return
     } else {
         $scope.failSearch = false;
-
-    StudiosFactory.searchStudios({location: $scope.studioSearch.searchTerm}, function(output){
+        StudiosFactory.searchStudios({location: $scope.studioSearch.searchTerm}, function(output){
         console.log(output)
         $location.path('/searchRequest').search({studioSearch: output, searchTerm: $scope.studioSearch.searchTerm});
     })
-     
-    }
-   
 
+    }
 }
 
-//function to load modals
-$scope.showForm = function () {
-            $scope.message = "Show Form Button Clicked";
-            console.log($scope.message);
-   
-            var modalInstance = $uibModal.open({
-                templateUrl: 'static/partials/AddStudioTemplate.html',
-                controller: 'ModalInstanceCtrl',
-                scope: $scope,
-                resolve: {
-                    newStudio: function () {
-                    	console.log($scope.newStudio, "back to original controlla")
-                        return $scope.newStudio;
-                    }
-                }
-            });
+$scope.logOut = function(){
+  auth.logOut()
+}
 
-            //on return
-            modalInstance.result.then(function (studioForm) {
-                // $scope.newStudio = studioForm;
-                // console.log($scope.newStudio, "after promise/result")
-                // $scope.successAdd = true
-            }, function () {
-                $log.info('Modal dismissed at: ' + new Date());
-                // $scope.successAdd = false
-              });
-        };
+$scope.goToProfile = function() {
+    $location.path("/profile").search({user:$scope.currentUser })
+}
 
-    // $scope.showLinks = function() {
-    // 	console.log('open da list')
-    // 	$scope.showlist = true
-    // }
+//integrate yelp business search api?
+
 
   //function to scroll to div
     $scope.scrollTo = function(id) {
@@ -88,6 +63,6 @@ $scope.showForm = function () {
                 });
             }
 
-            
+
         },100));
 });

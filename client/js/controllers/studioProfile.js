@@ -1,45 +1,90 @@
-vibe.controller("studioProfileController", function ($scope, $location, $routeParams, StudiosFactory, $uibModal, $log, SessionsFactory, moment, alert) {
+vibe.controller("studioProfileController", function ($scope, $location, $routeParams, StudiosFactory, $uibModal, $log, SessionsFactory, moment, alert, auth, $rootScope, usersFactory) {
 		// console.log($routeParams.studio)
 
 		// $scope.profile = $routeParams.studio
 		$scope.dropDown = true;
-		$scope.existsFail = false
+		$scope.existsFail = false;
+    $scope.isLoggedIn = auth.isLoggedIn;
+    $scope.canEdit = false;
+    $scope.beginEditing = false;
+    console.log($routeParams)
 
-	if ($routeParams.studio === undefined) {
+  //if we searched to get here, set the profile page to that one
+	if ($routeParams.studio) {
 		// $scope.searched = false
-    $scope.profile = $routeParams.newUser;
-	} else {
-		$scope.profile = $routeParams.studio
-		// $scope.searched = true
+    $scope.profile = $routeParams.studio;
 	}
+  //if we got here from a user, set the profile to that user
+  if ($routeParams.user){
+    $scope.profile = $routeParams.user
+  }
+//get the person using it
+ $scope.currentUser = auth.currentUser()
 
-// function createDateAsUTC(date) {
-//     return new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()));
-// }
-
-// function convertDateToUTC(date) { 
-//     return new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds()); 
-// }
-
-function getThenParse(date, hours) {
-	var sessionHours = hours.getHours()
-	var sessionMinutes = hours.getMinutes()
-	date.setHours(sessionHours)
-	date.setMinutes(sessionMinutes)
-	return date.getTime()
+//if the profile matches the current user, allow editing
+  if ($scope.profile.username === $scope.currentUser.username){
+    $scope.canEdit = true
+    console.log("hey it's my user page!");
+  }
+  //get date, parse it to number
+  function getThenParse(date, hours) {
+  var sessionHours = hours.getHours()
+  var sessionMinutes = hours.getMinutes()
+  date.setHours(sessionHours)
+  date.setMinutes(sessionMinutes)
+  return date.getTime()
 }
-
+//get parsedString, make it into a date
 function unParseThenSet (parsed) {
-	var unparsed = parseInt(parsed);
-	var realTime = new Date()
-	realTime.setTime(unparsed)
-	return realTime
+  var unparsed = parseInt(parsed);
+  var realTime = new Date()
+  realTime.setTime(unparsed)
+  return realTime
 }
-	//function to edit information
 
-	//function to delete
+//????
+$scope.linkModelFunc = function (url){
+  console.log('link model function' , url);
+  $window.open(url);
+}
 
-	//function to add/setup account information like dates/hours/payment etc
+//show modal
+  $scope.showForm = function () {
+            $scope.message = "Show Form Button Clicked";
+            console.log($scope.message);
+
+            var modalInstance = $uibModal.open({
+                templateUrl: 'static/partials/AddStudioTemplate.html',
+                controller: 'ModalInstanceCtrl',
+                scope: $scope,
+                resolve: {
+                    newStudio: function () {
+                        return $scope.newStudio;
+                    }
+                }
+            });
+
+            //on return
+            modalInstance.result.then(function (studioForm) {
+              // here we send it to the
+              $scope.profile = studioForm
+
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+                // $scope.successAdd = false
+              });
+        };
+
+
+$scope.logOut = function(){
+  auth.logOut()
+}
+
+
+$scope.goSite = function(url) {
+	console.log(url)
+}
+	//function to delete account
 
 	$scope.requestDates = function(){
 
@@ -62,11 +107,11 @@ function unParseThenSet (parsed) {
 						$scope.existsFail = false;
 						$scope.session = {};
 					}
-				}) 
+				})
 			}
 		}
 
-///open schedule should toggle, not
+///open schedule should toggle, not stay open
 
 	$scope.openSchedule = function(){
 		$scope.calendar = true;
@@ -75,7 +120,7 @@ function unParseThenSet (parsed) {
       if (output.sessions.length == 0) {
       	$scope.noSessions = true;
       } else {
-      	
+
       	for(session in output.sessions) {
 	      	//recombine date and time for calendar display
 	      	//make dates out of dateStrings
@@ -89,7 +134,7 @@ function unParseThenSet (parsed) {
 	  	      };
 	      //set event source for calendar
 	      $scope.eventSource = output.sessions;
-    	};     
+    	};
 		})
     };
 
@@ -110,19 +155,6 @@ function unParseThenSet (parsed) {
       alert.show('Edited', event);
     };
 
-    // $scope.eventClicked = function(event) {
-    //   alert.show('Clicked', event);
-    // };
-
-
-    // $scope.eventDeleted = function(event) {
-    //   alert.show('Deleted', event);
-    // };
-
-    // $scope.eventTimesChanged = function(event) {
-    //   alert.show('Dropped or resized', event);
-    // };
-
     $scope.toggle = function($event, field, event) {
       $event.preventDefault();
       $event.stopPropagation();
@@ -139,11 +171,20 @@ function unParseThenSet (parsed) {
   };
 
   // Disable weekend selection
+ $scope.dateOptions = {
+    dateDisabled: disabled,
+    formatYear: 'yy',
+    maxDate: new Date(2020, 5, 22),
+    minDate: new Date(),
+    startingDay: 1
+  };
 
   // for the datepicker
-  $scope.disabled = function(date, mode) {
+   function disabled(data) {
+    var date = data.date,
+      mode = data.mode;
     return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
-  };
+  }
 
   $scope.toggleMin = function() {
     $scope.minDate = $scope.minDate ? null : new Date();
@@ -160,6 +201,14 @@ function unParseThenSet (parsed) {
     $scope.popup2.opened = true;
   };
 
+  $scope.popup1 = {
+	opened: false
+  };
+
+  $scope.popup2 = {
+	opened: false
+  };
+
   $scope.setDate = function(year, month, day) {
     $scope.session.startDate = new Date(year, month, day);
   };
@@ -173,18 +222,9 @@ function unParseThenSet (parsed) {
   $scope.format = $scope.formats[3];
   $scope.altInputFormats = ['M!/d!/yyyy'];
 
-  $scope.popup1 = {
-    opened: false
-  };
-
-  $scope.popup2 = {
-    opened: false
-  };
-
   $scope.Zone = {
   	timeZone: null
   }
-
 
  $scope.hstep = 1;
   $scope.mstep = 30;
@@ -199,8 +239,6 @@ function unParseThenSet (parsed) {
     $scope.ismeridian = ! $scope.ismeridian;
   };
 
-  
+//
 
 });
-
-

@@ -32,8 +32,8 @@ var passport = require('./server/config/passport.js');
 // require('./models/Users');
 
 app.use(passport.initialize());
-app.use(passport.session()); // persistent login sessions
-app.use(flash()); // use connect-flash for flash messages stored in session
+// app.use(passport.session()); // persistent login sessions
+// app.use(flash()); // use connect-flash for flash messages stored in session
 
 
 var hostname = process.env.HOSTNAME || 'localhost', port = 8080;

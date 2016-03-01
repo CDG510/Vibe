@@ -9,7 +9,7 @@ var path = require('path');
 // };
 
 // database name
-mongoose.connect('mongodb://localhost/StudioFinder');
+mongoose.connect('mongodb://localhost/Vibe');
 
 // create a variable that points to the path where all of the models live
 var models_path = path.join(__dirname, './../models');

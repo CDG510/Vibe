@@ -1,10 +1,16 @@
 <div class="modal-header">
-    <h2 class="text-center">Create A New Account</h2>
+    <h2 class="text-center">Update your account {{currentUser.username}}</h2>
 </div>
-<form name="form.newStudio" ng-submit="submitForm()" novalidate>
-    <div class="modal-body">
+<div class="modal-body">
+
+    <form name="form.newStudio"  novalidate>
+
         <!-- NAME -->
         <div class="form-group ">
+            <!-- <div class="studioFormName">
+                <input type="text" name="password"
+            </div> -->
+
             <div class="studioFormName" >
                 <label>First Name</label>
                 <input type="text" name="firstName" class="form-control " ng-model="newStudio.firstName" ng-minlength="3" ng-maxlength="30" required>
@@ -12,7 +18,7 @@
             </div>
             <div class="studioFormName">
                 <label>Last Name</label>
-                <input type="text" name="lastName" class="form-control " ng-model="newStudio.lastlastName" ng-minlength="3" ng-maxlength="30" required>
+                <input type="text" name="lastName" class="form-control "  ng-model="newStudio.lastName" ng-minlength="3" ng-maxlength="30" required></input>
                 <p ng-show="form.newStudio.lastName.$invalid && !form.newStudio.lastName.$pristine" class="help-block">Your last name is required.</p>
             </div>
 
@@ -21,25 +27,120 @@
         <!-- EMAIL -->
         <div class="form-group">
             <div class="studioFormName">
-                <label>Email</label>
-                <input type="email" name="email" class="form-control" ng-model="newStudio.email" required>
-                <p ng-show="form.newStudio.email.$invalid && !form.newStudio.email.$pristine" class="help-block">Enter a valid email.</p>
+                <label>Specialty</label>
+                <input type="text" name="email" class="form-control" ng-model="newStudio.specialty" required>
+                <!-- <p ng-show="form.newStudio.email.$invalid && !form.newStudio.email.$pristine" class="help-block">Enter a specialty</p> -->
             </div>
             <!-- PASSWORD -->
-            <div class="studioFormName">
+           <!--  <div class="studioFormName">
                 <label>Password</label>
-                <input type="password" name="password" class="form-control" ng-model="newStudio.password" required>
+                <input type="password" name="password" class="form-control" ng-model="newStudio.password" value="{{currentUser.password}}" placeholder="{{currentUser.password}}" required>
                 <p ng-show="form.newStudio.password.$invalid && !form.newStudio.password.$pristine" class="help-block">Enter a valid password.</p>
-            </div>
+            </div> -->
         </div>
-<!-- 
-        <div class="form-group">
-            
-        </div> -->
 
-    </div>
-    <div class="modal-footer">
-        <button type="submit" class="btn btn-default btn-lg" ng-disabled="form.newStudio.$invalid">OK</button>
+        <div class="form-group ">
+            <div class="studioFormName" >
+                <label>Main Contact</label>
+                <input type="text" name="firstName" class="form-control " ng-model="newStudio.mainContact" ng-minlength="3" ng-maxlength="30" required>
+                <p ng-show="form.newStudio.firstName.$invalid && !form.newStudio.firstName.$pristine" class="help-block">Main Contact</p>
+            </div>
+            <div class="studioFormName">
+                <label>Phone Number</label>
+                <input type="text" name="phone" class="form-control " ng-model="newStudio.phone" ng-minlength="3" ng-maxlength="30" required>
+                <p ng-show="form.newStudio.lastName.$invalid && !form.newStudio.lastName.$pristine" class="help-block">Phone NUmber is required</p>
+            </div>
+            <div class="studioFormName">
+                <label>Address/location</label>
+                <input type="text" name="location" class="form-control " ng-model="newStudio.location" ng-minlength="3" ng-maxlength="30" required>
+                <p ng-show="form.newStudio.lastName.$invalid && !form.newStudio.lastName.$pristine" class="help-block">Location is required</p>
+            </div>
+            <div class="studioFormName">
+                <label>Profile Picture</label>
+                <input type="text" name="picture" class="form-control" placeholder="paste image url" ng-model="newStudio.profileImage">
+                <img src="{{newStudio.profileImage}}" class="editImage">
+            </div>
+            <div class="studioFormName">
+                <label>Bio</label>
+                <textarea name="bio" class="form-control" ng-model="newStudio.fullBio"></textarea>
+            </div>
+            <div class="studioFormName">
+                <label>Members</label>
+                <button class="btn btn-info" ng-click="addNewMember()" value="ADD MEMBER">Add a member</button>
+                    <div class="col-sm-12">
+                        <fieldset data-ng-repeat="field in newStudio.members track by $index">
+                            <input type="text" class="form-control" placeholder="members" name='members' ng-model="newStudio.members[$index]">
+                            <button type="button" class="btn btn-danger btn-sm" ng-click="removeMember($index)"> REMOVE
+                            </button>
+                        </fieldset>
+                    </div>
+            </div>
+            <div class="studioFormName">
+                <label>Websites</label>
+                <button class="btn btn-info" ng-click="addNewWebsite()" value="ADD MEMBER">Add a URL of interest</button>
+                    <div class="col-sm-12">
+                        <fieldset data-ng-repeat="field in newStudio.websites track by $index">
+                            <input type="text" class="form-control" placeholder="URL" name='members' ng-model="newStudio.websites[$index]">
+                            <button type="button" class="btn btn-danger btn-sm" ng-click="removeWebsite($index)"> REMOVE
+                            </button>
+                        </fieldset>
+                    </div>
+            </div>
+        <div class="studioFormName" >
+            <h4>Set your profile as {{newStudio.profileType}}</h4>
+             <button class="btn btn-primary" ng-click="setAsStudio()">Studio</button>
+             <button class="btn btn-primary" ng-click="setAsArtist()">Artist</button>
+                <!-- <input type="text" placeholder="" -->
+        </div>
+
+        <div class="studioFormName" ng-show="isStudio">
+                <label>Studio Name</label>
+                <input type="text" name="firstName" class="form-control " ng-model="newStudio.businessName" ng-minlength="3" ng-maxlength="30">
+                <p ng-show="form.newStudio.businessName.$invalid && !form.newStudio.businessName.$pristine" class="help-block">Your Studio name is required.</p>
+        </div>
+
+        <div class="studioFormName" ng-show="isStudio">
+                <label>Schedule</label>
+                <p>What days do you want off?</p>
+                <button class="btn btn-info" ng-click="addNewDayOff()" value="add Offday">Day off</button>
+
+                <div class="col-md-12">
+                    <!-- <fieldset data-ng-repeat="field in newStudio.schedule.days track by $index"> -->
+
+                         <!-- <select class="form-control" ng-model="newStudio.schedule.day" ng-options="day.name for day in Schedule" ></select> -->
+                         <!-- <button type='button' class="btn btn-danger btn-sm" ng-click="removeDayOff($index)">Remove Day off</button> -->
+<!--                     </fieldset>
+ -->                </div>
+
+                <!-- <label uib-btn-checkbox ng-model="newStudio.schedule.days.monday" class="btn btn-primary">Monday</label>
+                <label uib-btn-checkbox ng-model="newStudio.schedule.days.tuesday" class="btn btn-primary">Tuesday</label>
+                <label uib-btn-checkbox ng-model="newStudio.schedule.days.wednesday" class="btn btn-primary">Wednesday</label>
+                <label uib-btn-checkbox ng-model="newStudio.schedule.days.thursday" class="btn btn-primary">Thursday</label>
+                <label uib-btn-checkbox ng-model="newStudio.schedule.days.friday" class="btn btn-primary">Friday</label>
+                <label uib-btn-checkbox ng-model="newStudio.schedule.days.sunday" class="btn btn-primary">Sunday</label> -->
+                <!-- <p ng-show="form.newStudio.businessName.$invalid && !form.newStudio.businessName.$pristine" class="help-block">Your weekly schedule is required.</p> -->
+        </div>
+
+        <div class="col-md-4" ng-show="isStudio">
+            <h5>Start Hours</h5>
+            <uib-timepicker hour-step="hstep" minute-step="mstep" ng-model="newStudio.schedule.startHour" show-meridian="ismeridian"></uib-timepicker>
+            <!-- <span class="pull-right" style="color: red;" ng-show="newStudio.startHour"><h4>Please pick a valid Hour!</h4></span> -->
+        </div>
+
+        <div class='col-md-4' ng-show="isStudio">
+          <h5>End Hour</h5>
+          <uib-timepicker  hour-step="hstep" minute-step="mstep" ng-model="newStudio.schedule.endHour " format="date | shortTime" show-meridian="ismeridian"></uib-timepicker>
+        </div>
+
+
+        <div class="studioFormName" ng-show="isStudio">
+            <label>Price per hour</label>
+            <input type="number" name="picture" class="form-control" placeholder="price" ng-model="newStudio.price">
+        </div>
+</div>
+
+ <div class="modal-footer">
+        <button type="submit" class="btn btn-default btn-lg" ng-disabled="form.newStudio.$invalid" ng-click="submitForm()">OK</button>
         <button class="btn btn-cancel btn-lg" ng-click="cancel()">Cancel</button>
         </form>
-    </div>
+</div>

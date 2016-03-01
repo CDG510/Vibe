@@ -675,6 +675,7 @@ button {
 
 #calendar {
     margin-top: 20px;
+    border-color: white;
 }
 
 .full button span {
@@ -705,6 +706,8 @@ button {
     padding-top: 100px;
     padding-bottom: 100px;
     color: white;
+    background-color: #333333;
+    border-bottom-color: white;
 }
 
 #submitSessionDate{

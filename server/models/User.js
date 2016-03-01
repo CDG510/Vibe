@@ -1,11 +1,33 @@
 var mongoose = require('mongoose');
 var crypto = require("crypto");
 var jwt = require('jsonwebtoken')
+var Schema = mongoose.Schema;
+
 
 var UserSchema = new mongoose.Schema({
 	username: {type: String, lowercase: true, unique: true},
+	firstName: String,
+	lastName: String,
+	email: String,
+    password: String,
+	mainContact: String,
+    members: Array,
+	specialty: String,
+    websites: Array,
+    shortBio: String,
+    fullBio: String,
+    profileImage: String,
+    location: String,
+	phone: String,
+	ratings: Array,
+	schedule: Object,
+    price: Number,
+    businessName: String,
 	hash: String,
-	salt: String
+	salt: String,
+	profileType: String,
+	sessions: [{type: Schema.ObjectId, ref: 'Session'}]
+
 })
 
 

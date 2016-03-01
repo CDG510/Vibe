@@ -67,7 +67,7 @@
 				  <form class="form" role="form" name='form.actualUser'  ng-submit="login()" novalidate>
 					<div class="form-group">
 			            <div class= "loginInput ">
-			                <input type="email" name="email" placeholder="Email" class="form-control" ng-model="actualUser.email" required>
+			                <input type="text" name="userName" placeholder="Email" class="form-control" ng-model="actualUser.userName" required>
 			                <p ng-show="form.actualUser.email.$invalid && !form.actualUser.email.$pristine" class="help-block">Enter a valid email.</p>
 			            </div>
 			            <!-- PASSWORD -->
@@ -97,12 +97,8 @@
     				  <form class="form" name='form.newUser' role="form"  ng-submit="signUp()" novalidate>
     					<div class="form-group">
                             <div class="loginInput" >
-                                <input type="text" placeholder="First Name" name="firstName" class="form-control " ng-model="newUser.firstName" ng-minlength="3" ng-maxlength="30" required>
-                                <p ng-show="form.newUser.firstName.$invalid && !form.newUser.firstName.$pristine" class="help-block">Your first name is required.</p>
-                            </div>
-                            <div class="loginInput">
-                                <input type="text"placeholder="Last Name" name="lastName" class="form-control " ng-model="newUser.lastName" ng-minlength="3" ng-maxlength="30" required>
-                                <p ng-show="form.newUser.lastName.$invalid && !form.newUser.lastName.$pristine" class="help-block">Your last name is required.</p>
+                                <input type="text" placeholder="User Name" name="firstName" class="form-control " ng-model="newUser.userName" ng-minlength="3" ng-maxlength="30" required>
+                                <p ng-show="form.newUser.userName.$invalid && !form.newUser.userName.$pristine" class="help-block">A user name is required.</p>
                             </div>
     			            <div class= "loginInput ">
     			                <input type="email" placeholder="Email" name="email" class="form-control" ng-model="newUser.email" required>
@@ -114,12 +110,12 @@
     			                <p ng-show="form.newUser.password.$invalid && !form.newUser.password.$pristine" class="help-block">Enter a valid password.</p>
     			            </div>
     			            <br>
-    			            <h5>Create profile as {{newUser.preference }}</h5>
+    			           <!--  <h5>Create profile as {{newUser.preference }}</h5>
 	    			           <div class="btn-group">
 	    			            <button type="button" class="btn btn-default btn-lg pull-left " autofocus="true" ng-model="newUser.preference" ng-click="makeArtist()" active uib-btn-radio="artist">Artist</button>
 	    			            <button type="button" class="btn btn-default btn-lg pull-right"  ng-model="newUser.preference" ng-click="makeStudio()" uib-btn-radio="studio">Studio</button>
     			            </div>
-    			            <br>
+    			            <br> -->
 							<button type="submit" id="loginConfirmButton" class="btn btn-default btn-lg pull-right" ng-disabled="form.newStudio.$invalid">Submit</button>
     			        </div>
     				</form>

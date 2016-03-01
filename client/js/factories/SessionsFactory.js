@@ -3,10 +3,10 @@ vibe.factory('SessionsFactory', function ($http) {
 		var factory = {};
 
 		function ParseIt (parsed) {
-	var parsed = parsed.getTime();
-	return parsed
-}
-
+		var parsed = parsed.getTime();
+		return parsed
+	}
+		//get all sessions by current profile
 		factory.getSessions = function(id, callback) {
 			$http.post("/getSessions", id).success(function(output) {
 				Sessions = output.sessions;
@@ -14,6 +14,7 @@ vibe.factory('SessionsFactory', function ($http) {
 			})
 		}
 
+		//add session function with checks to see if it doesn't already exist
 		factory.addSession = function(requestedSession , callback){
 			if (Sessions.length > 0) {
 				for (session in Sessions) {
@@ -45,7 +46,7 @@ vibe.factory('SessionsFactory', function ($http) {
 				//other checks
 				}
 			}
-			
+			//if all passes, then take it to the db to add
 			$http.post("/addSession", requestedSession).success(function(output) {
 				callback(output)
 			})

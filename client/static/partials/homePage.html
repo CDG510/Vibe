@@ -19,8 +19,16 @@
                             <a class="page-scroll" ng-click="scrollTo('intro-Studio')">Studios</a>
                         </li>
                         <li>
-                            <a class="page-scroll" href="/#/login">Login</a>
+                            <a class="page-scroll" ng-hide="isLoggedIn()" href="/#/login">Login</a>
                         </li>
+                       
+                        <li>
+                            <a ng-show="isLoggedIn()" ng-click="goToProfile()">Profile</a>
+                        </li>
+                        <li>
+                            <a ng-show="isLoggedIn()" ng-click="logOut()">Logout</a>
+                        </li>
+
      <!--                    <li>
                             <a class="page-scroll" href="/#/signUp">Sign Up</a>
                         </li> -->
@@ -37,8 +45,9 @@
                         <ul class="droDownMenuList text-right animate-show"  role="menu" aria-labelledby="single-button" ng-hide="dropDown">
                             <li><a class="page-scroll" ng-click="scrollTo('introTop')">Home</a></li>
                             <li role="menuitem"><a class="page-scroll" ng-click="scrollTo('intro-Artist')">Artists</a></li>
-                            <li role="menuitem"><a class="page-scroll" ng-click="scrollTo('intro-Studio')">Studios</a></li>
-                            <li role="menuitem"><a class="page-scroll" href="/#/login">Login</a></li>
+                            <li role="menuitem"> <a ng-show="isLoggedIn()" ng-click="logOut()">Logout</a></li>
+                            <li role="menuitem"> <a ng-show="isLoggedIn()" ng-click="goToProfile()"> Profile</a></li>
+                            <li role="menuitem"><a class="page-scroll" ng-hide="isLoggedIn()" href="/#/login">Login</a></li>
 <!--                             <li role="menuitem"><a class="page-scroll" href="/#/signUp">Sign Up</a></li> -->
                         </ul>
                         </div>

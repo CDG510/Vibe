@@ -1,47 +1,36 @@
-vibe.controller("loginController", function ($scope, $location, $routeParams, $document, $window, $anchorScroll, $uibModal, $log, auth){
+vibe.controller("loginController", function ($scope, $location, $routeParams, $document, $window, $anchorScroll, $uibModal, $log, auth, $rootScope){
 
-//function to send form information to user/studio factory, route to profile page when successful
-
-//
 $scope.dropDown = true;
 $scope.newUser = {};
 $scope.actualUser = {};
-$scope.newUser.preference= "artist";
-console.log($scope.newUser)
+$scope.isLoggedIn = auth.isLoggedIn;
 
-$scope.makeArtist = function(){
-    $scope.newUser.preference = 'artist';
-}
-
-
-$scope.makeStudio = function(){
-    $scope.newUser.preference = 'studio';
-}
-
+//take info, register with passport, go to profile page
 $scope.signUp = function() {
     console.log($scope.newUser)
     auth.register($scope.newUser).error(function(error){
         $scope.error = error;
     }).then(function(output){
         console.log(output)
-        $location.path('/profile').search({user: $scope.newUser});
+        $scope.currentUser = auth.currentUser()
+
+        $location.path('/profile').search({user: $scope.currentUser});
 
     })
 }
-//     facebookService.getMyLastName($scope.newUser, function(output) {
-//         console.log(output)
-//     })
-// }
-// 
 
+//take login info, verify with passport, if pass, go to page
 $scope.login = function() {
     console.log($scope.actualUser)
     auth.logIn($scope.actualUser).error(function(error){
         $scope.error = error;
-    }).then(function(){
-        $location.path('/profile').search({user: $scope.actualUser});
+    }).then(function(output){
+        console.log(output, "came back to me!")
+        $scope.currentUser = auth.currentUser()
+        $location.path('/profile').search({user: $scope.currentUser});
     })
 }
+//function to scroll to position
 $scope.scrollTo = function(id) {
       var thisLocation = $location.hash(id);
       var someElement = angular.element(document.getElementById(id));

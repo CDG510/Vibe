@@ -1,4 +1,4 @@
-vibe.factory('auth', function($http, $window){
+vibe.factory('auth', function($http, $window, $rootScope){
 	var auth = {};
 
 	auth.saveToken = function(token){
@@ -24,29 +24,28 @@ vibe.factory('auth', function($http, $window){
 		if(auth.isLoggedIn()){
 			var token = auth.getToken();
 			var payload = JSON.parse($window.atob(token.split('.')[1]));
-
-			return payload.username;
+			console.log(payload);
+			return payload;
 		}
 	}
 
 	auth.register = function(user){
-		console.log('bout to register', user)
-		if (user.preference = "artist") {
-			return $http.post('/registerArtist', user).success(function(data){
+		return $http.post('/register', user).success(function(data){
 			auth.saveToken(data.token)
+
+			// $rootScope.$broadcast('currentUser', {user: data.user})
+			// $rootScope.$emit('currentUser', {user: data.user})
 		});
-		}
-		else {
-			return $http.post('/registerStudio', user).success(function(data){
-			auth.saveToken(data.token)
-		});
-		}
-		
 	};
 
-	auth.logInzdtudio = function(user){
-		return $http.post('/loginStudio', user).success(function(data){
-			auth.saveToken(data.token);
+	auth.logIn = function(user, callback){
+		return $http.post('/loginUser', user).success(function(data){
+		// $rootScope.$broadcast('currentUser', {user: data.user})
+		// $rootScope.$emit('currentUser', {user: data.user})
+		auth.saveToken(data.token);
+		
+
+			// return user
 		})
 	}
 

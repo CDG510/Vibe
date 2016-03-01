@@ -60,8 +60,8 @@ module.exports = (function(){
 		},
 ///search query for any of these terms
 		findSearch: function(req, res){
-			
-			Studio.find({$text: {$search: req.body.location+' '+req.body.name+' '+req.body.specialty} }, function (err, foundStudio){
+			console.log(req.body, "is getting searched_______________")
+			Studio.find({$text: {$search: req.body.location+' '+req.body.name+' '+req.body.specialty+" "+req.body.searchTerm} }, function (err, foundStudio){
 			 	if(err){
 			 		console.log(err)
 			 	}
