@@ -7,7 +7,7 @@ vibe.factory("DatesFactory", function(){
 		return date
 	}
 
-	factory.getThenParse = function(date){
+	factory.getThenParse = function(date, hours){
 
 		var sessionHours = hours.getHours()
   var sessionMinutes = hours.getMinutes()
@@ -31,14 +31,17 @@ vibe.factory("DatesFactory", function(){
   realTime.setTime(unparsed)
   return realTime
 	}
-//get parsedString, make it into a date
-// function unParseThenSet (parsed) {
-//   var unparsed = parseInt(parsed);
-//   var realTime = new Date()
-//   realTime.setTime(unparsed)
-//   return realTime
-// }
 
+	factory.unStringDate = function(date){
+		var newDate = new Date(date)
+		var hours = newDate.getHours()
+		var Minutes = newDate.getMinutes()
+		var backTime = new Date()
+		backTime.setHours(hours);
+		backTime.setMinutes(Minutes)
+		console.log(backTime, "IS GOING BACK")
+		return backTime
+	}
 
 	return factory
 })

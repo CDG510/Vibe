@@ -27,7 +27,8 @@ $scope.login = function() {
     }).then(function(output){
         console.log(output, "came back to me!")
         $scope.currentUser = auth.currentUser()
-        $location.path('/profile').search({user: $scope.currentUser});
+        console.log(output)
+        $location.path('/profile').search({user: output.data.user});
     })
 }
 //function to scroll to position

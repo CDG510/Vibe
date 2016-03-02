@@ -4,13 +4,17 @@ $scope.failSearch = false;
 //
 $scope.dropDown = true;
 $scope.isLoggedIn = auth.isLoggedIn;
-
+    
     var user = auth.currentUser()
-    user.User = user._id
+    console.log(user)
+    if (user !== undefined) {
+        user.User = user._id
 //get logged in user Info
 usersFactory.getUserInfo(user, function(output){
         $scope.currentUser = output
     });
+    }
+
 
 //function for studio search
 $scope.searchStudios = function() {

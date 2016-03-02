@@ -522,12 +522,15 @@ body {
 }
 
 .studioFormName {
-    width: 50%;
+    width: 100%;
     text-align: center;
     vertical-align: middle;
     text-align:center;
-
+    margin-bottom: 20px;
 }
+    .studioFormName button, select, input  {
+        margin-bottom: 10px;
+    }
 
 #loginInput {
     text-align: center;

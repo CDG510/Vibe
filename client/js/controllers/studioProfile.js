@@ -1,7 +1,8 @@
-vibe.controller("studioProfileController", function ($scope, $location, $routeParams, StudiosFactory, $uibModal, $log, SessionsFactory, moment, alert, auth, $rootScope, usersFactory) {
-		// console.log($routeParams.studio)
+vibe.controller("studioProfileController", function ($scope, $location, $routeParams, StudiosFactory, $uibModal, $log, SessionsFactory, moment, alert, auth, $rootScope, usersFactory, DatesFactory, $sce) {
 
-		// $scope.profile = $routeParams.studio
+    $scope.currentUser = auth.currentUser()
+    // console.log ($scope.currentUser)
+    var endDay
 		$scope.dropDown = true;
 		$scope.existsFail = false;
     $scope.isLoggedIn = auth.isLoggedIn;
@@ -15,17 +16,29 @@ vibe.controller("studioProfileController", function ($scope, $location, $routePa
     $scope.profile = $routeParams.studio;
 	}
   //if we got here from a user, set the profile to that user
-  if ($routeParams.user){
+   if ($routeParams.user){
     $scope.profile = $routeParams.user
+    console.log("set the user!")
+  }
+
+  if (!$routeParams.user || !$routeParams.studio) {
+    var user = auth.currentUser()
+    console.log(user)
+    if (user !== undefined) {
+        user.User = user._id
+//get logged in user Info
+usersFactory.getUserInfo(user, function(output){
+        $scope.profile = output
+    });
+    }
+    // $scope.profile 
   }
 //get the person using it
- $scope.currentUser = auth.currentUser()
 
 //if the profile matches the current user, allow editing
   if ($scope.profile.username === $scope.currentUser.username){
     $scope.canEdit = true
-    console.log("hey it's my user page!");
-  }
+      }
   //get date, parse it to number
   function getThenParse(date, hours) {
   var sessionHours = hours.getHours()
@@ -42,7 +55,6 @@ function unParseThenSet (parsed) {
   return realTime
 }
 
-//????
 $scope.linkModelFunc = function (url){
   console.log('link model function' , url);
   $window.open(url);
@@ -80,10 +92,6 @@ $scope.logOut = function(){
   auth.logOut()
 }
 
-
-$scope.goSite = function(url) {
-	console.log(url)
-}
 	//function to delete account
 
 	$scope.requestDates = function(){
@@ -93,6 +101,7 @@ $scope.goSite = function(url) {
 		}
 
 		else {
+
 			$scope.fail = false;
 				$scope.success = true;
 				var parsedStartTime = getThenParse($scope.session.startDate, $scope.session.startHour)
@@ -147,13 +156,13 @@ $scope.goSite = function(url) {
 
     $scopeisCellOpen = true;
 
-    $scope.eventClicked = function(event) {
-      alert.show("Clicked", event);
-    };
+    // $scope.eventClicked = function(event) {
+    //   alert.show("Clicked", event);
+    // };
 
-    $scope.eventEdited = function(event) {
-      alert.show('Edited', event);
-    };
+    // $scope.eventEdited = function(event) {
+    //   alert.show('Edited', event);
+    // };
 
     $scope.toggle = function($event, field, event) {
       $event.preventDefault();
@@ -169,22 +178,18 @@ $scope.goSite = function(url) {
   $scope.clear = function() {
     $scope.dt = null;
   };
-
   // Disable weekend selection
  $scope.dateOptions = {
-    dateDisabled: disabled,
     formatYear: 'yy',
     maxDate: new Date(2020, 5, 22),
     minDate: new Date(),
-    startingDay: 1
+    startingDay: 0
   };
 
   // for the datepicker
-   function disabled(data) {
-    var date = data.date,
-      mode = data.mode;
-    return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
-  }
+$scope.disabled = function (date, mode) {
+    return (mode === 'day' && (date.getDay() === $scope.profile.schedule.offDays[0].value || date.getDay() === $scope.profile.schedule.offDays[1].value || date.getDay() === $scope.profile.schedule.offDays[2].value || date.getDay() === $scope.profile.schedule.offDays[3].value || date.getDay() === $scope.profile.schedule.offDays[4].value || date.getDay() === $scope.profile.schedule.offDays[5].value || date.getDay() === $scope.profile.schedule.offDays[6].value));
+};
 
   $scope.toggleMin = function() {
     $scope.minDate = $scope.minDate ? null : new Date();
@@ -228,6 +233,12 @@ $scope.goSite = function(url) {
 
  $scope.hstep = 1;
   $scope.mstep = 30;
+
+
+console.log($scope.profile.openSchedule)
+$scope.min = DatesFactory.unStringDate($scope.profile.schedule.startHour)
+$scope.max = DatesFactory.unStringDate($scope.profile.schedule.endHour)
+
 
   $scope.options = {
     hstep: [1, 2, 3],

@@ -16,18 +16,35 @@ vibe.controller("ModalInstanceCtrl", function ($scope, $uibModalInstance, newStu
             var userEndTime = new Date($scope.currentUser.schedule.endHour)
             $scope.newStudio.schedule.endHour = userEndTime
             $scope.newStudio.schedule.startHour = userStartTime
+            if (!$scope.newStudio.schedule.offDays){
+                $scope.newStudio.schedule.offDays = [{
+                    noWork: false
+                }]
+
+            } else {
+                for(var i = 0; i < $scope.newStudio.schedule.offDays.length; i++){
+                    if ($scope.newStudio.schedule.offDays[i].noWork === false){
+                        $scope.newStudio.schedule.offDays.splice(i, i+1)
+                    }
+                }
+            }
+            
+                // $scope.newStudio.schedule.offDays.splice(7, 9);
+
+
+            
         }
     });
 
-    // $scope.Schedule = [
-    //     {name: "monday", value: 0},
-    //     {name: 'tuesday', value: 1},
-    //     {name: "wednesday" value: 2},
-    //     {name: "thursday" value: 3},
-    //     {name: "friday" , value: 4},
-    //     {name: "saturday", value: 5},
-    //     {name: "sunday", value: 6}
-    // ]
+    $scope.Schedule = [
+        {name: "monday", value: 1},
+        {name: 'tuesday', value: 2},
+        {name: "wednesday", value: 3},
+        {name: "thursday", value: 4},
+        {name: "friday" , value: 5},
+        {name: "saturday", value: 6},
+        {name: "sunday", value: 0}
+    ]
     // trigger preference to show additional input fields
     $scope.setAsStudio = function() {
         $scope.newStudio.profileType = "Studio";
@@ -66,6 +83,16 @@ vibe.controller("ModalInstanceCtrl", function ($scope, $uibModalInstance, newStu
         $scope.newStudio.websites.splice(z, 1);
     }
 
+    $scope.addNewDayOff = function(){
+        $scope.newStudio.schedule.offDays.push({noWork: true});
+        console.log($scope.newStudio.schedule);
+    };
+
+    $scope.removeDayOff = function(){
+
+        $scope.newStudio.schedule.offDays.splice($scope.newStudio.schedule.offDays.length-1, 1);
+    }
+
     // $scope.form = {}
     //submit info, return to original page
     $scope.submitForm = function () {
@@ -77,7 +104,6 @@ vibe.controller("ModalInstanceCtrl", function ($scope, $uibModalInstance, newStu
             if ($scope.newStudio.profileType == "Artist") {
                 $scope.newStudio.id = $scope.currentUser._id;
                 usersFactory.updateUser($scope.newStudio, function(output) {
-                    console.log(output)
                     $scope.newStudio = output
                     });
             } else {
@@ -85,29 +111,28 @@ vibe.controller("ModalInstanceCtrl", function ($scope, $uibModalInstance, newStu
             var momentEnd = moment($scope.newStudio.schedule.endHour).format("LT")
             $scope.newStudio.schedule.formatTime = momentStart;
             $scope.newStudio.schedule.formatEnd = momentEnd;
-            // angular.forEach($scope.checkModel, function (value, key) {
-            //     $scope.newStudio.schedule.daysOff = [];
-            //      if (value) {
-            //        $scope.newStudio.schedule.daysOff.push(key);
-            //        console.log($scope.newStudio.schedule);
-            //      }
-            //    });
-            // for(var key in $scope.newStudio.schedule.days) {
-            //     $scope.newStudio.schedule.daysOff = [];
-            //     if ($scope.newStudio.schedule.days[key]){
-            //         $scope.newStudio.schedule.daysOff.push($scope.newStudio.schedule.days[key])
-            //         console.log($scope.newStudio.schedule.daysOff)
-            //     }
-            // }
+
             $scope.newStudio.id = $scope.currentUser._id;
+
+            for (var i =0; i <= 7; i++){
+                // console.log($scope.newStudio.schedule.offDays[i])
+                if (!$scope.newStudio.schedule.offDays[i]){
+                    $scope.newStudio.schedule.offDays.push({});
+                    $scope.newStudio.schedule.offDays[i].value = 10;
+                    $scope.newStudio.schedule.offDays[i].noWork = false;
+                } 
+                console.log($scope.newStudio.schedule.offDays[i])
+            }
+
             usersFactory.updateUser($scope.newStudio, function(output) {
-                    console.log(output)
                     $scope.newStudio = output
                 });
+            console.log($scope.newStudio)
             }
-            $uibModalInstance.close($scope.newStudio);
 
-        } else {
+            $uibModalInstance.close($scope.newStudio);
+        }
+        else {
             console.log('userform is not in scope');
         }
     };

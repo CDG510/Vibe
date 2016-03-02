@@ -1,5 +1,5 @@
 var vibe = angular.module('vibe', ['ngRoute', 'ui.bootstrap', 'mwl.calendar', 
- 'duScroll', 'ngAnimate']).value('duScrollDuration', 1500);;
+ 'duScroll', 'multipleDatePicker', 'ngAnimate']).value('duScrollDuration', 1500);;
 
 var PHONE_REGEXP = /^[(]{0,1}[0-9]{3}[)\.\- ]{0,1}[0-9]{3}[\.\- ]{0,1}[0-9]{4}$/;
 
