@@ -4,15 +4,17 @@ $scope.failSearch = false;
 //
 $scope.dropDown = true;
 $scope.isLoggedIn = auth.isLoggedIn;
-    
+
     var user = auth.currentUser()
     console.log(user)
     if (user !== undefined) {
         user.User = user._id
 //get logged in user Info
-usersFactory.getUserInfo(user, function(output){
-        $scope.currentUser = output
-    });
+    usersFactory.getUserInfo(user, function(output){
+            $scope.currentUser = output
+            $scope.userID = $scope.currentUser.username
+            console.log($scope.userID)
+        });
     }
 
 
@@ -41,6 +43,10 @@ $scope.goToProfile = function() {
     $location.path("/profile").search({user:$scope.currentUser })
 }
 
+
+$scope.goToUserProfile = function() {
+    $location.path("/userProfile/"+$scope.userID).search({user:$scope.currentUser })
+}
 //integrate yelp business search api?
 
 

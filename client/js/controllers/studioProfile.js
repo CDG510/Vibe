@@ -3,8 +3,8 @@ vibe.controller("studioProfileController", function ($scope, $location, $routePa
     $scope.currentUser = auth.currentUser()
     // console.log ($scope.currentUser)
     var endDay
-		$scope.dropDown = true;
-		$scope.existsFail = false;
+	$scope.dropDown = true;
+	$scope.existsFail = false;
     $scope.isLoggedIn = auth.isLoggedIn;
     $scope.canEdit = false;
     $scope.beginEditing = false;
@@ -12,28 +12,24 @@ vibe.controller("studioProfileController", function ($scope, $location, $routePa
 
   //if we searched to get here, set the profile page to that one
 	if ($routeParams.studio) {
-		// $scope.searched = false
     $scope.profile = $routeParams.studio;
 	}
   //if we got here from a user, set the profile to that user
    if ($routeParams.user){
     $scope.profile = $routeParams.user
-    console.log("set the user!")
   }
 
   if (!$routeParams.user || !$routeParams.studio) {
     var user = auth.currentUser()
-    console.log(user)
     if (user !== undefined) {
         user.User = user._id
 //get logged in user Info
-usersFactory.getUserInfo(user, function(output){
-        $scope.profile = output
-    });
+        usersFactory.getUserInfo(user, function(output){
+            $scope.profile = output
+        });
     }
-    // $scope.profile 
+    // $scope.profile
   }
-//get the person using it
 
 //if the profile matches the current user, allow editing
   if ($scope.profile.username === $scope.currentUser.username){
@@ -235,10 +231,10 @@ $scope.disabled = function (date, mode) {
   $scope.mstep = 30;
 
 
-console.log($scope.profile.openSchedule)
-$scope.min = DatesFactory.unStringDate($scope.profile.schedule.startHour)
-$scope.max = DatesFactory.unStringDate($scope.profile.schedule.endHour)
-
+if ($scope.profile.schedule) {
+  $scope.min = DatesFactory.unStringDate($scope.profile.schedule.startHour)
+  $scope.max = DatesFactory.unStringDate($scope.profile.schedule.endHour)
+}
 
   $scope.options = {
     hstep: [1, 2, 3],

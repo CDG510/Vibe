@@ -17,7 +17,7 @@
 							<a class="page-scroll" ng-click="scrollTo('login')">Login</a>
 						</li>
 						<li>
-							<a class="page-scroll" ng-click="scrollTo('signUp')">SignUp</a>
+							<a class="page-scroll" href="/#/signUp">SignUp</a>
 						</li>
 
 	 <!--                    <li>
@@ -61,7 +61,7 @@
 
 <section id="login" class="container content-section text-center">
         <div class="row">
-            <div class="col-xs-4 col-xs-offset-4 " id="login_box" style="border: 1px solid white">
+            <div class="col-xs-4 col-xs-offset-4 " id="login_box" >
                 <h1>Login</h1>
                 <div class="row">
 				  <form class="form" role="form" name='form.actualUser'  ng-submit="login()" novalidate>
@@ -82,7 +82,7 @@
 				<div ng-show="error" class="alert alert-danger row">
 						    <span>{{ error.message }}</span>
 						</div>
-						<p>Don't have an account? <a class="page-scroll" ng-click="scrollTo('signUp')">Login</a>
+						<p>Don't have an account? <a class="page-scroll" href="/#/signUp">Sign Up</a>
 		        </div>
 		    </div>
 
@@ -91,39 +91,5 @@
     </section>
 
 
-	<section id="signUp" class="container content-section text-center">
-            <div class="row">
-                <div class="col-xs-4 col-xs-offset-4 ">
-                    <h1>Sign Up</h1>
-                    <div class="row">
-    				  <form class="form" name='form.newUser' role="form"  ng-submit="signUp()" novalidate>
-    					<div class="form-group">
-                            <div class="loginInput" >
-                                <input type="text" placeholder="User Name" name="firstName" class="form-control " ng-model="newUser.userName" ng-minlength="3" ng-maxlength="30" required>
-                                <p ng-show="form.newUser.userName.$invalid && !form.newUser.userName.$pristine" class="help-block">A user name is required.</p>
-                            </div>
-    			            <div class= "loginInput ">
-    			                <input type="email" placeholder="Email" name="email" class="form-control" ng-model="newUser.email" required>
-    			                <p ng-show="form.newUser.email.$invalid && !form.newUser.email.$pristine" class="help-block">Enter a valid email.</p>
-    			            </div>
-    			            <!-- PASSWORD -->
-    			            <div class="loginInput" >
-    			                <input type="password" placeholder="Password" name="password" class="form-control " ng-model="newUser.password" required>
-    			                <p ng-show="form.newUser.password.$invalid && !form.newUser.password.$pristine" class="help-block">Enter a valid password.</p>
-    			            </div>
-    			            <br>
-    			           <!--  <h5>Create profile as {{newUser.preference }}</h5>
-	    			           <div class="btn-group">
-	    			            <button type="button" class="btn btn-default btn-lg pull-left " autofocus="true" ng-model="newUser.preference" ng-click="makeArtist()" active uib-btn-radio="artist">Artist</button>
-	    			            <button type="button" class="btn btn-default btn-lg pull-right"  ng-model="newUser.preference" ng-click="makeStudio()" uib-btn-radio="studio">Studio</button>
-    			            </div>
-    			            <br> -->
-							<button type="submit" id="loginConfirmButton" class="btn btn-default btn-lg pull-right" ng-disabled="form.newStudio.$invalid">Submit</button>
-    			        </div>
-    				</form>
-    		        </div>
-    		        </div>
-
-                </div>
-        </section>
+	
  </div>

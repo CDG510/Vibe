@@ -1,18 +1,21 @@
-vibe.controller("SearchController", function ($scope, $routeParams, $uibModal, $log, $location, $document, $window, StudiosFactory) {
+vibe.controller("SearchController", function ($scope, $routeParams,  $log, $location, $document, $window, StudiosFactory) {
 
-	$scope.searchTerm = $routeParams.searchTerm
 	console.log($routeParams.studioSearch)
 
+if (!$routeParams) {
+	$scope.noneFound = false;
+} else {
+	$scope.searchTerm = $routeParams.searchTerm
 	if ($routeParams.studioSearch == '') {
 			$scope.noneFound = true
 	} else {
 		$scope.tempStudios = $routeParams.studioSearch
 
 	}
+}
+
 	$scope.dropDown = true;
-	//for testing purposed	
-
-
+	//for testing purposed
 
 	//function to show found studios information when selected
 	$scope.seeProfile = function(studio) {
@@ -20,13 +23,37 @@ vibe.controller("SearchController", function ($scope, $routeParams, $uibModal, $
 	}
 
 
-
+	$scope.searchStudios = function() {
+	    //go to factory, to api call, get results, transfer to next partial
+		console.log($scope.searchPlace)
+		$scope.searchTerm = $scope.searchPlace.searchTerm
+	    if ($scope.searchPlace === undefined) {
+	        //show fail message
+	        return
+	    } else {
+			StudiosFactory.findStudios	($scope.searchPlace, function(output){
+				console.log(output)
+			if (output.length < 1) {
+				$scope.noneFound = true;
+				$scope.searchPlace = {}
+			}
+			else {
+				$scope.noneFound = false;
+				$scope.tempStudios = output;
+				$scope.searchPlace = {};
+			}
+	    })
+		}
+	}
 	//function to adjust search term/results
 
 	$scope.search = function(){
 			// yelpFactory.searchStudios(searchArea, function(output) {
 			// 		console.log(output)
 			// 	})
+			console.log($scope.searchPlace)
+			$scope.searchTerm = $scope.searchPlace
+
 			StudiosFactory.findStudios($scope.searchPlace, function(output){
 				console.log(output)
 				if (output.length < 1) {
@@ -58,6 +85,6 @@ vibe.controller("SearchController", function ($scope, $routeParams, $uibModal, $
                 });
             }
 
-            
+
         },100));
 });

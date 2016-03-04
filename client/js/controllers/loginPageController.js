@@ -6,18 +6,7 @@ $scope.actualUser = {};
 $scope.isLoggedIn = auth.isLoggedIn;
 
 //take info, register with passport, go to profile page
-$scope.signUp = function() {
-    console.log($scope.newUser)
-    auth.register($scope.newUser).error(function(error){
-        $scope.error = error;
-    }).then(function(output){
-        console.log(output)
-        $scope.currentUser = auth.currentUser()
 
-        $location.path('/profile').search({user: $scope.currentUser});
-
-    })
-}
 
 //take login info, verify with passport, if pass, go to page
 $scope.login = function() {

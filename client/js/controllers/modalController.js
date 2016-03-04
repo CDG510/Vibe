@@ -7,19 +7,20 @@ vibe.controller("ModalInstanceCtrl", function ($scope, $uibModalInstance, newStu
     usersFactory.getUserInfo(user, function(output){
         $scope.currentUser = output
         $scope.newStudio = $scope.currentUser;
-         if ($scope.currentUser.profileType == undefined){
+         if ($scope.currentUser.profileType == undefined || $scope.currentUser.profileType== ""){
             console.log("CHOOSE YOUR PATH" , $scope.currentUser)
-        } else if ($scope.currentUser.profileType == "Studio") {
+        } else if ($scope.currentUser.profileType === "Studio") {
             $scope.isStudio = true;
             console.log($scope.newStudio.schedule)
-            var userStartTime = new Date($scope.currentUser.schedule.startHour)
-            var userEndTime = new Date($scope.currentUser.schedule.endHour)
-            $scope.newStudio.schedule.endHour = userEndTime
-            $scope.newStudio.schedule.startHour = userStartTime
             if (!$scope.newStudio.schedule.offDays){
                 $scope.newStudio.schedule.offDays = [{
                     noWork: false
                 }]
+            var userStartTime = new Date($scope.currentUser.schedule.startHour)
+            var userEndTime = new Date($scope.currentUser.schedule.endHour)
+            $scope.newStudio.schedule.endHour = userEndTime
+            $scope.newStudio.schedule.startHour = userStartTime
+
 
             } else {
                 for(var i = 0; i < $scope.newStudio.schedule.offDays.length; i++){
@@ -28,11 +29,6 @@ vibe.controller("ModalInstanceCtrl", function ($scope, $uibModalInstance, newStu
                     }
                 }
             }
-            
-                // $scope.newStudio.schedule.offDays.splice(7, 9);
-
-
-            
         }
     });
 
@@ -49,7 +45,15 @@ vibe.controller("ModalInstanceCtrl", function ($scope, $uibModalInstance, newStu
     $scope.setAsStudio = function() {
         $scope.newStudio.profileType = "Studio";
         $scope.isStudio = true;
+        if (!$scope.newStudio.schedule) {
+            $scope.newStudio.schedule = {}
+        }
+        if (!$scope.newStudio.schedule.offDays){
+            $scope.newStudio.schedule.offDays = [{
+                noWork: false
+            }]
     }
+}
 
   //trigger preference, don't show studio options> This will determine what other options appear in profile page
   $scope.setAsArtist = function() {
@@ -74,7 +78,9 @@ vibe.controller("ModalInstanceCtrl", function ($scope, $uibModalInstance, newStu
     }
     //add input field for media website
     $scope.addNewWebsite = function() {
-        $scope.newStudio.websites.push('');
+        $scope.newStudio.websites.push({
+            url: ""
+        });
         console.log($scope.newStudio)
         // console.log($scope.newStudio.members, "just !")
     }
@@ -120,7 +126,7 @@ vibe.controller("ModalInstanceCtrl", function ($scope, $uibModalInstance, newStu
                     $scope.newStudio.schedule.offDays.push({});
                     $scope.newStudio.schedule.offDays[i].value = 10;
                     $scope.newStudio.schedule.offDays[i].noWork = false;
-                } 
+                }
                 console.log($scope.newStudio.schedule.offDays[i])
             }
 

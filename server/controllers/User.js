@@ -67,6 +67,23 @@ module.exports = (function(){
 
 
 	},
+	findStudiosSimple: function(req, res){
+		console.log(req.body, " GETTING FOUND________________")
+		User.find({ $and: [
+			{profileType: "Studio"},
+			{$or: [{location: req.body.searchTerm}, {username: req.body.searchTerm}, {specialty: req.body.searchTerm}]}
+			]}, function(err, foundUsers) {
+				if(err){
+				console.log(err)
+			}
+			else{
+				console.log(foundUsers, "were found!!!!!!")
+				res.json(foundUsers);
+			}
+			})
+
+
+},
 
 	updateProfile: function(req, res){
 			User.findOneAndUpdate({_id: req.body.id}, {
@@ -83,6 +100,7 @@ module.exports = (function(){
 						profileType: req.body.profileType,
 						businessName: req.body.businessName,
 						schedule: req.body.schedule,
+						numberOfRecordings: req.body.numberOfRecordings,
 						price: req.body.price}, function(err, foundUser){
 							if (err){
 								console.log(err)

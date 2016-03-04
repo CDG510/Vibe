@@ -13,7 +13,7 @@
 
             <div class="studioFormName" >
                 <label>First Name</label>
-                <input type="text" name="firstName" class="form-control " ng-model="newStudio.firstName" ng-minlength="3" ng-maxlength="30" required>
+                <input type="text" name="firstName" class="form-control input-small " ng-model="newStudio.firstName" ng-minlength="3" ng-maxlength="30" required>
                 <p ng-show="form.newStudio.firstName.$invalid && !form.newStudio.firstName.$pristine" class="help-block">Your first name is required.</p>
             </div>
             <div class="studioFormName">
@@ -66,40 +66,42 @@
             </div>
             <div class="studioFormName">
                 <label>Members</label>
-                    <div class="col-sm-12">
-                        <fieldset data-ng-repeat="field in newStudio.members track by $index">
+<!--                     <div class="col-sm-12">
+ -->                        <fieldset data-ng-repeat="field in newStudio.members track by $index">
                             <input type="text" class="form-control" placeholder="members" name='members' ng-model="newStudio.members[$index]">
-                            <button class="btn btn-info" ng-click="addNewMember()" value="ADD MEMBER">Add a member</button>
-                            <button type="button" class="btn btn-danger btn-sm" ng-click="removeMember($index)"> REMOVE
+
+                            <button type="button" class="btn btn-cancel" ng-click="removeMember($index)"> REMOVE
                             </button>
                         </fieldset>
-                    </div>
+                         <button class="btn btn-default" ng-click="addNewMember()" value="ADD MEMBER">Add a member</button>
+<!--                     </div> -->
             </div>
             <div class="studioFormName">
                 <label>Websites</label>
 
-                    <div class="col-sm-12">
-                        <fieldset data-ng-repeat="field in newStudio.websites track by $index">
-                            <input type="text" class="form-control" placeholder="URL" name='members' ng-model="newStudio.websites[$index]">
-                            <button class="btn btn-info" ng-click="addNewWebsite()" value="ADD MEMBER">Add a URL </button>
-                 <!--            <select ng-model="newStudio.websites.type">
-                                <option>Facebook
-                                </option>
+<!--                     <div class="col-sm-12">
+ -->                        <fieldset data-ng-repeat="field in newStudio.websites track by $index">
+                            <p><input type="text" class="form-control" placeholder="URL" name='members' ng-model="newStudio.websites[$index].url"><button type="button" class="btn btn-cancel" ng-click="removeWebsite($index)"> REMOVE
+                            </button></p>
+
+                            <select ng-model="newStudio.websites[$index].type">
+                                <option>Facebook</option>
                                 <option>Personal Website</option>
-                                <option>SoundCloud
-                                </option>
-                                <option>BandCamp
-                                </option>
-                            </select> -->
-                            <button type="button" class="btn btn-danger btn-sm" ng-click="removeWebsite($index)"> REMOVE
-                            </button>
+                                <option>SoundCloud</option>
+                                <option>BandCamp</option>
+                                <option>Email</option>
+                                <option>Personal</option>
+                                <option>Other</option>
+                            </select>
+
                         </fieldset>
-                    </div>
-            </div>
+                        <button class="btn btn-default " ng-click="addNewWebsite()" value="ADD MEMBER">Add a URL </button>
+<!--                     </div>
+ -->            </div>
         <div class="studioFormName" >
             <h4>Set your profile as {{newStudio.profileType}}</h4>
-             <button class="btn btn-primary" ng-click="setAsStudio()">Studio</button>
-             <button class="btn btn-primary" ng-click="setAsArtist()">Artist</button>
+             <button class="btn btn-default btn-lg"  ng-click="setAsStudio()">Studio</button>
+             <button class="btn btn-default btn-lg"  ng-click="setAsArtist()">Artist</button>
                 <!-- <input type="text" placeholder="" -->
         </div>
 
@@ -110,11 +112,16 @@
         </div>
 
         <div class="studioFormName" ng-show="isStudio">
+                <label>Number of Recordings</label>
+                <input type="number" name="number" class="form-control " ng-model="newStudio.numberOfRecordings">
+        </div>
+
+        <div class="studioFormName" ng-show="isStudio">
                 <label>Schedule</label>
                 <p>What days do you want off?</p>
 
-                <div class="col-md-12">
-                    <!-- <fieldset data-ng-repeat="field in newStudio.schedule.days track by $index"> -->
+<!--                 <div class="col-md-12">
+ -->                    <!-- <fieldset data-ng-repeat="field in newStudio.schedule.days track by $index"> -->
                     <select class="form-control" ng-model="dayOff.value" ng-options="day.value as day.name for day in Schedule" ng-repeat=" dayOff in newStudio.schedule.offDays" ng-if="dayOff.noWork">
                         <!-- these show the values in Schedule -->
                         <option value="">
@@ -125,11 +132,11 @@
                         </option>
                     </select>
 
-                    <button class="btn btn-info" ng-click="addNewDayOff()" value="add Offday">Add Day off</button>
-                    <button class="btn btn-danger" ng-click="removeDayOff()" value="remove Offday">Remove Day</button>
+                    <button class="btn btn-default" ng-click="addNewDayOff()" value="add Offday">Add Day off</button>
+                    <button class="btn btn-cancel" ng-click="removeDayOff()" value="remove Offday">Remove Day</button>
 
-                </div>
-
+<!--                 </div>
+ -->
         </div>
 
         <div class="col-md-12" ng-show="isStudio">

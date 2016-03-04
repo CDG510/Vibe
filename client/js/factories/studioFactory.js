@@ -12,27 +12,12 @@ vibe.factory("StudiosFactory", function ($http) {
 	};
 
 	factory.findStudios = function (search, callback){
-			
-			 $http.post('/findStudios', search).success(function(output){
-			
+
+			 $http.post('/findStudiosSimple', search).success(function(output){
+
 			 	callback(output);
 			 })
 		}
-
-	//function to add studios of interest
-	factory.addStudios = function(studio, callback) {
-		$http.get("#", studio )
-	};
-
-	factory.addStudioUser = function(studio, callback) {
-		callback(studio)
-	}
-
-	//function to add a recording session
-
-	//function to message a studio
-
-	//for maps
 
 
 	return factory

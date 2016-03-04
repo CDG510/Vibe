@@ -46,13 +46,13 @@ li {
     border-bottom: 1px solid rgba(255,255,255,.3);
     text-transform: uppercase;
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
-    background-color: #000;
+    background-color: black;
     width: 100%;
 }
 
 .navbar-custom .navbar-brand {
     font-weight: 700;
-    background-color: transparent;
+    background-color: black;
 }
 
 .navbar-custom .navbar-brand:focus {
@@ -66,7 +66,7 @@ li {
 }
 #menuToggleButton {
     color: white;
-    background-color: transparent;
+    background-color: black;
     display: inline-block;
      transition: all linear 0.5s;
      float: right;
@@ -455,6 +455,11 @@ body {
 
     }
 
+#userInfo {
+    padding: 100px 0 100px 0 ;
+    background-color: #30353c;
+}
+
 #intro-Studio {
     display: table;
     width: 100%;
@@ -509,8 +514,10 @@ body {
 
 .modal-body {
     color: white;
-    background-color: black
-}
+    background-color: black;
+    /*margin: 0 30px 20px 30px;*/
+/*    width: 50%;
+*/}
 
 .modal-footer {
     color: white;
@@ -526,10 +533,22 @@ body {
     text-align: center;
     vertical-align: middle;
     text-align:center;
-    margin-bottom: 20px;
+    /*margin: 0 30px 20px 30px;*/
+
 }
     .studioFormName button, select, input  {
         margin-bottom: 10px;
+    }
+    .studioFormName img {
+        margin-top: 20px;
+    }
+    .studioFormName textarea {
+        height: 200px;
+    }
+
+    .studioFormName input, select {
+/*        width: 50%;
+*/        vertical-align: middle;
     }
 
 #loginInput {
@@ -545,7 +564,7 @@ body {
 
 #signUp {
     padding: 100px 0 200px 0;
-    margin: 0px 50px 0px 50px;
+    margin: 100px 50px 0px 50px;
 }
 
 .submitButtons {
@@ -570,7 +589,7 @@ body {
         }
         .profile
         {
-            min-height: 355px;
+            min-height: 600px;
             background-color: black;
             color: white;
             /*;*/
@@ -669,12 +688,13 @@ img {
     vertical-align: top;
 /*    border: 1px solid orange;
 */    text-justify: inter-word;
-text-align: justify
+text-align: justify;
+margin-bottom: 20px;
 }
 
-button {
+/*button {
     padding: 3px;
-}
+}*/
 
 #calendar {
     margin-top: 20px;
@@ -706,13 +726,33 @@ button {
 }
 
 #profile_container {
-    padding-top: 100px;
-    padding-bottom: 100px;
+
+    padding-top: 20px;
+    margin-top: 110px;
+    padding-bottom: 200px;
     color: white;
-    background-color: #333333;
-    border-bottom-color: white;
+    background-color: #2a2a2a;
+    /*border-bottom-color: white;*/
+
+}
+
+textarea {
+    height: 200px;
+    margin-top: 20px;
 }
 
 #submitSessionDate{
+    margin: 20px 15px 0 0;
+}
+mwl-calendar {
+    margin-bottom: 20px;
+}
+
+#sessionTimes {
     margin-top: 20px;
+}
+
+.bookDiv {
+    margin: 15px;
+
 }
