@@ -22,17 +22,17 @@ module.exports = (function(){
 
 //get 9he
 		findOne: function(req, res){
-			console.log(user.body, "bout to get found")
-			User.findOne({_id: req.body.User}, function(err, User){
+			console.log(req.body, "bout to get found")
+			User
+			.findOne({username: req.body.username}, function(err, found){
 				if (err){
 					console.log(err)
 				}
 				else{
-					 console.log("YEAS WE GOT ", User)
-					res.send(JSON.stringify(User));
+					 console.log("YEAS WE GOT ", found)
+					res.send(JSON.stringify(found));
 				}
 			})
-
 		},
 ///get all sessions for one User
 		findSessions: function(req, res){

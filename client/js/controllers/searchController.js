@@ -1,6 +1,10 @@
-vibe.controller("SearchController", function ($scope, $routeParams,  $log, $location, $document, $window, StudiosFactory) {
+vibe.controller("SearchController", function ($scope, $routeParams,  $log, $location, $document, $window, StudiosFactory, auth) {
 
-	console.log($routeParams.studioSearch)
+	// $scope.dropDown = true;
+
+	$scope.dropDown = true;
+	$scope.isLoggedIn = auth.isLoggedIn;
+	$scope.currentUser = auth.currentUser()
 
 if (!$routeParams) {
 	$scope.noneFound = false;
@@ -14,12 +18,14 @@ if (!$routeParams) {
 	}
 }
 
-	$scope.dropDown = true;
 	//for testing purposed
 
 	//function to show found studios information when selected
 	$scope.seeProfile = function(studio) {
-		$location.path('/profile').search({studio: studio});
+		console.log(studio.username)
+		$scope.thisUser = studio.username;
+		console.log($scope.thisUser)
+		$location.path('/profile/'+$scope.thisUser).search({'key': null});
 	}
 
 
@@ -69,7 +75,13 @@ if (!$routeParams) {
 		}
 
 	//function to add studio of interest
+	$scope.toggleDropdown = function($event) {
+      $event.preventDefault();
+      $event.stopPropagation();
+      $scope.status.isopen = !$scope.status.isopen;
+    };
 
+    $scope.appendToEl = angular.element(document.querySelector('#dropdown-long-content'))
 
 	 $(window).on("resize.doResize", _.throttle(function (){
     //if the window goes beyond reformatting size

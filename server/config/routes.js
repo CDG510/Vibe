@@ -1,7 +1,6 @@
 // var admin       = require('../controllers/admin.js');
 // var businesses  = require('../controllers/businesses.js');
 var Studio = require('./../controllers/Studios.js');
-var Artist = require('./../controllers/Artists.js');
 var Session = require('./../controllers/Sessions.js')
 var mongoose = require('mongoose');
 var Passport = require('passport')
@@ -10,6 +9,8 @@ var UserController = require('./../controllers/User.js')
 // var Studio = mongoose.model('Studio');
 // var User = mongoose.model('User');
 var jwt = require('express-jwt');
+
+
 module.exports = function(app, passport) {
 
     var urlencodedParser = bodyParser.urlencoded({ extended: false })
@@ -67,6 +68,10 @@ app.post('/loginUser', function(req, res, next) {
 	})(req, res, next);
 });
 
+app.post("/findUser", function(req, res){
+    UserController.findOne(req, res)
+})
+
 app.post("/updateProfile", function(req, res){
 	console.log(req.body, "going futher");
 	UserController.updateProfile(req, res)
@@ -90,13 +95,21 @@ app.post("/findStudiosSimple", function(req, res){
 
 //------------FOR SESSIONS
     app.post('/addSession', function(req, res){
-    Session.create(req, res)
+        console.log("GOING tO MAKE A SESSION------------")
+        Session.create(req, res)
 	})
 
 	app.post("/getSessions", function(req, res) {
 		console.log("off to controler", req.body.studio)
-	    Studio.findSessions(req, res)
+	    UserController.findSessions(req, res)
 	})
+
+    app.post('/deleteSession', function(req, res){
+        Session.deleteSession(req, res)
+    })
+
+
+    //------------paypal payment
 
 
 };

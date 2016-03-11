@@ -10,13 +10,28 @@ vibe.factory("usersFactory", function ($http) {
 		})
 	}
 
+	factory.getUserByName = function(user, callback){
+		$http.post("/findUser", user)
+		.success(function(output){
+			callback(output)
+		})
+		.error(function(){
+		})
+		;
+	}
+	factory.getUserPromise = function(user){
+		$http.post("/findUser", user).success(function(user){
+			return user
+		})
+	}
+
+
+
 	factory.getUserInfo = function(user, callback){
-		console.log(user, "needs mo info")
 		$http.post("/getUserInfo", user)
 		.success(function(output){
 			console.log(output, "WE GOT DIS BACK");
 			callback(output);
-			console.log("send it....")
 		})
 		.error(function(){
 			$scope.failure = true

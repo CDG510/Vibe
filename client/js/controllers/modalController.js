@@ -8,10 +8,8 @@ vibe.controller("ModalInstanceCtrl", function ($scope, $uibModalInstance, newStu
         $scope.currentUser = output
         $scope.newStudio = $scope.currentUser;
          if ($scope.currentUser.profileType == undefined || $scope.currentUser.profileType== ""){
-            console.log("CHOOSE YOUR PATH" , $scope.currentUser)
         } else if ($scope.currentUser.profileType === "Studio") {
             $scope.isStudio = true;
-            console.log($scope.newStudio.schedule)
             if (!$scope.newStudio.schedule.offDays){
                 $scope.newStudio.schedule.offDays = [{
                     noWork: false
@@ -20,8 +18,6 @@ vibe.controller("ModalInstanceCtrl", function ($scope, $uibModalInstance, newStu
             var userEndTime = new Date($scope.currentUser.schedule.endHour)
             $scope.newStudio.schedule.endHour = userEndTime
             $scope.newStudio.schedule.startHour = userStartTime
-
-
             } else {
                 for(var i = 0; i < $scope.newStudio.schedule.offDays.length; i++){
                     if ($scope.newStudio.schedule.offDays[i].noWork === false){
@@ -57,7 +53,6 @@ vibe.controller("ModalInstanceCtrl", function ($scope, $uibModalInstance, newStu
 
   //trigger preference, don't show studio options> This will determine what other options appear in profile page
   $scope.setAsArtist = function() {
-
     $scope.newStudio.profileType = "Artist"
     $scope.newStudio.schedule = {};
     $scope.newStudio.ratings = [];
@@ -70,7 +65,6 @@ vibe.controller("ModalInstanceCtrl", function ($scope, $uibModalInstance, newStu
     //add input field
     $scope.addNewMember = function() {
         $scope.newStudio.members.push('');
-        console.log($scope.newStudio)
     }
     //remove members input field
     $scope.removeMember = function(z){
@@ -81,8 +75,6 @@ vibe.controller("ModalInstanceCtrl", function ($scope, $uibModalInstance, newStu
         $scope.newStudio.websites.push({
             url: ""
         });
-        console.log($scope.newStudio)
-        // console.log($scope.newStudio.members, "just !")
     }
     //remove input field for media website
     $scope.removeWebsite = function(z){
@@ -113,13 +105,7 @@ vibe.controller("ModalInstanceCtrl", function ($scope, $uibModalInstance, newStu
                     $scope.newStudio = output
                     });
             } else {
-            var momentStart = moment($scope.newStudio.schedule.startHour).format("LT")
-            var momentEnd = moment($scope.newStudio.schedule.endHour).format("LT")
-            $scope.newStudio.schedule.formatTime = momentStart;
-            $scope.newStudio.schedule.formatEnd = momentEnd;
-
             $scope.newStudio.id = $scope.currentUser._id;
-
             for (var i =0; i <= 7; i++){
                 // console.log($scope.newStudio.schedule.offDays[i])
                 if (!$scope.newStudio.schedule.offDays[i]){
@@ -127,13 +113,11 @@ vibe.controller("ModalInstanceCtrl", function ($scope, $uibModalInstance, newStu
                     $scope.newStudio.schedule.offDays[i].value = 10;
                     $scope.newStudio.schedule.offDays[i].noWork = false;
                 }
-                console.log($scope.newStudio.schedule.offDays[i])
             }
 
             usersFactory.updateUser($scope.newStudio, function(output) {
                     $scope.newStudio = output
                 });
-            console.log($scope.newStudio)
             }
 
             $uibModalInstance.close($scope.newStudio);

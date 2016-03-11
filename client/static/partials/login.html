@@ -12,12 +12,17 @@
 				<div class="collapse navbar-collapse navbar-right navbar-main-collapse" collapse="navCollapsed" id="collapsedLinks">
 					<ul class="nav navbar-nav">
 						<!-- Hidden li included to remove active class from about link when scrolled up past about section -->
-						<li><a class="page-scroll" href="/#/">Home</a></li>
 						<li>
-							<a class="page-scroll" ng-click="scrollTo('login')">Login</a>
+							<a ng-show="isLoggedIn()" ng-click="goToProfile()"><strong>Profile</strong></a>
 						</li>
 						<li>
-							<a class="page-scroll" href="/#/signUp">SignUp</a>
+							<a class="page-scroll" ng-hide="isLoggedIn()" href="/#/signUp">SignUp</a>
+						</li>
+						<li>
+							<a class="page-scroll" href="/#/searchRequest">Search</a>
+						</li>
+						<li>
+							<a ng-show="isLoggedIn()" ng-click="logOut()">Logout</a>
 						</li>
 
 	 <!--                    <li>
@@ -34,12 +39,20 @@
 						<div class="container">
 
 						<ul class="droDownMenuList text-right animate-show"  role="menu" aria-labelledby="single-button" ng-hide="dropDown">
-							<li><a class="page-scroll" href="/#/">Home</a></li>
+
+					
 							<li>
-								<a class="page-scroll" ng-click="scrollTo('login')">Login</a>
+	                            <a ng-show="isLoggedIn()" ng-click="goToProfile()">Profile</a>
+	                        </li>
+
+							<li>
+								<a class="page-scroll" ng-hide="isLoggedIn()" href="/#/signUp">SignUp</a>
 							</li>
 							<li>
-								<a class="page-scroll" ng-click="scrollTo('signUp')">SignUp</a>
+								<a class="page-scroll" href="/#/searchRequest">Search</a>
+							</li>
+							<li>
+								<a ng-show="isLoggedIn()" ng-click="logOut()">Logout</a>
 							</li>
 <!--                             <li role="menuitem"><a class="page-scroll" href="/#/signUp">Sign Up</a></li> -->
 						</ul>
@@ -67,7 +80,7 @@
 				  <form class="form" role="form" name='form.actualUser'  ng-submit="login()" novalidate>
 					<div class="form-group">
 			            <div class= "loginInput ">
-			                <input type="text" name="userName" placeholder="Email" class="form-control" ng-model="actualUser.userName" required>
+			                <input type="text" name="userName" placeholder="User Name" class="form-control" ng-model="actualUser.userName" required>
 			                <p ng-show="form.actualUser.email.$invalid && !form.actualUser.email.$pristine" class="help-block">Enter a valid email.</p>
 			            </div>
 			            <!-- PASSWORD -->
@@ -76,7 +89,7 @@
 			                <p ng-show="form.actualUser.password.$invalid && !form.actualUser.password.$pristine" class="help-block">Enter a valid password.</p>
 			            </div>
 						<button type="submit" id="loginConfirmButton" class="btn btn-default btn-lg pull-right" ng-disabled="form.actualUser.$invalid">Submit</button>
-						
+
 			        </div>
 				</form>
 				<div ng-show="error" class="alert alert-danger row">
@@ -91,5 +104,5 @@
     </section>
 
 
-	
+
  </div>

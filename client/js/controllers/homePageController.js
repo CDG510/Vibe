@@ -1,19 +1,16 @@
 vibe.controller("HomeController", function ($scope, $location, $routeParams, $document, $window, $anchorScroll, $uibModal, $log, StudiosFactory, auth, usersFactory) {
 
 $scope.failSearch = false;
-//
 $scope.dropDown = true;
 $scope.isLoggedIn = auth.isLoggedIn;
 
     var user = auth.currentUser()
-    console.log(user)
     if (user !== undefined) {
         user.User = user._id
 //get logged in user Info
     usersFactory.getUserInfo(user, function(output){
             $scope.currentUser = output
             $scope.userID = $scope.currentUser.username
-            console.log($scope.userID)
         });
     }
 
@@ -28,8 +25,7 @@ $scope.searchStudios = function() {
     } else {
         $scope.failSearch = false;
         StudiosFactory.searchStudios({location: $scope.studioSearch.searchTerm}, function(output){
-        console.log(output)
-        $location.path('/searchRequest').search({studioSearch: output, searchTerm: $scope.studioSearch.searchTerm});
+            $location.path('/searchRequest').search({studioSearch: output, searchTerm: $scope.studioSearch.searchTerm});
     })
 
     }
@@ -40,7 +36,7 @@ $scope.logOut = function(){
 }
 
 $scope.goToProfile = function() {
-    $location.path("/profile").search({user:$scope.currentUser })
+    $location.path("/profile/"+$scope.userID).search({key:null })
 }
 
 
@@ -56,7 +52,10 @@ $scope.goToUserProfile = function() {
           var someElement = angular.element(document.getElementById(id));
         $document.scrollToElementAnimated(someElement);
        }
-    $scope.appendToEl = angular.element(document.querySelector('#toggleButton'))
+
+    // $scope.appendToEl = angular.element(document.querySelector('#toggleButton'))
+    $scope.appendToEl = angular.element(document.querySelector('.navbar-header'));
+
 
 //this monitors windows size
    $(window).on("resize.doResize", _.throttle(function (){

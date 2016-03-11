@@ -1,6 +1,6 @@
 var vibe = angular.module('vibe', ['ngRoute', 'ui.bootstrap', 'mwl.calendar',
- 'duScroll', 'multipleDatePicker', 'ngAnimate']).value('duScrollDuration', 1500);;
-
+ 'duScroll', 'multipleDatePicker', 'ngAnimate',]).value('duScrollDuration', 1500);;
+// 'ngCart'
 var PHONE_REGEXP = /^[(]{0,1}[0-9]{3}[)\.\- ]{0,1}[0-9]{3}[\.\- ]{0,1}[0-9]{4}$/;
 
 vibe.config(function ($routeProvider, $locationProvider, calendarConfig) {
@@ -31,12 +31,17 @@ vibe.config(function ($routeProvider, $locationProvider, calendarConfig) {
     .when('/', {templateUrl: "/static/partials/homePage.html", overrideRoot: true})
     .when('/artists', {templateUrl: "/static/partials/Artists.html", overrideRoot: true})
     .when('/studios', {templateUrl: "/static/partials/Studios.html", overrideRoot: true})
-    .when('/profile/:id', {templateUrl: "/static/partials/studioPage.html", overrideRoot:true})
+    .when('/profile/:id', {
+        templateUrl: "/static/partials/profilePage.html",
+        overrideRoot:true
+    })
+
     .when('/login', {templateUrl: "/static/partials/login.html", controller: 'loginController'})
     .when("/signUp", {templateUrl: "static/partials/signUp.html", controller: "signUpController", overrideRoot: true})
     // .when("/signUp", {templateUrl: "/static/partials/signUp.html"})
-    .when("/searchRequest", {templateUrl: "/static/partials/Search.html", onEnter: scrollContent} )
-    .when("/userProfile/:id", {templateUrl: "static/partials/userPage.html", overrideRoot: true})
+    .when("/searchRequest", {templateUrl: "/static/partials/Searchv2.html", onEnter: scrollContent} )
+    // .when('/checkout', {templateUrl:'/static/partials/Artists.html'})
+    // .when("/userProfile/:id", {templateUrl: "static/partials/userPage.html", overrideRoot: true})
     .otherwise({
         redirectTo: '/'
     });

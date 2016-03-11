@@ -1,15 +1,10 @@
 <div class="modal-header">
-    <h2 class="text-center">Update your account {{currentUser.username}}</h2>
+    <h4 class="text-center">Update your account {{currentUser.username}}</h4>
 </div>
 <div class="modal-body">
-
     <form name="form.newStudio"  novalidate>
-
         <!-- NAME -->
         <div class="form-group ">
-            <!-- <div class="studioFormName">
-                <input type="text" name="password"
-            </div> -->
 
             <div class="studioFormName" >
                 <label>First Name</label>
@@ -124,7 +119,7 @@
  -->                    <!-- <fieldset data-ng-repeat="field in newStudio.schedule.days track by $index"> -->
                     <select class="form-control" ng-model="dayOff.value" ng-options="day.value as day.name for day in Schedule" ng-repeat=" dayOff in newStudio.schedule.offDays" ng-if="dayOff.noWork">
                         <!-- these show the values in Schedule -->
-                        <option value="">
+                        <option value="What Site?">
                             Choose your days off!
                         </option>
                         <option ng-repeat = "day.value as day.name for day in Schedule"  >
@@ -139,13 +134,13 @@
  -->
         </div>
 
-        <div class="col-md-12" ng-show="isStudio">
-            <h5>Start Hours</h5>
+        <div class="col-md-6 timeSpace" ng-show="isStudio" >
+            <h5>Start Hour</h5>
             <uib-timepicker hour-step="hstep" minute-step="mstep" ng-model="newStudio.schedule.startHour" show-meridian="ismeridian"></uib-timepicker>
             <!-- <span class="pull-right" style="color: red;" ng-show="newStudio.startHour"><h4>Please pick a valid Hour!</h4></span> -->
         </div>
 
-        <div class='col-md-12' ng-show="isStudio">
+        <div class='col-md-6 timeSpace' ng-show="isStudio">
           <h5>End Hour</h5>
           <uib-timepicker  hour-step="hstep" minute-step="mstep" ng-model="newStudio.schedule.endHour " format="date | shortTime" show-meridian="ismeridian"></uib-timepicker>
         </div>
@@ -155,6 +150,11 @@
             <label>Price per hour</label>
             <input type="number" name="picture" class="form-control" placeholder="price" ng-model="newStudio.price">
         </div>
+        <!--  abailability, yes or no-->
+        <!-- <div class="studioFormName" ng-show="isStudio">
+            <label>Availability</label>
+            <input type="button" name="picture" class="form-control" placeholder="price" ng-model="newStudio.price">
+        </div> -->
 </div>
 
  <div class="modal-footer">

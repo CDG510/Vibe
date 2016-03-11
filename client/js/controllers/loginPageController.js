@@ -4,6 +4,7 @@ $scope.dropDown = true;
 $scope.newUser = {};
 $scope.actualUser = {};
 $scope.isLoggedIn = auth.isLoggedIn;
+var clearKey = {key: null}
 
 //take info, register with passport, go to profile page
 
@@ -17,7 +18,7 @@ $scope.login = function() {
         console.log(output, "came back to me!")
         $scope.currentUser = auth.currentUser()
         console.log(output)
-        $location.path('/profile').search({user: output.data.user});
+        $location.path('/profile/'+output.data.user.username).search(clearKey);
     })
 }
 //function to scroll to position

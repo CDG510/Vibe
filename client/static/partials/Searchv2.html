@@ -1,0 +1,184 @@
+<div ng-controller="SearchController">
+	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation" id='top'>
+
+		<div class="container">
+
+			<div class="navbar-header">
+
+				<!-- this is the wideScreen list -->
+				<a class="navbar-brand page-scroll" href="/#/">Vibe</a>
+				<div class="collapse navbar-collapse navbar-right navbar-main-collapse" collapse="navCollapsed" id="collapsedLinks">
+					<ul class="nav navbar-nav">
+						<!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+						<li><a class="page-scroll" ng-click="scrollTo('introTop')">Home</a></li>
+						<li>
+                            <a ng-show="isLoggedIn()" href="/#/profile/{{currentUser.username}}" >Profile</a>
+                        </li>
+						<li>
+							<a class="page-scroll" ng-hide="isLoggedIn()" href="/#/login">Login</a>
+						</li>
+						<li>
+							<a class="page-scroll" ng-hide="isLoggedIn()" href="/#/signUp">signUp</a>
+						</li>
+						<li>
+							<a ng-show="isLoggedIn()" ng-click="logOut()">Logout</a>
+						</li>
+
+	 <!--                    <li>
+							<a class="page-scroll" href="/#/signUp">Sign Up</a>
+						</li> -->
+					</ul>
+				</div>
+				<!-- this is the collapsed list -->
+
+				<div class="btn-group"  id="menuToggleButton" >
+					<button type="button"  class="navbar-toggle pull-right" data-toggle="collapse" data-target=".navbar-main-collapse" ng-click="dropDown=!dropDown" id="dropDownMenu"><span class="glyphicon glyphicon-align-justify"></span></button>
+					<div class="row">
+						<!--this list needs to be floated right  -->
+						<div class="container">
+
+						<ul class="droDownMenuList text-right animate-show"  role="menu" aria-labelledby="single-button" ng-hide="dropDown">
+							<li>
+									  <a ng-show="isLoggedIn()" ng-click="goToProfile()"><strong>Profile</strong></a>
+								  </li>
+								  <li>
+									  <a class="page-scroll" ng-hide="isLoggedIn()" href="/#/signUp">SignUp</a>
+								  </li>
+								  <li>
+									  <a class="page-scroll" href="/#/searchRequest">Search</a>
+								  </li>
+								  <li>
+									  <a ng-show="isLoggedIn()" ng-click="logOut()">Logout</a>
+								  </li>
+
+<!--                             <li role="menuitem"><a class="page-scroll" href="/#/signUp">Sign Up</a></li> -->
+						</ul>
+						</div>
+					</div>
+				</div>
+				<!-- dropdown-append-to="appendToEl" -->
+
+			</div>
+
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container -->
+	</nav>
+<!-- 		 -->
+	<section style="margin-top: 150px">
+
+
+
+		<div class="row">
+				<div class="container">
+			<!-- for the search inputs -->
+			<div class="col-sm-3" >
+				<div class="form-group">
+					<h5 >Simple Search</h5>
+
+					<input type="text" class="form-control input-md col-md-12"  ng-model="searchPlace.searchTerm" placeholder="Desired location" />
+	                <button class="submit btn btn-default" ng-click="searchStudios()">Search</button>
+				</div>
+
+
+				<h5  style="margin-top: 20px">Advanced Search</h5>
+				<div  class="form-group ">
+					<form name="searchForm" novalidate
+						ng-submit="search()">
+						<div class=" form-group">
+							<!-- <div class="col-md-12"> -->
+								<input name="location" type="text"  class="form-control"
+								ng-model="searchPlace.location"  placeholder = 'Location' required />
+							<!-- </div> -->
+							<!-- <div class="col-md-12"> -->
+								<input name="specialty" type="text"  class="form-control"
+							ng-model="searchPlace.contact"  placeholder = 'Specialty'  />
+							<!-- </div> -->
+							<!-- <div class="col-md-12"> -->
+
+								<input name="name" type="text" class="form-control col-md-12"
+							ng-model="searchPlace.name" placeholder="Name"  />
+							<!-- </div> -->
+
+							<!-- <div class="col-md-12"> -->
+								<input name="specialty" type="text" class="form-control input-md col-md-12"
+							ng-model="searchPlace.specialty"  placeholder = 'Specialty'  />
+							<button class=" submit btn btn-default" id="advancedSearchButton"
+							ng-disabled="searchForm.$invalid" style="margin-top: 10px">Search</button>
+							<!-- </div> -->
+
+						</div>
+
+					</form>
+
+				</div>
+			</div>
+
+
+			<div class="col-sm-9 col-md-9 col-lg-9"  style="border-left: 1px solid #009688 "  >
+				<h5  ng-if="searchTerm">Search Results </h5>
+				<p>
+					<em>{{searchTerm}}</em>
+				</p>
+				<divider></divider>
+                <!-- <p  ng-if="searchTerm"> results</p> -->
+				<div class="row ">
+						<ul ng-repeat="studio in tempStudios" id="studioSearchResults">
+							<li><h3 >{{studio.businessName}}</h3></li>
+							<li>
+							<img src="{{studio.profileImage}}"  alt="img/profile_default.png" width=200px height=200px class="img-circle img-responsive">
+
+							</li>
+							<li><p>Location: {{studio.address}}</p></li>
+							<li><p>Speciality: {{studio.specialty}}</p></li>
+							<li><p>Websites:
+								<a ng-repeat="site in studio.websites" href="{{site.url}}">
+									{{site.type}}  </a></p></li>
+							<li><p>Phone #: {{studio.phone}}</p></li>
+							<li><p>Hourly rate: {{studio.price}}$</p></li>
+							<li><button class="btn btn-default btn-lg" ng-click="seeProfile(studio)">See Studio</button>
+								<li role="separator" class="divider" style="margin-top:20px"></li>
+
+						</ul>
+
+						 <div class="modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&close;</button>
+        <h4 class="modal-title">{{studio.businessName}}</h4>
+      </div>
+      <div class="modal-body">
+		  <ul ng-repeat="studio in tempStudios" id="studioSearchResults">
+  			<li><h3 >{{studio.businessName}}</h3></li>
+  			<li>
+  			<img src="{{studio.profileImage}}"  alt="img/profile_default.png" width=200px height=200px class="img-circle img-responsive">
+
+  			</li>
+  			<li><p>Location: {{studio.address}}</p></li>
+  			<li><p>Speciality: {{studio.specialty}}</p></li>
+  			<li><p>Websites:
+  				<a ng-repeat="site in studio.websites" href="{{site.url}}">
+  					{{site.type}}  </a></p></li>
+  			<li><p>Phone #: {{studio.phone}}</p></li>
+  			<li><p>Hourly rate: {{studio.price}}$</p></li>
+		</ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		<button class="btn btn-default btn-lg" ng-click="seeProfile(studio)">See Studio</button>
+			<li role="separator" class="divider" style="margin-top:20px"></li>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+				</div>
+
+			</div>
+		</div>
+		</div>
+	</section>
+
+</div>
