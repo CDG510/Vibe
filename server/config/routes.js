@@ -1,16 +1,55 @@
-// var admin       = require('../controllers/admin.js');
-// var businesses  = require('../controllers/businesses.js');
+
 var Studio = require('./../controllers/Studios.js');
 var Session = require('./../controllers/Sessions.js')
 var mongoose = require('mongoose');
 var Passport = require('passport')
 var User = mongoose.model('User');
 var UserController = require('./../controllers/User.js')
-// var Studio = mongoose.model('Studio');
-// var User = mongoose.model('User');
 var jwt = require('express-jwt');
+var Paypal = require('paypal-adaptive');
+var paypalSdk = new Paypal({
+  userId:    'christian.anchors-facilitator_api1.gmail.com',
+  password:  'T9J6T6DANU4XU3EB',
+  signature: 'AYZv5UZKLzSPZ.oyEgmdtB4L0fp.AIXb6UPjbpeoxudQ9KDSEkB0EdcJ',
+  sandbox:   true //defaults to false
+});
 
+// var payload = {
+//     requestEnvelope: {
+//         errorLanguage:  'en_US'
+//     },
+//     actionType:     'PAY',
+//     currencyCode:   'USD',
+//     feesPayer:      'EACHRECEIVER',
+//     memo:           'Chained payment example',
+//     cancelUrl:      'http://test.com/cancel',
+//     returnUrl:      'http://test.com/success',
+//     receiverList: {
+//         receiver: [
+//             {
+//                 email:  'primary@test.com',
+//                 amount: '100.00',
+//                 primary:'true'
+//             },
+//             {
+//                 email:  'secondary@test.com',
+//                 amount: '10.00',
+//                 primary:'false'
+//             }
+//         ]
+//     }
+// };
 
+// paypalSdk.pay(payload, function (err, response) {
+//     if (err) {
+//         console.log(err);
+//     } else {
+//         // Response will have the original Paypal API response
+//         console.log(response);
+//         // But also a paymentApprovalUrl, so you can redirect the sender to checkout easily
+//         console.log('Redirect to %s', response.paymentApprovalUrl);
+//     }
+// });
 module.exports = function(app, passport) {
 
     var urlencodedParser = bodyParser.urlencoded({ extended: false })

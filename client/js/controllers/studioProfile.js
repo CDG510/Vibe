@@ -1,7 +1,6 @@
 vibe.controller("studioProfileController", function ($scope, $location, $routeParams, StudiosFactory, $uibModal, $log, $rootScope, SessionsFactory, moment, alert, auth, usersFactory, DatesFactory, $sce, $window) {
 
     $scope.currentUser = auth.currentUser()
-    // console.log ($scope.currentUser)
 	$scope.dropDown = true;
 	$scope.existsFail = false;
     $scope.isLoggedIn = auth.isLoggedIn;
@@ -40,24 +39,51 @@ vibe.controller("studioProfileController", function ($scope, $location, $routePa
             var modalInstance = $uibModal.open({
                 templateUrl: 'static/partials/AddStudioTemplate.html',
                 controller: 'ModalInstanceCtrl',
-                scope: $scope,
-                resolve: {
-                    newStudio: function () {
-                        return $scope.newStudio;
-                    }
-                }
-            });
+                scope: $scope
+
+              })
 
             //on return
             modalInstance.result.then(function (studioForm) {
               // here we send it to the
-              $scope.profile = studioForm
 
             }, function () {
                 $log.info('Modal dismissed at: ' + new Date());
                 // $scope.successAdd = false
               });
         };
+
+        $scope.getSessions = function() {
+            SessionsFactory.getSessions({User: $scope.profile._id},  function(output) {
+              //this output will populate the schedule table
+                $scope.min = DatesFactory.unStringDate(output.schedule.startHour)
+                $scope.max = DatesFactory.unStringDate(output.schedule.endHour)
+              if (output.sessions.length == 0) {
+                  $scope.calendarView ="month";
+                  // $scope.calendarTitle = $scope.profile.name
+                  $scope.viewDate = moment();
+                  // $scope.events = $scope.eventSource;
+                  $scope.isCellOpen = true;
+                  $scope.events = []
+                $scope.noSessions = true;
+              } else {
+                    for(session in output.sessions) {
+                        //recombine date and time for calendar display
+                        //make dates out of dateStrings
+                        var newStartHour = DatesFactory.unParseThenSet(output.sessions[session].startsAt);
+                        output.sessions[session].startsAt = newStartHour
+                        var endTime = DatesFactory.unParseThenSet(output.sessions[session].endsAt)
+                        output.sessions[session].endsAt =  endTime;
+                    };
+                      //set event source for calendar
+                    $scope.events = output.sessions;
+                    $scope.calendarView ="month";
+                    $scope.viewDate = moment();
+                    $scope.isCellOpen = true;
+                    console.log($scope.events)
+                };
+            })
+        }
 
 
 $scope.logOut = function(){
@@ -91,21 +117,40 @@ $scope.logOut = function(){
 					if (output === "exists") {
 						$scope.existsFail = true;
 					} else if (output === "invalid") {
-                        $scope.invalidd = true;
+                        $scope.invalid = true;
                     } else {
 						$scope.existsFail = false;
-                        console.log(output)
+                        console.log(output, "WE DIDN'T FAIL MOMMA LETS GO PAY__________________")
+
+                        var session = output
+                        console.log($scope.currentUser, $scope.profile, session, " ARE OFF TO THE CHECKOUT PAGE")
+                        $location.path("/checkout").search({studio: $scope.profile, session: session})
+                        console.log("YEEEEE")
+                      //   var newSession = output
+                      //   var newStartHour = DatesFactory.unParseThenSet(output.startTime);
+                      // newSession.startsAt = newStartHour
+                      //   var endTime = DatesFactory.unParseThenSet(output.endTime)
+                      // newSession.endsAt =  endTime;
+                        // $scope.events.push(newSession)
+                        //
+                        // $scope.events.push($scope.session)
+                        // console.log($scope.events)
+                        // $location.path('/checkout').search(studio: $scope.profile, session: output)
                         // console.log (ngCart);
 
                         // $location.path('/checkout').search({session: output});
 
-                        SessionsFactory.addSession(output, function(output){
-                            $scope.getSessions();
-                            $scope.events = output;
-                            console.log($scope.events)
-                            $scope.session = {};
-                        })
+                        // SessionsFactory.addSession(output, function(output){
+                        //
+                        //     // $scope.events.push(output)
+                        //
+                        //     console.log(output)
+                        //     $scope.session = {};
+                        //     $scope.getSessions();
+                        //     $scope.showForm()
+                        //     console.log($scope.events, "IS WHAT WE SHOULD BE RESET AT")
 
+                        // })
 
 					}
 				})
@@ -115,6 +160,7 @@ $scope.logOut = function(){
 ///open schedule should toggle, not stay open
 	$scope.openSchedule = function(){
         $scope.calendar = true;
+        $scope.getSessions()
         // getSessions()
     };
 
@@ -123,7 +169,12 @@ $scope.logOut = function(){
         $window.open("mailto:"+ emailId + "?subject=" + subject+"&body="+message,"_self");
     };
     $scope.email = function() {
+      if ($scope.canEdit == true){
+        $scope.sendMail("christian.d.gonzalez.92@gmail.com","Inquiry","");
+        return
+      } else {
         $scope.sendMail($scope.profile.email,"Inquiry","");
+      }
 
     }
 
@@ -223,39 +274,7 @@ $scope.disabled = function (date, mode) {
     $scope.ismeridian = ! $scope.ismeridian;
   };
 
-  $scope.getSessions = function() {
-      SessionsFactory.getSessions({User: $scope.profile._id},  function(output) {
-        //this output will populate the schedule table
-          $scope.min = DatesFactory.unStringDate(output.schedule.startHour)
-          $scope.max = DatesFactory.unStringDate(output.schedule.endHour)
-        if (output.sessions.length == 0) {
-            $scope.calendarView ="month";
-            // $scope.calendarTitle = $scope.profile.name
-            $scope.viewDate = moment();
-            // $scope.events = $scope.eventSource;
-            $scope.isCellOpen = true;
-            $scope.events = []
-          $scope.noSessions = true;
-        } else {
-              for(session in output.sessions) {
-                  //recombine date and time for calendar display
-                  //make dates out of dateStrings
-                  var newStartHour = DatesFactory.unParseThenSet(output.sessions[session].startsAt);
-                  output.sessions[session].startsAt = newStartHour
-                  var endTime = DatesFactory.unParseThenSet(output.sessions[session].endsAt)
-                  output.sessions[session].endsAt =  endTime;
-              };
-                //set event source for calendar
-              $scope.events = output.sessions;
-              $scope.calendarView ="month";
-              // $scope.calendarTitle = $scope.profile.name
-              $scope.viewDate = moment();
-              // $scope.events = $scope.eventSource;
-              $scope.isCellOpen = true;
-              console.log($scope.events)
-          };
-      })
-  }
+
 
   $(window).on("resize.doResize", _.throttle(function (){
    //if the window goes beyond reformatting size

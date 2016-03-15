@@ -828,9 +828,14 @@ margin-bottom: 20px;
         color: blue;
     }
 
+    #editPageInfo{
+      position:fixed; 
+    }
+
 textarea {
     height: 200px;
     margin-top: 20px;
+    border: 1px solid grey;
 }
 
 #submitSessionDate{

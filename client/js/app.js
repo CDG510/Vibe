@@ -1,5 +1,5 @@
 var vibe = angular.module('vibe', ['ngRoute', 'ui.bootstrap', 'mwl.calendar',
- 'duScroll', 'multipleDatePicker', 'ngAnimate',]).value('duScrollDuration', 1500);;
+ 'duScroll', 'multipleDatePicker', 'ngAnimate']).value('duScrollDuration', 1500);;
 // 'ngCart'
 var PHONE_REGEXP = /^[(]{0,1}[0-9]{3}[)\.\- ]{0,1}[0-9]{3}[\.\- ]{0,1}[0-9]{4}$/;
 
@@ -39,8 +39,10 @@ vibe.config(function ($routeProvider, $locationProvider, calendarConfig) {
     .when('/login', {templateUrl: "/static/partials/login.html", controller: 'loginController'})
     .when("/signUp", {templateUrl: "static/partials/signUp.html", controller: "signUpController", overrideRoot: true})
     // .when("/signUp", {templateUrl: "/static/partials/signUp.html"})
-    .when("/searchRequest", {templateUrl: "/static/partials/Searchv2.html", onEnter: scrollContent} )
-    // .when('/checkout', {templateUrl:'/static/partials/Artists.html'})
+    .when("/searchRequest", {templateUrl: "/static/partials/Searchv2.html"} )
+    .when('/profile/:id/edit', {templateUrl: "/static/partials/editProfilePage.html", overrideRoot: true})
+    .when('/checkout', {templateUrl:'/static/partials/Checkout.html', controller: "paymentController"})
+    .when('/checkout/success', {templateUrl: '/static/partials/success.html'})
     // .when("/userProfile/:id", {templateUrl: "static/partials/userPage.html", overrideRoot: true})
     .otherwise({
         redirectTo: '/'
@@ -54,17 +56,17 @@ vibe.config(function ($routeProvider, $locationProvider, calendarConfig) {
 
 });
 
-vibe.run(function($rootScope, $window) {
-
-
-  $rootScope.$on('$routeChangeSuccess', function () {
-
-    var interval = setInterval(function(){
-      if (document.readyState == 'complete') {
-        $window.scrollTo(0, 0);
-        clearInterval(interval);
-      }
-    }, 200);
-
-  });
-});
+// vibe.run(function($rootScope, $window) {
+//
+//
+//   $rootScope.$on('$routeChangeSuccess', function () {
+//
+//     var interval = setInterval(function(){
+//       if (document.readyState == 'complete') {
+//         $window.scrollTo(0, 0);
+//         clearInterval(interval);
+//       }
+//     }, 200);
+//
+//   });
+// });

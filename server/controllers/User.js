@@ -86,6 +86,8 @@ module.exports = (function(){
 },
 
 	updateProfile: function(req, res){
+		if (req.body.profileType === "Studio"){
+			console.log("BIG BAD STUDIO GEtiNG UPDATEEEEEEEEEEEEEEED")
 			User.findOneAndUpdate({_id: req.body.id}, {
 						firstName: req.body.firstName,
 						lastName: req.body.lastName,
@@ -93,7 +95,7 @@ module.exports = (function(){
 						specialty: req.body.specialty,
 						phone: req.body.phone,
 						location: req.body.location,
-						profileImage: req.body.profileImage.toString(),
+						profileImage: req.body.profileImage,
 						fullBio: req.body.fullBio,
 						members: req.body.members,
 						websites: req.body.websites,
@@ -110,8 +112,34 @@ module.exports = (function(){
 								res.send(JSON.stringify(foundUser))
 								// update info here
 						}
-					})
-				},
+					}
+
+					)
+				} else {
+					User.findOneAndUpdate({_id: req.body.id}, {
+								firstName: req.body.firstName,
+								lastName: req.body.lastName,
+								mainContact: req.body.mainContact,
+								specialty: req.body.specialty,
+								phone: req.body.phone,
+								location: req.body.location,
+								profileImage: req.body.profileImage,
+								fullBio: req.body.fullBio,
+								members: req.body.members,
+								websites: req.body.websites,
+								profileType: req.body.profileType},
+								function(err, foundUser){
+									if (err){
+										console.log(err)
+									}
+									else {
+										console.log(foundUser, "JUST GOT UPDATED");
+										res.send(JSON.stringify(foundUser))
+										// update info here
+								}
+				})
+			}
+		},
 //probably to update ratings
 		updateRating: function(req, res){
 			User.find({_id: req.body.id}, function(err, foundUser){

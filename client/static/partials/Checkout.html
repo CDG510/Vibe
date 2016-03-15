@@ -1,0 +1,104 @@
+<div class="paymentController">
+  <div class="row">
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation" id='top' >
+
+        <div class="container">
+            <div class="navbar-header">
+                <!-- this is the wideScreen list -->
+                <a class="navbar-brand page-scroll" href="/#/">Vibe</a>
+                <div class="collapse navbar-collapse navbar-right navbar-main-collapse" collapse="navCollapsed" id="collapsedLinks">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a class="page-scroll" ng-hide="isLoggedIn()" href="/#/login">Login</a>
+                        </li>
+                        <li>
+                            <a ng-show="isLoggedIn()" href="/#/profile/{{currentUser.username}}" >Profile</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="/#/searchRequest">Search</a>
+                        </li>
+                        <li>
+                            <a ng-if="canEdit" href="/#/profile/{{currentUser.username}}/edit">Edit Profile</a>
+                        </li>
+
+                        <li>
+                            <a ng-show="isLoggedIn()" ng-click="logOut()">Logout</a>
+                        </li>
+                </ul>
+            </div>
+            <!-- this is the collapsed list -->
+
+            <div class="btn-group"  id="menuToggleButton" >
+                <button type="button"  class="navbar-toggle pull-right" data-toggle="collapse" data-target=".navbar-main-collapse" ng-click="dropDown=!dropDown" id="dropDownMenu"><span class="glyphicon glyphicon-align-justify"></span></button>
+                <div class="row">
+                    <!--this list needs to be floated right  -->
+                    <div class="container">
+                        <ul class="dropDownMenuList text-right animate-show"  role="menu" aria-labelledby="single-button" ng-hide="dropDown">
+                            <li><a class="page-scroll" href="/#/">Home</a></li>
+                            <li>
+                                <a ng-show="isLoggedIn()" href="/#/profile/{{currentUser.username}}" >Profile</a>
+                            </li>
+                            <li>
+                                <a  ng-if="canEdit" ng-click="showForm()">Edit Profile</a>
+                            </li>
+                            <li>
+                                <a class="page-scroll" href="/#/searchRequest">Search</a>
+                            </li>
+                            <li role="menuitem"><a class="page-scroll" href="/#/login">Login</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- /.navbar-collapse -->
+      </div>
+    <!-- /.container -->
+    </nav>
+
+  </div>
+
+
+    <div class="row" style='margin-top: 200px;'>
+      <div class="container">
+          <div class="row">
+
+            <h3>Session Checkout</h3>
+            <p>
+              please confirm through paypal in order to reserve your session with <strong>{{studio.username}}</strong>
+            </p>
+            <!--  insert paypal stuff here-->
+          </div>
+          <div class="col-md-8 text-justify">
+             <!-- insert session details here -->
+             <p>
+               {{session.artist}}
+             </p>
+             <p>
+               Starting at: {{session.startHour}} and ending at {{session.endHour}}
+             </p>
+          </div>
+          <div class="col-md-4">
+            <!-- insert paypal stuff here -->
+
+<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_xclick">
+<input type="hidden" name="business" value="{{studio.email}}">
+<input type="hidden" name="item_name_1" value="Session">
+<input type="hidden" name="currency_code" value="USD">
+<input type="hidden" name="no_shipping" value="1">
+<input type="hidden" name="tax" value="0.00">
+<input type="hidden" name="handling" value="0.00">
+<input type="hidden" name="quantity" value="1">
+<input type="hidden" name="return" value="/#/checkout/success">
+<input type="hidden" name="cancel_return" value="/#/profile/{{studio.username}}">
+<input type="hidden" name="amount_1" value="{{studio.price}}.00">
+<input type="image" class="btn btn-lg" src="http://www.paypal.com/en_US/i/btn/x-click-but01.gif" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
+</form>
+</div>
+</div>
+
+</div>
+
+</div>

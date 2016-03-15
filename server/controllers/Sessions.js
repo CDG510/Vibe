@@ -28,7 +28,7 @@ module.exports = (function(){
 
 		create: function(req, res){
 
-// 		
+//
 
 
 
@@ -42,7 +42,8 @@ module.exports = (function(){
 				 info: req.body.info,
 				 artist: req.body.artist,
 				 title: req.body.artist,
-				 deletable: true
+				 deletable: true,
+         startsAt: req.body.startsAt
 			 });
 			 session._studio = user._id
 			 user.sessions.push(session)

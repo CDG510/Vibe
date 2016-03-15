@@ -116,65 +116,31 @@
 
 
 			<div class="col-sm-9 col-md-9 col-lg-9"  style="border-left: 1px solid #009688 "  >
-				<h5  ng-if="searchTerm">Search Results </h5>
-				<p>
-					<em>{{searchTerm}}</em>
-				</p>
-				<divider></divider>
                 <!-- <p  ng-if="searchTerm"> results</p> -->
-				<div class="row ">
-						<ul ng-repeat="studio in tempStudios" id="studioSearchResults">
-							<li><h3 >{{studio.businessName}}</h3></li>
-							<li>
-							<img src="{{studio.profileImage}}"  alt="img/profile_default.png" width=200px height=200px class="img-circle img-responsive">
+				<div class="col-md-12">
+					<h5  ng-if="searchTerm">Search Results </h5>
+					<p>
+						<em>{{searchTerm}}</em>
+					</p>
+					<divider></divider>
 
+						<ul ng-repeat="studio in tempStudios" id="studioSearchResults">
+							<li><h3>{{studio.username}}</h3> <img src="{{studio.profileImage}}"  alt="img/profile_default.png" width=100px height=100px class="img-circle img-responsive"></li>
+							<li></li>
+							<li>{{studio.address}}</li>
+							<li>{{studio.specialty}}</li>
+							<li>		<p>Websites:
+										<a ng-repeat="site in studio.websites" href="{{site.url}}">
+											{{site.type}}  </a></p>
 							</li>
-							<li><p>Location: {{studio.address}}</p></li>
-							<li><p>Speciality: {{studio.specialty}}</p></li>
-							<li><p>Websites:
-								<a ng-repeat="site in studio.websites" href="{{site.url}}">
-									{{site.type}}  </a></p></li>
-							<li><p>Phone #: {{studio.phone}}</p></li>
-							<li><p>Hourly rate: {{studio.price}}$</p></li>
-							<li><button class="btn btn-default btn-lg" ng-click="seeProfile(studio)">See Studio</button>
+							<li>	<p>Phone #: {{studio.phone}}</p></li>
+							<p>Hourly rate: {{studio.price}}$</p>
+							<li><button class="btn btn-default btn-lg" ng-click="seeProfile(studio)">See Studio</button></li>
+							<li>
 								<li role="separator" class="divider" style="margin-top:20px"></li>
 
 						</ul>
-
-						 <div class="modal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&close;</button>
-        <h4 class="modal-title">{{studio.businessName}}</h4>
-      </div>
-      <div class="modal-body">
-		  <ul ng-repeat="studio in tempStudios" id="studioSearchResults">
-  			<li><h3 >{{studio.businessName}}</h3></li>
-  			<li>
-  			<img src="{{studio.profileImage}}"  alt="img/profile_default.png" width=200px height=200px class="img-circle img-responsive">
-
-  			</li>
-  			<li><p>Location: {{studio.address}}</p></li>
-  			<li><p>Speciality: {{studio.specialty}}</p></li>
-  			<li><p>Websites:
-  				<a ng-repeat="site in studio.websites" href="{{site.url}}">
-  					{{site.type}}  </a></p></li>
-  			<li><p>Phone #: {{studio.phone}}</p></li>
-  			<li><p>Hourly rate: {{studio.price}}$</p></li>
-		</ul>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		<button class="btn btn-default btn-lg" ng-click="seeProfile(studio)">See Studio</button>
-			<li role="separator" class="divider" style="margin-top:20px"></li>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-				</div>
+					</div>
 
 			</div>
 		</div>

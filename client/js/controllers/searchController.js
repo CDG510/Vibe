@@ -18,6 +18,10 @@ if (!$routeParams) {
 	}
 }
 
+$scope.logOut = function(){
+  auth.logOut()
+}
+
 	//for testing purposed
 
 	//function to show found studios information when selected

@@ -63,14 +63,22 @@ vibe.factory('SessionsFactory', function ($http) {
 
 
 
+
+
 		//add session function with checks to see if it doesn't already exist
 		factory.addSession = function(requestedSession , callback){
 			//if all passes, then take it to the db to add
 			$http.post("/addSession", requestedSession).success(function(output) {
 				console.log("back from the db", output)
-				Sessions.push(output[output.length-1])
-				console.log(Sessions)
-				callback(Sessions)
+				if (Sessions.length === 0) {
+						Sessions.push(output)
+						callback(output)
+				} else {
+					Sessions.push(requestedSession)
+					console.log(Sessions)
+					callback(Sessions)
+				}
+
 			})
 		}
 
@@ -85,6 +93,11 @@ vibe.factory('SessionsFactory', function ($http) {
 			Sessions.slice(Sessions.length-1, 1)
 			callback(output)
 		})
+		}
+
+		factory.payForSession = function(session, callback) {
+			var payment = {}
+			payment.addCheckOutParamaters
 		}
 
 		return factory
