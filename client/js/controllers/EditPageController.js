@@ -114,8 +114,6 @@ $scope.setAsArtist = function() {
     mstep: [1, 5, 10, 15, 25, 30]
   };
 
-  // $scope.form = {}
-  //submit info, return to original page
   $scope.submitForm = function () {
       if ($scope.form.newStudio.$valid) {
           //repackage data for easier DBencoding
