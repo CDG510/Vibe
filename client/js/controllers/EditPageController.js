@@ -2,7 +2,6 @@ vibe.controller("EditPageController", function($scope, StudiosFactory, auth, $ro
 
 console.log($routeParams)
   $scope.isLoggedIn = auth.isLoggedIn;
-
   var clearKey = {key: null}
   if ($routeParams.id){
     console.log('ayeeee')
