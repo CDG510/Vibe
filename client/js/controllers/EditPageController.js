@@ -4,8 +4,6 @@ console.log($routeParams)
   $scope.isLoggedIn = auth.isLoggedIn;
 
   var clearKey = {key: null}
-
-
   if ($routeParams.id){
     console.log('ayeeee')
   usersFactory.getUserByName({username: $routeParams.id}, function(output){
