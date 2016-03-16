@@ -44,7 +44,7 @@ ul {
 }
 
 
-.navbar-custom {
+.navbar-default {
     margin-bottom: 0;
     border-bottom: 1px solid rgba(255,255,255,.3);
     text-transform: uppercase;
@@ -53,19 +53,22 @@ ul {
     width: 100%;
 }
 
-.navbar-custom .navbar-brand {
+.navbar-default .navbar-brand {
     font-weight: 700;
-background-color: #009688;}
+background-color: #009688;
+}
 
-.navbar-custom .navbar-brand:focus {
+.navbar-default .navbar-brand:hover {
     outline: 0;
+    color: rgba(255, 255, 255, 0.5);
+
 }
 
 .uib-datepicker{
     background-color: white;
 }
 
-.navbar-custom .navbar-brand .navbar-toggle {
+.navbar-default .navbar-brand .navbar-toggle {
     /*padding: 4px 6px;*/
     font-size: 24px;
     color: white;
@@ -95,23 +98,31 @@ transition: all linear 0.5s;
     margin-bottom: 20px;
 }
 
+.navbar-default .navbar-nav>li>a {
+  color: white
+
+}
+
+
+.nav .navbar-nav ul{
+  margin-top: 30px;
+}
+
+.collapse .navbar-collapse .navbar-right .navbar-main-collapse{
+  margin-top: 30px;
+}
+
 #dropDownMenuList {
     float: right;
-
     /*display:block;*/
     max-width: 30px;
     padding-right: 30px;
     /*margin-right: 10px;*/
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     background-color: #009688;
+    color: white
 }
-.dropDownMenu li, a:hover {
-    outline: 0;
-    color: rgba(255,255,255,.8);
-    /*background-color: #009688;*/
-    display: row;
-    /*float: right*/
-}
+
 
 .icon-bar {
     color: white;
@@ -125,24 +136,38 @@ transition: all linear 0.5s;
     color: inherit;
 }
 
+.navbar-default .navbar-brand{
+  color: white;
+}
+.navbar-default .navbar-toggle .icon-bar{
+  background-color: white;
+}
+
 .dropdown-menu ul {
     background-color: #009688;
 }
-.navbar-custom .navbar-brand .navbar-toggle:focus,
-.navbar-custom .navbar-brand .navbar-toggle:active {
+.navbar-default .navbar-brand .navbar-toggle:focus,
+.navbar-default .navbar-brand .navbar-toggle:active {
     outline: 0;
-    background-color:
+    background-color:#fff
+    color: white;
 }
 
-.navbar-custom a {
+.navbar-default a {
     color: #fff;
+}
+#logo a:hover a:focus {
+    color: rgb(255,255,255);
+}
+
+.page-scroll{
+  color: white
 }
 
 .navbar-header {
     /*width: 100%;*/
 background-color: #009688;
     display: inline;
-    margin-top: 30px;
 }
 
 .navbar-header a:hover {
@@ -151,8 +176,9 @@ background-color: #009688;
 }
 .navbar-collapsed-list{
     display: inline;
+    margin-top: 30px;
 }
-.navbar-custom .nav li a {
+.navbar-default .nav li a {
     -webkit-transition: background .3s ease-in-out;
     -moz-transition: background .3s ease-in-out;
     transition: background .3s ease-in-out;
@@ -161,33 +187,33 @@ background-color: #009688;
     background-color: #009688;
 }
 
-.navbar-custom .nav li a:hover {
+.navbar-default .nav li a:hover {
     outline: 0;
     color: rgba(255,255,255,.5);
     background-color: #009688;
 }
 
-.navbar-custom .nav li a:focus,
-.navbar-custom .nav li a:active {
+.navbar-default .nav li a:focus,
+.navbar-default .nav li a:active {
     outline: 0;
     background-color: #009688;
 }
 
-.navbar-custom .nav li.active {
+.navbar-default .nav li.active {
     outline: 0;
 }
 
-.navbar-custom .nav li.active a {
+.navbar-default .nav li.active a {
     background-color: rgba(255,255,255,.3);
 }
 
-.navbar-custom .nav li.active a:hover {
+.navbar-default .nav li.active a:hover {
     color: #fff;
 }
 
 
 @media(min-width:768px) {
-    .navbar-custom {
+    .navbar-default {
         /*padding: 20px 0;*/
         height: 124px;
         border-bottom: 0;
@@ -198,12 +224,20 @@ background-color: #009688;
         transition: background .5s ease-in-out,padding .5s ease-in-out;
     }
 
-    .navbar-custom.top-nav-collapse {
+    .navbar-default.top-nav-collapse {
         padding: 0;
         border-bottom: 1px solid rgba(255,255,255,.3);
         background: #000;
         max-height: 64px;
     }
+
+    #topLinks {
+      margin-top: 25px;
+    }
+    #topLinks a:hover {
+      color: #rgba(255, 255, 255, 0.5);;
+    }
+
 }
 
 .navbar-fixed-top{
@@ -672,9 +706,10 @@ body {
 
 }
 
-/*#studioSearchResults {
-    margin: 10px 0px 0px 0px
-}*/
+#studioSearchResults {
+  background-color: white;
+
+}
         body
         {
             /*font-family: 'Lato', 'sans-serif';
@@ -761,6 +796,12 @@ img {
 */    float: right;
 }
 
+.collapse a{
+  background-color: #009688;
+  color: white;
+}
+
+
 #aboutInfo {
     display: inline-block;
     vertical-align: top;
@@ -829,7 +870,7 @@ margin-bottom: 20px;
     }
 
     #editPageInfo{
-      position:fixed; 
+      position:fixed;
     }
 
 textarea {
@@ -852,4 +893,39 @@ mwl-calendar {
 .bookDiv {
     margin: 15px;
 
+}
+
+.animate-show {
+  line-height: 20px;
+  opacity: 1;
+  padding: 10px;
+}
+
+.animate-show.ng-hide-add, .animate-show.ng-hide-remove {
+  transition: all linear 0.5s;
+}
+
+.animate-show.ng-hide {
+  line-height: 0;
+  opacity: 0;
+  padding: 0 10px;
+}
+
+
+.animate-if {
+  padding:10px;
+}
+
+.animate-if.ng-enter, .animate-if.ng-leave {
+  transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+}
+
+.animate-if.ng-enter,
+.animate-if.ng-leave.ng-leave-active {
+  opacity:0;
+}
+
+.animate-if.ng-leave,
+.animate-if.ng-enter.ng-enter-active {
+  opacity:1;
 }

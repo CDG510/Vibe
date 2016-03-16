@@ -1,64 +1,29 @@
 <div ng-controller="studioProfileController" >
 
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container" id="topLinks">
+          <div class="navbar-header">
 
-
-    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation" id='top' >
-
-        <div class="container">
-            <div class="navbar-header">
-                <!-- this is the wideScreen list -->
-                <a class="navbar-brand page-scroll" href="/#/">Vibe</a>
-                <div class="collapse navbar-collapse navbar-right navbar-main-collapse" collapse="navCollapsed" id="collapsedLinks">
-                    <ul class="nav navbar-nav">
-                        <li>
-                            <a class="page-scroll" ng-hide="isLoggedIn()" href="/#/login">Login</a>
-                        </li>
-                        <li>
-                            <a ng-show="isLoggedIn()" href="/#/profile/{{currentUser.username}}" >Profile</a>
-                        </li>
-                        <li>
-                            <a class="page-scroll" href="/#/searchRequest">Search</a>
-                        </li>
-                        <li>
-                            <a ng-if="canEdit" href="/#/profile/{{currentUser.username}}/edit">Edit Profile</a>
-                        </li>
-
-                        <li>
-                            <a ng-show="isLoggedIn()" ng-click="logOut()">Logout</a>
-                        </li>
-                </ul>
-            </div>
-            <!-- this is the collapsed list -->
-
-            <div class="btn-group"  id="menuToggleButton" >
-                <button type="button"  class="navbar-toggle pull-right" data-toggle="collapse" data-target=".navbar-main-collapse" ng-click="dropDown=!dropDown" id="dropDownMenu"><span class="glyphicon glyphicon-align-justify"></span></button>
-                <div class="row">
-                    <!--this list needs to be floated right  -->
-                    <div class="container">
-                        <ul class="dropDownMenuList text-right animate-show"  role="menu" aria-labelledby="single-button" ng-hide="dropDown">
-                            <li><a class="page-scroll" href="/#/">Home</a></li>
-                            <li>
-                                <a ng-show="isLoggedIn()" href="/#/profile/{{currentUser.username}}" >Profile</a>
-                            </li>
-                            <li>
-                                <a  ng-if="canEdit" ng-click="showForm()">Edit Profile</a>
-                            </li>
-                            <li>
-                                <a class="page-scroll" href="/#/searchRequest">Search</a>
-                            </li>
-                            <li role="menuitem"><a class="page-scroll" href="/#/login">Login</a></li>
-
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            <button type="button" class="navbar-toggle animate-show" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand page-scroll logo" href="/#/">Vibe</a>
+          </div>
+          <div class="collapse navbar-collapse navbar-right navbar-main-collapse" ng-class="!navCollapsed && 'in'">
+            <ul class="nav navbar-nav  text-right">
+              <li><a class="page-scroll" ng-hide="isLoggedIn()" href="/#/login">Login</a></li>
+              <li><a ng-hide="canEdit" class="animate-show" href="/#/profile/{{currentUser.username}}" >Profile</a></li>
+              <li><a class="page-scroll" href="/#/searchRequest">Search</a></li>
+              <li><a ng-if="canEdit" href="/#/profile/{{currentUser.username}}/edit" class="animate-if">Edit Profile</a></li>
+              <li><a class="animate-show" ng-show="isLoggedIn()" ng-click="logOut()">Logout</a></li>
+            </ul>
+          </div><!-- /.navbar-collapse -->
         </div>
-
-        <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container -->
-</nav>
+      </nav>
 
 <div class="container" ng-hide="profile" ng-show="isLoading" style="padding-top: 100px">
     <div class="row">
@@ -145,7 +110,7 @@
         </div>
     </div>
 
-    <div class="row" id="calendar" ng-if="calendar == true">
+    <div class="row animate-show" id="calendar" ng-show="calendar" >
         <div class="col-md-12 calendario">
 
            <div class="col-md-6 text-center">
@@ -204,7 +169,7 @@
     day-view-split="30"
     cell-modifier="vm.modifyCell(calendarCell)"></mwl-calendar>
 
-    <!-- </div> -->
+
 
         <div class="bookDiv" ng-show="isLoggedIn()" >
         <!-- end of calendar row -->
@@ -224,10 +189,13 @@
                 </div>
                 <div class="col-md-4">
                     <label>Session Start Date</label>
-                   <input  ng-model="session.startDate" class="form-control" uib-datepicker-popup  is-open="popup1.opened" datepicker-options="dateOptions"  close-text="Close" alt-input-formats="altInputFormats" date-disabled="disabled(date, mode)" />
-                  <span class="input-group-btn">
-                    <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
-                  </span>
+                    <p>
+                      <input  ng-model="session.startDate" class="form-control" uib-datepicker-popup  is-open="popup1.opened" datepicker-options="dateOptions"  close-text="Close" alt-input-formats="altInputFormats" date-disabled="disabled(date, mode)" />
+                     <span class="input-group-btn">
+                       <button type="button" class="btn btn-default pull-right" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                     </span>
+                    </p>
+
                   <p ng-if="needStartDateError">
                     Please Pick a Time. Try the calendar button?
                   </p>
@@ -240,7 +208,7 @@
                     <label>Session End Date</label>
                     <input ng-model="session.endDate" class="form-control"  uib-datepicker-popup  is-open="popup2.opened" datepicker-options="dateOptions"  close-text="Close" date-disabled="disabled(date, mode)" />
                   <span class="input-group-btn">
-                    <button  class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                    <button  class="btn btn-default pull-right" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
                   </span>
                   <p ng-if="needEndDateError" class='text-center'>
                     Please pick an end time. Try the calendar button?
@@ -293,8 +261,8 @@
 
 
             <div class="col-md-12 pull-right">
-                   <button type="submit" class="btn btn-default btn-block " id="submitsessionDate" ng-click="requestDates()">Confirm Session</button>
-                   <button type='button' class="btn btn-default btn-block" ng-if="openDate" ng-click="goPay()"></button>
+                   <button type="submit" class="btn btn-default btn-block "  ng-hide="canEdit" id="submitsessionDate" ng-click="requestDates()">Reserve Session</button>
+                   <button type='button' class="btn btn-default btn-block" ng-show="canEdit" ng-click="goPay()">Submit Session</button>
             </div>
 
 
@@ -303,8 +271,8 @@
         </div>
     </form>
 
-</div>
-</div>
+    </div>
+  </div>
 </div>
 </div>
 </div>

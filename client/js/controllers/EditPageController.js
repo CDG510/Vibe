@@ -2,10 +2,7 @@ vibe.controller("EditPageController", function($scope, StudiosFactory, auth, $ro
 
 console.log($routeParams)
   $scope.isLoggedIn = auth.isLoggedIn;
-  // var user = auth.currentUser()
-  // user.User = user._id
-  // console.log(user)
-  $scope.dropDown = true;
+
   var clearKey = {key: null}
 
 
@@ -157,22 +154,5 @@ $scope.setAsArtist = function() {
           $scope.redo=  true;
       }
   };
-
-  $(window).on("resize.doResize", _.throttle(function (){
-   //if the window goes beyond reformatting size
-           if (window.innerWidth > 767) {
-               $scope.$apply(function(){
-                   //if the dropdown is active (meaning hidden)
-                   if ($scope.dropDown == true) {
-                       return
-                   } else {
-                       //otherwise disable it
-                       $scope.dropDown = !$scope.dropDown
-                   }
-               });
-           }
-
-
-       },100));
 
 })

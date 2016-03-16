@@ -1,7 +1,6 @@
 vibe.controller("HomeController", function ($scope, $location, $routeParams, $document, $window, $anchorScroll, $uibModal, $log, StudiosFactory, auth, usersFactory) {
 
 $scope.failSearch = false;
-$scope.dropDown = true;
 $scope.isLoggedIn = auth.isLoggedIn;
 
     var user = auth.currentUser()
@@ -58,20 +57,5 @@ $scope.goToUserProfile = function() {
 
 
 //this monitors windows size
-   $(window).on("resize.doResize", _.throttle(function (){
-    //if the window goes beyond reformatting size
-            if (window.innerWidth > 767) {
-                $scope.$apply(function(){
-                    //if the dropdown is active (meaning hidden)
-                    if ($scope.dropDown == true) {
-                        return
-                    } else {
-                        //otherwise disable it
-                        $scope.dropDown = !$scope.dropDown
-                    }
-                });
-            }
 
-
-        },100));
 });

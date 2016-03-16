@@ -1,70 +1,27 @@
 <div ng-controller="SearchController">
-	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation" id='top'>
 
-		<div class="container">
+	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container" id="topLinks">
+        <div class="navbar-header">
 
-			<div class="navbar-header">
+          <button type="button" class="navbar-toggle animate-show" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand page-scroll logo" href="/#/">Vibe</a>
+        </div>
+        <div class="collapse navbar-collapse navbar-right navbar-main-collapse" ng-class="!navCollapsed && 'in'">
+          <ul class="nav navbar-nav  text-right">
+            <li><a class="page-scroll" ng-hide="isLoggedIn()" href="/#/login">Login</a></li>
+            <li><a ng-show="isLoggedIn()" href="/#/profile/{{currentUser.username}}" >Profile</a></li>
+            <li><a ng-if="canEdit" ng-click="showForm()">Edit Profile</a></li>
+            <li><a ng-show="isLoggedIn()" ng-click="logOut()">Logout</a></li>
+        </div><!-- /.navbar-collapse -->
+      </div>
+    </nav>
 
-				<!-- this is the wideScreen list -->
-				<a class="navbar-brand page-scroll" href="/#/">Vibe</a>
-				<div class="collapse navbar-collapse navbar-right navbar-main-collapse" collapse="navCollapsed" id="collapsedLinks">
-					<ul class="nav navbar-nav">
-						<!-- Hidden li included to remove active class from about link when scrolled up past about section -->
-						<li><a class="page-scroll" ng-click="scrollTo('introTop')">Home</a></li>
-						<li>
-                            <a ng-show="isLoggedIn()" href="/#/profile/{{currentUser.username}}" >Profile</a>
-                        </li>
-						<li>
-							<a class="page-scroll" ng-hide="isLoggedIn()" href="/#/login">Login</a>
-						</li>
-						<li>
-							<a class="page-scroll" ng-hide="isLoggedIn()" href="/#/signUp">signUp</a>
-						</li>
-						<li>
-							<a ng-show="isLoggedIn()" ng-click="logOut()">Logout</a>
-						</li>
-
-	 <!--                    <li>
-							<a class="page-scroll" href="/#/signUp">Sign Up</a>
-						</li> -->
-					</ul>
-				</div>
-				<!-- this is the collapsed list -->
-
-				<div class="btn-group"  id="menuToggleButton" >
-					<button type="button"  class="navbar-toggle pull-right" data-toggle="collapse" data-target=".navbar-main-collapse" ng-click="dropDown=!dropDown" id="dropDownMenu"><span class="glyphicon glyphicon-align-justify"></span></button>
-					<div class="row">
-						<!--this list needs to be floated right  -->
-						<div class="container">
-
-						<ul class="droDownMenuList text-right animate-show"  role="menu" aria-labelledby="single-button" ng-hide="dropDown">
-							<li>
-									  <a ng-show="isLoggedIn()" ng-click="goToProfile()"><strong>Profile</strong></a>
-								  </li>
-								  <li>
-									  <a class="page-scroll" ng-hide="isLoggedIn()" href="/#/signUp">SignUp</a>
-								  </li>
-								  <li>
-									  <a class="page-scroll" href="/#/searchRequest">Search</a>
-								  </li>
-								  <li>
-									  <a ng-show="isLoggedIn()" ng-click="logOut()">Logout</a>
-								  </li>
-
-<!--                             <li role="menuitem"><a class="page-scroll" href="/#/signUp">Sign Up</a></li> -->
-						</ul>
-						</div>
-					</div>
-				</div>
-				<!-- dropdown-append-to="appendToEl" -->
-
-			</div>
-
-			<!-- /.navbar-collapse -->
-		</div>
-		<!-- /.container -->
-	</nav>
-<!-- 		 -->
 	<section style="margin-top: 150px">
 
 
@@ -72,12 +29,12 @@
 		<div class="row">
 				<div class="container">
 			<!-- for the search inputs -->
-			<div class="col-sm-3" >
+			<div class="col-sm-3" style="border-right: 1px solid #009688 ">
 				<div class="form-group">
 					<h5 >Simple Search</h5>
 
 					<input type="text" class="form-control input-md col-md-12"  ng-model="searchPlace.searchTerm" placeholder="Desired location" />
-	                <button class="submit btn btn-default" ng-click="searchStudios()">Search</button>
+	        <button class="submit btn btn-default" ng-click="searchStudios()">Search</button>
 				</div>
 
 
@@ -89,18 +46,10 @@
 							<!-- <div class="col-md-12"> -->
 								<input name="location" type="text"  class="form-control"
 								ng-model="searchPlace.location"  placeholder = 'Location' required />
-							<!-- </div> -->
-							<!-- <div class="col-md-12"> -->
 								<input name="specialty" type="text"  class="form-control"
 							ng-model="searchPlace.contact"  placeholder = 'Specialty'  />
-							<!-- </div> -->
-							<!-- <div class="col-md-12"> -->
-
 								<input name="name" type="text" class="form-control col-md-12"
 							ng-model="searchPlace.name" placeholder="Name"  />
-							<!-- </div> -->
-
-							<!-- <div class="col-md-12"> -->
 								<input name="specialty" type="text" class="form-control input-md col-md-12"
 							ng-model="searchPlace.specialty"  placeholder = 'Specialty'  />
 							<button class=" submit btn btn-default" id="advancedSearchButton"
@@ -115,7 +64,7 @@
 			</div>
 
 
-			<div class="col-sm-9 col-md-9 col-lg-9"  style="border-left: 1px solid #009688 "  >
+			<div class="col-sm-9 col-md-9 col-lg-9"    >
                 <!-- <p  ng-if="searchTerm"> results</p> -->
 				<div class="col-md-12">
 					<h5  ng-if="searchTerm">Search Results </h5>

@@ -95,10 +95,10 @@ vibe.factory('SessionsFactory', function ($http) {
 		})
 		}
 
-		factory.payForSession = function(session, callback) {
-			var payment = {}
-			payment.addCheckOutParamaters
-		}
+		// factory.payForSession = function(session, callback) {
+		// 	var payment = {}
+		// 	payment.addCheckOutParamaters
+		// }
 
 		return factory
 	});

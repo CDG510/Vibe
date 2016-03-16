@@ -1,11 +1,11 @@
 vibe.controller("studioProfileController", function ($scope, $location, $routeParams, StudiosFactory, $uibModal, $log, $rootScope, SessionsFactory, moment, alert, auth, usersFactory, DatesFactory, $sce, $window) {
 
     $scope.currentUser = auth.currentUser()
-	$scope.dropDown = true;
 	$scope.existsFail = false;
     $scope.isLoggedIn = auth.isLoggedIn;
     $scope.canEdit = false;
     $scope.calendar = false;
+
     if (!$scope.profile) {
         $scope.isLoading = true
     }
@@ -17,7 +17,6 @@ vibe.controller("studioProfileController", function ($scope, $location, $routePa
             console.log(output)
             $scope.profile = output;
             $scope.isLoading=false;
-            console.log($scope.profile, "is who's page we visit")
             if ($scope.profile.profileType === "Studio") {
                 $scope.getSessions()
                 $scope.session= {}
@@ -32,26 +31,26 @@ vibe.controller("studioProfileController", function ($scope, $location, $routePa
 //if the profile matches the current user, allow editing
 
 //show modal
-  $scope.showForm = function () {
-            $scope.message = "Show Form Button Clicked";
-            console.log($scope.message);
-
-            var modalInstance = $uibModal.open({
-                templateUrl: 'static/partials/AddStudioTemplate.html',
-                controller: 'ModalInstanceCtrl',
-                scope: $scope
-
-              })
-
-            //on return
-            modalInstance.result.then(function (studioForm) {
-              // here we send it to the
-
-            }, function () {
-                $log.info('Modal dismissed at: ' + new Date());
-                // $scope.successAdd = false
-              });
-        };
+  // $scope.showForm = function () {
+  //           $scope.message = "Show Form Button Clicked";
+  //           console.log($scope.message);
+  //
+  //           var modalInstance = $uibModal.open({
+  //               templateUrl: 'static/partials/AddStudioTemplate.html',
+  //               controller: 'ModalInstanceCtrl',
+  //               scope: $scope
+  //
+  //             })
+  //
+  //           //on return
+  //           modalInstance.result.then(function (studioForm) {
+  //             // here we send it to the
+  //
+  //           }, function () {
+  //               $log.info('Modal dismissed at: ' + new Date());
+  //               // $scope.successAdd = false
+  //             });
+  //       };
 
         $scope.getSessions = function() {
             SessionsFactory.getSessions({User: $scope.profile._id},  function(output) {
@@ -120,38 +119,16 @@ $scope.logOut = function(){
                         $scope.invalid = true;
                     } else {
 						$scope.existsFail = false;
-                        console.log(output, "WE DIDN'T FAIL MOMMA LETS GO PAY__________________")
+            var session = output
+            // if ($scope.canEdit == true) {
+          //   SessionsFactory.addSession(session, function(output){
+          //     $scope.showForm()
+          //   })
+          // } else {
 
-                        var session = output
-                        console.log($scope.currentUser, $scope.profile, session, " ARE OFF TO THE CHECKOUT PAGE")
-                        $location.path("/checkout").search({studio: $scope.profile, session: session})
-                        console.log("YEEEEE")
-                      //   var newSession = output
-                      //   var newStartHour = DatesFactory.unParseThenSet(output.startTime);
-                      // newSession.startsAt = newStartHour
-                      //   var endTime = DatesFactory.unParseThenSet(output.endTime)
-                      // newSession.endsAt =  endTime;
-                        // $scope.events.push(newSession)
-                        //
-                        // $scope.events.push($scope.session)
-                        // console.log($scope.events)
-                        // $location.path('/checkout').search(studio: $scope.profile, session: output)
-                        // console.log (ngCart);
-
-                        // $location.path('/checkout').search({session: output});
-
-                        // SessionsFactory.addSession(output, function(output){
-                        //
-                        //     // $scope.events.push(output)
-                        //
-                        //     console.log(output)
-                        //     $scope.session = {};
-                        //     $scope.getSessions();
-                        //     $scope.showForm()
-                        //     console.log($scope.events, "IS WHAT WE SHOULD BE RESET AT")
-
-                        // })
-
+        // }
+            console.log($scope.currentUser, $scope.profile, session, " ARE OFF TO THE CHECKOUT PAGE")
+            $location.path("/checkout").search({studio: $scope.profile, session: session})
 					}
 				})
 			}
@@ -159,9 +136,12 @@ $scope.logOut = function(){
 
 ///open schedule should toggle, not stay open
 	$scope.openSchedule = function(){
-        $scope.calendar = true;
-        $scope.getSessions()
-        // getSessions()
+        if($scope.calendar == true){
+          $scope.calendar = false;
+        } else {
+          $scope.calendar = true;
+        }
+
     };
 
 	//for calendar events
@@ -274,25 +254,4 @@ $scope.disabled = function (date, mode) {
     $scope.ismeridian = ! $scope.ismeridian;
   };
 
-
-
-  $(window).on("resize.doResize", _.throttle(function (){
-   //if the window goes beyond reformatting size
-           if (window.innerWidth > 767) {
-               $scope.$apply(function(){
-                   //if the dropdown is active (meaning hidden)
-                   if ($scope.dropDown == true) {
-                       return
-                   } else {
-                       //otherwise disable it
-                       $scope.dropDown = !$scope.dropDown
-                   }
-               });
-           }
-
-
-       },100));
 });
-
-
-// });
