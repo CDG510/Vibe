@@ -29,7 +29,7 @@
 		<div class="row">
 				<div class="container">
 			<!-- for the search inputs -->
-			<div class="col-sm-3" style="border-right: 1px solid #009688 ">
+			<div class="col-sm-4 col-md-4 col-lg-4" style="border-right: 1px solid #009688; ">
 				<div class="form-group">
 					<h5 >Simple Search</h5>
 
@@ -64,20 +64,21 @@
 			</div>
 
 
-			<div class="col-sm-9 col-md-9 col-lg-9"    >
+			<div class="col-sm-8 col-md-8 col-lg-8"    >
                 <!-- <p  ng-if="searchTerm"> results</p> -->
-				<div class="col-md-12">
-					<h5  ng-if="searchTerm">Search Results </h5>
-					<p>
-						<em>{{searchTerm}}</em>
-					</p>
+								<div class="col-md-12 animate-if" ng-if="noneFound">
+									<h5>Oh no! We couldn't find anything for {{searchTerm}}, maybe try the advanced search?</h5>
+								</div>
+				<div class="col-md-12 animate-if " ng-if="noneFound==false">
+				<p> search results for <strong>{{searchTerm}}</strong>
+				</p>
 					<divider></divider>
 
-						<ul ng-repeat="studio in tempStudios" id="studioSearchResults">
-							<li><h3>{{studio.username}}</h3> <img src="{{studio.profileImage}}"  alt="img/profile_default.png" width=100px height=100px class="img-circle img-responsive"></li>
-							<li></li>
-							<li>{{studio.address}}</li>
-							<li>{{studio.specialty}}</li>
+						<ul ng-repeat="studio in tempStudios | limitTo:quantity" id="studioSearchResults">
+							<li><h3>{{studio.username}}</h3>  <img src="{{studio.profileImage}}"  alt="They haven't uploaded a photo yet :(" width=150px height=150px class="img-circle img-responsive"> </li>
+							<li><p>
+								Specialty: {{studio.specialty}}
+							</p></li>
 							<li>		<p>Websites:
 										<a ng-repeat="site in studio.websites" href="{{site.url}}">
 											{{site.type}}  </a></p>

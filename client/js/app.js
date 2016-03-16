@@ -55,18 +55,3 @@ vibe.config(function ($routeProvider, $locationProvider, calendarConfig) {
     calendarConfig.allDateFormats.moment.date.hour = 'HH:mm';
 
 });
-
-// vibe.run(function($rootScope, $window) {
-//
-//
-//   $rootScope.$on('$routeChangeSuccess', function () {
-//
-//     var interval = setInterval(function(){
-//       if (document.readyState == 'complete') {
-//         $window.scrollTo(0, 0);
-//         clearInterval(interval);
-//       }
-//     }, 200);
-//
-//   });
-// });

@@ -15,6 +15,7 @@
 	        <ul class="nav navbar-nav  text-right">
 						<li><a ng-show="isLoggedIn()" class="animate-show" href="/#/profile/{{currentUser.username}}" >Profile</a></li>
 						<li><a class="page-scroll" href="/#/searchRequest">Search</a></li>
+						<li><a class="page-scroll" href="/#/signUp">Sign Up</a></li>
 						<li><a ng-if="canEdit" href="/#/profile/{{currentUser.username}}/edit" class="animate-if">Edit Profile</a></li>
 						<li><a class="animate-show" ng-show="isLoggedIn()" ng-click="logOut()">Logout</a></li>
 		</ul>

@@ -1,12 +1,9 @@
 vibe.controller("EditPageController", function($scope, StudiosFactory, auth, $routeParams, usersFactory, DatesFactory, $location){
 
-console.log($routeParams)
   $scope.isLoggedIn = auth.isLoggedIn;
   var clearKey = {key: null}
   if ($routeParams.id){
-    console.log('ayeeee')
   usersFactory.getUserByName({username: $routeParams.id}, function(output){
-    console.log(output)
       $scope.currentUser = output
       $scope.newStudio = $scope.currentUser;
        if ($scope.currentUser.profileType == undefined || $scope.currentUser.profileType== ""){
@@ -62,7 +59,6 @@ $scope.setAsArtist = function() {
   $scope.newStudio.price = 0
   $scope.newStudio.businessName = ""
   $scope.isStudio = false;
-  console.log('artist inputs yeeee', $scope.newStudio)
 }
 
   //add input field
@@ -86,11 +82,9 @@ $scope.setAsArtist = function() {
 
   $scope.addNewDayOff = function(){
       $scope.newStudio.schedule.offDays.push({noWork: true});
-      console.log($scope.newStudio.schedule);
   };
 
   $scope.removeDayOff = function(){
-
       $scope.newStudio.schedule.offDays.splice($scope.newStudio.schedule.offDays.length-1, 1);
   }
   $scope.ismeridian = true;
@@ -115,9 +109,7 @@ $scope.setAsArtist = function() {
   };
 
   $scope.submitForm = function () {
-      if ($scope.form.newStudio.$valid) {
-          //repackage data for easier DBencoding
-          //get reformat date into hours
+
           if ($scope.newStudio.profileImage){
             $scope.newStudio.profileImage = $scope.newStudio.profileImage.toString()
           }
@@ -143,11 +135,9 @@ $scope.setAsArtist = function() {
               });
           }
 
-          $location.path('/profile/'+$routeParams.id).search(clearKey);      }
-      else {
-          console.log('userform is not in scope');
-          $scope.redo=  true;
-      }
-  };
+          $location.path('/profile/'+$routeParams.id).search(clearKey);
+        }
+
+
 
 })

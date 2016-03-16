@@ -21,11 +21,9 @@ $scope.isLoggedIn = auth.isLoggedIn;
 
 //take login info, verify with passport, if pass, go to page
 $scope.login = function() {
-    console.log($scope.actualUser)
     auth.logIn($scope.actualUser).error(function(error){
         $scope.error = error;
     }).then(function(output){
-        console.log(output, "came back to me!")
         $scope.currentUser = auth.currentUser()
         console.log(output)
         $location.path('/profile/'+output.data.user.username).search(clearKey);

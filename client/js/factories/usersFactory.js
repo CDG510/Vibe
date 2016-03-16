@@ -19,13 +19,6 @@ vibe.factory("usersFactory", function ($http) {
 		})
 		;
 	}
-	factory.getUserPromise = function(user){
-		$http.post("/findUser", user).success(function(user){
-			return user
-		})
-	}
-
-
 
 	factory.getUserInfo = function(user, callback){
 		$http.post("/getUserInfo", user)

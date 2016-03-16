@@ -248,6 +248,7 @@ background-color: #009688;
     display: table;
     width: 100%;
     height: auto;
+    max-height: 800px
     padding: 200px 0px 200px 0;
     text-align: center;
     color: white;
@@ -282,10 +283,10 @@ uib-timepicker
     font-size: 18px;
 }
 
+
 @media(min-width:768px) {
     .intro {
-        height: 400px;
-        padding: 0;
+        padding: 100px 0 100px 0;
     }
 
     .intro .intro-body .brand-heading {
@@ -539,12 +540,13 @@ body {
 }
 
 #introInfo {
-     padding: 100px 0px 100px 0;
-     margin-bottom: 130px;
+     padding: 200px 0px 200px 0;
+     /*margin-bottom: 130px;*/
 }
 
-#about {
-    padding: 150px 0 150px 0;
+#about, #filler, #introArtist {
+    padding: 200px 0 200px 0;
+    min-height:800px;
     /*margin: 100px 50px 0px 50px;*/
 }
 
@@ -588,6 +590,7 @@ body {
     height: auto;
     padding: 110px 0px 10px 0;
     text-align: center;
+    min-height: 800px;
     color: #fff;
     background: url(../img/studioHands.jpg) no-repeat bottom center scroll;
     background-color: #000;
@@ -604,9 +607,10 @@ body {
     display: table;
     width: 100%;
     height: auto;
-    padding: 100px 0px 100px 0;
+    padding: 200px 0px 200px 0;
     text-align: center;
     color: white;
+    min-height: 800px;
     background: url(../img/bassist.jpeg) no-repeat bottom center scroll;
     background-color: #000;
     -webkit-background-size: cover;
@@ -800,6 +804,9 @@ img {
   background-color: #009688;
   color: white;
 }
+li .ng-scope, .event-item{
+  background-color: transparent !important;
+}
 
 
 #aboutInfo {
@@ -809,6 +816,7 @@ img {
 */    text-justify: inter-word;
 text-align: justify;
 margin-bottom: 20px;
+margin-top:
 }
 
 /*button {
@@ -858,15 +866,13 @@ margin-bottom: 20px;
 #profilePage_container {
 
     padding-top: 20px;
-    margin-top: 110px;
-    padding-bottom: 200px;
-    /*color: white;*/
-    /*background-color: #2a2a2a;*/
-    /*border-bottom-color: white;*/
+    margin-top: 130px;
+    min-height: 800px;
+
 
 }
     #profilePage_container a:hover {
-        color: blue;
+        color: rgba(255, 255, 255, 0.5);;
     }
 
     #editPageInfo{

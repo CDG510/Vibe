@@ -24,21 +24,13 @@
     <div class="row" style='margin-top: 200px;'>
       <div class="container">
           <div class="row">
-
             <h3>Session Checkout</h3>
-            <p>
-              please confirm through paypal in order to reserve your session with <strong>{{studio.username}}</strong>
-            </p>
-            <!--  insert paypal stuff here-->
+
           </div>
-          <div class="col-md-8 text-justify">
-             <!-- insert session details here -->
-             <p>
-               {{session.artist}}
-             </p>
-             <p>
-               Starting at: {{session.startHour}} and ending at {{session.endHour}}
-             </p>
+          <div class="col-md-8 text-justify jumbotron">
+             <p>{{session.artist}} has a session  with <strong>{{studio.username}}</strong>.</p>
+             <p>Start of session is at: {{session.startHour}} and ends at {{session.endHour}}</p>
+             <p>To reserve your session please pay the deposit reservation fee through paypal.</p>
           </div>
           <div class="col-md-4">
             <!-- insert paypal stuff here -->

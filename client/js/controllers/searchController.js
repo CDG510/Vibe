@@ -26,6 +26,8 @@ $scope.logOut = function(){
 		$location.path('/profile/'+$scope.thisUser).search({'key': null});
 	}
 
+	$scope.searchLimit = 20;
+
 	$scope.searchStudios = function() {
 	    //go to factory, to api call, get results, transfer to next partial
 		$scope.searchTerm = $scope.searchPlace.searchTerm

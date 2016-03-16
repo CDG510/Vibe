@@ -40,12 +40,7 @@ vibe.factory('auth', function($http, $window, $rootScope){
 
 	auth.logIn = function(user, callback){
 		return $http.post('/loginUser', user).success(function(data){
-		// $rootScope.$broadcast('currentUser', {user: data.user})
-		// $rootScope.$emit('currentUser', {user: data.user})
 		auth.saveToken(data.token);
-		
-
-			// return user
 		})
 	}
 

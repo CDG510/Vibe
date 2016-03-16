@@ -52,9 +52,10 @@ module.exports = (function(){
 ///search query for any of these terms
 		findStudios: function(req, res){
 			console.log(req.body, "IS GETTING FOUND________________")
+			console.log('while utilizing ~~~~~~', req.body.location+ " "+ req.body.businessName+" "+req.body.specialty )
 			User.find({ $and: [
 				{profileType: "Studio"},
-				{$or: [{location: req.body.location}, {username: req.body.username}, {specialty: req.body.specialty}]}
+				// {$or: [{location: req.body.location}, {username: req.body.username}, {specialty: req.body.specialty}]}
 				]}, function(err, foundUsers) {
 					if(err){
 			 		console.log(err)
@@ -102,6 +103,7 @@ module.exports = (function(){
 						profileType: req.body.profileType,
 						businessName: req.body.businessName,
 						schedule: req.body.schedule,
+						city: req.body.city,
 						numberOfRecordings: req.body.numberOfRecordings,
 						price: req.body.price}, function(err, foundUser){
 							if (err){

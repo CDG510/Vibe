@@ -174,7 +174,7 @@
         <div class="bookDiv" ng-show="isLoggedIn()" >
         <!-- end of calendar row -->
         <h3 ng-hide="canEdit">Request a Session with {{profile.username}} !</h3>
-        <h3 ng-show="canEdit">Add Sessions to your scheudle</h3>
+        <h3 ng-show="canEdit">Add Sessions to your schedule</h3>
         <div class="row">
             <form>
 
@@ -192,7 +192,7 @@
                     <p>
                       <input  ng-model="session.startDate" class="form-control" uib-datepicker-popup  is-open="popup1.opened" datepicker-options="dateOptions"  close-text="Close" alt-input-formats="altInputFormats" date-disabled="disabled(date, mode)" />
                      <span class="input-group-btn">
-                       <button type="button" class="btn btn-default pull-right" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                       <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
                      </span>
                     </p>
 
@@ -208,7 +208,7 @@
                     <label>Session End Date</label>
                     <input ng-model="session.endDate" class="form-control"  uib-datepicker-popup  is-open="popup2.opened" datepicker-options="dateOptions"  close-text="Close" date-disabled="disabled(date, mode)" />
                   <span class="input-group-btn">
-                    <button  class="btn btn-default pull-right" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                    <button  class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
                   </span>
                   <p ng-if="needEndDateError" class='text-center'>
                     Please pick an end time. Try the calendar button?

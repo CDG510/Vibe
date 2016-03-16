@@ -44,18 +44,11 @@ $scope.goToUserProfile = function() {
 }
 //integrate yelp business search api?
 
-
   //function to scroll to div
     $scope.scrollTo = function(id) {
           var thisLocation = $location.hash(id);
           var someElement = angular.element(document.getElementById(id));
         $document.scrollToElementAnimated(someElement);
        }
-
-    // $scope.appendToEl = angular.element(document.querySelector('#toggleButton'))
-    $scope.appendToEl = angular.element(document.querySelector('.navbar-header'));
-
-
-//this monitors windows size
 
 });

@@ -26,6 +26,8 @@
     <div class="row">
         <div class="col-md-12 col-lg-12">
          <div class="col-sm-12 col-md-12 col-lg-12">
+
+
            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 text-center" id="profilePhoto">
                <figure id="editPageInfo">
                  <h4>{{newStudio.username}}</h4>
@@ -49,12 +51,7 @@
                         </a> -->
                     </p>
                 </figcaption>
-                <div class="studioFormName" >
-                    <h4>Set your profile as {{newStudio.profileType}}</h4>
-                     <button class="btn btn-default btn-lg"  ng-click="setAsStudio()">Studio</button>
-                     <button class="btn btn-default btn-lg"  ng-click="setAsArtist()">Artist</button>
-                        <!-- <input type="text" placeholder="" -->
-                </div>
+
             </figure>
 
 
@@ -62,8 +59,13 @@
             <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 text-left jumbotron" id="aboutInfo">
 
                 <h3>{{profile.username }}</h3>
-
-                <form name="form.newStudio"  novalidate>
+                <div class="studioFormName" >
+                    <h4>Set your profile as {{newStudio.profileType}}</h4>
+                     <button class="btn btn-default btn-lg"  ng-click="setAsStudio()">Studio</button>
+                     <button class="btn btn-default btn-lg"  ng-click="setAsArtist()">Artist</button>
+                        <!-- <input type="text" placeholder="" -->
+                </div>
+                <form name="form.newStudio" ng-if="newStudio.profileType"  novalidate>
                     <!-- NAME -->
                     <div class="form-group ">
 
@@ -103,18 +105,23 @@
                     <div class="form-group ">
                         <div class="studioFormName" >
                             <label>Main Contact</label>
-                            <input type="text" name="firstName" class="form-control " ng-model="newStudio.mainContact" ng-minlength="3" ng-maxlength="30" required>
-                            <p ng-show="form.newStudio.firstName.$invalid && !form.newStudio.firstName.$pristine" class="help-block">Main Contact</p>
+                            <input type="text" name="firstName" class="form-control " ng-model="newStudio.mainContact" ng-minlength="3" ng-maxlength="30">
+                            <p ng-show="form.newStudio.mainContact.$invalid && !form.newStudio.mainContact.$pristine" class="help-block">Main Contact</p>
                         </div>
                         <div class="studioFormName">
                             <label>Phone Number</label>
-                            <input type="text" name="phone" placeholder="XXX-XXX-XXXX" class="form-control " ng-model="newStudio.phone" ng-minlength="3" ng-maxlength="30" required>
-                            <p ng-show="form.newStudio.lastName.$invalid && !form.newStudio.lastName.$pristine" class="help-block">Phone NUmber is required</p>
+                            <input type="phone" name="phone" placeholder="XXX-XXX-XXXX" class="form-control " ng-model="newStudio.phone" ng-minlength="3" ng-maxlength="30" required>
+                            <p ng-show="form.newStudio.phone.$invalid && !form.newStudio.phone.$pristine" class="help-block">Phone Number is required</p>
+                        </div>
+                        <div class="studioFormName" ng-show="isStudio">
+                            <label>Street Address</label>
+                            <input type="text" name="location" class="form-control " ng-model="newStudio.location" ng-minlength="3" ng-maxlength="30" >
+                            <p ng-show="form.newStudio.location.$invalid && !form.newStudio.location.$pristine" class="help-block">Location is required</p>
                         </div>
                         <div class="studioFormName">
-                            <label>Address/location</label>
-                            <input type="text" name="location" class="form-control " ng-model="newStudio.location" ng-minlength="3" ng-maxlength="30" required>
-                            <p ng-show="form.newStudio.lastName.$invalid && !form.newStudio.lastName.$pristine" class="help-block">Location is required</p>
+                            <label>City</label>
+                            <input type="text" name="location" class="form-control " ng-model="newStudio.city" ng-minlength="3" ng-maxlength="30" required>
+                            <p ng-show="form.newStudio.city.$invalid && !form.newStudio.city.$pristine" class="help-block">Location is required</p>
                         </div>
 
                         <div class="studioFormName">
@@ -213,7 +220,10 @@
                         <input type="button" name="picture" class="form-control" placeholder="price" ng-model="newStudio.price">
                     </div> -->
                   </div>
-                  <button type="submit" class="btn btn-default btn-lg pull-right" ng-disabled="form.newStudio.$invalid" ng-click="submitForm()">OK</button>
+                  <div class="studioFormName">
+                  <button type="submit" class="btn btn-default btn-block " ng-disabled="form.newStudio.$invalid" ng-click="submitForm()">Save</button>
+                  </div>
+
                   <!-- <button class="btn btn-cancel btn-lg pull-right" ng-click="cancel()">Cancel</button> -->
                   </form>
 

@@ -10,12 +10,13 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand page-scroll logo" href="/#/">Vibe</a>
+        <a class="navbar-brand page-scroll logo" ng-click="scrollTo('introTop')">Vibe</a>
       </div>
       <div class="collapse navbar-collapse navbar-right navbar-main-collapse" ng-class="!navCollapsed && 'in'">
         <ul class="nav navbar-nav  text-right">
           <li><a class="page-scroll" ng-click="scrollTo('intro-Artist')">Artists</a></li>
           <li><a class="page-scroll" ng-click="scrollTo('intro-Studio')">Studios</a></li>
+          <li><a class="page-scroll" ng-click="scrollTo('contact')">Contact</a></li>
           <li><a class="page-scroll" ng-hide="isLoggedIn()" href="/#/login">Login</a></li>
           <li><a class="page-scroll" ng-hide="isLoggedIn()" href="/#/signUp">signUp</a></li>
           <li><a ng-show="isLoggedIn()" ng-click="goToProfile()">Profile</a></li>
@@ -32,7 +33,7 @@
         <div class="intro-body">
             <div class="container">
                 <div class="row" id="introInfo">
-                    <div class="col-md-8 col-md-offset-2">
+                    <div class="col-lg-8 col-lg-offset-2">
                         <h1 class="brand-heading">Vibe</h1>
                         <p class="intro-text">A music service to find who you need</p>
 
@@ -63,23 +64,26 @@
                 <div class='row'>
                     <div class="col-lg-8 col-lg-offset-2">
                         <h2>Artists</h2>
-                        <p>
-                            Find studios to work with, see their schedule, and book time to record.
-                        </p>
+                        <p>Find studios to work with, see their schedule, and book time to record.</p>
                         <form role="form">
-                        <!-- <p>Find studios, get recording</p> -->
                             <div class="form-group" ng-submit="searchStudios()">
                                 <input type="text"  class="form-control input-md" id="exampleInputEmail1" ng-model="studioSearch.searchTerm" placeholder="Desired location" style="color: white" />
                                 <!-- add geolocator button -->
                                 <button type="submit" class="btn btn-default btn-lg" id="submitSearchButton" ng-click="searchStudios()" >Search for Studios</button>
-
                             </div>
-
-
-                            <!-- on submit this should perform a search of studios, whether by name, location, genre, etc etc, ideally redirect to a results page OR just show stuff below -->
                         </form>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="filler" class="container content-section text-center">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h2>Why Vibe?</h2>
+                <p>Vibe strives to let Studios stay in command of their business, giving Artists the less confusion about what they can and can't book</p>
+                <p>Focus on your craft, we'll handle the rest</p>
             </div>
         </div>
     </section>
