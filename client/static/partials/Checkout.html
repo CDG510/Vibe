@@ -1,0 +1,58 @@
+<div class="paymentController">
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container" id="topLinks">
+      <div class="navbar-header">
+
+        <button type="button" class="navbar-toggle animate-show" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand page-scroll logo" href="/#/">Vibe</a>
+      </div>
+      <div class="collapse navbar-collapse navbar-right navbar-main-collapse" ng-class="!navCollapsed && 'in'">
+        <ul class="nav navbar-nav  text-right">
+          <li><a class="page-scroll" href="/#/">Home</a></li>
+          <li><a ng-show="isLoggedIn()" href="/#/profile/{{currentUser.username}}" >Profile</a></li>
+          <li><a  ng-if="canEdit" ng-click="showForm()">Edit Profile</a></li>
+          <li><a class="page-scroll" href="/#/searchRequest">Search</a></li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div>
+  </nav>
+    <div class="row" style='margin-top: 200px;'>
+      <div class="container">
+          <div class="row">
+            <h3>Session Checkout</h3>
+
+          </div>
+          <div class="col-md-8 text-justify jumbotron">
+             <p>{{session.artist}} has a session  with <strong>{{studio.username}}</strong>.</p>
+             <p>Start of session is at: {{session.startHour}} and ends at {{session.endHour}}</p>
+             <p>To reserve your session please pay the deposit reservation fee through paypal.</p>
+          </div>
+          <div class="col-md-4">
+            <!-- insert paypal stuff here -->
+
+<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_xclick">
+<input type="hidden" name="business" value="{{studio.email}}">
+<input type="hidden" name="item_name" value="Studio Session">
+<input type="hidden" name="currency_code" value="USD">
+<input type="hidden" name="no_shipping" value="1">
+<input type="hidden" name="tax" value="0.00">
+<input type="hidden" name="handling" value="0.00">
+<input type="hidden" name="quantity" value="1">
+<input type="hidden" name="return" value="/#/checkout/success">
+<input type="hidden" name="cancel_return" value="/#/profile/{{studio.username}}">
+<input type="hidden" name="amount" value="{{studio.price}}.00">
+<!-- <input type="hidden" name="charset" value="utf-8"> -->
+<input type="image" class="btn btn-block" src="http://www.paypal.com/en_US/i/btn/x-click-but01.gif" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
+</form>
+</div>
+</div>
+
+</div>
+
+</div>

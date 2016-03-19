@@ -1,0 +1,23 @@
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+
+var SessionSchema = new mongoose.Schema({
+	_studio: {type: mongoose.Schema.Types.ObjectId, ref: "Studio"},
+	startsAt: Number,
+	endsAt: Number,
+	// startHour: String,
+	// endHour: String,
+	type: String,
+	artist: String,
+	info: String,
+	title: String,
+	deletable: Boolean,
+	allDay: Boolean,
+	created_at: {type: Date, default: new Date},
+	hash: String,
+	salt: String,
+	_artist: {type: mongoose.Schema.Types.ObjectId, ref: "Artist"}
+})
+
+
+var Session = mongoose.model('Session', SessionSchema);

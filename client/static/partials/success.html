@@ -1,0 +1,129 @@
+<div class="successController">
+  <div class="row">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="container" id="">
+        <div class="navbar-header">
+
+          <button type="button" class="navbar-toggle animate-show" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand page-scroll" href="/#/">Vibe</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-right navbar-main-collapse"  ng-class="!navCollapsed && 'in'">
+
+          <ul class="nav navbar-nav  text-right">
+            <li><a class="page-scroll" ng-hide="isLoggedIn()" href="/#/login">Login</a></li>
+            <li><a ng-show="isLoggedIn()" href="/#/profile/{{currentUser.username}}" >Profile</a></li>
+            <li><a class="page-scroll" href="/#/searchRequest">Search</a></li>
+            <li><a ng-if="canEdit" href="/#/profile/{{currentUser.username}}/edit">Edit Profile</a></li>
+            <li><a ng-show="isLoggedIn()" ng-click="logOut()">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation" id='top' >
+
+        <div class="container">
+            <div class="navbar-header">
+                <!-- this is the wideScreen list -->
+                <a class="navbar-brand page-scroll" href="/#/">Vibe</a>
+                <div class="collapse navbar-collapse navbar-right navbar-main-collapse" collapse="navCollapsed" id="collapsedLinks">
+                    <ul class="nav navbar-nav">
+                        <li><a class="page-scroll" ng-hide="isLoggedIn()" href="/#/login">Login</a></li>
+                        <li><a ng-show="isLoggedIn()" href="/#/profile/{{currentUser.username}}" >Profile</a></li>
+                        <li><a class="page-scroll" href="/#/searchRequest">Search</a></li>
+                        <li><a ng-if="canEdit" href="/#/profile/{{currentUser.username}}/edit">Edit Profile</a></li>
+                        <li><a ng-show="isLoggedIn()" ng-click="logOut()">Logout</a></li>
+                </ul>
+            </div>
+            <!-- this is the collapsed list -->
+
+            <div class="btn-group"  id="menuToggleButton" >
+                <button type="button"  class="navbar-toggle pull-right" data-toggle="collapse" data-target=".navbar-main-collapse" ng-click="dropDown=!dropDown" id="dropDownMenu"><span class="glyphicon glyphicon-align-justify"></span></button>
+                <div class="row">
+                    <!--this list needs to be floated right  -->
+                    <div class="container">
+                        <ul class="dropDownMenuList text-right animate-show"  role="menu" aria-labelledby="single-button" ng-hide="dropDown">
+                            <li><a class="page-scroll" href="/#/">Home</a></li>
+                            <li>
+                                <a ng-show="isLoggedIn()" href="/#/profile/{{currentUser.username}}" >Profile</a>
+                            </li>
+                            <li>
+                                <a  ng-if="canEdit" ng-click="showForm()">Edit Profile</a>
+                            </li>
+                            <li>
+                                <a class="page-scroll" href="/#/searchRequest">Search</a>
+                            </li>
+                            <li role="menuitem"><a class="page-scroll" href="/#/login">Login</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- /.navbar-collapse -->
+      </div>
+    <!-- /.container -->
+    </nav>
+
+  </div>
+
+
+    <div class="row" style='margin-top: 200px;'>
+      <div class="container">
+          <div class="row">
+
+            <h3>Session Checkout</h3>
+            <p>
+              please confirm through paypal in order to reserve your session with <h3>{{studio.username}}</h3>
+            </p>
+            <!--  insert paypal stuff here-->
+          </div>
+          <div class="col-md-8">
+             <!-- insert session details here -->
+             <p>
+               SESSION DETAILS {{ session}}
+             </p>
+          </div>
+          <div class="col-md-4">
+            <!-- insert paypal stuff here -->
+            <p>
+              PAYPAL BUTTON
+              <!-- <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form> -->
+
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_xclick">
+<input type="hidden" name="business" value="{{studio.email}}">
+<input type="hidden" name="item_name" value="Session with {{studio.username}}">
+<input type="hidden" name="currency_code" value="USD">
+<input type="hidden" name="amount" value="{{studio.price}}.00">
+<input type="hidden" name="no_shipping" value=1
+<input type="image" src="http://www.paypal.com/en_US/i/btn/x-click-but01.gif" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
+</form>
+
+
+            </p>
+          </div>
+      </div>
+    </div>
+    <script src="paypal-button.min.js?merchant=christian.anchors-facilitator_api1.gmail.com"
+    data-button="buynow"
+    data-name="Session"
+    data-amount="{{studio.price}}"
+    async
+></script>
+
+</div>
