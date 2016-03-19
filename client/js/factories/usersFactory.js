@@ -11,6 +11,7 @@ vibe.factory("usersFactory", function ($http) {
 	}
 
 	factory.getUserByName = function(user, callback){
+		console.log(user, "OFF TO DB")
 		$http.post("/findUser", user)
 		.success(function(output){
 			callback(output)

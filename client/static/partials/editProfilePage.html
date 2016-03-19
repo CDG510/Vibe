@@ -30,28 +30,8 @@
 
            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 text-center" id="profilePhoto">
                <figure id="editPageInfo">
-                 <h4>{{newStudio.username}}</h4>
+                 <h4 text-center>{{newStudio.username}}</h4>
                    <img src="{{newStudio.profileImage}}" ng-if="newStudio.profileImage "  alt="img/profile_default.png" class="img-circle img-responsive">
-                   <figcaption ng-if="profile.ratings" class="ratings">
-                       <p ng-if="profile.profileImage">Ratings
-                           <!-- <a href="#">
-                               <span class="fa fa-star"></span>
-                           </a>
-                           <a href="#">
-                               <span class="fa fa-star"></span>
-                           </a>
-                           <a href="#">
-                               <span class="fa fa-star"></span>
-                           </a>
-                           <a href="#">
-                               <span class="fa fa-star"></span>
-                           </a>
-                           <a href="#">
-                            <span class="fa fa-star-o"></span>
-                        </a> -->
-                    </p>
-                </figcaption>
-
             </figure>
 
 
@@ -82,7 +62,6 @@
                         <div class="studioFormName">
                             <label>Profile Picture</label>
                             <input type="text" name="picture" class="form-control" placeholder="paste image url" ng-model="newStudio.profileImage">
-                            <!-- <img src="{{newStudio.profileImage}}" class="editImage img-circle img-responsive"> -->
                         </div>
 
                     </div>
@@ -92,7 +71,6 @@
                         <div class="studioFormName">
                             <label>Specialty</label>
                             <input type="text" name="email" class="form-control" ng-model="newStudio.specialty" required>
-                            <!-- <p ng-show="form.newStudio.email.$invalid && !form.newStudio.email.$pristine" class="help-block">Enter a specialty</p> -->
                         </div>
                         <!-- PASSWORD -->
                        <!--  <div class="studioFormName">
@@ -123,28 +101,23 @@
                             <input type="text" name="location" class="form-control " ng-model="newStudio.city" ng-minlength="3" ng-maxlength="30" required>
                             <p ng-show="form.newStudio.city.$invalid && !form.newStudio.city.$pristine" class="help-block">Location is required</p>
                         </div>
-
                         <div class="studioFormName">
                             <label>Bio</label>
                             <textarea name="bio" class="form-control" ng-model="newStudio.fullBio"></textarea>
                         </div>
                         <div class="studioFormName">
                             <label>Members</label>
-            <!--                     <div class="col-sm-12">
-             -->                        <fieldset data-ng-repeat="field in newStudio.members track by $index">
+                            <fieldset data-ng-repeat="field in newStudio.members track by $index">
                                         <input type="text" class="form-control" placeholder="members" name='members' ng-model="newStudio.members[$index]">
 
                                         <button type="button" class="btn btn-cancel" ng-click="removeMember($index)"> REMOVE
                                         </button>
                                     </fieldset>
                                      <button class="btn btn-default" ng-click="addNewMember()" value="ADD MEMBER">Add a member</button>
-            <!--                     </div> -->
                         </div>
                         <div class="studioFormName">
                             <label>Websites</label>
-
-            <!--                     <div class="col-sm-12">
-             -->                        <fieldset data-ng-repeat="field in newStudio.websites track by $index">
+                            <fieldset data-ng-repeat="field in newStudio.websites track by $index">
                                         <p><input type="text" class="form-control" placeholder="URL" name='members' ng-model="newStudio.websites[$index].url"><button type="button" class="btn btn-cancel" ng-click="removeWebsite($index)"> REMOVE
                                         </button></p>
                                         <label>Select Which site</label>
@@ -214,22 +187,11 @@
                         <label>Price per hour</label>
                         <input type="number" name="picture" class="form-control" placeholder="price" ng-model="newStudio.price">
                     </div>
-                    <!--  abailability, yes or no-->
-                    <!-- <div class="studioFormName" ng-show="isStudio">
-                        <label>Availability</label>
-                        <input type="button" name="picture" class="form-control" placeholder="price" ng-model="newStudio.price">
-                    </div> -->
-                  </div>
+
                   <div class="studioFormName">
                   <button type="submit" class="btn btn-default btn-block " ng-disabled="form.newStudio.$invalid" ng-click="submitForm()">Save</button>
                   </div>
-
-                  <!-- <button class="btn btn-cancel btn-lg pull-right" ng-click="cancel()">Cancel</button> -->
                   </form>
-
-
-                <!-- <p class="text-justify"><strong>People Recorded:</strong> PEOPLE OF INTEREST </p>
-                 -->
 
             </div>
 

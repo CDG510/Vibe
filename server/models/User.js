@@ -26,9 +26,9 @@ var UserSchema = new mongoose.Schema({
 	hash: String,
 	salt: String,
 	profileType: String,
+	city: String,
 	numberOfRecordings: Number,
 	sessions: [{type: Schema.ObjectId, ref: 'Session'}]
-
 })
 
 

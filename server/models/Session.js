@@ -2,11 +2,10 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var SessionSchema = new mongoose.Schema({
-	_studio: {type: mongoose.Schema.Types.ObjectId, ref: "Studio"},
+	_studio: {type: mongoose.Schema.Types.ObjectId, ref: "User"},
 	startsAt: Number,
 	endsAt: Number,
-	// startHour: String,
-	// endHour: String,
+	studioName: String,
 	type: String,
 	artist: String,
 	info: String,
@@ -16,7 +15,7 @@ var SessionSchema = new mongoose.Schema({
 	created_at: {type: Date, default: new Date},
 	hash: String,
 	salt: String,
-	_artist: {type: mongoose.Schema.Types.ObjectId, ref: "Artist"}
+	_user: {type: mongoose.Schema.Types.ObjectId, ref: "User"}
 })
 
 

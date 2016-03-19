@@ -1,7 +1,7 @@
 vibe.factory('SessionsFactory', function ($http) {
 		var Sessions = [];
 		var factory = {};
-
+		Studios = []
 		function ParseIt (parsed) {
 		var parsed = parsed.getTime();
 		return parsed
@@ -15,11 +15,33 @@ vibe.factory('SessionsFactory', function ($http) {
 				callback(output);
 			})
 		}
+		//
+		// factory.getStudioFromSession = function(id, callback){
+		// 	console.log('checking sessions with', id)
+		// 	$http.post('/findStudiobySession', output) {
+		// 		Studios = output
+		// 		callback(ouput)
+		// 	}
+		// }
 
 		factory.checkSession = function(requestedSession, callback){
 			var today = new Date()
 			var newtoday = ParseIt(today)
+			console.log('begin the checks!', requestedSession, 'against', Sessions)
+			if (requestedSession.startTime < newtoday  || requestedSession.endTime< newtoday){
+				callback('invalid');
+				return
+			}
+			// if (requestedSession.startsAt instanceof Date == false || requestedSession.endsAt instanceof Date == false){
+			// 	callback('notDate')
+			// 	return
+			// }
+			if (Sessions.length == 0){
+				console.log('lol only one, and it passed')
+				callback(requestedSession)
+			} else {
 				for (session in Sessions) {
+					console.log(Sessions[session])
 				//if requested session is after an exisiting start time & before an exisiting endTime (aka during)
 				//parse existing times and requested dates for comparison
 					var existingParsedStart = ParseIt(Sessions[session].startsAt)
@@ -44,20 +66,19 @@ vibe.factory('SessionsFactory', function ($http) {
 						callback("exists");
 						return
 					}
-					//can't overtake an existing one
+					//can't have a date invalid date
 					if (requestedSession.endTime <= requestedSession.startTime) {
 						// console.log(requestedSession, existingParsedStart,existingParsedEnd,  "can't overtake an existing one, ends after an existing end" )
 						callback("invalid");
 						return
 					}
-
-					if (requestedSession.startTime < newtoday  || requestedSession.endTime< newtoday){
-						callback('invalid');
-						return
-					}
+					//can't have a date that is before today
 				//other checks
 				}
 				callback(requestedSession)
+			}
+
+
 
 			}
 

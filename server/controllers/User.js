@@ -8,7 +8,7 @@ module.exports = (function(){
 		///get all
 		show: function(req, res){
 			 User.find({})
-			 .populate('sessions')
+			 .populate('Session')
 			 .exec(function(err, Users){
 			 	if(err){
 			 		console.log(err)
@@ -36,6 +36,7 @@ module.exports = (function(){
 		},
 ///get all sessions for one User
 		findSessions: function(req, res){
+			console.log(req.body ,"gon get found~~~~~~~~~~~~~")
 			User
 				.findOne({_id: req.body.User})
 				.populate("sessions")
@@ -44,7 +45,8 @@ module.exports = (function(){
 			 		console.log(err)
 			 	}
 			 	else{
-			 		console.log(foundUser, "back at it again")
+
+			 		console.log(foundUser, "back at it again ~~~~~~~~~~~~~~~~~~~~~~")
 			 		res.send(JSON.stringify(foundUser));
 			 	}
 			 })
@@ -52,7 +54,7 @@ module.exports = (function(){
 ///search query for any of these terms
 		findStudios: function(req, res){
 			console.log(req.body, "IS GETTING FOUND________________")
-			console.log('while utilizing ~~~~~~', req.body.location+ " "+ req.body.businessName+" "+req.body.specialty )
+			console.log('while utilizing ~~~~~~', req.body.city+ " "+ req.body.businessName+" "+req.body.specialty )
 			User.find({ $and: [
 				{profileType: "Studio"},
 				// {$or: [{location: req.body.location}, {username: req.body.username}, {specialty: req.body.specialty}]}
@@ -72,7 +74,7 @@ module.exports = (function(){
 		console.log(req.body, " GETTING FOUND________________")
 		User.find({ $and: [
 			{profileType: "Studio"},
-			{$or: [{location: req.body.searchTerm}, {username: req.body.searchTerm}, {specialty: req.body.searchTerm}]}
+			{$or: [{city: req.body.searchTerm}, {username: req.body.searchTerm}, {specialty: req.body.searchTerm}]}
 			]}, function(err, foundUsers) {
 				if(err){
 				console.log(err)
@@ -129,6 +131,7 @@ module.exports = (function(){
 								fullBio: req.body.fullBio,
 								members: req.body.members,
 								websites: req.body.websites,
+								city: req.body.city,
 								profileType: req.body.profileType},
 								function(err, foundUser){
 									if (err){

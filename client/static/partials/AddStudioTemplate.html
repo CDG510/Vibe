@@ -2,12 +2,12 @@
     <h4 class="text-center">Congrats {{currentUser.username}}!</h4>
 </div>
 <div class="modal-body">
-<p >
-  You successfully booked your session at {{session.startsAt}} and ends at {{session.endsAt}}
+<p  class='text-center'>
+Your reservation has been saved with {{studio.username}}. Make sure to contact
 </p>
 </div>
 
  <div class="modal-footer">
-      <button class="btn btn-default" ng-click="cancel()">Back to profile</button>
+      <button class="btn btn-default btn-link" href="/#/profile/{{curentUser.username}}">Back to profile</button>
 
 </div>

@@ -13,14 +13,15 @@ vibe.controller("studioProfileController", function ($scope, $location, $routePa
 // ngCart.setShipping(0.00);
 
     if ($routeParams.id){
+        console.log($routeParams)
         usersFactory.getUserByName({username: $routeParams.id}, function(output){
             console.log(output)
             $scope.profile = output;
             $scope.isLoading=false;
-            if ($scope.profile.profileType === "Studio") {
+
                 $scope.getSessions()
                 $scope.session= {}
-            }
+
             if ($scope.profile.username == $scope.currentUser.username) {
                 $scope.canEdit = true;
             }
@@ -55,8 +56,12 @@ vibe.controller("studioProfileController", function ($scope, $location, $routePa
         $scope.getSessions = function() {
             SessionsFactory.getSessions({User: $scope.profile._id},  function(output) {
               //this output will populate the schedule table
-                $scope.min = DatesFactory.unStringDate(output.schedule.startHour)
-                $scope.max = DatesFactory.unStringDate(output.schedule.endHour)
+              console.log($scope.profile)
+              console.log(output)
+              if ($scope.profile.profileType == "Studio"){
+                  $scope.min = DatesFactory.unStringDate(output.schedule.startHour)
+                  $scope.max = DatesFactory.unStringDate(output.schedule.endHour)
+              }
               if (output.sessions.length == 0) {
                   $scope.calendarView ="month";
                   // $scope.calendarTitle = $scope.profile.name
@@ -64,7 +69,7 @@ vibe.controller("studioProfileController", function ($scope, $location, $routePa
                   // $scope.events = $scope.eventSource;
                   $scope.isCellOpen = true;
                   $scope.events = []
-                $scope.noSessions = true;
+                  $scope.noSessions = true;
               } else {
                     for(session in output.sessions) {
                         //recombine date and time for calendar display
@@ -73,6 +78,9 @@ vibe.controller("studioProfileController", function ($scope, $location, $routePa
                         output.sessions[session].startsAt = newStartHour
                         var endTime = DatesFactory.unParseThenSet(output.sessions[session].endsAt)
                         output.sessions[session].endsAt =  endTime;
+                        if($scope.profile.profileType == "Artist"){
+                            output.sessions[session].title = output.sessions[session].studioName
+                        }
                     };
                       //set event source for calendar
                     $scope.events = output.sessions;
@@ -85,20 +93,25 @@ vibe.controller("studioProfileController", function ($scope, $location, $routePa
         }
 
 
-$scope.logOut = function(){
-  auth.logOut()
-}
-	//add sessions
+    $scope.logOut = function(){
+      auth.logOut()
+    }
+    	//add sessions
 	$scope.requestDates = function() {
         console.log($scope.session)
 		if ($scope.session.startHour == null || $scope.session.endHour == null) {
 			$scope.fail = true;
             return
-		}
+		} else if ($scope.session.startDate instanceof Date == false || $scope.session.endDate == false){
+            console.log('sorry bro not a date try again')
+            $scope.notDate = true;
+            return
+        }
 
 		else {
-			$scope.fail = false;
-				$scope.success = true;
+			// $scope.fail = false;
+			// 	$scope.success = true;
+
 				var parsedStartTime = DatesFactory.getThenParse($scope.session.startDate, $scope.session.startHour)
 				 // var parsedStartTime = sessionStart ;
 				 var parsedEndTime = DatesFactory.getThenParse($scope.session.endDate, $scope.session.endHour);
@@ -112,21 +125,21 @@ $scope.logOut = function(){
                     artist: $scope.session.artist,
                     studio: $scope.profile._id
                 };
+
+                console.log(session, "IS OFF TO THE DB")
 				SessionsFactory.checkSession(session, function(output){
 					if (output === "exists") {
 						$scope.existsFail = true;
+                        return
 					} else if (output === "invalid") {
                         $scope.invalid = true;
-                    } else {
+                        return
+                    }
+                     else {
 						$scope.existsFail = false;
+                        $scope.invalid = false;
             var session = output
-            // if ($scope.canEdit == true) {
-          //   SessionsFactory.addSession(session, function(output){
-          //     $scope.showForm()
-          //   })
-          // } else {
 
-        // }
             console.log($scope.currentUser, $scope.profile, session, " ARE OFF TO THE CHECKOUT PAGE")
             $location.path("/checkout").search({studio: $scope.profile, session: session})
 					}
@@ -148,6 +161,7 @@ $scope.logOut = function(){
     $scope.sendMail = function(emailId,subject,message){
         $window.open("mailto:"+ emailId + "?subject=" + subject+"&body="+message,"_self");
     };
+
     $scope.email = function() {
       if ($scope.canEdit == true){
         $scope.sendMail("christian.d.gonzalez.92@gmail.com","Inquiry","");

@@ -14,42 +14,15 @@ var paypalSdk = new Paypal({
   sandbox:   true //defaults to false
 });
 
-// var payload = {
-//     requestEnvelope: {
-//         errorLanguage:  'en_US'
-//     },
-//     actionType:     'PAY',
-//     currencyCode:   'USD',
-//     feesPayer:      'EACHRECEIVER',
-//     memo:           'Chained payment example',
-//     cancelUrl:      'http://test.com/cancel',
-//     returnUrl:      'http://test.com/success',
-//     receiverList: {
-//         receiver: [
-//             {
-//                 email:  'primary@test.com',
-//                 amount: '100.00',
-//                 primary:'true'
-//             },
-//             {
-//                 email:  'secondary@test.com',
-//                 amount: '10.00',
-//                 primary:'false'
-//             }
-//         ]
-//     }
-// };
+var braintree = require("braintree");
 
-// paypalSdk.pay(payload, function (err, response) {
-//     if (err) {
-//         console.log(err);
-//     } else {
-//         // Response will have the original Paypal API response
-//         console.log(response);
-//         // But also a paymentApprovalUrl, so you can redirect the sender to checkout easily
-//         console.log('Redirect to %s', response.paymentApprovalUrl);
-//     }
-// });
+var gateway = braintree.connect({
+  environment: braintree.Environment.Sandbox,
+  merchantId: "useYourMerchantId",
+  publicKey: "useYourPublicKey",
+  privateKey: "useYourPrivateKey"
+});
+
 module.exports = function(app, passport) {
 
     var urlencodedParser = bodyParser.urlencoded({ extended: false })
@@ -145,6 +118,10 @@ app.post("/findStudiosSimple", function(req, res){
 
     app.post('/deleteSession', function(req, res){
         Session.deleteSession(req, res)
+    })
+
+    app.post('/findStudiobySession', function(req, res){
+        Session.show(req, res)
     })
 
 

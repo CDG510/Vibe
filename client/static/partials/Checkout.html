@@ -28,14 +28,36 @@
 
           </div>
           <div class="col-md-8 text-justify jumbotron">
-             <p>{{session.artist}} has a session  with <strong>{{studio.username}}</strong>.</p>
-             <p>Start of session is at: {{session.startHour}} and ends at {{session.endHour}}</p>
-             <p>To reserve your session please pay the deposit reservation fee through paypal.</p>
+              <p>
+                  Congrats!, the time-slot you selected is available! Please double-check the information and click confirm to save the date
+              </p>
+             <p>{{currentUser.username}} has a session  with <strong>{{studio.username}}</strong>.</p>
+             <p>Start of session is at: {{session.startHour}}</p>
+             <p>
+                 Ends at {{session.endHour}}.
+             </p>
+
           </div>
           <div class="col-md-4">
+             <!-- <button type="btn btn-success btn-lg"><ngcart-checkout service="paypal" settings="{ business: {{studio.email}}, item_number: {{session.startDate}} }"></ngcart-checkout>Pay Downpayment</button> -->
+            <button class="btn btn-success" ng-click="confirmSession()">Save </button>
+
+            <form action="/charge" method="POST">
+  <script
+    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+    data-key="sk_test_ghnSVUwORQe2wvRk3tY5f2oU"
+    data-image="/img/documentation/checkout/marketplace.png"
+    data-name="Stripe.com"
+    data-description="2 widgets"
+    data-amount="{{studio.price}}"
+    data-locale="auto">
+  </script>
+</form>
+
+<!--  -->
             <!-- insert paypal stuff here -->
 
-<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+<!-- <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
 <input type="hidden" name="cmd" value="_xclick">
 <input type="hidden" name="business" value="{{studio.email}}">
 <input type="hidden" name="item_name" value="Studio Session">
@@ -44,12 +66,12 @@
 <input type="hidden" name="tax" value="0.00">
 <input type="hidden" name="handling" value="0.00">
 <input type="hidden" name="quantity" value="1">
-<input type="hidden" name="return" value="/#/checkout/success">
-<input type="hidden" name="cancel_return" value="/#/profile/{{studio.username}}">
+<input type="hidden" name="return" value="localhost:8080/#/checkout/success">
+<input type="hidden" name="cancel_return" value="localhost:8080/#/">
 <input type="hidden" name="amount" value="{{studio.price}}.00">
 <!-- <input type="hidden" name="charset" value="utf-8"> -->
-<input type="image" class="btn btn-block" src="http://www.paypal.com/en_US/i/btn/x-click-but01.gif" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
-</form>
+<!-- <input type="image" class="btn btn-block" src="http://www.paypal.com/en_US/i/btn/x-click-but01.gif" name="submit" alt="Make payments with PayPal - it's fast, free and secure!"> -->
+<!-- </form>  -->
 </div>
 </div>
 
