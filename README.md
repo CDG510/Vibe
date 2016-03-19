@@ -7,4 +7,4 @@ Social & scheduling site built in the MEAN stack to provide studios and musician
 
 --Need to clean up/refactor before deploying
 
---Need to check Paypal, integration, if not Utilize Stripe for downpayment/reservations
+--Need to check integration of Paypal, if not Utilize Stripe for downpayment/reservations
