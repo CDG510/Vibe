@@ -2,22 +2,33 @@ vibe.controller("EditPageController", function($scope, StudiosFactory, auth, $ro
 
   $scope.isLoggedIn = auth.isLoggedIn;
   var clearKey = {key: null}
-  if ($routeParams.id){
-  usersFactory.getUserByName({username: $routeParams.id}, function(output){
+  console.log('bruh')
+  console.log($routeParams)
+
+  //if page and logged in is true
+  if ($routeParams.id && $scope.isLoggedIn != false) {
+  usersFactory.getUserByName({username: $routeParams.id}, function(output) {
       $scope.currentUser = output
+      console.log(output)
       $scope.newStudio = $scope.currentUser;
+      //if there is no profiletype yet
        if ($scope.currentUser.profileType == undefined || $scope.currentUser.profileType== ""){
-      } else if ($scope.currentUser.profileType === "Studio") {
+           console.log("SET A PREFERENCE")
+      } else if ($scope.currentUser.profileType == "Studio") {
+          //if is studio, set the offdays
           $scope.isStudio = true;
+          //if no offdays setup the offdays
           if (!$scope.newStudio.schedule.offDays){
               $scope.newStudio.schedule.offDays = [{
                   noWork: false
               }]
+              //reset the parsed time to to a useable date
           var userStartTime = new Date($scope.currentUser.schedule.startHour)
           var userEndTime = new Date($scope.currentUser.schedule.endHour)
           $scope.newStudio.schedule.endHour = userEndTime
           $scope.newStudio.schedule.startHour = userStartTime
           } else {
+              ///otherwise, loop through the days, check what there is and set them
               for(var i = 0; i < $scope.newStudio.schedule.offDays.length; i++){
                   if ($scope.newStudio.schedule.offDays[i].noWork === false){
                       $scope.newStudio.schedule.offDays.splice(i, i+1)
@@ -27,7 +38,7 @@ vibe.controller("EditPageController", function($scope, StudiosFactory, auth, $ro
       }
   });
 }
-
+//schedule values
   $scope.Schedule = [
       {name: "monday", value: 1},
       {name: 'tuesday', value: 2},
@@ -107,34 +118,33 @@ $scope.setAsArtist = function() {
     hstep: [1, 2, 3],
     mstep: [1, 5, 10, 15, 25, 30]
   };
-
+//to setup the updated info
   $scope.submitForm = function () {
 
-          if ($scope.newStudio.profileImage){
-            $scope.newStudio.profileImage = $scope.newStudio.profileImage.toString()
-          }
-          $scope.newStudio.id = $scope.currentUser._id;
-
-
+      if ($scope.newStudio.profileImage){
+        $scope.newStudio.profileImage = $scope.newStudio.profileImage.toString()
+      }
+      //set the form to current user...
+         $scope.newStudio.id = $scope.currentUser._id;
           if ($scope.newStudio.profileType == "Artist") {
               usersFactory.updateUser($scope.newStudio, function(output) {
                   $scope.newStudio = output
                   });
           } else {
           for (var i =0; i <= 7; i++){
-              // console.log($scope.newStudio.schedule.offDays[i])
+              //for any values not set, set them to a non-valid value so they don't get registered by calendar
               if (!$scope.newStudio.schedule.offDays[i]){
                   $scope.newStudio.schedule.offDays.push({});
                   $scope.newStudio.schedule.offDays[i].value = 10;
                   $scope.newStudio.schedule.offDays[i].noWork = false;
               }
           }
-
+          //actually go update finally
           usersFactory.updateUser($scope.newStudio, function(output) {
                   $scope.newStudio = output
               });
           }
-
+          //return to profile
           $location.path('/profile/'+$routeParams.id).search(clearKey);
         }
 

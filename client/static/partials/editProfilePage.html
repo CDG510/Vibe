@@ -39,8 +39,9 @@
             <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 text-left jumbotron" id="aboutInfo">
 
                 <h3>{{profile.username }}</h3>
-                <div class="studioFormName" >
-                    <h4>Set your profile as {{newStudio.profileType}}</h4>
+                <div class="studioFormName" id="selectProfileType" >
+                    <h4 ng-hide="newStudio.profileType">Set your profile as {{newStudio.profileType}}</h4>
+                    <h4 ng-show="newStudio.profileType">Profile set as {{newStudio.profileType}}</h4>
                      <button class="btn btn-default btn-lg"  ng-click="setAsStudio()">Studio</button>
                      <button class="btn btn-default btn-lg"  ng-click="setAsArtist()">Artist</button>
                         <!-- <input type="text" placeholder="" -->
@@ -62,6 +63,9 @@
                         <div class="studioFormName">
                             <label>Profile Picture</label>
                             <input type="text" name="picture" class="form-control" placeholder="paste image url" ng-model="newStudio.profileImage">
+                            <p ng-show="form.newStudio.profileImage.$pristine" class="help-block">
+                                Not required, but we recommend a profile picture
+                            </p>
                         </div>
 
                     </div>
@@ -70,12 +74,12 @@
                     <div class="form-group">
                         <div class="studioFormName">
                             <label>Specialty</label>
-                            <input type="text" name="email" class="form-control" ng-model="newStudio.specialty" required>
+                            <input type="text" name="email" class="form-control" ng-model="newStudio.specialty" >
                         </div>
                         <!-- PASSWORD -->
-                       <!--  <div class="studioFormName">
+                        <!-- <div class="studioFormName">
                             <label>Password</label>
-                            <input type="password" name="password" class="form-control" ng-model="newStudio.password" value="{{currentUser.password}}" placeholder="{{currentUser.password}}" required>
+                            <input  name="password" class="form-control" ng-model="newStudio.password" value="{{currentUser.password}}" placeholder="{{currentUser.password}}" required>
                             <p ng-show="form.newStudio.password.$invalid && !form.newStudio.password.$pristine" class="help-block">Enter a valid password.</p>
                         </div> -->
                     </div>
@@ -99,13 +103,13 @@
                         <div class="studioFormName">
                             <label>City</label>
                             <input type="text" name="location" class="form-control " ng-model="newStudio.city" ng-minlength="3" ng-maxlength="30" required>
-                            <p ng-show="form.newStudio.city.$invalid && !form.newStudio.city.$pristine" class="help-block">Location is required</p>
+                            <p ng-show="form.newStudio.city.$invalid && !form.newStudio.city.$pristine" class="help-block">City is required</p>
                         </div>
                         <div class="studioFormName">
                             <label>Bio</label>
                             <textarea name="bio" class="form-control" ng-model="newStudio.fullBio"></textarea>
                         </div>
-                        <div class="studioFormName">
+                        <div class=" selectOptions">
                             <label>Members</label>
                             <fieldset data-ng-repeat="field in newStudio.members track by $index">
                                         <input type="text" class="form-control" placeholder="members" name='members' ng-model="newStudio.members[$index]">
@@ -115,7 +119,7 @@
                                     </fieldset>
                                      <button class="btn btn-default" ng-click="addNewMember()" value="ADD MEMBER">Add a member</button>
                         </div>
-                        <div class="studioFormName">
+                        <div class=" selectOptions">
                             <label>Websites</label>
                             <fieldset data-ng-repeat="field in newStudio.websites track by $index">
                                         <p><input type="text" class="form-control" placeholder="URL" name='members' ng-model="newStudio.websites[$index].url"><button type="button" class="btn btn-cancel" ng-click="removeWebsite($index)"> REMOVE
@@ -133,13 +137,12 @@
 
                                     </fieldset>
                                     <button class="btn btn-default " ng-click="addNewWebsite()" value="ADD MEMBER">Add a URL </button>
-            <!--                     </div>
-             -->            </div>
+                        </div>
 
 
                     <div class="studioFormName" ng-show="isStudio">
                             <label>Studio Name</label>
-                            <input type="text" name="firstName" class="form-control " ng-model="newStudio.businessName" ng-minlength="3" ng-maxlength="30">
+                            <input type="text" name="firstName" class="form-control " ng-model="newStudio.businessName" ng-minlength="3" ng-maxlength="30" >
                             <p ng-show="form.newStudio.businessName.$invalid && !form.newStudio.businessName.$pristine" class="help-block">Your Studio name is required.</p>
                     </div>
 
@@ -151,9 +154,6 @@
                     <div class="studioFormName" ng-show="isStudio">
                             <label>Schedule</label>
                             <p>What days do you want off?</p>
-
-            <!--                 <div class="col-md-12">
-             -->                    <!-- <fieldset data-ng-repeat="field in newStudio.schedule.days track by $index"> -->
                                 <select class="form-control" ng-model="dayOff.value" ng-options="day.value as day.name for day in Schedule" ng-repeat=" dayOff in newStudio.schedule.offDays" ng-if="dayOff.noWork">
                                     <!-- these show the values in Schedule -->
                                     <option value="What Site?">
@@ -163,18 +163,14 @@
                                         {{day.name}}
                                     </option>
                                 </select>
-
                                 <button class="btn btn-default" ng-click="addNewDayOff()" value="add Offday">Add Day off</button>
                                 <button class="btn btn-cancel" ng-click="removeDayOff()" value="remove Offday">Remove Day</button>
-
-            <!--                 </div>
-             -->
                     </div>
 
                     <div class="col-md-6 timeSpace" ng-show="isStudio" >
                         <h5>Start Hour</h5>
                         <uib-timepicker hour-step="hstep" minute-step="mstep" ng-model="newStudio.schedule.startHour" format="date | shortTime" show-meridian="ismeridian"></uib-timepicker>
-                        <!-- <span class="pull-right" style="color: red;" ng-show="newStudio.startHour"><h4>Please pick a valid Hour!</h4></span> -->
+
                     </div>
 
                     <div class='col-md-6 timeSpace' ng-show="isStudio">
@@ -185,7 +181,8 @@
 
                     <div class="studioFormName" ng-show="isStudio">
                         <label>Price per hour</label>
-                        <input type="number" name="picture" class="form-control" placeholder="price" ng-model="newStudio.price">
+                        <input type="number" name="picture" class="form-control" placeholder="price" ng-model="newStudio.price" >
+                        <span class="pull-right" style="color: red;" ng-if="newStudio.price.$pristine"><h4>Please have a price per hour!</h4></span>
                     </div>
 
                   <div class="studioFormName">

@@ -8,14 +8,6 @@ vibe.controller('paymentController', function($scope, $location, $routeParams, S
   var user = auth.currentUser()
   $scope.currentUser = user
 //
-//   if (user !== undefined) {
-//       user.User = user._id
-// //get logged in user Info
-//   usersFactory.getUserInfo(user, function(output){
-//           $scope.currentUser = output
-//           $scope.userID = $scope.currentUser.username
-//       });
-//   }
 
   $scope.showForm = function () {
 
@@ -43,10 +35,7 @@ vibe.controller('paymentController', function($scope, $location, $routeParams, S
 
         $scope.confirmSession = function(){
             $scope.session.artist = $scope.currentUser.username
-            console.log("going to go save the session!")
             SessionsFactory.addSession($scope.session, function(output){
-                console.log("yee we saved it")
-                console.log(output)
                 $scope.success = true
                 $scope.showForm()
             })

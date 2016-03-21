@@ -11,7 +11,6 @@ if (!$routeParams) {
 			$scope.noneFound = true
 	} else {
 		$scope.tempStudios = $routeParams.studioSearch
-
 	}
 }
 
@@ -22,13 +21,11 @@ $scope.logOut = function(){
 	//function to show found studios information when selected
 	$scope.seeProfile = function(studio) {
 		$scope.thisUser = studio.username;
-		console.log($scope.thisUser)
 		$location.path('/profile/'+$scope.thisUser).search({'key': null});
 	}
 
-	$scope.searchLimit = 20;
-
-	$scope.searchStudios = function() {
+	// $scope.searchLimit = 20;
+	$scope.searchSimple = function() {
 	    //go to factory, to api call, get results, transfer to next partial
 		$scope.searchTerm = $scope.searchPlace.searchTerm
 	    if ($scope.searchPlace === undefined) {
@@ -36,7 +33,6 @@ $scope.logOut = function(){
 	        return
 	    } else {
 			StudiosFactory.findStudios	($scope.searchPlace, function(output){
-				console.log(output)
 			if (output.length < 1) {
 				$scope.noneFound = true;
 				$scope.searchPlace = {}
@@ -65,8 +61,5 @@ $scope.logOut = function(){
 				}
 			});
 		}
-
-	//function to add studio of interest
-
 
 });

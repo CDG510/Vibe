@@ -22,7 +22,6 @@ module.exports = (function(){
 					console.log(err)
 				}
 				else{
-					 console.log("YEAS WE GOT ", studio)
 					res.send(JSON.stringify(studio.sessions));
 				}
 			})
@@ -30,12 +29,10 @@ module.exports = (function(){
 
 		create: function(req, res){
             //req.body is the session
-            console.log("begining the add!", req.body)
 			User.findOne({_id: req.body.studio}, function(err, studio){
                 if (err){
                     console.log(err)
                 } else {
-                    console.log('found', studio ,'~~~~~~~~~~~')
                     User.findOne({username: req.body.artist}, function(err, artist){
                         if (err){
                             console.log(err)
@@ -52,17 +49,11 @@ module.exports = (function(){
                				 deletable: true,
 							 studioName: studio.username
                			 });
-
-                         console.log(session, 'IS ABOUT TO BE SAVED')
                			 session._studio = studio._id
                          session._user = artist._id
-                         console.log(studio)
                			 studio.sessions.push(session)
                          artist.sessions.push(session)
                			 //add the new session
-                         console.log(studio, "IS THE STUDIO GETTING ADDED")
-                         console.log(artist, "IS THE Artist getting added into")
-                         console.log(session, "IS NOW UPDATED CHECK IT OUUUUUUT")
                			 session.save(function(err, session){
                              if (err){
                                  console.log(err)
@@ -76,7 +67,6 @@ module.exports = (function(){
                                 			 		console.log(er)
                                 			 	}
                                 			 	else{
-                                			 		console.log(everything, "is getting sent back")
                                 			 		res.send(JSON.stringify(session));
                                 			 	}
                                              })
@@ -94,12 +84,13 @@ module.exports = (function(){
 		},
 
 		deleteSession: function(req, res){
+			console.log(req.body, "~~~~~~~is gettin deletedddd")
 			Session.remove({_id: req.body.event._id}, function(err, userFound){
 				if (err){
 					console.log(err)
 				} else {
 					User
-						.findOne({_id: req.body.user.id})
+						.find({_id: req.body.user.id, _user: req.body.event.user})
 						.populate("sessions")
 						.exec(function (err, foundUser){
 					 	if(err){

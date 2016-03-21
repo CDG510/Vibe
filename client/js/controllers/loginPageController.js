@@ -25,7 +25,6 @@ $scope.login = function() {
         $scope.error = error;
     }).then(function(output){
         $scope.currentUser = auth.currentUser()
-        console.log(output)
         $location.path('/profile/'+output.data.user.username).search(clearKey);
     })
 }

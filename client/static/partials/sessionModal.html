@@ -1,15 +1,11 @@
 <div class="modal-header">
-        <a href="/#/profile/{{vm.event.title}}"><h3 class="modal-title text-center">{{vm.event.title}}</h3></a>
+        <a href="/#/profile/{{vm.event.title}}" ng-click="$close()"><h3 class="modal-title text-center">{{vm.event.title}}</h3></a>
       </div>
       <div class="modal-body">
-        <!-- <p>Action:
-        <pre>{{ vm.action }}</pre>
-        </p>
-         -->
         <p> Starts: {{ vm.event.startsAt.toString() }}</p>
         <p>Ends: {{ vm.event.endsAt.toString() }}</p>
-
       </div>
       <div class="modal-footer">
+          <a href="/#/profile/{{vm.event.title}}" ><button class="btn btn-default btn-lg"  ng-click="$close()">View Profile</button> </a>
         <button class="btn btn-default btn-lg" ng-click="$close()">Close</button>
       </div>

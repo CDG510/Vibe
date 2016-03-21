@@ -12,18 +12,11 @@ vibe.factory("StudiosFactory", function ($http) {
 	};
 
 	factory.findStudios = function (search, callback){
-
 			 $http.post('/findStudiosSimple', search).success(function(output){
-
 			 	callback(output);
 			 })
 		}
 
-
-
-
 	return factory
-
-
 
 });

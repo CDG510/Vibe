@@ -2,15 +2,11 @@ body {
     width: 100%;
     height: 100%;
     font-family: Lora,"Helvetica Neue",Helvetica,Arial,sans-serif;
-    /*color: #fff;*/
-    /*background-color: #000;*/
-
 }
 
 html {
     width: 100%;
     height: 100%;
-    /*color: green;*/
 }
 
 h1,
@@ -24,7 +20,6 @@ h6 {
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 700;
     letter-spacing: 1px;
-
 }
 
 p {
@@ -43,7 +38,6 @@ ul {
 
 }
 
-
 .navbar-default {
     margin-bottom: 0;
     border-bottom: 1px solid rgba(255,255,255,.3);
@@ -55,7 +49,7 @@ ul {
 
 .navbar-default .navbar-brand {
     font-weight: 700;
-background-color: #009688;
+    background-color: #009688;
 }
 
 .navbar-default .navbar-brand:hover {
@@ -69,20 +63,18 @@ background-color: #009688;
 }
 
 .navbar-default .navbar-brand .navbar-toggle {
-    /*padding: 4px 6px;*/
     font-size: 24px;
     color: white;
-background-color: #009688;
-transition: all linear 0.5s;
+    background-color: #009688;
+    transition: all linear 0.5s;
 }
 #menuToggleButton {
     color: white;
     background-color: #009688;
     display: ;
-     transition: all linear 0.5s;
-     float: right;
-     vertical-align: top;
-     /*padding-right:*/
+    transition: all linear 0.5s;
+    float: right;
+    vertical-align: top;
 }
 .navbar-default .navbar-toggle .icon-bar {
     color: white;
@@ -103,7 +95,6 @@ transition: all linear 0.5s;
 
 }
 
-
 .nav .navbar-nav ul{
   margin-top: 30px;
 }
@@ -114,15 +105,12 @@ transition: all linear 0.5s;
 
 #dropDownMenuList {
     float: right;
-    /*display:block;*/
     max-width: 30px;
     padding-right: 30px;
-    /*margin-right: 10px;*/
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     background-color: #009688;
     color: white
 }
-
 
 .icon-bar {
     color: white;
@@ -211,14 +199,12 @@ background-color: #009688;
     color: #fff;
 }
 
-
 @media(min-width:768px) {
     .navbar-default {
-        /*padding: 20px 0;*/
         height: 124px;
         border-bottom: 0;
         letter-spacing: 1px;
-background-color: #009688;
+        background-color: #009688;
         -webkit-transition: background .5s ease-in-out,padding .5s ease-in-out;
         -moz-transition: background .5s ease-in-out,padding .5s ease-in-out;
         transition: background .5s ease-in-out,padding .5s ease-in-out;
@@ -269,8 +255,7 @@ uib-timepicker
 .intro .intro-body {
     display: table-cell;
     vertical-align: middle;
-/*    margin-top: 200px;
-*/}
+}
 
 .intro .intro-body .brand-heading {
     vertical-align: middle;
@@ -298,7 +283,7 @@ uib-timepicker
     }
 }
 
-.btn-circle {
+/*.btn-circle {
     width: 70px;
     height: 70px;
     margin-top: 15px;
@@ -336,7 +321,7 @@ uib-timepicker
     -moz-animation-iteration-count: infinite;
     -webkit-animation-timing-function: linear;
     -moz-animation-timing-function: linear;
-}
+}*/
 
 
 @-webkit-keyframes pulse {
@@ -547,7 +532,6 @@ body {
 #about, #filler, #introArtist {
     padding: 200px 0 200px 0;
     min-height:800px;
-    /*margin: 100px 50px 0px 50px;*/
 }
 
 #download {
@@ -637,20 +621,14 @@ body {
 }
 
 .modal-header {
-    /*color:white;
-    background-color: black*/
+
 }
 
 .modal-body {
-    /*color: white;
-    background-color: black;*/
-    /*margin: 0 30px 20px 30px;*/
-/*    width: 50%;
-*/}
+}
 
 .modal-footer {
-    /*color: white;
-    background-color: black*/
+
 }
 
 #successfulAddStudio {
@@ -659,31 +637,48 @@ body {
 
 .studioFormName {
     width: 100%;
+    text-align: left;
+    vertical-align: middle;
+
+}
+#selectProfileType{
     text-align: center;
     vertical-align: middle;
-    text-align:center;
-    /*margin: 0 30px 20px 30px;*/
+}
+.selectOptions {
+    text-align: center ;
+    vertical-align: middle ;
 
+}
+.selectOptions button, select, input {
+    margin-bottom: 10px;
+}
+.selectOptions label {
+    font-weight: bold;
+    text-align: left;
 }
     .studioFormName button, select, input  {
         margin-bottom: 10px;
+
     }
     .studioFormName img {
         margin-top: 20px;
     }
     .studioFormName textarea {
         height: 200px;
+        margin-bottom: 10px;
+    }
+    .studioFormName label {
+        font-weight: bold;
+        margin-top: 10px;
     }
 
     .studioFormName input, select {
-/*        width: 50%;
-*/        vertical-align: middle;
+        vertical-align: middle;
     }
 
 #loginInput {
     text-align: center;
-    /*padding: 20px 0 20px 0;*/
-
 }
 
 #login {
@@ -716,15 +711,10 @@ body {
 }
         body
         {
-            /*font-family: 'Lato', 'sans-serif';
-            color: white;*/
         }
-        .profile
-        {
+        .profile {
             min-height: 600px;
-            /*background-color: black;
-            color: white;*/
-            /*;*/
+
         }
 
         .divider
@@ -737,8 +727,7 @@ body {
             display: inline-block;
             padding: 10px;
             vertical-align: top;
-/*    border: 2px solid green;
-*/    }
+        }
 .emphasis:hover
 {
     border-top: 4px solid #29b6f6;

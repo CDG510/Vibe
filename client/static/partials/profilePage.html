@@ -21,7 +21,7 @@
               <li><a ng-if="canEdit == true" href="/#/profile/{{currentUser.username}}/edit" class="animate-if">Edit Profile</a></li>
               <li><a class="animate-show" ng-show="isLoggedIn()" ng-click="logOut()">Logout</a></li>
             </ul>
-          </div><!-- /.navbar-collapse -->
+          </div>
         </div>
       </nav>
 
@@ -48,39 +48,23 @@
                 <p ng-show="profile.mainContact"><strong>Contact: </strong> {{profile.mainContact}}</p>
                 <!-- <p><strong>Address: </strong>{{profile.location}}</p> -->
                 <p ng-show="profile.specialty"><strong>Specialty: </strong> <span class="tags">{{profile.specialty}}</span></p>
-                <p ng-show="profile.websites"><strong ng-if="profile.websites.length > 0">Social: </strong><br>
+                <p ng-show="profile.websites"><strong ng-if="profile.websites.length > 0"> Social: </strong><br>
                     <a ng-repeat="site in profile.websites" href="{{site.url}}" target="_self">{{site.type}}<br /> </a>
                 </p>
-
-
-
-                <!-- <p class="text-justify"><strong>People Recorded:</strong> PEOPLE OF INTEREST </p>
-                 -->
-
             </div>
 
             <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 text-center" id="profilePhoto">
                 <figure>
                     <img src="{{profile.profileImage}}" ng-if="profile.profileImage "  alt="img/profile_default.png" class="img-circle img-responsive">
-                    <figcaption ng-if="profile.ratings" class="ratings">
-                        <p ng-if="profile.profileImage">Ratings
-                            <!-- <a href="#">
-                                <span class="fa fa-star"></span>
-                            </a>
-                            <a href="#">
-                                <span class="fa fa-star"></span>
-                            </a>
-                            <a href="#">
-                                <span class="fa fa-star"></span>
-                            </a>
-                            <a href="#">
-                                <span class="fa fa-star"></span>
-                            </a>
-                            <a href="#">
-                             <span class="fa fa-star-o"></span>
-                         </a> -->
-                     </p>
-                 </figcaption>
+
+                    <!-- <figcaption ng-if="profile.ratings" ng-hide="canEdit" class="ratings">
+                        <label>Rating if not self</label>
+                        <uib-rating ng-click="addRating()"  ng-model="profile.ratings" max="max" read-only="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" titles="['one','two','three']" aria-labelledby="default-rating"></uib-rating>
+                    </figcaption>
+                    <figcaption ng-if="profile.ratings" ng-show="canEdit" class="ratings">
+                        <label>Rating if self</label>
+                        <uib-rating  ng-model="profile.ratings" max="max" read-only="isReadonly" aria-labelledby="default-rating"></uib-rating>
+                 </figcaption> -->
              </figure>
 
          </div>
@@ -170,52 +154,46 @@
 
 
         <div class="bookDiv" ng-show="isLoggedIn()" ng-if="profile.profileType == 'Studio' " >
-        <!-- end of calendar row -->
-        <h3 ng-hide="canEdit">Request a Session with {{profile.username}} !</h3>
-        <h3 ng-show="canEdit">Add Sessions to your schedule</h3>
-        <div class="row">
-            <form>
+            <h3 ng-hide="canEdit">Request a Session with {{profile.username}} !</h3>
+            <h3 ng-show="canEdit">Add Sessions to your schedule</h3>
+            <div class="row">
+                <form>
+                    <p class="input-group">
+                        <div class="col-md-4">
+                            <label>Arist Name</label>
+                            <input type = "text"  ng-model="session.artist"  class='form-control' placeholder={{currentUser.username}}   />
+                            <p ng-if="needNameError" class="text-center">I'm sorry, please provide your name</p>
+                        </div>
+                        <div class="col-md-4">
+                            <label>Session Start Date</label>
+                            <p>
+                              <input  ng-model="session.startDate" class="form-control" uib-datepicker-popup  is-open="popup1.opened" datepicker-options="dateOptions"  close-text="Close" alt-input-formats="altInputFormats" date-disabled="disabled(date, mode)" />
+                             <span class="input-group-btn">
+                               <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                             </span>
+                            </p>
 
+                          <p ng-if="notDate">
+                            Please Pick a Time. Try the calendar button?
+                          </p>
+                          <p ng-if="notDate" class="text-center">
+                            Sorry! Please pick a valid date
+                          </p>
 
-            <p class="input-group">
-                <div class="col-md-4">
-                    <label>Arist Name</label>
-                    <input type = "text"  ng-model="session.artist"  class='form-control' placeholder={{currentUser.username}}   />
-                    <p ng-if="needNameError" class="text-center">
-                      I'm sorry, please provide your name
+                        </div>
+
+                        <div class="col-md-4">
+                            <label>Session End Date</label>
+                            <input ng-model="session.endDate" class="form-control"  uib-datepicker-popup  is-open="popup2.opened" datepicker-options="dateOptions"  close-text="Close" date-disabled="disabled(date, mode)" />
+                          <span class="input-group-btn">
+                            <button  class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                          </span>
+                          <p ng-if="needEndDateError" class='text-center'>
+                            Please pick an end time. Try the calendar button?
+                          </p>
+                        </div>
                     </p>
-                </div>
-                <div class="col-md-4">
-                    <label>Session Start Date</label>
-                    <p>
-                      <input  ng-model="session.startDate" class="form-control" uib-datepicker-popup  is-open="popup1.opened" datepicker-options="dateOptions"  close-text="Close" alt-input-formats="altInputFormats" date-disabled="disabled(date, mode)" />
-                     <span class="input-group-btn">
-                       <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
-                     </span>
-                    </p>
-
-                  <p ng-if="notDate">
-                    Please Pick a Time. Try the calendar button?
-                  </p>
-                  <p ng-if="notDate" class="text-center">
-                    Sorry! Please pick a valid date
-                  </p>
-
-                </div>
-                <div class="col-md-4">
-                    <label>Session End Date</label>
-                    <input ng-model="session.endDate" class="form-control"  uib-datepicker-popup  is-open="popup2.opened" datepicker-options="dateOptions"  close-text="Close" date-disabled="disabled(date, mode)" />
-                  <span class="input-group-btn">
-                    <button  class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
-                  </span>
-                  <p ng-if="needEndDateError" class='text-center'>
-                    Please pick an end time. Try the calendar button?
-                  </p>
-                </div>
-
-
-            </p>
-        </div>
+            </div>
 <br />
         <div class="row" id="sessionTimes">
             <div class="col-md-4">
@@ -243,25 +221,19 @@
                 <span class="pull-left" style="color: red;" ng-show="invalid"><h4>Please pick a valid time!</h4></span>
                 <span class="pull-left" style="color: red;" ng-show="existsFail"><h4>We're sorry, there's already a session booked for that time. Try another timeframe?</h4></span>
                 <br />
-
                 <div class="row timeSpace" id="schedule">
-
-            <div class="col-md-12 pull-right">
-                   <button type="submit" class="btn btn-default btn-block "  ng-hide="canEdit" id="submitsessionDate" ng-click="requestDates()">Reserve Session</button>
-                   <button type='button' class="btn btn-default btn-block" ng-show="canEdit" ng-click="goPay()">Submit Session</button>
-            </div>
-
-
+                    <div class="col-md-12 pull-right">
+                           <button type="submit" class="btn btn-default btn-block "  ng-hide="canEdit" id="submitsessionDate" ng-click="requestDates()">Reserve Session</button>
+                           <button type='button' class="btn btn-default btn-block" ng-show="canEdit" ng-click="requestDates()">Submit Session</button>
+                    </div>
                </div>
            </div>
         </div>
-    </form>
+            </form>
 
+        </div>
     </div>
-  </div>
+    </div>
 </div>
 </div>
-</div>
-<!-- <script src="https://www.paypalobjects.com/js/external/apdg.js" type="text/javascript"></script> -->
-
 </div>

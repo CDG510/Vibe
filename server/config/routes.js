@@ -1,5 +1,4 @@
 
-var Studio = require('./../controllers/Studios.js');
 var Session = require('./../controllers/Sessions.js')
 var mongoose = require('mongoose');
 var Passport = require('passport')
@@ -14,14 +13,14 @@ var paypalSdk = new Paypal({
   sandbox:   true //defaults to false
 });
 
-var braintree = require("braintree");
-
-var gateway = braintree.connect({
-  environment: braintree.Environment.Sandbox,
-  merchantId: "useYourMerchantId",
-  publicKey: "useYourPublicKey",
-  privateKey: "useYourPrivateKey"
-});
+// var braintree = require("braintree");
+//
+// var gateway = braintree.connect({
+//   environment: braintree.Environment.Sandbox,
+//   merchantId: "useYourMerchantId",
+//   publicKey: "useYourPublicKey",
+//   privateKey: "useYourPrivateKey"
+// });
 
 module.exports = function(app, passport) {
 

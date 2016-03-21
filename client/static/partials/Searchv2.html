@@ -18,80 +18,67 @@
             <li><a ng-show="isLoggedIn()" href="/#/profile/{{currentUser.username}}" >Profile</a></li>
             <li><a ng-if="canEdit" ng-click="showForm()">Edit Profile</a></li>
             <li><a ng-show="isLoggedIn()" ng-click="logOut()">Logout</a></li>
-        </div><!-- /.navbar-collapse -->
+        </div>
       </div>
     </nav>
 
 	<section style="margin-top: 150px">
-
-
-
 		<div class="row">
-				<div class="container">
-			<!-- for the search inputs -->
-			<div class="col-sm-4 col-md-4 col-lg-4" style="border-right: 1px solid #009688; ">
-				<div class="form-group">
-					<h5 >Simple Search</h5>
+			<div class="container">
+				<div class="col-sm-4 col-md-4 col-lg-4" style="border-right: 1px solid #009688; ">
+					<div class="form-group">
+						<h5 >Simple Search</h5>
 
-					<input type="text" class="form-control input-md col-md-12"  ng-model="searchPlace.searchTerm" placeholder="Desired location" />
-	        <button class="submit btn btn-default" ng-click="searchStudios()">Search</button>
-				</div>
-
-
-				<h5  style="margin-top: 20px">Advanced Search</h5>
-				<div  class="form-group ">
-					<form name="searchForm" novalidate
-						ng-submit="search()">
-						<div class=" form-group">
-							<!-- <div class="col-md-12"> -->
-								<input name="location" type="text"  class="form-control"
-								ng-model="searchPlace.location"  placeholder = 'Location' required />
-								<input name="specialty" type="text"  class="form-control"
-							ng-model="searchPlace.contact"  placeholder = 'Specialty'  />
-								<input name="name" type="text" class="form-control col-md-12"
-							ng-model="searchPlace.name" placeholder="Name"  />
-								<input name="specialty" type="text" class="form-control input-md col-md-12"
-							ng-model="searchPlace.specialty"  placeholder = 'Specialty'  />
-							<button class=" submit btn btn-default" id="advancedSearchButton"
-							ng-disabled="searchForm.$invalid" style="margin-top: 10px">Search</button>
-							<!-- </div> -->
-
-						</div>
-
-					</form>
-
-				</div>
-			</div>
-
-
-			<div class="col-sm-8 col-md-8 col-lg-8"    >
-                <!-- <p  ng-if="searchTerm"> results</p> -->
-								<div class="col-md-12 animate-if" ng-if="noneFound">
-									<h5>Oh no! We couldn't find anything for {{searchTerm}}, maybe try the advanced search?</h5>
-								</div>
-				<div class="col-md-12 animate-if " ng-if="noneFound==false">
-				<p> search results for <strong>{{searchTerm}}</strong>
-				</p>
-					<divider></divider>
-
-						<ul ng-repeat="studio in tempStudios | limitTo:quantity" id="studioSearchResults">
-							<li><h3>{{studio.username}}</h3>  <img src="{{studio.profileImage}}"  alt="They haven't uploaded a photo yet :(" width=150px height=150px class="img-circle img-responsive"> </li>
-							<li><p>
-								Specialty: {{studio.specialty}}
-							</p></li>
-							<li>		<p>Websites:
-										<a ng-repeat="site in studio.websites" href="{{site.url}}">
-											{{site.type}}  </a></p>
-							</li>
-							<li>	<p>Phone #: {{studio.phone}}</p></li>
-							<p>Hourly rate: {{studio.price}}$</p>
-							<li><button class="btn btn-default btn-lg" ng-click="seeProfile(studio)">See Studio</button></li>
-							<li>
-								<li role="separator" class="divider" style="margin-top:20px"></li>
-
-						</ul>
+						<input type="text" class="form-control input-md col-md-12"  ng-model="searchPlace.searchTerm" placeholder="Desired location" />
+		        		<button class="submit btn btn-default" ng-click="searchStudios()">Search</button>
 					</div>
 
+					<h5  style="margin-top: 20px">Advanced Search</h5>
+
+					<div  class="form-group ">
+						<form name="searchForm" novalidate
+							ng-submit="search()">
+							<div class=" form-group">
+									<input name="location" type="text"  class="form-control"
+									ng-model="searchPlace.location"  placeholder = 'Location' required />
+									<input name="specialty" type="text"  class="form-control"
+								ng-model="searchPlace.contact"  placeholder = 'Specialty'  />
+									<input name="name" type="text" class="form-control col-md-12"
+								ng-model="searchPlace.name" placeholder="Name"  />
+									<input name="specialty" type="text" class="form-control input-md col-md-12"
+								ng-model="searchPlace.specialty"  placeholder = 'Specialty'  />
+								<button class=" submit btn btn-default" id="advancedSearchButton"
+								ng-disabled="searchForm.$invalid" style="margin-top: 10px">Search</button>
+							</div>
+						</form>
+					</div>
+				</div>
+
+			<div class="col-sm-8 col-md-8 col-lg-8"    >
+				<div class="col-md-12 animate-if" ng-if="noneFound">
+					<h5>Oh no! We couldn't find anything for {{searchTerm}}, maybe try the advanced search?</h5>
+				</div>
+
+				<div class="col-md-12 animate-if " ng-if="noneFound==false">
+					<p> search results for <strong>{{searchTerm}}</strong></p>
+					<ul ng-repeat="studio in tempStudios | limitTo:quantity" id="studioSearchResults">
+						<li><h3>{{studio.username}}</h3>  <img src="{{studio.profileImage}}"  alt="They haven't uploaded a photo yet :(" width=150px height=150px class="img-circle img-responsive"> </li>
+						<li><p>
+							Specialty: {{studio.specialty}}
+						</p></li>
+						<li><p>Websites: <a ng-repeat="site in studio.websites" href="{{site.url}}">{{site.type}}  </a></p></li>
+						<li>	<p>Phone #: {{studio.phone}}</p></li>
+						<p>Hourly rate: {{studio.price}}$</p>
+						<li>
+							location: {{studio.location}}
+						</li>
+						<li ng-if="studio.city">
+							city: {{studio.city}}
+						</li>
+						<li><button class="btn btn-default btn-lg" ng-click="seeProfile(studio)">See Studio</button></li>
+						<li role="separator" class="divider" style="margin-top:20px"></li>
+					</ul>
+				</div>
 			</div>
 		</div>
 		</div>
