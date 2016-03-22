@@ -174,6 +174,18 @@ $scope.hoveringOver = function(value) {
                 console.log(output)
                 $scope.events = output
             });
+        } else {
+            console.log("nice try buddy")
+            var modalInstance = $uibModal.open({
+                templateUrl: 'static/partials/failMessage.html',
+                controller: 'ModalInstanceCtrl',
+                scope: $scope,
+                resolve: {
+                    studio: function() {
+                        return $scope.profile
+                    }
+                }
+            })
         }
     }
 

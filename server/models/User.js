@@ -28,6 +28,7 @@ var UserSchema = new mongoose.Schema({
 	profileType: String,
 	city: String,
 	hardware: String,
+	ratingScore: Number,
 	numberOfRecordings: Number,
 	sessions: [{type: Schema.ObjectId, ref: 'Session'}]
 })

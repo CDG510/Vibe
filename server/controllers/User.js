@@ -46,11 +46,28 @@ module.exports = (function(){
 			 	}
 			 })
 		},
-///search query for any of these terms
+		//simple search, find all related
+		findStudiosSimple: function(req, res){
+			User.find({ $and: [
+				{profileType: "Studio"},
+				{$or: [{city: new RegExp(req.body.searchTerm, "i")}, {username: new RegExp(req.body.searchTerm, "i")}, {specialty: new RegExp(req.body.searchTerm)}]}
+				]}, function(err, foundUsers) {
+					if(err){
+					console.log(err)
+				}
+				else{
+					console.log(foundUsers, "were found!!!!!!")
+					res.json(foundUsers);
+				}
+				})
+
+
+	},
+///specific query for any of these terms in advanced search
 		findStudios: function(req, res){
 			User.find({ $and: [
 				{profileType: "Studio"},
-				{$or: [{city: /^req.body.city$/i}, {username: req.body.username}, {specialty: req.body.specialty}]}
+				{$or: [{city: new RegExp(req.body.city, "i")}, {username: new RegExp( req.body.username)}, {specialty: new RegExp	(req.body.specialty)}]}
 				]}, function(err, foundUsers) {
 					if(err){
 			 		console.log(err)
@@ -62,22 +79,7 @@ module.exports = (function(){
 			})
 	},
 
-	findStudiosSimple: function(req, res){
-		User.find({ $and: [
-			{profileType: "Studio"},
-			{$or: [{city: req.body.searchTerm}, {username: req.body.searchTerm}, {specialty: req.body.searchTerm}]}
-			]}, function(err, foundUsers) {
-				if(err){
-				console.log(err)
-			}
-			else{
-				console.log(foundUsers, "were found!!!!!!")
-				res.json(foundUsers);
-			}
-			})
 
-
-},
 
 	updateProfile: function(req, res){
 		if (req.body.profileType === "Studio"){

@@ -37,13 +37,11 @@ vibe.config(function ($routeProvider, $locationProvider, calendarConfig) {
     })
 
     .when('/login', {templateUrl: "/static/partials/login.html", controller: 'loginController'})
-    .when("/signUp", {templateUrl: "static/partials/signUp.html", controller: "signUpController", overrideRoot: true})
-    // .when("/signUp", {templateUrl: "/static/partials/signUp.html"})
+    .when("/signUp", {templateUrl: "static/partials/signUp.html",  overrideRoot: true})
     .when("/searchRequest", {templateUrl: "/static/partials/Searchv2.html"} )
     .when('/profile/:id/edit', {templateUrl: "/static/partials/editProfilePage.html", overrideRoot: true})
     .when('/checkout', {templateUrl:'/static/partials/Checkout.html', controller: "paymentController"})
     .when('/checkout/success', {templateUrl: '/static/partials/success.html'})
-    // .when("/userProfile/:id", {templateUrl: "static/partials/userPage.html", overrideRoot: true})
     .otherwise({
         redirectTo: '/'
     });
