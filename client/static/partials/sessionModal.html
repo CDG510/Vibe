@@ -2,8 +2,8 @@
         <a href="/#/profile/{{vm.event.title}}" ng-click="$close()"><h3 class="modal-title text-center">{{vm.event.title}}</h3></a>
       </div>
       <div class="modal-body">
-        <p> Starts: {{ vm.event.startsAt.toString() }}</p>
-        <p>Ends: {{ vm.event.endsAt.toString() }}</p>
+        <p> Starts: {{ vm.event.startsAt | date:"MM/dd/yyyy 'at' h:mma" }}</p>
+        <p>Ends: {{ vm.event.endsAt | date:"MM/dd/yyyy 'at' h:mma"  }}</p>
       </div>
       <div class="modal-footer">
           <a href="/#/profile/{{vm.event.title}}" ><button class="btn btn-default btn-lg"  ng-click="$close()">View Profile</button> </a>

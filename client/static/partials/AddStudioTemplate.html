@@ -3,11 +3,12 @@
 </div>
 <div class="modal-body">
 <p  class='text-center'>
-Your reservation has been saved with {{studio.username}}. Make sure to contact
+Your reservation has been saved with {{studio.businessName}}. Make sure to contact
 </p>
 </div>
 
  <div class="modal-footer">
-      <button class="btn btn-default btn-link" href="/#/profile/{{curentUser.username}}">Back to profile</button>
+      <a class="btn btn-default btn-link" href="/#/profile/{{currentUser.username}}" ng-click="cancel()">Back to your profile</a>
+        <a class="btn btn-default btn-link" href="/#/profile/{{studio.username}}" ng-click="cancel()">Back to Studio</a>
 
 </div>

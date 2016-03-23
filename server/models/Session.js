@@ -15,6 +15,7 @@ var SessionSchema = new mongoose.Schema({
 	created_at: {type: Date, default: new Date},
 	hash: String,
 	salt: String,
+	addedBy: String,
 	_user: {type: mongoose.Schema.Types.ObjectId, ref: "User"}
 })
 

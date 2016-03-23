@@ -7,7 +7,10 @@ vibe.controller('paymentController', function($scope, $location, $routeParams, S
   $scope.studio = $routeParams.studio;
   var user = auth.currentUser()
   $scope.currentUser = user
-//
+
+//just for reformatting purposes
+$scope.endTime = moment($scope.session.endHour).format("MMMM Do YYYY, h:mm:ss a")
+$scope.startTime = moment($scope.session.startHour).format("MMMM Do YYYY, h:mm:ss a")
 
   $scope.showForm = function () {
 
@@ -29,12 +32,12 @@ vibe.controller('paymentController', function($scope, $location, $routeParams, S
             }, function () {
                 $log.info('Modal dismissed at: ' + new Date());
                 // $scope.successAdd = false
-                $location.path("/#/profile/"+$scope.currentUser.username).search({key: null})
+                // $location.path("/#/profile/"+$scope.currentUser.username).search({key: null})
               });
         };
 
         $scope.confirmSession = function(){
-            $scope.session.artist = $scope.currentUser.username
+            // $scope.session.artist = $scope.currentUser.username
             SessionsFactory.addSession($scope.session, function(output){
                 $scope.success = true
                 $scope.showForm()

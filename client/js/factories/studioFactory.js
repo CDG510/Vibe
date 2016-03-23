@@ -17,6 +17,12 @@ vibe.factory("StudiosFactory", function ($http) {
 			 })
 		}
 
+		factory.findStudiosByCity = function (search, callback){
+				 $http.post('/findStudiosByCity', search).success(function(output){
+					callback(output);
+				 })
+			}
+
 	return factory
 
 });

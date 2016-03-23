@@ -24,17 +24,19 @@
     <div class="row" style='margin-top: 200px;'>
       <div class="container">
           <div class="row">
-            <h3>Session Checkout</h3>
+            <div class="col-md-12">
+                <h3>Session Checkout</h3>
+            </div>
 
-          </div>
+
           <div class="col-md-8 text-justify jumbotron">
               <p>
                   Congrats!, the time-slot you selected is available! Please double-check the information and click confirm to save the date
               </p>
              <p>{{currentUser.username}} has a session  with <strong>{{studio.username}}</strong>.</p>
-             <p>Start of session is at: {{session.startHour}}</p>
+             <p>Start of session is at: {{startTime}}</p>
              <p>
-                 Ends at {{session.endHour}}.
+                 Ends at {{endTime}}.
              </p>
 
           </div>

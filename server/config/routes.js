@@ -84,22 +84,22 @@ app.post("/findUser", function(req, res){
 })
 
 app.post("/updateProfile", function(req, res){
-	console.log(req.body, "going futher");
 	UserController.updateProfile(req, res)
 })
 
 app.post("/getUserInfo", function(req, res){
-	console.log(req.body, "going futher than ever before");
 	UserController.findSessions(req , res)
 })
 
 app.post("/findStudios", function(req, res){
-	console.log(req.body, "searching for the user")
 	UserController.findStudios(req, res)
 })
 
+app.post("findStudiosByCity", function(req, res){
+    UsersController.findStudiosByCity(req, res)
+})
+
 app.post("/findStudiosSimple", function(req, res){
-	console.log(req.body, "searching for the user")
 	UserController.findStudiosSimple(req, res)
 })
 
@@ -109,6 +109,10 @@ app.post("/findStudiosSimple", function(req, res){
         console.log("GOING tO MAKE A SESSION------------")
         Session.create(req, res)
 	})
+
+    app.post('/selfAddSession', function(req, res){
+        Session.studioCreate(req, res)
+    })
 
 	app.post("/getSessions", function(req, res) {
 		console.log("off to controler", req.body.studio)

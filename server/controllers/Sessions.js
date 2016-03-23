@@ -27,8 +27,88 @@ module.exports = (function(){
 			})
 		},
 
+		studioCreate: function(req, res){
+			console.log(req.body)
+			User.findOne({_id: req.body.studio}, function(err, studio){
+				if(err) {return}
+				else {
+					console.log(studio)
+					User.findOne({username: req.body.artist}, function(err, artist){
+						if (err){
+							console.log(err)
+							return
+						} else {
+							console.log("WE FOUND ", artist, "~~~~~~~~~~~~~~~~~~~~~~~~~~")
+							var session = new Session({
+							startsAt: req.body.startTime,
+							 endsAt: req.body.endTime,
+							 startHour: req.body.startHour,
+							 endHour: req.body.endHour,
+							 type: "info",
+							 info: req.body.info,
+							 artist: req.body.artist,
+							 title: req.body.artist,
+							 deletable: true,
+							 studioName: studio.username,
+							 addedBy: req.body.addedBy
+						 });
+						 //set the studio
+						 session._studio = studio._id
+						 //add to sessions
+						 studio.sessions.push(session)
+						 //if we found an artist
+						 if (artist !== null) {
+							 session._user = artist._id
+							 artist.sessions.push(session)
+							 console.log(session, "JUST GOT ADDED TO ",  artist, "~~~~~~~~~~~~~~~")
+							 session.save(function(err, session){
+							  if (err){
+								  console.log(err)
+							  } else {
+								  studio.save(function(err, all){
+									  if (err) {
+										  console.log(err) }
+										  else {
+											  artist.save(function(err, everything){
+												  if(err){
+													console.log(er)
+												}
+												else{
+													res.send(JSON.stringify(session));
+												}
+											  })
+
+										  }
+
+									})
+							  }
+							 })
+						 } else {
+							 session.save(function(err, savedSession){
+								 if(err){
+									 console.log(err)
+								 } else {
+									 studio.save(function(err, all){
+										 if(err) {
+											 console.log(err)
+										 } else {
+											 res.send(JSON.stringify(savedSession))
+										 }
+									 })
+								 }
+							 })
+						 }
+						 //add the new session
+
+						}
+					})
+				}
+			})
+		},
+
 		create: function(req, res){
             //req.body is the session
+			console.log(req.body)
 			User.findOne({_id: req.body.studio}, function(err, studio){
                 if (err){
                     console.log(err)
@@ -38,7 +118,7 @@ module.exports = (function(){
                             console.log(err)
                         } else {
                             var session = new Session({
-                                startsAt: req.body.startTime,
+                            startsAt: req.body.startTime,
                				 endsAt: req.body.endTime,
                				 startHour: req.body.startHour,
                				 endHour: req.body.endHour,
@@ -47,7 +127,8 @@ module.exports = (function(){
                				 artist: req.body.artist,
                				 title: req.body.artist,
                				 deletable: true,
-							 studioName: studio.username
+							 studioName: studio.username,
+							 addedBy: req.body.addedBy
                			 });
                			 session._studio = studio._id
                          session._user = artist._id
@@ -97,8 +178,7 @@ module.exports = (function(){
 					 		console.log(err)
 					 	}
 					 	else{
-					 		console.log(foundUser, "back at it again")
-					 		res.send(JSON.stringify(foundUser));
+							res.end()
 					 	}
 					 })
 				}

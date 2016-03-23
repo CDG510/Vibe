@@ -1,5 +1,5 @@
 var vibe = angular.module('vibe', ['ngRoute', 'ui.bootstrap', 'mwl.calendar',
- 'duScroll', 'multipleDatePicker', 'ngAnimate', 'ngCart', 'angularMoment']).value('duScrollDuration', 1500);;
+ 'duScroll', 'multipleDatePicker', 'ngAnimate', 'angularMoment']).value('duScrollDuration', 1500);;
 // 'ngCart'
 var PHONE_REGEXP = /^[(]{0,1}[0-9]{3}[)\.\- ]{0,1}[0-9]{3}[\.\- ]{0,1}[0-9]{4}$/;
 
@@ -33,7 +33,13 @@ vibe.config(function ($routeProvider, $locationProvider, calendarConfig) {
     .when('/studios', {templateUrl: "/static/partials/Studios.html", overrideRoot: true})
     .when('/profile/:id', {
         templateUrl: "/static/partials/profilePage.html",
-        overrideRoot:true
+        overrideRoot:true,
+        // controller: "studioProfileController",
+        // resolve:  {
+        //     profile: ["$route", "StudiosFactory", "SessionsFactory", function($route, StudiosFactory, SessionsFactory){
+        //
+        //     }]
+        // }
     })
 
     .when('/login', {templateUrl: "/static/partials/login.html", controller: 'loginController'})
@@ -46,9 +52,9 @@ vibe.config(function ($routeProvider, $locationProvider, calendarConfig) {
         redirectTo: '/'
     });
 
-    var scrollContent = function() {
-        $('html, body').animate({ scrollTop: 0 }, 100);
-};
+//     var scrollContent = function() {
+//         $('html, body').animate({ scrollTop: 0 }, 100);
+// };
     calendarConfig.displayEventEndTimes = true;
     calendarConfig.allDateFormats.moment.date.hour = 'HH:mm';
 

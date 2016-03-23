@@ -43,6 +43,8 @@ $scope.hoveringOver = function(value) {
             } else {
                 $scope.isReadonly = false;
             }
+            console.log($scope.profile.businessName)
+
         });
     }
 
@@ -70,9 +72,10 @@ $scope.hoveringOver = function(value) {
                         var endTime = DatesFactory.unParseThenSet(output.sessions[session].endsAt)
                         output.sessions[session].endsAt =  endTime;
                         // change the title (for the calendar's use) to the studio the artist booked with
-                        if($scope.profile.profileType == "Artist"){
-                            output.sessions[session].title = output.sessions[session].studioName
+                        if($scope.profile.profileType == "Artist" || $scope.canEdit == false ){
+                            output.sessions[session].title = output.sessions[session].addedBy
                         }
+
                     };
                       //set event source for calendar
                     $scope.events = output.sessions;
@@ -110,9 +113,15 @@ $scope.hoveringOver = function(value) {
                 endHour:  $scope.session.endHour.toString(),
                 endTime: parsedEndTime,
                 info: $scope.session.info,
-                artist: $scope.session.artist,
-                studio: $scope.profile._id
+                artist: $scope.currentUser.username,
+                studio: $scope.profile._id,
+                addedBy: $scope.currentUser.username
             };
+
+            if ($scope.canEdit == true){
+                session.artist = $scope.session.artist;
+            }
+            console.log(session)
             //check to make usre it's valid and doesn't already exist from the studio
 			SessionsFactory.checkSession(session, function(output){
 				if (output === "exists") {
@@ -123,14 +132,36 @@ $scope.hoveringOver = function(value) {
                     return
                 }
                  else {
-                     //elimate error messages
 					$scope.existsFail = false;
                     $scope.invalid = false;
                     var session = output
-                    if( $scope.canEdit == true) {
+                    if($scope.canEdit == true) {
+                        console.log(session)
+                        SessionsFactory.SelfAddSession(session, function(output){
+                            var modalInstance = $uibModal.open({
+                                templateUrl: 'static/partials/studioAddSuccess.html',
+                                controller: 'ModalInstanceCtrl',
+                                scope: $scope,
+                                resolve: {
+                                    studio: function() {
+                                        return $scope.session
+                                    }
+                                }
+                            })
+                            modalInstance.result.then(function (studioForm) {
+                              // here we send it to the
 
-                    }
+                            }, function () {
+                                // $scope.successAdd = false
+                                $scope.getSessions()
+                                $scope.session = {}
+                              });
+                        })
+                }
+                else {
                     $location.path("/checkout").search({studio: $scope.profile, session: session})
+                }
+
 					}
 				})
 			}
@@ -138,7 +169,7 @@ $scope.hoveringOver = function(value) {
 
 ///Only because the usual configuration isn't working
 	$scope.openSchedule = function(){
-        if($scope.calendardar == true){
+        if($scope.calendar === true){
           $scope.calendar = false;
         } else {
           $scope.calendar = true;
@@ -167,15 +198,16 @@ $scope.hoveringOver = function(value) {
         event[field] = !event[field];
     };
 
+
+
 //only be able to delete events if you can edit(self profile)
     $scope.deleteEvent = function(event){
-        if ($scope.canEdit == true) {
+        if ($scope.canEdit == true || event.addedBy == $scope.currentUser.username) {
             SessionsFactory.deleteSession(event, {id: $scope.profile._id}, function(output){
-                console.log(output)
                 $scope.events = output
+                console.log($scope.events)
             });
         } else {
-            console.log("nice try buddy")
             var modalInstance = $uibModal.open({
                 templateUrl: 'static/partials/failMessage.html',
                 controller: 'ModalInstanceCtrl',

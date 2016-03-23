@@ -2,8 +2,8 @@ vibe.factory('SessionsFactory', function ($http) {
 		var Sessions = [];
 		var factory = {};
 		Studios = []
-		function ParseIt (parsed) {
-		var parsed = parsed.getTime();
+		var ParseIt = function  (parsed) {
+			parsed = parsed.getTime();
 		return parsed
 	}
 		//get all sessions by current profile
@@ -93,7 +93,25 @@ vibe.factory('SessionsFactory', function ($http) {
 				console.log("back from the db", output)
 				if (Sessions.length === 0) {
 						Sessions.push(output)
-						callback(output)
+						console.log(Sessions)
+						callback(Sessions)
+				} else {
+					Sessions.push(requestedSession)
+					console.log(Sessions)
+					callback(Sessions)
+				}
+
+			})
+		}
+
+		factory.SelfAddSession = function(requestedSession , callback){
+			//if all passes, then take it to the db to add
+			console.log(requestedSession)
+			$http.post("/selfAddSession", requestedSession).success(function(output) {
+				console.log("back from the db", output)
+				if (Sessions.length === 0) {
+						Sessions.push(output)
+						callback(Sessions)
 				} else {
 					Sessions.push(requestedSession)
 					console.log(Sessions)
@@ -105,15 +123,18 @@ vibe.factory('SessionsFactory', function ($http) {
 
 		factory.deleteSession = function(event, user, callback ){
 			console.log(event, user);
+			console.log(Sessions)
 			var info = {
 				event: event,
 				user: user
 			}
-			$http.post('/deleteSession', info).success(function(output){
-			console.log(output)
-			Sessions.slice(Sessions.length-1, 1)
-			callback(output)
-		})
+			$http.post('/deleteSession', info).success(function(){
+				var elementPos = Sessions.map(function(x) {return x._id; }).indexOf(event._id);
+				console.log(elementPos)
+				Sessions.splice(elementPos, 1)
+				console.log(Sessions)
+				callback(Sessions)
+			})
 		}
 
 		// factory.payForSession = function(session, callback) {

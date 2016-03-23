@@ -10,13 +10,18 @@ html {
 }
 
 h1,
-h2,
+h2{
+    margin: 0 0 35px;
+    text-transform: uppercase;
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
 h3,
 h4,
 h5,
-h6 {
+h6{
     margin: 0 0 35px;
-    text-transform: uppercase;
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 700;
     letter-spacing: 1px;
@@ -86,8 +91,8 @@ ul {
 }
 
 .timeSpace {
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 100px;
+    /*margin-bottom: 20px;*/
 }
 
 .navbar-default .navbar-nav>li>a {
@@ -887,7 +892,7 @@ textarea {
 }
 
 #submitSessionDate{
-    margin: 20px 15px 0 0;
+    /*margin: 20px 15px 0 0;*/
 }
 mwl-calendar {
     margin-bottom: 20px;
