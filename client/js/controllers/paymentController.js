@@ -2,8 +2,7 @@ vibe.controller('paymentController', function($scope, $location, $routeParams, S
 
   console.log($routeParams)
   $scope.session = $routeParams.session;
-  // $scope.session.startsAt = moment($scope.session.startTime).format('LT');
-  // $scope.session.endTime = moment($scope.session.startTime).format('LT')
+
   $scope.studio = $routeParams.studio;
   var user = auth.currentUser()
   $scope.currentUser = user
@@ -27,8 +26,6 @@ $scope.startTime = moment($scope.session.startHour).format("MMMM Do YYYY, h:mm:s
 
             //on return
             modalInstance.result.then(function (studioForm) {
-              // here we send it to the
-
             }, function () {
                 $log.info('Modal dismissed at: ' + new Date());
                 // $scope.successAdd = false

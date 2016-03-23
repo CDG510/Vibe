@@ -71,10 +71,26 @@ $scope.hoveringOver = function(value) {
                         output.sessions[session].startsAt = newStartHour
                         var endTime = DatesFactory.unParseThenSet(output.sessions[session].endsAt)
                         output.sessions[session].endsAt =  endTime;
+                        console.log(output.sessions[session])
                         // change the title (for the calendar's use) to the studio the artist booked with
-                        if($scope.profile.profileType == "Artist" || $scope.canEdit == false ){
-                            output.sessions[session].title = output.sessions[session].addedBy
+
+                        //studioAdded a session, not the artist   OR if this profile DIDN"T added add a session, show the artist
+                        if(output.sessions[session].addedBy == output.sessions[session].studioName && $scope.profile.profileType == "Studio" && $scope.canEdit == true){
+                            console.log("studio added, studio page, and it's my page")
+                            output.sessions[session].title = output.sessions[session].artist
                         }
+                        //if artist added session, not the studio, show the studio name on the artists page
+                        if ( output.sessions[session].addedBy == output.sessions[session].artist && $scope.profile.profileType == "Artist" && $scope.canEdit == true){
+                            console.log("artist added, not studio, artist page, it's my page")
+                            output.sessions[session].title = output.sessions[session].studioName
+                        }
+                        //
+                        if(output.sessions[session].addedBy == output.sessions[session].artist && output.sessions[session].artist == $scope.profile.username ){
+                            console.log("it's my page, show me the studio")
+                            output.sessions[session].title = output.sessions[session].studioName
+                        }
+
+                        //if artist added session, not studio, and on studio page, show the artist
 
                     };
                       //set event source for calendar
@@ -115,11 +131,14 @@ $scope.hoveringOver = function(value) {
                 info: $scope.session.info,
                 artist: $scope.currentUser.username,
                 studio: $scope.profile._id,
-                addedBy: $scope.currentUser.username
+                addedBy: $scope.currentUser.username,
+                title: $scope.currentUser.username,
+                studioName: $scope.profile.username
             };
 
             if ($scope.canEdit == true){
                 session.artist = $scope.session.artist;
+                session.title = session.artist
             }
             console.log(session)
             //check to make usre it's valid and doesn't already exist from the studio

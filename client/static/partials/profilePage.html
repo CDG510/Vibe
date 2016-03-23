@@ -18,7 +18,7 @@
               <li><a class="page-scroll" ng-hide="isLoggedIn()" href="/#/login">Login</a></li>
               <li><a ng-hide="canEdit == true" class="animate-show" href="/#/profile/{{currentUser.username}}" >Profile</a></li>
               <li><a class="page-scroll" href="/#/searchRequest">Search</a></li>
-              <li><a ng-if="canEdit == true" href="/#/profile/{{currentUser.username}}/edit" class="animate-if">Edit Profile</a></li>
+              <li><a ng-if="canEdit == true && isLoggedIn()" href="/#/profile/{{currentUser.username}}/edit" class="animate-if">Edit Profile</a></li>
               <li><a class="animate-show" ng-show="isLoggedIn()" ng-click="logOut()">Logout</a></li>
             </ul>
           </div>
@@ -146,7 +146,7 @@
     day-view-start="06:00"
     day-view-end="22:00"
     day-view-split="30"
-    cell-modifier="vm.modifyCell(calendarCell)"></mwl-calendar>
+    ></mwl-calendar>
 
 
 

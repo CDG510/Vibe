@@ -125,9 +125,9 @@ module.exports = (function(){
                				 type: "info",
                				 info: req.body.info,
                				 artist: req.body.artist,
-               				 title: req.body.artist,
+               				 title: req.body.title,
                				 deletable: true,
-							 studioName: studio.username,
+							 studioName: req.body.studioName,
 							 addedBy: req.body.addedBy
                			 });
                			 session._studio = studio._id
@@ -166,23 +166,29 @@ module.exports = (function(){
 
 		deleteSession: function(req, res){
 			console.log(req.body, "~~~~~~~is gettin deletedddd")
-			Session.remove({_id: req.body.event._id}, function(err, userFound){
-				if (err){
+			User
+				.findOne({_id: req.body.user.id, _user: req.body.event.user})
+				.populate("sessions")
+				.exec(function (err, foundUser){
+				if(err){
 					console.log(err)
-				} else {
-					User
-						.find({_id: req.body.user.id, _user: req.body.event.user})
-						.populate("sessions")
-						.exec(function (err, foundUser){
-					 	if(err){
-					 		console.log(err)
-					 	}
-					 	else{
-							res.end()
-					 	}
-					 })
 				}
-			})
+				else{
+					console.log(foundUser, "~~~~~~~~~~~~ was found")
+					var elementPos = foundUser.sessions.map(function(x) {return x._id; }).indexOf(req.body.event._id);
+					console.log(elementPos)
+					foundUser.sessions.splice(elementPos, 1)
+					Session.remove({_id: req.body.event._id}, function(err){
+						if (err){
+							console.log(err)
+						} else {
+							res.end()
+						}
+					})
+
+				}
+			 })
+
 		}
 	}
 }) ()

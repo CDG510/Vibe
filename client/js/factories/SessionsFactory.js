@@ -130,9 +130,7 @@ vibe.factory('SessionsFactory', function ($http) {
 			}
 			$http.post('/deleteSession', info).success(function(){
 				var elementPos = Sessions.map(function(x) {return x._id; }).indexOf(event._id);
-				console.log(elementPos)
 				Sessions.splice(elementPos, 1)
-				console.log(Sessions)
 				callback(Sessions)
 			})
 		}
