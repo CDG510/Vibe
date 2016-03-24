@@ -24,8 +24,9 @@ $scope.isLoggedIn = auth.isLoggedIn;
         } else {
             //remove error message if is a search entered
             $scope.failSearch = false;
-            StudiosFactory.findStudiosSimple({location: $scope.studioSearch.searchTerm}, function(output){
+            StudiosFactory.findStudiosSimple({searchTerm: $scope.studioSearch.searchTerm}, function(output){
                 //go to search results page, show the results if any
+                console.log(output)
                 $location.path('/searchRequest').search({studioSearch: output, searchTerm: $scope.studioSearch.searchTerm});
         })
         }

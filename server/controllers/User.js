@@ -28,7 +28,13 @@ module.exports = (function(){
 					console.log(err)
 				}
 				else{
-					res.send(JSON.stringify(found));
+					User.findOne({_id: found._id})
+					.populate("sessions")
+					.exec(function (err, foundUser){
+						console.log(foundUser)
+						res.send(JSON.stringify(foundUser));
+
+					})
 				}
 			})
 		},

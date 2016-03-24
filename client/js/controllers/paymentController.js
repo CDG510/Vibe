@@ -1,6 +1,5 @@
 vibe.controller('paymentController', function($scope, $location, $routeParams, StudiosFactory, $uibModal, $log, $rootScope, SessionsFactory, moment, alert, auth, usersFactory, DatesFactory, $sce, $window) {
 
-  console.log($routeParams)
   $scope.session = $routeParams.session;
 
   $scope.studio = $routeParams.studio;

@@ -15,7 +15,7 @@
           </div>
           <div class="collapse navbar-collapse navbar-right navbar-main-collapse" ng-class="!navCollapsed && 'in'">
             <ul class="nav navbar-nav  text-right ">
-              <li><a class="page-scroll" ng-hide="isLoggedIn()" href="/#/login">Login</a></li>
+              <li><a class="page-scroll animate-show" ng-hide="isLoggedIn()" href="/#/login">Login</a></li>
               <li><a ng-hide="canEdit" href="/#/profile/{{currentUser.username}}" class="animate-show" >Profile</a></li>
               <li><a class="page-scroll" href="/#/searchRequest">Search</a></li>
               <li><a class="page-scroll" ng-show="canEdit && isLoggedIn()" href="/#/profile/{{currentUser.username}}/edit" >Edit Profile</a></li>
@@ -41,7 +41,7 @@
 
 
                 <!-- <h3>{{profile.username}}</h3> -->
-                <h6 ng-hide='profile.city'>Hit the edit button to fill out your profile!</h6>
+                <h6 ng-show='!profile.city && !isLoading' class="animate-show">Hit the edit button to fill out your profile!</h6>
                 <p ng-show>{{profile.businessName}}</p>
                 <p class="text-justify" style="word-wrap: break-word" ng-if='profile.fullBio'><strong>Bio: </strong>{{profile.fullBio}} </p>
                 <p ng-show="profile.phone"><strong>Phone: </strong> {{profile.phone}}</p>
@@ -166,11 +166,12 @@
     day-view-split="30"
     ></mwl-calendar>
 
-
+            <h3 style="margin-top: 20px;" ng-if="canEdit==false && isLoggedIn() == false">Want to reserve a session? <a href="/#/signUp">Sign up</a> or <a href="/#/login">log in</a> to gain access!</h3>
 
         <div class="bookDiv" ng-show="isLoggedIn()" ng-if="profile.profileType == 'Studio' " >
             <h3 ng-hide="canEdit" class="text-center">Request a Session with {{profile.businessName}} at {{profile.price}}$ per hour!</h3>
             <h3 ng-show="canEdit" class="text-center">Add Sessions to your schedule</h3>
+
             <div class="row">
                 <form>
                     <p class="input-group">

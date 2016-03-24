@@ -880,9 +880,12 @@ margin-top:
 
 
 }
+
+
     #profilePage_container a:hover {
-        color: rgba(255, 255, 255, 0.5);;
+        color: #295c86;
     }
+
 
     #editPageInfo{
       position:fixed;
@@ -893,6 +896,10 @@ textarea {
     margin-top: 20px;
     border: 1px solid grey;
 }
+mwl-calendar a:hover {
+    color: rgba(255, 255, 255, 0.5);
+}
+
 
 #submitSessionDate{
     /*margin: 20px 15px 0 0;*/

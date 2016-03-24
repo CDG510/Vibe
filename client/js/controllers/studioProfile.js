@@ -8,12 +8,6 @@ vibe.controller("studioProfileController", function ($scope, $location, $routePa
     $scope.max = 10;
 
 
-
-$scope.hoveringOver = function(value) {
-  $scope.overStar = value;
-  $scope.percent = 100 * (value / $scope.max);
-};
-
     if (!$scope.profile) {
         $scope.isLoading = true
     }
@@ -23,80 +17,69 @@ $scope.hoveringOver = function(value) {
         usersFactory.getUserByName({username: $routeParams.id}, function(output){
             //profile should be in db, set profile to what we get back
             $scope.profile = output;
-            if ($scope.profile.ratings.length > 0) {
-                $scope.rate = $scope.profile.ratings
-                console.log("lol my rating", $scope.rate)
-            } else {
-                $scope.rate = 0;
-            }
-
-            $scope.isLoading=false;
-            //populate the sessions array
-            $scope.getSessions()
-            $scope.session= {}
-            //if logged in user is the profile name, they can edit
             if ($scope.profile.username == $scope.currentUser.username) {
                 $scope.canEdit = true;
             }
-            if ($scope.canEdit == true){
-                $scope.isReadonly = true;
-            } else {
-                $scope.isReadonly = false;
+            //populate the sessions array
+            // $scope.getSessions()
+            if ($scope.profile.profileType == "Studio"){
+                $scope.min = DatesFactory.unStringDate(output.schedule.startHour)
+                $scope.max = DatesFactory.unStringDate(output.schedule.endHour)
             }
-            console.log($scope.profile.businessName)
+            //if no sessions,
+            if (output.sessions.length == 0) {
+                $scope.calendarView ="month";
+                $scope.isCellOpen = true;
+                $scope.events = []
+                $scope.viewDate = new Date()
+                $scope.noSessions = true;
+            } else {
+                  for(session in output.sessions) {
+                      //recombine date and time for calendar display
+                      //make dates out of parsed dates
+                      var newStartHour = DatesFactory.unParseThenSet(output.sessions[session].startsAt);
+                      output.sessions[session].startsAt = newStartHour
+                      var endTime = DatesFactory.unParseThenSet(output.sessions[session].endsAt)
+                      output.sessions[session].endsAt =  endTime;
+                      // change the title (for the calendar's use) to the studio the artist booked with
+
+                      //studioAdded a session, not the artist   OR if this profile DIDN"T added add a session, show the artist
+                      if(output.sessions[session].addedBy == output.sessions[session].studioName && $scope.profile.profileType == "Studio" && $scope.canEdit == true){
+                          output.sessions[session].title = output.sessions[session].artist
+                      }
+                      //if artist added session, not the studio, show the studio name on the artists page
+                      if ( output.sessions[session].addedBy == output.sessions[session].artist && $scope.profile.profileType == "Artist" && $scope.canEdit == true){
+                          output.sessions[session].title = output.sessions[session].studioName
+                      }
+                      //
+                      if(output.sessions[session].addedBy == output.sessions[session].artist && output.sessions[session].artist == $scope.profile.username ){
+                          output.sessions[session].title = output.sessions[session].studioName
+                      }
+
+                      //if artist added session, not studio, and on studio page, show the artist
+
+                  };
+                    //set event source for calendar
+                  $scope.events = output.sessions;
+                  $scope.calendarView ="month";
+                  $scope.viewDate = new Date()
+                  $scope.isCellOpen = true;
+              };
+            $scope.session= {}
+            //if logged in user is the profile name, they can edit
+
+            $scope.isLoading=false;
 
         });
     }
 
-        $scope.getSessions = function() {
-            //get sessions from user _id for the calendar to use
-            SessionsFactory.getSessions({User: $scope.profile._id},  function(output) {
-                //if studio set min and max to set schedule times
-              if ($scope.profile.profileType == "Studio"){
-                  $scope.min = DatesFactory.unStringDate(output.schedule.startHour)
-                  $scope.max = DatesFactory.unStringDate(output.schedule.endHour)
-              }
-              //if no sessions,
-              if (output.sessions.length == 0) {
-                  $scope.calendarView ="month";
-                  $scope.isCellOpen = true;
-                  $scope.events = []
-                  $scope.viewDate = new Date()
-                  $scope.noSessions = true;
-              } else {
-                    for(session in output.sessions) {
-                        //recombine date and time for calendar display
-                        //make dates out of parsed dates
-                        var newStartHour = DatesFactory.unParseThenSet(output.sessions[session].startsAt);
-                        output.sessions[session].startsAt = newStartHour
-                        var endTime = DatesFactory.unParseThenSet(output.sessions[session].endsAt)
-                        output.sessions[session].endsAt =  endTime;
-                        // change the title (for the calendar's use) to the studio the artist booked with
-
-                        //studioAdded a session, not the artist   OR if this profile DIDN"T added add a session, show the artist
-                        if(output.sessions[session].addedBy == output.sessions[session].studioName && $scope.profile.profileType == "Studio" && $scope.canEdit == true){
-                            output.sessions[session].title = output.sessions[session].artist
-                        }
-                        //if artist added session, not the studio, show the studio name on the artists page
-                        if ( output.sessions[session].addedBy == output.sessions[session].artist && $scope.profile.profileType == "Artist" && $scope.canEdit == true){
-                            output.sessions[session].title = output.sessions[session].studioName
-                        }
-                        //
-                        if(output.sessions[session].addedBy == output.sessions[session].artist && output.sessions[session].artist == $scope.profile.username ){
-                            output.sessions[session].title = output.sessions[session].studioName
-                        }
-
-                        //if artist added session, not studio, and on studio page, show the artist
-
-                    };
-                      //set event source for calendar
-                    $scope.events = output.sessions;
-                    $scope.calendarView ="month";
-                    $scope.viewDate = new Date()
-                    $scope.isCellOpen = true;
-                };
-            })
-        }
+        // $scope.getSessions = function() {
+        //     //get sessions from user _id for the calendar to use
+        //     SessionsFactory.getSessions({User: $scope.profile._id},  function(output) {
+        //         //if studio set min and max to set schedule times
+        //
+        //     })
+        // }
 
 
     $scope.logOut = function(){
@@ -226,6 +209,12 @@ $scope.hoveringOver = function(value) {
         })
     };
 
+
+$scope.editEvent = function(event) {
+    if($scope.canEdit == true || event.addedBy == $scope.currentUser.username){
+        console.log(event)
+    }
+}
 
 
 //only be able to delete events if you can edit(self profile)
