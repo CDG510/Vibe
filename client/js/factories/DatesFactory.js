@@ -39,7 +39,6 @@ vibe.factory("DatesFactory", function(){
 		var backTime = new Date()
 		backTime.setHours(hours);
 		backTime.setMinutes(Minutes)
-		console.log(backTime, "IS GOING BACK")
 		return backTime
 	}
 

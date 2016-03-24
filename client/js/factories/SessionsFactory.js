@@ -10,7 +10,6 @@ vibe.factory('SessionsFactory', function ($http) {
 		factory.getSessions = function(id, callback) {
 			console.log('getting dem sessions')
 			$http.post("/getSessions", id).success(function(output) {
-				console.log("got back",  output)
 				Sessions = output.sessions;
 				callback(output);
 			})
@@ -32,10 +31,7 @@ vibe.factory('SessionsFactory', function ($http) {
 				callback('invalid');
 				return
 			}
-			// if (requestedSession.startsAt instanceof Date == false || requestedSession.endsAt instanceof Date == false){
-			// 	callback('notDate')
-			// 	return
-			// }
+
 			if (Sessions.length == 0){
 				console.log('lol only one, and it passed')
 				callback(requestedSession)
@@ -50,19 +46,16 @@ vibe.factory('SessionsFactory', function ($http) {
 					//can't start& end during an existing session
 					if (requestedSession.startTime >= existingParsedStart && requestedSession.endTime < existingParsedEnd) {
 						//show callbacka failure
-						console.log(requestedSession,  existingParsedStart, existingParsedEnd, "start overlap existing & end before existing end")
 						callback("exists")
 						return
 					}
 					//can't start during and end after an existing
 					if (requestedSession.startTime >= existingParsedStart && requestedSession.startTime < existingParsedEnd  && requestedSession.endTime >= existingParsedEnd) {
-						console.log(requestedSession, existingParsedStart, existingParsedEnd,  " can't start during and end after an existing")
 						callback("exists");
 						return
 					}
 					//can't run into an existing session (overlap into it)
 					if  (requestedSession.startTime < existingParsedStart && requestedSession.endTime > existingParsedStart) {
-						console.log(requestedSession, existingParsedStart, existingParsedEnd, "can't run into an existing session (overlap into it)")
 						callback("exists");
 						return
 					}
@@ -90,31 +83,20 @@ vibe.factory('SessionsFactory', function ($http) {
 		factory.addSession = function(requestedSession , callback){
 			//if all passes, then take it to the db to add
 			$http.post("/addSession", requestedSession).success(function(output) {
-				console.log("back from the db", output)
-				if (Sessions.length === 0) {
 						Sessions.push(output)
-						console.log(Sessions)
 						callback(Sessions)
-				} else {
-					Sessions.push(requestedSession)
-					console.log(Sessions)
-					callback(Sessions)
-				}
-
 			})
 		}
 
 		factory.SelfAddSession = function(requestedSession , callback){
 			//if all passes, then take it to the db to add
-			console.log(requestedSession)
 			$http.post("/selfAddSession", requestedSession).success(function(output) {
-				console.log("back from the db", output)
 				if (Sessions.length === 0) {
 						Sessions.push(output)
 						callback(Sessions)
 				} else {
 					Sessions.push(requestedSession)
-					console.log(Sessions)
+
 					callback(Sessions)
 				}
 

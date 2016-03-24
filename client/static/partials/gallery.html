@@ -1,0 +1,17 @@
+<div class="modal-header">
+    <h4 class="text-center"> {{studio.businessName}}!</h4>
+</div>
+<div class="modal-body">
+
+        <uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides" ng-if="studio.gallery.length > 0" style="padding-bottom: 10px;">
+          <uib-slide ng-repeat="img in studio.gallery track by $index" >
+            <img ng-src="{{img}}" style="margin:auto; img-responsive">
+
+          </uib-slide>
+        </uib-carousel>
+</div>
+
+ <div class="modal-footer">
+      <button class="btn btn-default btn-link" ng-click="cancel()">Back to profile</button>
+
+</div>

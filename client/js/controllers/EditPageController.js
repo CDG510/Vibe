@@ -13,7 +13,6 @@ vibe.controller("EditPageController", function($scope, StudiosFactory, auth, $ro
       $scope.newStudio = $scope.currentUser;
       //if there is no profiletype yet
        if ($scope.currentUser.profileType == undefined || $scope.currentUser.profileType== ""){
-           console.log("SET A PREFERENCE")
       } else if ($scope.currentUser.profileType == "Studio") {
           //if is studio, set the offdays
           $scope.isStudio = true;
@@ -34,6 +33,9 @@ vibe.controller("EditPageController", function($scope, StudiosFactory, auth, $ro
                       $scope.newStudio.schedule.offDays.splice(i, i+1)
                   }
               }
+          }
+          if(!$scope.newStudio.gallery){
+              $scope.newStudio.gallery = []
           }
       }
   });
@@ -98,6 +100,15 @@ $scope.setAsArtist = function() {
   $scope.removeDayOff = function(){
       $scope.newStudio.schedule.offDays.splice($scope.newStudio.schedule.offDays.length-1, 1);
   }
+
+  $scope.addToGallery = function(){
+      $scope.newStudio.gallery.push("")
+  };
+
+  $scope.removeFromGallery = function(z){
+      $scope.newStudio.gallery.splice(z, 1);
+  }
+
   $scope.ismeridian = true;
   $scope.toggleMode = function() {
     $scope.ismeridian = ! $scope.ismeridian;
@@ -118,6 +129,9 @@ $scope.setAsArtist = function() {
     hstep: [1, 2, 3],
     mstep: [1, 5, 10, 15, 25, 30]
   };
+
+
+
 //to setup the updated info
   $scope.submitForm = function () {
 
@@ -139,6 +153,7 @@ $scope.setAsArtist = function() {
                   $scope.newStudio.schedule.offDays[i].noWork = false;
               }
           }
+          console.log($scope.newStudio)
           //actually go update finally
           usersFactory.updateUser($scope.newStudio, function(output) {
                   $scope.newStudio = output

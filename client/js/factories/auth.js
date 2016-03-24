@@ -24,7 +24,6 @@ vibe.factory('auth', function($http, $window, $rootScope){
 		if(auth.isLoggedIn()){
 			var token = auth.getToken();
 			var payload = JSON.parse($window.atob(token.split('.')[1]));
-			console.log(payload);
 			return payload;
 		}
 	}

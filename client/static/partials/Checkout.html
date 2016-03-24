@@ -31,29 +31,29 @@
 
           <div class="col-md-8 text-justify jumbotron">
               <p>
-                  Congrats!, the time-slot you selected is available! Please double-check the information and click confirm to save the date
+                  Congrats!, the time-slot you selected is available! Please double-check the information and click confirm to save the date.
               </p>
-             <p>{{currentUser.username}} has a session  with <strong>{{studio.username}}</strong>.</p>
+             <p><strong>{{currentUser.username}}</strong> is reserving a session with <strong>{{studio.username}}</strong>.</p>
              <p>Start of session is at: {{startTime}}</p>
              <p>
-                 Ends at {{endTime}}.
+                 End of session is at {{endTime}}.
              </p>
 
           </div>
           <div class="col-md-4">
-            <button class="btn btn-success" ng-click="confirmSession()">Save </button>
+            <button class="btn btn-success btn-block" ng-click="confirmSession()">Save </button>
+<button class="btn btn-success btn-block"><form action="/charge" method="POST">StriPE
+<script
+src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+data-key="sk_test_ghnSVUwORQe2wvRk3tY5f2oU"
+data-image="/img/documentation/checkout/marketplace.png"
+data-name="Stripe.com"
+data-description="2 widgets"
+data-amount="{{studio.price}}"
+data-locale="auto">
+</script>
+</form></button>
 
-            <form action="/charge" method="POST">
-  <script
-    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-    data-key="sk_test_ghnSVUwORQe2wvRk3tY5f2oU"
-    data-image="/img/documentation/checkout/marketplace.png"
-    data-name="Stripe.com"
-    data-description="2 widgets"
-    data-amount="{{studio.price}}"
-    data-locale="auto">
-  </script>
-</form>
 
 <!--  -->
             <!-- insert paypal stuff here -->

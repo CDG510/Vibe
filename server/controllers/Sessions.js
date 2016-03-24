@@ -1,14 +1,6 @@
 var mongoose = require('mongoose');
 var Session = mongoose.model('Session');
 var User = mongoose.model('User');
-//
-// var Paypal = require('paypal-adaptive');
-// var paypalSdk = new Paypal({
-//     userId:    'christian.anchors-facilitator_api1.gmail.com',
-//     password:  'T9J6T6DANU4XU3EB',
-//     signature: 'AYZv5UZKLzSPZ.oyEgmdtB4L0fp.AIXb6UPjbpeoxudQ9KDSEkB0EdcJ',
-//     sandbox:   true //defaults to false
-// });
 
 module.exports = (function(){
 	return {
@@ -28,7 +20,6 @@ module.exports = (function(){
 		},
 
 		studioCreate: function(req, res){
-			console.log(req.body)
 			User.findOne({_id: req.body.studio}, function(err, studio){
 				if(err) {return}
 				else {
@@ -38,7 +29,6 @@ module.exports = (function(){
 							console.log(err)
 							return
 						} else {
-							console.log("WE FOUND ", artist, "~~~~~~~~~~~~~~~~~~~~~~~~~~")
 							var session = new Session({
 							startsAt: req.body.startTime,
 							 endsAt: req.body.endTime,
@@ -60,7 +50,6 @@ module.exports = (function(){
 						 if (artist !== null) {
 							 session._user = artist._id
 							 artist.sessions.push(session)
-							 console.log(session, "JUST GOT ADDED TO ",  artist, "~~~~~~~~~~~~~~~")
 							 session.save(function(err, session){
 							  if (err){
 								  console.log(err)
@@ -108,7 +97,6 @@ module.exports = (function(){
 
 		create: function(req, res){
             //req.body is the session
-			console.log(req.body)
 			User.findOne({_id: req.body.studio}, function(err, studio){
                 if (err){
                     console.log(err)
@@ -165,7 +153,6 @@ module.exports = (function(){
 		},
 
 		deleteSession: function(req, res){
-			console.log(req.body, "~~~~~~~is gettin deletedddd")
 			User
 				.findOne({_id: req.body.user.id, _user: req.body.event.user})
 				.populate("sessions")
@@ -174,7 +161,6 @@ module.exports = (function(){
 					console.log(err)
 				}
 				else{
-					console.log(foundUser, "~~~~~~~~~~~~ was found")
 					var elementPos = foundUser.sessions.map(function(x) {return x._id; }).indexOf(req.body.event._id);
 					console.log(elementPos)
 					foundUser.sessions.splice(elementPos, 1)

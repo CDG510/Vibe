@@ -112,6 +112,8 @@ module.exports = (function(){
 						businessName: req.body.businessName,
 						schedule: req.body.schedule,
 						city: req.body.city,
+						gear: req.body.gear,
+						gallery: req.body.gallery,
 						numberOfRecordings: req.body.numberOfRecordings,
 						price: req.body.price}, function(err, foundUser){
 							if (err){

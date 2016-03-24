@@ -27,8 +27,9 @@ var UserSchema = new mongoose.Schema({
 	salt: String,
 	profileType: String,
 	city: String,
-	hardware: String,
+	gear: String,
 	ratingScore: Number,
+	gallery: Array,
 	numberOfRecordings: Number,
 	sessions: [{type: Schema.ObjectId, ref: 'Session'}]
 })

@@ -2,7 +2,6 @@ vibe.controller("SearchController", function ($scope, $routeParams,  $log, $loca
 
 	$scope.isLoggedIn = auth.isLoggedIn;
 	$scope.currentUser = auth.currentUser()
-	console.log($routeParams)
 	$scope.searched = false
 if (!$routeParams || !$routeParams.searchTerm) {
 	$scope.noneFound = true;
@@ -14,7 +13,6 @@ if (!$routeParams || !$routeParams.searchTerm) {
 		$scope.noneFound = false;
 		$scope.searched = true;
 		$scope.tempStudios  = $routeParams.studioSearch;
-		console.log($scope.tempStudios)
 	}
 }
 
@@ -44,7 +42,6 @@ $scope.logOut = function(){
 			else {
 				$scope.searched = true
 				$scope.noneFound = false;
-				console.log(output)
 				$scope.tempStudios = output;
 				$scope.searchPlace = {};
 			}
@@ -65,7 +62,6 @@ $scope.logOut = function(){
 					$scope.searched = true
 					$scope.tempStudios = output;
 					$scope.searchPlace = {}
-					console.log($scope.tempStudios)
 				}
 			});
 		}

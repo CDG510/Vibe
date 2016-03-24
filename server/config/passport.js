@@ -1,6 +1,5 @@
 var passport          = require('passport');
 var LocalStrategy     = require('passport-local').Strategy;
-// var FacebookStrategy  = require('passport-facebook').Strategy;
 var mongoose          = require('mongoose');
 var bodyParser = require('body-parser');
 var User = mongoose.model("User")
@@ -25,36 +24,7 @@ passport.use(new LocalStrategy(
 ));
 
 // passport.use(new FacebookStrategy({
-//     clientID: '1530701907226627',
-//     clientSecret: '38823705332f301c68dfe0984d8f5dd6',
-//     callbackURL: "http://localhost:8080/auth/facebook/callback"
-//   },
-//   function(accessToken, refreshToken, profile, done) {
-//     User.findOne({ oauthID: profile.id }, function(err, user) {
-//       if(err) {
-//         console.log(err);  // handle errors!
-//       }
-//       if (!err && user !== null) {
-//         done(null, user);
-//       } else {
-//         user = new User({
-//           oauthID: profile.id,
-//           name: profile.displayName,
-//           created: Date.now()
-//         });
-//         user.save(function(err) {
-//           if(err) {
-//             console.log(err);  // handle errors!
-//           } else {
-//             console.log("saving user ...");
-//             done(null, user);
-//           }
-//         });
-//       }
-//     });
-//   }
 
-// ));
 // =========================================================================
 // passport session setup ==================================================
 // =========================================================================

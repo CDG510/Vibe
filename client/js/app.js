@@ -31,17 +31,7 @@ vibe.config(function ($routeProvider, $locationProvider, calendarConfig) {
     .when('/', {templateUrl: "/static/partials/homePage.html", overrideRoot: true})
     .when('/artists', {templateUrl: "/static/partials/Artists.html", overrideRoot: true})
     .when('/studios', {templateUrl: "/static/partials/Studios.html", overrideRoot: true})
-    .when('/profile/:id', {
-        templateUrl: "/static/partials/profilePage.html",
-        overrideRoot:true,
-        // controller: "studioProfileController",
-        // resolve:  {
-        //     profile: ["$route", "StudiosFactory", "SessionsFactory", function($route, StudiosFactory, SessionsFactory){
-        //
-        //     }]
-        // }
-    })
-
+    .when('/profile/:id', {templateUrl: "/static/partials/profilePage.html",overrideRoot:true})
     .when('/login', {templateUrl: "/static/partials/login.html", controller: 'loginController'})
     .when("/signUp", {templateUrl: "static/partials/signUp.html",  overrideRoot: true})
     .when("/searchRequest", {templateUrl: "/static/partials/Searchv2.html"} )

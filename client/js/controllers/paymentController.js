@@ -8,8 +8,8 @@ vibe.controller('paymentController', function($scope, $location, $routeParams, S
   $scope.currentUser = user
 
 //just for reformatting purposes
-$scope.endTime = moment($scope.session.endHour).format("MMMM Do YYYY, h:mm:ss a")
-$scope.startTime = moment($scope.session.startHour).format("MMMM Do YYYY, h:mm:ss a")
+$scope.endTime = moment($scope.session.endHour).format("MMMM Do YYYY, h:mm a")
+$scope.startTime = moment($scope.session.startHour).format("MMMM Do YYYY, h:mm a")
 
   $scope.showForm = function () {
 

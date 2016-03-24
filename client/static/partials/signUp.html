@@ -36,7 +36,11 @@
                                 <p ng-show="form.newUser.userName.$invalid && !form.newUser.userName.$pristine" class="help-block">A user name is required.</p>
                             </div>
                             <div class= "loginInput ">
-                                <input type="email" placeholder="Email" name="email" class="form-control" ng-model="newUser.email" required>
+                                <input type="email" placeholder="Email" name="email" class="form-control" ng-model="newUser.email" required
+                                uib-tooltip="Make sure this email is connected to Stripe or Paypal if you don't already have them"
+                                     tooltip-placement="top"
+                                     tooltip-trigger="mouseenter"
+                                     tooltip-enable="!newUser.email">
                                 <p ng-show="form.newUser.email.$invalid && !form.newUser.email.$pristine" class="help-block">Enter a valid email.</p>
                             </div>
                             <!-- PASSWORD -->

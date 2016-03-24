@@ -4,14 +4,12 @@ vibe.factory("usersFactory", function ($http) {
 
 
 	factory.updateUser = function(user, callback){
-		console.log(user, "is going to the db")
 		$http.post("/updateProfile", user).success(function(output){
 			callback(output)
 		})
 	}
 
 	factory.getUserByName = function(user, callback){
-		console.log(user, "OFF TO DB")
 		$http.post("/findUser", user)
 		.success(function(output){
 			callback(output)
@@ -33,11 +31,6 @@ vibe.factory("usersFactory", function ($http) {
 		;
 	}
 
-
-	// factory.deleteUser = function(user, callback){
-	// 	console.log(user, "is getting removed")
-	// 	$http.post("/deleteProfile", user)
-	// }
 
 
 	//function to message a studio
