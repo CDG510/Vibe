@@ -8,7 +8,7 @@ vibe.factory("DatesFactory", function(){
 	}
 
 	factory.getThenParse = function(date, hours){
-
+		console.log(date, hours, "BOUT TO GET PARSED")
 		var sessionHours = hours.getHours()
 		  var sessionMinutes = hours.getMinutes()
 		  date.setHours(sessionHours)

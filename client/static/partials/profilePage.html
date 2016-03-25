@@ -16,9 +16,10 @@
           <div class="collapse navbar-collapse navbar-right navbar-main-collapse" ng-class="!navCollapsed && 'in'">
             <ul class="nav navbar-nav  text-right ">
               <li><a class="page-scroll animate-show" ng-hide="isLoggedIn()" href="/#/login">Login</a></li>
-              <li><a ng-hide="canEdit" href="/#/profile/{{currentUser.username}}" class="animate-show" >Profile</a></li>
-              <li><a class="page-scroll" href="/#/searchRequest">Search</a></li>
+              <li><a ng-hide="canEdit" href="/#/profile/{{currentUser.username}}"  >Profile</a></li>
               <li><a class="page-scroll" ng-show="canEdit && isLoggedIn()" href="/#/profile/{{currentUser.username}}/edit" >Edit Profile</a></li>
+              <li><a class="page-scroll" href="/#/searchRequest">Search</a></li>
+
               <li><a ng-show="isLoggedIn()" ng-click="logOut()">Logout</a></li>
             </ul>
           </div>

@@ -1,13 +1,12 @@
-vibe.controller("studioProfileController", function ($scope, $location, $routeParams, StudiosFactory, $uibModal, $log, $rootScope, SessionsFactory, moment, alert, auth, usersFactory, DatesFactory, $sce, $window) {
+vibe.controller("studioProfileController", function ($scope, $location,  $routeParams, StudiosFactory, $uibModal, $log, $rootScope, SessionsFactory, moment, alert, auth, usersFactory, DatesFactory, $sce, $window) {
 
     $scope.currentUser = auth.currentUser()
-	$scope.existsFail = false;
     $scope.isLoggedIn = auth.isLoggedIn;
+	$scope.existsFail = false;
     $scope.canEdit = false;
     $scope.calendar = false;
     $scope.max = 10;
     $scope.myInterval = 4000;
-
 
     if (!$scope.profile) {
         $scope.isLoading = true
@@ -35,6 +34,8 @@ vibe.controller("studioProfileController", function ($scope, $location, $routePa
                 $scope.viewDate = new Date()
                 $scope.noSessions = true;
             } else {
+                console.log(output)
+                SessionsFactory.setSessions(output.sessions);
                   for(session in output.sessions) {
                       //recombine date and time for calendar display
                       //make dates out of parsed dates
@@ -148,10 +149,7 @@ vibe.controller("studioProfileController", function ($scope, $location, $routePa
                                 }
                             })
                             modalInstance.result.then(function (studioForm) {
-                              // here we send it to the
-
                             }, function () {
-                                // $scope.successAdd = false
                                 $scope.getSessions()
                                 $scope.session = {}
                               });

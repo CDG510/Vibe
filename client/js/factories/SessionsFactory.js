@@ -14,6 +14,12 @@ vibe.factory('SessionsFactory', function ($http) {
 				callback(output);
 			})
 		}
+
+		factory.setSessions = function(sessions){
+			Sessions = sessions;
+			console.log(Sessions)
+
+		}
 		//
 		// factory.getStudioFromSession = function(id, callback){
 		// 	console.log('checking sessions with', id)
@@ -27,7 +33,12 @@ vibe.factory('SessionsFactory', function ($http) {
 			var today = new Date()
 			var newtoday = ParseIt(today)
 			console.log('begin the checks!', requestedSession, 'against', Sessions)
-			if (requestedSession.startTime < newtoday  || requestedSession.endTime< newtoday){
+			if (requestedSession.endTime <= requestedSession.startTime ) {
+				// console.log(requestedSession, existingParsedStart,existingParsedEnd,  "can't overtake an existing one, ends after an existing end" )
+				callback("invalid");
+				return
+			}
+			if (requestedSession.startTime <= newtoday  || requestedSession.endTime <= newtoday){
 				callback('invalid');
 				return
 			}
@@ -60,11 +71,7 @@ vibe.factory('SessionsFactory', function ($http) {
 						return
 					}
 					//can't have a date invalid date
-					if (requestedSession.endTime <= requestedSession.startTime) {
-						// console.log(requestedSession, existingParsedStart,existingParsedEnd,  "can't overtake an existing one, ends after an existing end" )
-						callback("invalid");
-						return
-					}
+
 					//can't have a date that is before today
 				//other checks
 				}
@@ -104,8 +111,6 @@ vibe.factory('SessionsFactory', function ($http) {
 		}
 
 		factory.deleteSession = function(event, user, callback ){
-			console.log(event, user);
-			console.log(Sessions)
 			var info = {
 				event: event,
 				user: user
@@ -117,10 +122,11 @@ vibe.factory('SessionsFactory', function ($http) {
 			})
 		}
 
-		// factory.payForSession = function(session, callback) {
-		// 	var payment = {}
-		// 	payment.addCheckOutParamaters
-		// }
+		factory.updateSession = function(event, callback){
+			$http.post("/updateSession", event).success(function(output){
+				callback(output);
+			});
+		}
 
 		return factory
 	});

@@ -102,6 +102,10 @@ app.post("/findStudiosSimple", function(req, res){
         Session.show(req, res)
     })
 
+    app.post('/updateSession', function(req, res){
+        Session.update(req, res)
+    })
+
 
     //------------paypal payment
 

@@ -1,0 +1,13 @@
+<div class="modal-header">
+    <h4 class="text-center">Congrats {{currentUser.username}}!</h4>
+</div>
+<div class="modal-body">
+<p  class='text-center'>The session was edited! </p>
+<p class="text-left">
+    Your session with <strong>{{studio.artist}}</strong> will now start at <strong>{{studio.startsAt | date:"MM/dd/yyyy 'at' h:mma" }}</strong> and end at <strong>{{studio.endsAt | date:"MM/dd/yyyy 'at' h:mma" }}</strong>
+</p>
+</div>
+
+ <div class="modal-footer">
+      <a href="/#/profile/{{currentUser.username}}" ><button class="btn btn-default"  ng-click="cancel()">Back to profile</button></a>
+</div>

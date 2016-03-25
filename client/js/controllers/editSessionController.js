@@ -1,8 +1,12 @@
-vibe.controller('editSessionController', function($scope, StudiosFactory, auth, $routeParams, usersFactory, DatesFactory, $location){
+vibe.controller('editSessionController', function($scope, $uibModal, SessionsFactory, StudiosFactory, auth, $routeParams, usersFactory, DatesFactory, $location){
 
     if ($routeParams.session) {
-        $scope.session = $routeParams.session
+        $scope.session = $routeParams.session;
+        console.log($scope.session)
     }
+        $scope.isLoggedIn = auth.isLoggedIn;
+        $scope.currentUser = auth.currentUser()
+
     $scope.today = function() {
         $scope.dt = new Date();
   };
@@ -84,8 +88,37 @@ vibe.controller('editSessionController', function($scope, StudiosFactory, auth, 
 
 
   ///need to add save button function
-
-  //should check for any overlaps, in calendar/sessions scheduled
-  //if are deny, or make an approval check
-  //if none, send to db to save, update in db, update in factory, return to profile page.
+  $scope.editSession = function(){
+      var parsedStartTime = DatesFactory.getThenParse($scope.session.startsAt, $scope.session.startsAt)
+      var parsedEndTime = DatesFactory.getThenParse($scope.session.endsAt, $scope.session.endsAt);
+      session = {
+          startsAt: parsedStartTime,
+          endsAt: parsedEndTime,
+          artist: $scope.session.artist,
+          title: $scope.session.artist,
+          _id: $scope.session._id
+      };
+      SessionsFactory.updateSession(session, function(output){
+          //reformat the parsed times
+          var newStartHour = DatesFactory.unParseThenSet(output.startsAt);
+          output.startsAt = newStartHour
+          var endTime = DatesFactory.unParseThenSet(output.endsAt)
+          output.endsAt =  endTime;
+          console.log(output)
+          var modalInstance = $uibModal.open({
+              templateUrl: 'static/partials/successChange.html',
+              controller: 'ModalInstanceCtrl',
+              scope: $scope,
+              resolve: {
+                  studio: function() {
+                      return output
+                  }
+              }
+          })
+          modalInstance.result.then( function () {
+            $location.path("/profile/"+$scope.currentUser.username).search({key:null})
+            $scope.session = {}
+            });
+         })
+  }
 });

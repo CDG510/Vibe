@@ -97,6 +97,7 @@ module.exports = (function(){
 
 		create: function(req, res){
             //req.body is the session
+			console.log(req.body);
 			User.findOne({_id: req.body.studio}, function(err, studio){
                 if (err){
                     console.log(err)
@@ -175,6 +176,23 @@ module.exports = (function(){
 				}
 			 })
 
+		},
+
+		update: function(req, res){
+			console.log(req.body, "GETTING UPDATED~~~~~~~~~")
+			Session.findOneAndUpdate({_id: req.body._id}, {
+				startsAt: req.body.startsAt,
+				endsAt: req.body.endsAt,
+				artist: req.body.artist,
+				title: req.body.title
+			}, function(err, yee){
+				if (err){
+					console.log(err)
+				} else {
+					console.log(yee);
+					res.send(JSON.stringify(yee))
+				}
+			})
 		}
 	}
 }) ()
