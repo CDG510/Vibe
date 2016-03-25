@@ -754,6 +754,11 @@ export default StyleSheet.create({
     "mwl-calendar a:hover": {
         "color": "rgba(255, 255, 255, 0.5)"
     },
+    "profileGallery": {
+        "paddingBottom": 10,
+        "height": 300,
+        "marginTop": 20
+    },
     "submitSessionDate": {},
     "mwl-calendar": {
         "marginBottom": 20

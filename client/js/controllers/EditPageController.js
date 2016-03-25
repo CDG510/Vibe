@@ -2,14 +2,14 @@ vibe.controller("EditPageController", function($scope, StudiosFactory, auth, $ro
 
   $scope.isLoggedIn = auth.isLoggedIn;
   var clearKey = {key: null}
-  console.log('bruh')
-  console.log($routeParams)
+  if ($routeParams.session) {
+      $scope.session = $routeParams.session
+  }
 
   //if page and logged in is true
   if ($routeParams.id && $scope.isLoggedIn != false) {
   usersFactory.getUserByName({username: $routeParams.id}, function(output) {
       $scope.currentUser = output
-      console.log(output)
       $scope.newStudio = $scope.currentUser;
       //if there is no profiletype yet
        if ($scope.currentUser.profileType == undefined || $scope.currentUser.profileType== ""){

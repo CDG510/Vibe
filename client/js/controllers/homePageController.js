@@ -40,11 +40,6 @@ $scope.goToProfile = function() {
     $location.path("/profile/"+$scope.userID).search({key:null })
 }
 
-
-$scope.goToUserProfile = function() {
-    $location.path("/userProfile/"+$scope.userID).search({user:$scope.currentUser })
-}
-
   //function to scroll to div
     $scope.scrollTo = function(id) {
           var thisLocation = $location.hash(id);

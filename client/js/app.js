@@ -38,6 +38,7 @@ vibe.config(function ($routeProvider, $locationProvider, calendarConfig) {
     .when('/profile/:id/edit', {templateUrl: "/static/partials/editProfilePage.html", overrideRoot: true})
     .when('/checkout', {templateUrl:'/static/partials/Checkout.html', controller: "paymentController"})
     .when('/checkout/success', {templateUrl: '/static/partials/success.html'})
+    .when('/profile/:id/editSession', {templateUrl: "/static/partials/editSession.html", controller: 'editSessionController', overrideRoot: true})
     .otherwise({
         redirectTo: '/'
     });

@@ -6,6 +6,7 @@ vibe.controller("studioProfileController", function ($scope, $location, $routePa
     $scope.canEdit = false;
     $scope.calendar = false;
     $scope.max = 10;
+    $scope.myInterval = 4000;
 
 
     if (!$scope.profile) {
@@ -186,9 +187,7 @@ vibe.controller("studioProfileController", function ($scope, $location, $routePa
         $scope.sendMail($scope.profile.email,"Inquiry","");
       }
     }
-    $scope.addRating = function(){
-        console.log($scope.profile.ratings)
-    }
+
 
     $scope.toggle = function($event, field, event) {
         $event.preventDefault();
@@ -213,6 +212,20 @@ vibe.controller("studioProfileController", function ($scope, $location, $routePa
 $scope.editEvent = function(event) {
     if($scope.canEdit == true || event.addedBy == $scope.currentUser.username){
         console.log(event)
+        //     $location.path("/userProfile/"+$scope.userID).search({user:$scope.currentUser })
+
+        $location.path("/profile/"+$scope.currentUser.username+"/editSession").search({session: event})
+    } else {
+        var modalInstance = $uibModal.open({
+            templateUrl: 'static/partials/failMessage.html',
+            controller: 'ModalInstanceCtrl',
+            scope: $scope,
+            resolve: {
+                studio: function() {
+                    return $scope.profile
+                }
+            }
+        })
     }
 }
 
