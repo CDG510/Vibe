@@ -72,6 +72,7 @@ module.exports = (function(){
 									})
 							  }
 							 })
+							 //if we didn't find an artist, save
 						 } else {
 							 session.save(function(err, savedSession){
 								 if(err){
@@ -88,7 +89,6 @@ module.exports = (function(){
 							 })
 						 }
 						 //add the new session
-
 						}
 					})
 				}
@@ -97,7 +97,6 @@ module.exports = (function(){
 
 		create: function(req, res){
             //req.body is the session
-			console.log(req.body);
 			User.findOne({_id: req.body.studio}, function(err, studio){
                 if (err){
                     console.log(err)
@@ -189,7 +188,6 @@ module.exports = (function(){
 				if (err){
 					console.log(err)
 				} else {
-					console.log(yee);
 					res.send(JSON.stringify(yee))
 				}
 			})

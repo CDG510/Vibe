@@ -4,9 +4,6 @@ $scope.newUser = {};
 $scope.actualUser = {};
 $scope.isLoggedIn = auth.isLoggedIn;
 var clearKey = {key: null}
-
-$scope.isLoggedIn = auth.isLoggedIn;
-
     var user = auth.currentUser()
     if (user !== undefined) {
         user.User = user._id

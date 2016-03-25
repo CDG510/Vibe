@@ -26,19 +26,18 @@ $scope.isLoggedIn = auth.isLoggedIn;
             $scope.failSearch = false;
             StudiosFactory.findStudiosSimple({searchTerm: $scope.studioSearch.searchTerm}, function(output){
                 //go to search results page, show the results if any
-                console.log(output)
                 $location.path('/searchRequest').search({studioSearch: output, searchTerm: $scope.studioSearch.searchTerm});
         })
         }
     }
 
-$scope.logOut = function(){
-  auth.logOut()
-}
+    $scope.logOut = function(){
+      auth.logOut()
+    }
 
-$scope.goToProfile = function() {
-    $location.path("/profile/"+$scope.userID).search({key:null })
-}
+    $scope.goToProfile = function() {
+        $location.path("/profile/"+$scope.userID).search({key:null })
+    }
 
   //function to scroll to div
     $scope.scrollTo = function(id) {

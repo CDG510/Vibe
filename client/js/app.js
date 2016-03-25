@@ -43,9 +43,6 @@ vibe.config(function ($routeProvider, $locationProvider, calendarConfig) {
         redirectTo: '/'
     });
 
-//     var scrollContent = function() {
-//         $('html, body').animate({ scrollTop: 0 }, 100);
-// };
     calendarConfig.displayEventEndTimes = true;
     calendarConfig.allDateFormats.moment.date.hour = 'HH:mm';
 

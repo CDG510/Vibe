@@ -34,6 +34,7 @@ vibe.controller("EditPageController", function($scope, StudiosFactory, auth, $ro
                   }
               }
           }
+          //if no pictures in gallery, make an empty placeholder
           if(!$scope.newStudio.gallery){
               $scope.newStudio.gallery = []
           }

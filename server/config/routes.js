@@ -5,18 +5,10 @@ var Passport = require('passport')
 var User = mongoose.model('User');
 var UserController = require('./../controllers/User.js')
 var jwt = require('express-jwt');
-;
-
-module.exports = function(app, passport) {
-
-    var urlencodedParser = bodyParser.urlencoded({ extended: false })
-}
-
-
 var auth = jwt({secret: 'SECRET', userProperty: 'payload'});
 
 
-//
+
 module.exports = function(app, passport, client) {
 
 //-------------------- AUTHENTICATION / LOGIN / SIGNUP ROUTES : START  ----------------//
@@ -55,6 +47,8 @@ app.post('/loginUser', function(req, res, next) {
 		}
 	})(req, res, next);
 });
+
+//~~~~~~~~~~~USER ROUTES
 
 app.post("/findUser", function(req, res){
     UserController.findOne(req, res)
@@ -105,9 +99,6 @@ app.post("/findStudiosSimple", function(req, res){
     app.post('/updateSession', function(req, res){
         Session.update(req, res)
     })
-
-
-    //------------paypal payment
 
 
 };

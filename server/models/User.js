@@ -19,7 +19,6 @@ var UserSchema = new mongoose.Schema({
     profileImage: String,
     location: String,
 	phone: String,
-	ratings: Array,
 	schedule: Object,
     price: Number,
     businessName: String,
@@ -28,7 +27,6 @@ var UserSchema = new mongoose.Schema({
 	profileType: String,
 	city: String,
 	gear: String,
-	ratingScore: Number,
 	gallery: Array,
 	numberOfRecordings: Number,
 	sessions: [{type: Schema.ObjectId, ref: 'Session'}]

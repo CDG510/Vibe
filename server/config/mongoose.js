@@ -3,11 +3,6 @@ var fs = require('fs');
 // require path for getting the models path
 var path = require('path');
 //
-// module.exports = {
-//     'secret': 'mySecret',
-//
-// };
-
 // database name
 mongoose.connect('mongodb://localhost/Vibe');
 

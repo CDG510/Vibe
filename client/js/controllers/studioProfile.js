@@ -2,12 +2,21 @@ vibe.controller("studioProfileController", function ($scope, $location,  $routeP
 
     $scope.currentUser = auth.currentUser()
     $scope.isLoggedIn = auth.isLoggedIn;
-	$scope.existsFail = false;
+    //error messages when trying to signup
+    $scope.errors = {
+        existsFail: false,
+        fail: false,
+        invalidDate: false,
+        invalidOrder: false,
+        invalidStart: false,
+        notDate: false
+    }
     $scope.canEdit = false;
     $scope.calendar = false;
     $scope.max = 10;
     $scope.myInterval = 4000;
-
+    $scope.session= {}
+//set loading
     if (!$scope.profile) {
         $scope.isLoading = true
     }
@@ -17,16 +26,17 @@ vibe.controller("studioProfileController", function ($scope, $location,  $routeP
         usersFactory.getUserByName({username: $routeParams.id}, function(output){
             //profile should be in db, set profile to what we get back
             $scope.profile = output;
+            //if profile is the current user, they can edit
             if ($scope.profile.username == $scope.currentUser.username) {
                 $scope.canEdit = true;
             }
             //populate the sessions array
-            // $scope.getSessions()
+            //set min/max for studio
             if ($scope.profile.profileType == "Studio"){
                 $scope.min = DatesFactory.unStringDate(output.schedule.startHour)
                 $scope.max = DatesFactory.unStringDate(output.schedule.endHour)
             }
-            //if no sessions,
+            //if no sessions, set up calendar
             if (output.sessions.length == 0) {
                 $scope.calendarView ="month";
                 $scope.isCellOpen = true;
@@ -34,7 +44,7 @@ vibe.controller("studioProfileController", function ($scope, $location,  $routeP
                 $scope.viewDate = new Date()
                 $scope.noSessions = true;
             } else {
-                console.log(output)
+                //put sessions into factory for reference/checks
                 SessionsFactory.setSessions(output.sessions);
                   for(session in output.sessions) {
                       //recombine date and time for calendar display
@@ -45,7 +55,7 @@ vibe.controller("studioProfileController", function ($scope, $location,  $routeP
                       output.sessions[session].endsAt =  endTime;
                       // change the title (for the calendar's use) to the studio the artist booked with
 
-                      //studioAdded a session, not the artist   OR if this profile DIDN"T added add a session, show the artist
+                      //studioAdded a session, not the artist  OR if this profile DIDN"T added add a session, show the artist
                       if(output.sessions[session].addedBy == output.sessions[session].studioName && $scope.profile.profileType == "Studio" && $scope.canEdit == true){
                           output.sessions[session].title = output.sessions[session].artist
                       }
@@ -53,13 +63,11 @@ vibe.controller("studioProfileController", function ($scope, $location,  $routeP
                       if ( output.sessions[session].addedBy == output.sessions[session].artist && $scope.profile.profileType == "Artist" && $scope.canEdit == true){
                           output.sessions[session].title = output.sessions[session].studioName
                       }
-                      //
+                      //if artist added session & artist's profile, show the studio
                       if(output.sessions[session].addedBy == output.sessions[session].artist && output.sessions[session].artist == $scope.profile.username ){
                           output.sessions[session].title = output.sessions[session].studioName
                       }
-
                       //if artist added session, not studio, and on studio page, show the artist
-
                   };
                     //set event source for calendar
                   $scope.events = output.sessions;
@@ -67,22 +75,10 @@ vibe.controller("studioProfileController", function ($scope, $location,  $routeP
                   $scope.viewDate = new Date()
                   $scope.isCellOpen = true;
               };
-            $scope.session= {}
-            //if logged in user is the profile name, they can edit
-
+              //end loading
             $scope.isLoading=false;
-
         });
     }
-
-        // $scope.getSessions = function() {
-        //     //get sessions from user _id for the calendar to use
-        //     SessionsFactory.getSessions({User: $scope.profile._id},  function(output) {
-        //         //if studio set min and max to set schedule times
-        //
-        //     })
-        // }
-
 
     $scope.logOut = function(){
       auth.logOut()
@@ -90,18 +86,20 @@ vibe.controller("studioProfileController", function ($scope, $location,  $routeP
 
     	//add sessions
 	$scope.requestDates = function() {
-		if ($scope.session.startHour == null || $scope.session.endHour == null) {
-			$scope.fail = true;
+        //if missing fields
+		if ($scope.session.startHour == null || $scope.session.endHour == null || $scope.session.startDate == null || $scope.session.endDate == null) {
+			$scope.errors.fail = true;
             return
+            //if not a date/other
 		} else if ($scope.session.startDate instanceof Date == false || $scope.session.endDate instanceof Date == false){
-            $scope.notDate = true;
+            $scope.errors.notDate = true;
             return
         }
 		else {
-			$scope.fail = false;
-
+			$scope.errors.fail = false;
+            $scope.errors.notDate = false;
+            //parse dates for checks
 			var parsedStartTime = DatesFactory.getThenParse($scope.session.startDate, $scope.session.startHour)
-			 // var parsedStartTime = sessionStart ;
 			var parsedEndTime = DatesFactory.getThenParse($scope.session.endDate, $scope.session.endHour);
 			 // packaging for DB
 			session = {
@@ -116,28 +114,29 @@ vibe.controller("studioProfileController", function ($scope, $location,  $routeP
                 title: $scope.currentUser.username,
                 studioName: $scope.profile.username
             };
-
+            //set artist and title if studio, for reference purposes
             if ($scope.canEdit == true){
                 session.artist = $scope.session.artist;
                 session.title = session.artist
             }
-            console.log(session)
-            //check to make usre it's valid and doesn't already exist from the studio
+            //check to make sure it's valid and doesn't already exist from the studio
 			SessionsFactory.checkSession(session, function(output){
 				if (output === "exists") {
-					$scope.existsFail = true;
+					$scope.errors.existsFail = true;
                     return
-				} else if (output === "invalid") {
-                    $scope.invalid = true;
+				} else if (output === "invalidDate") {
+                    $scope.errors.invalidDate = true;
+                    return
+                }
+                else if (output === "invalidStart"){
+                    $scope.errors.invalidStart = true;
                     return
                 }
                  else {
-					$scope.existsFail = false;
-                    $scope.invalid = false;
+                     $scope.errors =  false;
                     var session = output
                     if($scope.canEdit == true) {
-                        console.log(session)
-                        SessionsFactory.SelfAddSession(session, function(output){
+                        SessionsFactory.SelfAddSession(session, function(newSessions){
                             var modalInstance = $uibModal.open({
                                 templateUrl: 'static/partials/studioAddSuccess.html',
                                 controller: 'ModalInstanceCtrl',
@@ -150,19 +149,19 @@ vibe.controller("studioProfileController", function ($scope, $location,  $routeP
                             })
                             modalInstance.result.then(function (studioForm) {
                             }, function () {
-                                $scope.getSessions()
-                                $scope.session = {}
+                                $scope.events = newSessions;
+                                $scope.session = {};
                               });
                         })
                 }
+                //if not self, go to check out page
                 else {
                     $location.path("/checkout").search({studio: $scope.profile, session: session})
                 }
-
-					}
-				})
-			}
+				}
+			})
 		}
+	}
 
 ///Only because the usual configuration isn't working
 	$scope.openSchedule = function(){
@@ -193,6 +192,7 @@ vibe.controller("studioProfileController", function ($scope, $location,  $routeP
         event[field] = !event[field];
     };
 
+//open th image gallery for larger viewing
     $scope.showGallery = function(){
         var modalInstance = $uibModal.open({
             templateUrl: 'static/partials/gallery.html',
@@ -206,12 +206,9 @@ vibe.controller("studioProfileController", function ($scope, $location,  $routeP
         })
     };
 
-
+//only let profile's user edit and only if it was them who added
 $scope.editEvent = function(event) {
-    if($scope.canEdit == true || event.addedBy == $scope.currentUser.username){
-        console.log(event)
-        //     $location.path("/userProfile/"+$scope.userID).search({user:$scope.currentUser })
-
+    if($scope.canEdit == true || event.studioName == $scope.currentUser.username){
         $location.path("/profile/"+$scope.currentUser.username+"/editSession").search({session: event})
     } else {
         var modalInstance = $uibModal.open({
@@ -230,10 +227,9 @@ $scope.editEvent = function(event) {
 
 //only be able to delete events if you can edit(self profile)
     $scope.deleteEvent = function(event){
-        if ($scope.canEdit == true || event.addedBy == $scope.currentUser.username) {
+        if ($scope.canEdit == true || event.studioName == $scope.currentUser.username) {
             SessionsFactory.deleteSession(event, {id: $scope.profile._id}, function(output){
                 $scope.events = output
-                console.log($scope.events)
             });
         } else {
             var modalInstance = $uibModal.open({

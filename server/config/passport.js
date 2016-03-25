@@ -4,8 +4,6 @@ var mongoose          = require('mongoose');
 var bodyParser = require('body-parser');
 var User = mongoose.model("User")
 
-
-
 passport.use(new LocalStrategy(
   function(username, password, done) {
     console.log("into the db________________")
@@ -23,13 +21,6 @@ passport.use(new LocalStrategy(
   }
 ));
 
-// passport.use(new FacebookStrategy({
-
-// =========================================================================
-// passport session setup ==================================================
-// =========================================================================
-// required for persistent login sessions
-// passport needs ability to serialize and unserialize users out of session
 
 // used to serialize the user for the session
 passport.serializeUser(function(user, done) {
@@ -42,13 +33,6 @@ passport.deserializeUser(function(id, done) {
         done(err, user);
     });
 });
-
-// =========================================================================
-// LOCAL SIGNUP ============================================================
-// =========================================================================
-// we are using named strategies since we have one for login and one for signup
-// by default, if there was no name, it would just be called 'local'
-
 
 
 module.exports = passport;

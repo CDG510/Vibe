@@ -35,11 +35,11 @@ vibe.factory('SessionsFactory', function ($http) {
 			console.log('begin the checks!', requestedSession, 'against', Sessions)
 			if (requestedSession.endTime <= requestedSession.startTime ) {
 				// console.log(requestedSession, existingParsedStart,existingParsedEnd,  "can't overtake an existing one, ends after an existing end" )
-				callback("invalid");
+				callback("invalidDate");
 				return
 			}
 			if (requestedSession.startTime <= newtoday  || requestedSession.endTime <= newtoday){
-				callback('invalid');
+				callback('invalidStart');
 				return
 			}
 
@@ -77,14 +77,7 @@ vibe.factory('SessionsFactory', function ($http) {
 				}
 				callback(requestedSession)
 			}
-
-
-
-			}
-
-
-
-
+		}
 
 		//add session function with checks to see if it doesn't already exist
 		factory.addSession = function(requestedSession , callback){
@@ -103,10 +96,8 @@ vibe.factory('SessionsFactory', function ($http) {
 						callback(Sessions)
 				} else {
 					Sessions.push(requestedSession)
-
 					callback(Sessions)
 				}
-
 			})
 		}
 

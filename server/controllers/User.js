@@ -20,7 +20,6 @@ module.exports = (function(){
 
 		},
 
-//get 9he
 		findOne: function(req, res){
 			User
 			.findOne({username: req.body.username}, function(err, found){
@@ -31,7 +30,6 @@ module.exports = (function(){
 					User.findOne({_id: found._id})
 					.populate("sessions")
 					.exec(function (err, foundUser){
-						console.log(foundUser)
 						res.send(JSON.stringify(foundUser));
 
 					})
@@ -149,25 +147,11 @@ module.exports = (function(){
 									}
 									else {
 										res.send(JSON.stringify(foundUser))
-										// update info here
-							}
+									}
 				})
 			}
-		},
-
-//probably to update ratings
-		updateRating: function(req, res){
-			User.find({_id: req.body.id}, function(err, foundUser){
-				if (err){
-					console.log(err)
-				}
-				else {
-					console.log(foundUser);
-					foundUser.rating.push(req.body.rating)
-					var newRating = (foundUser.rating/foundUser.rating.length)
-				}
-			})
 		}
+
 	}
 
 }) ();

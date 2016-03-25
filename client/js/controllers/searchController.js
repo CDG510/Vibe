@@ -3,18 +3,18 @@ vibe.controller("SearchController", function ($scope, $routeParams,  $log, $loca
 	$scope.isLoggedIn = auth.isLoggedIn;
 	$scope.currentUser = auth.currentUser()
 	$scope.searched = false
-if (!$routeParams || !$routeParams.searchTerm) {
-	$scope.noneFound = true;
-} else {
-	$scope.searchTerm = $routeParams.searchTerm
-	if ($routeParams.studioSearch == '' || $routeParams.studioSearch.length< 1) {
-			$scope.noneFound = true;
+	if (!$routeParams || !$routeParams.searchTerm) {
+		$scope.noneFound = true;
 	} else {
-		$scope.noneFound = false;
-		$scope.searched = true;
-		$scope.tempStudios  = $routeParams.studioSearch;
+		$scope.searchTerm = $routeParams.searchTerm
+		if ($routeParams.studioSearch == '' || $routeParams.studioSearch.length< 1) {
+				$scope.noneFound = true;
+		} else {
+			$scope.noneFound = false;
+			$scope.searched = true;
+			$scope.tempStudios  = $routeParams.studioSearch;
+		}
 	}
-}
 
 $scope.logOut = function(){
   auth.logOut()
@@ -49,8 +49,8 @@ $scope.logOut = function(){
 		}
 	}
 	//function to adjust search term/results
-////this works
 	$scope.search = function(){
+		//reconiguring
 			$scope.searchTerm = $scope.searchPlace
 			StudiosFactory.findStudiosAdvanced($scope.searchPlace, function(output){
 				if (output.length < 1) {

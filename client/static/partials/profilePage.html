@@ -36,6 +36,7 @@
 <div class="container jumbotron  animate-show" id = 'profilePage_container' ng-hide="isLoading" ng-show="profile" >
     <div class="row">
         <h1 ng-show="profile.businessName" class="text-center">{{profile.businessName}}</h1>
+        <h1 ng-if='profile.profileType=="Artist"' class="text-center">{{profile.username}}</h1>
         <div class="col-md-12 col-lg-12">
          <div class="col-sm-12 col-md-12 col-lg-12">
             <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 text-left" id="aboutInfo">
@@ -182,13 +183,6 @@
                              </span>
                             </p>
 
-                          <p ng-if="notDate">
-                            Please Pick a Time. Try the calendar button?
-                          </p>
-                          <p ng-if="notDate" class="text-center">
-                            Sorry! Please pick a valid date
-                          </p>
-
                         </div>
 
                         <div class="col-md-4 col-md-offset-1">
@@ -197,9 +191,7 @@
                           <span class="input-group-btn">
                             <button  class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
                           </span>
-                          <p ng-if="needEndDateError" class='text-center'>
-                            Please pick an end time. Try the calendar button?
-                          </p>
+
                         </div>
                         <div class="col-md-2" ng-show="canEdit">
                             <label>Artist Name</label>
@@ -214,34 +206,32 @@
             <div class="col-md-4 col-md-offset-1 ">
                 <h5>Start Time</h5>
                 <uib-timepicker  ng-change="changed()" hour-step="hstep" min="min" max="max" minute-step="mstep"  ng-model="session.startHour" show-meridian="ismeridian"></uib-timepicker>
-                <span class="pull-right" style="color: red;" ng-show="invalid"><h4>Please pick a valid Hour!</h4></span>
             </div>
 
             <div class='col-md-4 col-md-offset-1 '>
               <h5>End Time</h5>
               <uib-timepicker  ng-change="changed()" min="min" max="max" hour-step="hstep" minute-step="mstep" ng-model="session.endHour " format="date | shortTime" show-meridian="ismeridian" ></uib-timepicker>
-              <span class="pull-right" style="color: red;" ng-show="invalid"><h4>Please pick a valid Hour!</h4></span>
 
             </div>
             <div class="col-md-2 timeSpace ">
                    <button type="submit" class="btn btn-default btn-block "  ng-hide="canEdit" id="submitsessionDate" ng-click="requestDates()">Reserve</button>
                    <button type='submit' class="btn btn-default btn-block" ng-show="canEdit" ng-click="requestDates()">Submit </button>
             </div>
-            <div class="row " id="schedule">
-
-           </div>
-
 
         </div>
 
         <div class='row'>
+            <br />
             <div class="col-md-12">
-                <span class="pull-left" style="color: red;" ng-show="existsFail"><h4>We're sorry, there's already a session booked for that time. Try another timeframe?</h4></span>
+                <span class="text-center text-warning"  ng-show="errors.fail"><h4>Make sure to have all fields filled out!</h4></span>
+                <span class="text-center text-warning"  ng-show="errors.existsFail"><h4>We're sorry, there's already a session booked for that time. Try another timeframe?</h4></span>
+                <span class="text-center text-warning" ng-show="errors.notDate"><h4>Please Pick a Time. Try the calendar button instead?</h4></span>
+                <span class="text-center text-warning"  ng-show="errors.invalidDate" ><h4>Make sure to pick a time that is chronologically correct! try again</h4></span>
+                <span class="text-center text-warning"  ng-show="errors.invalidStart" ><h4>Make sure to pick a time after today. Try again?</h4></span>
                 <br />
-
            </div>
         </div>
-            </form>
+        </form>
 
         </div>
     </div>

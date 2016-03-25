@@ -3,7 +3,6 @@ vibe.controller("ModalInstanceCtrl", function ($scope, $uibModalInstance, studio
 
     $scope.isLoggedIn = auth.isLoggedIn();
     $scope.studio = studio
-    console.log(studio)
     var user = auth.currentUser()
         user.User = user._id
 //get logged in user Info

@@ -6,12 +6,11 @@ vibe.controller('paymentController', function($scope, $location, $routeParams, S
   var user = auth.currentUser()
   $scope.currentUser = user
 
-//just for reformatting purposes
-$scope.endTime = moment($scope.session.endHour).format("MMMM Do YYYY, h:mm a")
-$scope.startTime = moment($scope.session.startHour).format("MMMM Do YYYY, h:mm a")
+    //just for reformatting purposes
+    $scope.endTime = moment($scope.session.endHour).format("MMMM Do YYYY, h:mm a")
+    $scope.startTime = moment($scope.session.startHour).format("MMMM Do YYYY, h:mm a")
 
   $scope.showForm = function () {
-
             var modalInstance = $uibModal.open({
                 templateUrl: 'static/partials/AddStudioTemplate.html',
                 controller: 'ModalInstanceCtrl',
@@ -23,15 +22,9 @@ $scope.startTime = moment($scope.session.startHour).format("MMMM Do YYYY, h:mm a
                 }
             })
 
-            //on return
-            modalInstance.result.then(function (studioForm) {
-            }, function () {
-                $log.info('Modal dismissed at: ' + new Date());
-                // $scope.successAdd = false
-                // $location.path("/#/profile/"+$scope.currentUser.username).search({key: null})
-              });
         };
 
+        //go and confirm, take an save in db
         $scope.confirmSession = function(){
             // $scope.session.artist = $scope.currentUser.username
             SessionsFactory.addSession($scope.session, function(output){
@@ -39,7 +32,5 @@ $scope.startTime = moment($scope.session.startHour).format("MMMM Do YYYY, h:mm a
                 $scope.showForm()
             })
         }
-
-  //this monitors windows size
 
   });
