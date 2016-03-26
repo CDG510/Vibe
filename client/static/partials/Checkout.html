@@ -25,41 +25,24 @@
       <div class="container">
           <div class="row">
             <div class="col-md-12">
-                <h3>Session Checkout</h3>
+                <h3 class="text-center">Session Checkout</h3>
             </div>
 
 
-          <div class="col-md-8 text-justify jumbotron">
+          <div class="col-md-12 text-justify jumbotron">
               <p>
-                  Congrats!, the time-slot you selected is available! Please double-check the information and click confirm to save the date.
+                  Congrats! The time-slot you selected is available! Please check the information and click confirm to save the date.
               </p>
              <p><strong>{{currentUser.username}}</strong> is reserving a session with <strong>{{studio.username}}</strong>.</p>
-             <p>Start of session is at: {{startTime}}</p>
+             <p>Start of session is <strong>{{startTime}}</strong></p>
              <p>
-                 End of session is at {{endTime}}.
+                 End of session is at <strong>{{endTime}}</strong> .
              </p>
+             <button class="btn btn-default btn-lg pull-left" ng-click="confirmSession()">Confirm </button>
 
           </div>
           <div class="col-md-4">
-            <button class="btn btn-default btn-block" ng-click="confirmSession()">Save </button>
 
-            <!-- insert paypal stuff here -->
-
-<!-- <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-<input type="hidden" name="cmd" value="_xclick">
-<input type="hidden" name="business" value="{{studio.email}}">
-<input type="hidden" name="item_name" value="Studio Session">
-<input type="hidden" name="currency_code" value="USD">
-<input type="hidden" name="no_shipping" value="1">
-<input type="hidden" name="tax" value="0.00">
-<input type="hidden" name="handling" value="0.00">
-<input type="hidden" name="quantity" value="1">
-<input type="hidden" name="return" value="localhost:8080/#/checkout/success">
-<input type="hidden" name="cancel_return" value="localhost:8080/#/">
-<input type="hidden" name="amount" value="{{studio.price}}.00">
-<!-- <input type="hidden" name="charset" value="utf-8"> -->
-<!-- <input type="image" class="btn btn-block" src="http://www.paypal.com/en_US/i/btn/x-click-but01.gif" name="submit" alt="Make payments with PayPal - it's fast, free and secure!"> -->
-<!-- </form>  -->
             </div>
         </div>
 

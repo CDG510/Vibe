@@ -48,7 +48,13 @@
                                 <input type="password" placeholder="Password" name="password" class="form-control " ng-model="newUser.password" required>
                                 <p ng-show="form.newUser.password.$invalid && !form.newUser.password.$pristine" class="help-block">Enter a valid password.</p>
                             </div>
+
+                            <div class="loginInput" >
+                                <input type="password" placeholder="Password check" name="password" class="form-control " ng-model="newUser.passwordCheck" required>
+                                <p ng-show="pwFailed" class="help-block">Must match your password!</p>
+                            </div>
                             <br>
+                            <p ng-show="tryAgain" class="help-block">Make sure all forms are filled</p>
 
                             <button type="submit" id="loginConfirmButton" class="btn btn-default btn-lg pull-right" ng-disabled="form.newStudio.$invalid">Submit</button>
                         </div>

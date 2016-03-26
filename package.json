@@ -4,13 +4,12 @@
   "description": "Connect Musicans & Recording Studios Togeather",
   "repository": {
     "type": "git",
-    "url": "https://github.com/SuragSheth/Vibe"
+    "url": "https://github.com/CDG510/Vibe"
   },
   "dependencies": {
     "angular-moment": "^1.0.0-beta.4",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.14.2",
-    "braintree": "^1.36.0",
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.1",
     "express": "^4.13.4",
@@ -21,11 +20,7 @@
     "mongoose": "^4.4.1",
     "morgan": "^1.6.1",
     "passport": "^0.3.2",
-    "passport-facebook": "^2.1.0",
     "passport-local": "^1.0.0",
-    "path": "^0.12.7",
-    "paypal-adaptive": "^0.4.2",
-    "paypal-pay": "^0.1.1",
-    "paypal-rest-sdk": "^1.6.8"
+    "path": "^0.12.7"
   }
 }
