@@ -8,7 +8,6 @@ vibe.controller("signUpController", function ($scope, $location, $routeParams, $
 			$scope.pwFailed = true;
 			return
 		} else if ($scope.newUser.password === undefined || $scope.newUser.email === undefined || $scope.newUser.userName === undefined){
-			console.log($scope.newUser)
 			$scope.tryAgain  = true;
 			return
 		}

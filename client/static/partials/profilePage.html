@@ -40,24 +40,17 @@
         <div class="col-md-12 col-lg-12">
          <div class="col-sm-12 col-md-12 col-lg-12">
             <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 text-left" id="aboutInfo">
-
-
-                <!-- <h3>{{profile.username}}</h3> -->
                 <h6 ng-show='!profile.city && !isLoading' class="animate-show">Hit the edit button to fill out your profile!</h6>
                 <p ng-show>{{profile.businessName}}</p>
                 <p class="text-justify" style="word-wrap: break-word" ng-if='profile.fullBio'><strong>Bio: </strong>{{profile.fullBio}} </p>
                 <p ng-show="profile.phone"><strong>Phone: </strong> {{profile.phone}}</p>
                 <p ng-show="profile.city"><strong>City: </strong>{{profile.city}}</p>
-
                 <p ng-show="profile.mainContact"><strong>Contact: </strong> {{profile.mainContact}}</p>
-                <!-- <p><strong>Address: </strong>{{profile.location}}</p> -->
                 <p ng-show="profile.specialty"><strong>Specialty: </strong> <span class="tags">{{profile.specialty}}</span></p>
                 <p ng-show="profile.websites"><strong ng-if="profile.websites.length > 0"> Social: </strong><br>
                     <a ng-repeat="site in profile.websites" href="{{site.url}}" target="_self">{{site.type}}<br /> </a>
                 </p>
                 <p class="text-justify" style="word-wrap: break-word" ng-if='profile.gear'><strong>Gear: </strong>{{profile.gear}} </p>
-
-
             </div>
 
             <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 text-center" id="profilePhoto">
@@ -81,23 +74,17 @@
      <div class="row" >
          <div class="col-xs-12 divider text-center">
              <div class="col-xs-12 col-sm-6 emphasis">
-                 <div class="row">
-
-                 </div>
                  <h2><strong ng-if='events'>{{events.length}}</strong><strong ng-hide='events'>0</strong></h2>
                  <p><small>Sessions Booked</small></p>
                  <button class="btn btn-default btn-block" ng-click="openSchedule()" ><span class="fa fa-user"></span> View Schedule </button>
-
              </div>
             <div class="col-xs-12 col-sm-6 emphasis">
                 <h2 ng-if="profile.numberOfRecordings"><strong>{{profile.numberOfRecordings}} </strong></h2>
                 <h2 ng-if="!profile.numberOfRecordings"><strong>0</strong></h2>
                 <p><small>Recordings made</small></p>
                 <!-- THIS MESSAGE BUTTON SHOULD BE A MODAL, if not lead to messenger service-->
-                <button class="btn btn-more btn-block" ng-click="email()";
-><span class="fa fa-plus-circle"></span>Send Message </button></a>
+                <button class="btn btn-more btn-block" ng-click="email()";><span class="fa fa-plus-circle"></span>Send Message </button></a>
             </div>
-
         </div>
     </div>
 
@@ -132,13 +119,10 @@
         </div>
 
     <br class="visible-xs visible-sm">
-
     <div class="col-md-6 text-center">
         <div class="btn-group">
             <label class="btn btn-default" ng-model="calendarView" uib-btn-radio="'year'">Year</label>
             <label class="btn btn-default" ng-model="calendarView" uib-btn-radio="'month'">Month</label>
-            <!-- <label class="btn btn-default" ng-model="calendarView" uib-btn-radio="'week'">Week</label>
-            <label class="btn btn-default" ng-model="calendarView" uib-btn-radio="'day'">Day</label> -->
         </div>
     </div>
 
@@ -146,10 +130,8 @@
     <mwl-calendar
     events="events"
     view="calendarView"
-
     view-date="viewDate"
     on-event-click="eventClicked(calendarEvent)"
-
     edit-event-html="'<i class=\'glyphicon glyphicon-pencil\'></i>'"
     delete-event-html="'<i class=\'glyphicon glyphicon-remove\'></i>'"
     on-edit-event-click="editEvent(calendarEvent)"
@@ -169,11 +151,6 @@
             <div class="row">
                 <form>
                     <p class="input-group">
-                        <!-- <div class="col-md-4">
-                            <label>Arist Name</label>
-                            <input type = "text"  ng-model="session.artist"  class='form-control' placeholder={{currentUser.username}}   />
-                            <p ng-if="needNameError" class="text-center">I'm sorry, please provide your name</p>
-                        </div> -->
                         <div class="col-md-4 col-md-offset-1">
                             <label>Session Start Date</label>
                             <p>
@@ -182,24 +159,21 @@
                                <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
                              </span>
                             </p>
-
                         </div>
 
                         <div class="col-md-4 col-md-offset-1">
                             <label>Session End Date</label>
                             <input ng-model="session.endDate" class="form-control"  uib-datepicker-popup  is-open="popup2.opened" datepicker-options="dateOptions"  close-text="Close" date-disabled="disabled(date, mode)" />
-                          <span class="input-group-btn">
+                            <span class="input-group-btn">
                             <button  class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
                           </span>
-
                         </div>
+
                         <div class="col-md-2" ng-show="canEdit">
                             <label>Artist Name</label>
                             <input ng-model="session.artist" class='form-control' type='text' />
                         </div>
-
                     </p>
-
             </div>
 <br />
         <div class="row" id="sessionTimes">
@@ -207,17 +181,14 @@
                 <h5>Start Time</h5>
                 <uib-timepicker  ng-change="changed()" hour-step="hstep" min="min" max="max" minute-step="mstep"  ng-model="session.startHour" show-meridian="ismeridian"></uib-timepicker>
             </div>
-
             <div class='col-md-4 col-md-offset-1 '>
               <h5>End Time</h5>
               <uib-timepicker  ng-change="changed()" min="min" max="max" hour-step="hstep" minute-step="mstep" ng-model="session.endHour " format="date | shortTime" show-meridian="ismeridian" ></uib-timepicker>
-
             </div>
             <div class="col-md-2 timeSpace ">
                    <button type="submit" class="btn btn-default btn-block "  ng-hide="canEdit" id="submitsessionDate" ng-click="requestDates()">Reserve</button>
                    <button type='submit' class="btn btn-default btn-block" ng-show="canEdit" ng-click="requestDates()">Submit </button>
             </div>
-
         </div>
 
         <div class='row'>
