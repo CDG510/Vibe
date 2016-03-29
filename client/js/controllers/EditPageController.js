@@ -2,6 +2,11 @@ vibe.controller("EditPageController", function($scope, StudiosFactory, auth, $ro
 
   $scope.isLoggedIn = auth.isLoggedIn;
   var clearKey = {key: null}
+  $scope.logOut = function(){
+    auth.logOut()
+    $location.path("/").search(clearKey)
+  }
+  
   if ($routeParams.session) {
       $scope.session = $routeParams.session
   }

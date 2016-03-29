@@ -44,14 +44,14 @@
 
 			        </div>
 				</form>
-				<div ng-show="error" class="alert alert-danger row">
-						    <span>{{ error.message }}</span>
-						</div>
-						<p>Don't have an account? <a href="/#/signUp">Sign Up</a>
-		        </div>
-		    </div>
 
+		    </div>
+			<div ng-show="error" class="row">
+						<p class="text-danger">{{ error.message }}</p>
+					</div>
+			</div>
         </div>
+		<p>Don't have an account? <a href="/#/signUp">Sign Up</a>
 
     </section>
 

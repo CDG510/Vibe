@@ -41,7 +41,7 @@
                                      tooltip-placement="top"
                                      tooltip-trigger="mouseenter"
                                      tooltip-enable="!newUser.email">
-                                <p ng-show="form.newUser.email.$invalid && !form.newUser.email.$pristine" class="help-block">Enter a valid email.</p>
+                                <p ng-show="form.newUser.email.$invalid && !form.newUser.email.$pristine" class="help-block ">Enter a valid email.</p>
                             </div>
                             <!-- PASSWORD -->
                             <div class="loginInput" >
@@ -51,12 +51,12 @@
 
                             <div class="loginInput" >
                                 <input type="password" placeholder="Password check" name="password" class="form-control " ng-model="newUser.passwordCheck" required>
-                                <p ng-show="pwFailed" class="help-block">Must match your password!</p>
+                                <p ng-show="pwFailed" class="text-danger">Must match your password!</p>
                             </div>
                             <br>
-                            <p ng-show="tryAgain" class="help-block">Make sure all forms are filled</p>
 
                             <button type="submit" id="loginConfirmButton" class="btn btn-default btn-lg pull-right" ng-disabled="form.newStudio.$invalid">Submit</button>
+                            <p ng-show="tryAgain" class="text-danger">Make sure all forms are filled</p>
                         </div>
                     </form>
                     </div>

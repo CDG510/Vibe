@@ -35,8 +35,8 @@ app.use(passport.initialize());
 // app.use(passport.session()); // persistent login sessions
 // app.use(flash()); // use connect-flash for flash messages stored in session
 
-app.listen(5000, function(){
-    console.log("listening on 5000")
+app.listen(8080, function(){
+    console.log("listening on 8080")
 })
 // var hostname = process.env.HOSTNAME || 'localhost', port = 8080;
 // console.log("Simple static server listening at http://" + hostname + ":" + port);
