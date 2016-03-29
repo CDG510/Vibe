@@ -82,6 +82,7 @@ vibe.controller("studioProfileController", function ($scope, $location,  $routeP
 
     $scope.logOut = function(){
       auth.logOut()
+      $location.path("/").search({key:null})
     }
 
     	//add sessions

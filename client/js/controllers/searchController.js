@@ -18,6 +18,7 @@ vibe.controller("SearchController", function ($scope, $routeParams,  $log, $loca
 
 $scope.logOut = function(){
   auth.logOut()
+  $location.path("/").search({key: null})
 }
 
 	//function to show found studios information when selected

@@ -33,6 +33,7 @@ $scope.isLoggedIn = auth.isLoggedIn;
 
     $scope.logOut = function(){
       auth.logOut()
+      $location.path('/').search({key:null})
     }
 
     $scope.goToProfile = function() {

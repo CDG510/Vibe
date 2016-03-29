@@ -2,7 +2,6 @@ vibe.controller('editSessionController', function($scope, $uibModal, SessionsFac
 
     if ($routeParams.session) {
         $scope.session = $routeParams.session;
-        console.log($scope.session)
     }
         $scope.isLoggedIn = auth.isLoggedIn;
         $scope.currentUser = auth.currentUser()
@@ -104,7 +103,6 @@ vibe.controller('editSessionController', function($scope, $uibModal, SessionsFac
           output.startsAt = newStartHour
           var endTime = DatesFactory.unParseThenSet(output.endsAt)
           output.endsAt =  endTime;
-          console.log(output)
           var modalInstance = $uibModal.open({
               templateUrl: 'static/partials/successChange.html',
               controller: 'ModalInstanceCtrl',

@@ -35,8 +35,10 @@ app.use(passport.initialize());
 // app.use(passport.session()); // persistent login sessions
 // app.use(flash()); // use connect-flash for flash messages stored in session
 
-
-var hostname = process.env.HOSTNAME || 'localhost', port = 8080;
-console.log("Simple static server listening at http://" + hostname + ":" + port);
-var server = app.listen(port, hostname);
-require('./server/config/routes.js')(app, passport);
+app.listen(5000, function(){
+    console.log("listening on 5000")
+})
+// var hostname = process.env.HOSTNAME || 'localhost', port = 8080;
+// console.log("Simple static server listening at http://" + hostname + ":" + port);
+// var server = app.listen(port, hostname);
+// require('./server/config/routes.js')(app, passport);
