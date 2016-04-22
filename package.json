@@ -22,9 +22,11 @@
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.0",
     "passport-local": "^1.0.0",
+    "passport-stripe": "^0.2.2",
     "path": "^0.12.7",
     "paypal-adaptive": "^0.4.2",
     "paypal-pay": "^0.1.1",
-    "paypal-rest-sdk": "^1.6.8"
+    "paypal-rest-sdk": "^1.6.8",
+    "request": "^2.72.0"
   }
 }

@@ -1,6 +1,9 @@
 vibe.factory('SessionsFactory', function ($http) {
 		var Sessions = [];
 		var factory = {};
+		var user = {}
+
+		var paySession = {}
 
 		function ParseIt (parsed) {
 		var parsed = parsed.getTime();
@@ -15,6 +18,7 @@ vibe.factory('SessionsFactory', function ($http) {
 				callback(output);
 			})
 		}
+
 
 		factory.checkSession = function(requestedSession, callback){
 			var today = new Date()
@@ -65,6 +69,7 @@ vibe.factory('SessionsFactory', function ($http) {
 
 
 
+
 		//add session function with checks to see if it doesn't already exist
 		factory.addSession = function(requestedSession , callback){
 			//if all passes, then take it to the db to add
@@ -95,10 +100,21 @@ vibe.factory('SessionsFactory', function ($http) {
 		})
 		}
 
-		// factory.payForSession = function(session, callback) {
-		// 	var payment = {}
-		// 	payment.addCheckOutParamaters
-		// }
+
+		factory.checkoutSession = function(info){
+			console.log(info)
+			paySession = info.session;
+			var user = info.studio;
+			$http.post('/holdSession', {studio: user, session: paySession})
+		}
+
+		factory.payForSession = function(callback) {
+			$http.get('/returnForPayment').success(function (info){
+				console.log('info')
+				callback(info)
+			})
+
+		}
 
 		return factory
 	});

@@ -28,29 +28,7 @@ vibe.controller("studioProfileController", function ($scope, $location, $routePa
         });
     }
 
-//if the profile matches the current user, allow editing
 
-//show modal
-  // $scope.showForm = function () {
-  //           $scope.message = "Show Form Button Clicked";
-  //           console.log($scope.message);
-  //
-  //           var modalInstance = $uibModal.open({
-  //               templateUrl: 'static/partials/AddStudioTemplate.html',
-  //               controller: 'ModalInstanceCtrl',
-  //               scope: $scope
-  //
-  //             })
-  //
-  //           //on return
-  //           modalInstance.result.then(function (studioForm) {
-  //             // here we send it to the
-  //
-  //           }, function () {
-  //               $log.info('Modal dismissed at: ' + new Date());
-  //               // $scope.successAdd = false
-  //             });
-  //       };
 
         $scope.getSessions = function() {
             SessionsFactory.getSessions({User: $scope.profile._id},  function(output) {
@@ -90,13 +68,14 @@ $scope.logOut = function(){
 }
 	//add sessions
 	$scope.requestDates = function() {
-        console.log($scope.session)
 		if ($scope.session.startHour == null || $scope.session.endHour == null) {
 			$scope.fail = true;
+            console.log('sorruy')
             return
 		}
 
 		else {
+            console.log("we begin")
 			$scope.fail = false;
 				$scope.success = true;
 				var parsedStartTime = DatesFactory.getThenParse($scope.session.startDate, $scope.session.startHour)
@@ -112,23 +91,24 @@ $scope.logOut = function(){
                     artist: $scope.session.artist,
                     studio: $scope.profile._id
                 };
+                console.log('to the factory')
 				SessionsFactory.checkSession(session, function(output){
 					if (output === "exists") {
+                        console.log('nah')
 						$scope.existsFail = true;
+                        return
 					} else if (output === "invalid") {
+                        console.log('sorry')
+
                         $scope.invalid = true;
+                        return
                     } else {
 						$scope.existsFail = false;
-            var session = output
-            // if ($scope.canEdit == true) {
-          //   SessionsFactory.addSession(session, function(output){
-          //     $scope.showForm()
-          //   })
-          // } else {
+                        var session = output
 
-        // }
-            console.log($scope.currentUser, $scope.profile, session, " ARE OFF TO THE CHECKOUT PAGE")
-            $location.path("/checkout").search({studio: $scope.profile, session: session})
+                        SessionsFactory.checkoutSession({studio: $scope.profile, session: session})
+                        console.log($scope.currentUser, $scope.profile, session, " ARE OFF TO THE CHECKOUT PAGE")
+                        $window.location.href = "https://connect.stripe.com/oauth/authorize?response_type=code&client_id=ca_85HBoyAWwpEv8c4XhKzTSHsPUvrza10d&scope=read_write"
 					}
 				})
 			}

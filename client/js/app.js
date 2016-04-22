@@ -43,7 +43,7 @@ vibe.config(function ($routeProvider, $locationProvider, calendarConfig) {
     .when('/profile/:id/edit', {templateUrl: "/static/partials/editProfilePage.html", overrideRoot: true})
     .when('/checkout', {templateUrl:'/static/partials/Checkout.html', controller: "paymentController"})
     .when('/checkout/success', {templateUrl: '/static/partials/success.html'})
-    // .when("/userProfile/:id", {templateUrl: "static/partials/userPage.html", overrideRoot: true})
+    .when('/stripe/success', {templateUrl: '/static/partials/StripeSuccess.html', controller: 'successController'})
     .otherwise({
         redirectTo: '/'
     });
@@ -55,3 +55,9 @@ vibe.config(function ($routeProvider, $locationProvider, calendarConfig) {
     calendarConfig.allDateFormats.moment.date.hour = 'HH:mm';
 
 });
+
+vibe.config(['$httpProvider', function($httpProvider) {
+        $httpProvider.defaults.useXDomain = true;
+        delete $httpProvider.defaults.headers.common['X-Requested-With'];
+    }
+]);

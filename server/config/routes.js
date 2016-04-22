@@ -7,54 +7,17 @@ var User = mongoose.model('User');
 var UserController = require('./../controllers/User.js')
 var jwt = require('express-jwt');
 var Paypal = require('paypal-adaptive');
-var paypalSdk = new Paypal({
-  userId:    'christian.anchors-facilitator_api1.gmail.com',
-  password:  'T9J6T6DANU4XU3EB',
-  signature: 'AYZv5UZKLzSPZ.oyEgmdtB4L0fp.AIXb6UPjbpeoxudQ9KDSEkB0EdcJ',
-  sandbox:   true //defaults to false
-});
+var tempSession
+var CLIENT_ID = 'ca_85HBoyAWwpEv8c4XhKzTSHsPUvrza10d';
+var API_KEY = 'sk_test_ghnSVUwORQe2wvRk3tY5f2oU';
 
-// var payload = {
-//     requestEnvelope: {
-//         errorLanguage:  'en_US'
-//     },
-//     actionType:     'PAY',
-//     currencyCode:   'USD',
-//     feesPayer:      'EACHRECEIVER',
-//     memo:           'Chained payment example',
-//     cancelUrl:      'http://test.com/cancel',
-//     returnUrl:      'http://test.com/success',
-//     receiverList: {
-//         receiver: [
-//             {
-//                 email:  'primary@test.com',
-//                 amount: '100.00',
-//                 primary:'true'
-//             },
-//             {
-//                 email:  'secondary@test.com',
-//                 amount: '10.00',
-//                 primary:'false'
-//             }
-//         ]
-//     }
-// };
+var TOKEN_URI = 'https://connect.stripe.com/oauth/token';
+var AUTHORIZE_URI = 'https://connect.stripe.com/oauth/authorize';
 
-// paypalSdk.pay(payload, function (err, response) {
-//     if (err) {
-//         console.log(err);
-//     } else {
-//         // Response will have the original Paypal API response
-//         console.log(response);
-//         // But also a paymentApprovalUrl, so you can redirect the sender to checkout easily
-//         console.log('Redirect to %s', response.paymentApprovalUrl);
-//     }
-// });
+
 module.exports = function(app, passport) {
-
     var urlencodedParser = bodyParser.urlencoded({ extended: false })
 }
-
 
 var auth = jwt({secret: 'SECRET', userProperty: 'payload'});
 
@@ -147,8 +110,28 @@ app.post("/findStudiosSimple", function(req, res){
         Session.deleteSession(req, res)
     })
 
+    app.post('/holdSession', function(req, res){
+         tempSession =  {session: req.body.session, studio: req.body.studio}
+         console.log(tempSession, 'HOLDING TEMP SESSION')
+    })
+//
+    app.get('/returnForPayment', function(req, res){
+        console.log(tempSession, "GETTING RETURN !!~~~~~~~~~~~~~~~~~~~~~~~~~")
+        res.json(tempSession)
+    })
 
-    //------------paypal payment
+    app.get('/auth/stripe',
+      Passport.authenticate('stripe', { scope: 'read_write' }));
+
+    app.get('/auth/stripe/callback',
+      Passport.authenticate('stripe', { failureRedirect: '/#/login' }),
+      function(req, res) {
+        // Successful authentication, redirect   home.
+        res.redirect('/profile');
+      });
+    //------------stripe payment
+
+    // });
 
 
 };

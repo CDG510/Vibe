@@ -1,5 +1,6 @@
 var passport          = require('passport');
 var LocalStrategy     = require('passport-local').Strategy;
+var StripeStrategy = require('passport-stripe').Strategy;
 // var FacebookStrategy  = require('passport-facebook').Strategy;
 var mongoose          = require('mongoose');
 var bodyParser = require('body-parser');
@@ -72,6 +73,18 @@ passport.deserializeUser(function(id, done) {
         done(err, user);
     });
 });
+
+passport.use(new StripeStrategy({
+     clientID: 'ca_85HBoyAWwpEv8c4XhKzTSHsPUvrza10d',
+     clientSecret: 'sk_test_ghnSVUwORQe2wvRk3tY5f2oU',
+         callbackURL: "http://localhost:8080/auth/stripe/callback"
+   },
+   function(accessToken, refreshToken, stripe_properties, done) {
+     User.findOne({ stripeId: stripe_properties.stripe_user_id }, function (err, user) {
+       return done(err, user);
+     });
+   }
+ ));
 
 // =========================================================================
 // LOCAL SIGNUP ============================================================
