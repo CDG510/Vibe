@@ -1,4 +1,4 @@
-import React, {StyleSheet, Dimensions} from "react-native";
+import React, {StyleSheet, Dimensions, PixelRatio} from "react-native";
 const {width, height, scale} = Dimensions.get("window"),
     vw = width / 100,
     vh = height / 100,
@@ -96,7 +96,7 @@ export default StyleSheet.create({
     },
     "navbar-default": {
         "marginBottom": 0,
-        "borderBottom": "1 solid rgba(255,255,255,.3)",
+        "borderBottom": "1px solid rgba(255,255,255,.3)",
         "textTransform": "uppercase",
         "fontFamily": "Montserrat,\"Helvetica Neue\",Helvetica,Arial,sans-serif",
         "backgroundColor": "#009688",
@@ -154,7 +154,7 @@ export default StyleSheet.create({
         "float": "right",
         "maxWidth": 30,
         "paddingRight": 30,
-        "boxShadow": "0 4 8 0 rgba(0, 0, 0, 0.2), 0 6 20 0 rgba(0, 0, 0, 0.19)",
+        "boxShadow": "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
         "backgroundColor": "#009688",
         "color": "white"
     },
@@ -232,7 +232,7 @@ export default StyleSheet.create({
         "display": "table",
         "width": "100%",
         "height": "auto",
-        "maxHeight": "800    padding: 200 0 200 0",
+        "maxHeight": "800px    padding: 200px 0px 200px 0",
         "textAlign": "center",
         "color": "white",
         "background": "url(../img/studioBackground.jpeg) no-repeat top center scroll",
@@ -284,18 +284,18 @@ export default StyleSheet.create({
         "transition": "all .3s ease-in-out"
     },
     "btn-default": {
-        "border": "1 solid #009688",
+        "border": "1px solid #009688",
         "color": "#009688",
         "backgroundColor": "transparent"
     },
     "btn-default:hover": {
-        "border": "1 solid #009688",
+        "border": "1px solid #009688",
         "outline": 0,
         "color": "white",
         "backgroundColor": "#009688"
     },
     "btn-default:focus": {
-        "border": "1 solid #009688",
+        "border": "1px solid #009688",
         "outline": 0,
         "color": "white",
         "backgroundColor": "#009688"
@@ -305,45 +305,45 @@ export default StyleSheet.create({
         "color": "white"
     },
     "btn-inverse:hover": {
-        "border": "1 solid #009688",
+        "border": "1px solid #009688",
         "color": "#009688",
         "backgroundColor": "transparent"
     },
     "btn-inverse:focus": {
-        "border": "1 solid #009688",
+        "border": "1px solid #009688",
         "color": "#009688",
         "backgroundColor": "transparent"
     },
     "btn-more": {
-        "border": "1 solid #9c27b0",
+        "border": "1px solid #9c27b0",
         "color": "#9c27b0",
         "backgroundColor": "transparent"
     },
     "btn-more:hover": {
-        "border": "1 solid #9c27b0",
+        "border": "1px solid #9c27b0",
         "outline": 0,
         "color": "white",
         "backgroundColor": "#9c27b0"
     },
     "btn-more:focus": {
-        "border": "1 solid #9c27b0",
+        "border": "1px solid #9c27b0",
         "outline": 0,
         "color": "white",
         "backgroundColor": "#9c27b0"
     },
     "btn-cancel": {
-        "border": "1 solid #F44336",
+        "border": "1px solid #F44336",
         "color": "#F44336",
         "backgroundColor": "transparent"
     },
     "btn-cancel:hover": {
-        "border": "1 solid #F44336",
+        "border": "1px solid #F44336",
         "outline": 0,
         "color": "#000",
         "backgroundColor": "#F44336"
     },
     "btn-cancel:focus": {
-        "border": "1 solid #F44336",
+        "border": "1px solid #F44336",
         "outline": 0,
         "color": "#000",
         "backgroundColor": "#F44336"
@@ -462,7 +462,7 @@ export default StyleSheet.create({
         "paddingLeft": 0
     },
     "contactInfo": {
-        "marginTop": "100 0 100 0"
+        "marginTop": "100px 0 100px 0"
     },
     "userInfo": {
         "paddingTop": 100,
@@ -626,10 +626,10 @@ export default StyleSheet.create({
         "minHeight": 600
     },
     "divider": {
-        "borderTop": "1 solid rgba(0,0,0,0.1)"
+        "borderTop": "1px solid rgba(0,0,0,0.1)"
     },
     "emphasis": {
-        "borderTop": "4 solid transparent",
+        "borderTop": "4px solid transparent",
         "display": "inline-block",
         "paddingTop": 10,
         "paddingRight": 10,
@@ -638,7 +638,7 @@ export default StyleSheet.create({
         "verticalAlign": "top"
     },
     "emphasis:hover": {
-        "borderTop": "4 solid #29b6f6"
+        "borderTop": "4px solid #29b6f6"
     },
     "emphasis h2": {
         "marginBottom": 0
@@ -671,10 +671,10 @@ export default StyleSheet.create({
         "marginBottom": 10
     },
     "dropup dropdown-menu:before": {
-        "content": "\"\"",
-        "borderTop": "10 solid #34495e",
-        "borderRight": "10 solid transparent",
-        "borderLeft": "10 solid transparent",
+        "content": "",
+        "borderTop": "10px solid #34495e",
+        "borderRight": "10px solid transparent",
+        "borderLeft": "10px solid transparent",
         "position": "absolute",
         "bottom": -10,
         "left": "50%",
@@ -749,7 +749,7 @@ export default StyleSheet.create({
     "textarea": {
         "height": 200,
         "marginTop": 20,
-        "border": "1 solid grey"
+        "border": "1px solid grey"
     },
     "mwl-calendar a:hover": {
         "color": "rgba(255, 255, 255, 0.5)"
@@ -821,12 +821,12 @@ export default StyleSheet.create({
         "backgroundColor": "rgba(255,255, 255, 0.5)"
     },
     "searchPageResults": {
-        "borderLeft": "1 solid #009688",
+        "borderLeft": "1px solid #009688",
         "minHeight": 500
     },
     "example-animate-container": {
         "background": "white",
-        "border": "1 solid black",
+        "border": "1px solid black",
         "listStyle": "none",
         "marginTop": 0,
         "marginRight": 0,
@@ -868,5 +868,9 @@ export default StyleSheet.create({
     "animate-repeatng-enterng-enter-active": {
         "opacity": 1,
         "maxHeight": 30
+    },
+    "connectStripeButton": {
+        "height": 50,
+        "width": 250
     }
 });

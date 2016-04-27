@@ -37,6 +37,19 @@ vibe.factory('auth', function($http, $window, $rootScope){
 		});
 	};
 
+	auth.stripeRegister = function(user){
+	return $http.post('/authorize', user).success(function(){
+		//  $window.location.href = "https://connect.stripe.com/oauth/authorize?response_type=code&client_id=ca_85HBoyAWwpEv8c4XhKzTSHsPUvrza10d&scope=read_write"
+
+		})
+	}
+
+	auth.stripeSave = function(user, callback){
+		 $http.post('/saveStripeInfo', user).success(function(results){
+			 callback(results);
+		 })
+	}
+
 	auth.logIn = function(user, callback){
 		return $http.post('/loginUser', user).success(function(data){
 		auth.saveToken(data.token);

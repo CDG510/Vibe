@@ -6,6 +6,16 @@ var User = mongoose.model('User');
 var UserController = require('./../controllers/User.js')
 var jwt = require('express-jwt');
 var auth = jwt({secret: 'SECRET', userProperty: 'payload'});
+var CLIENT_ID = 'ca_85HBoyAWwpEv8c4XhKzTSHsPUvrza10d';
+var API_KEY = 'sk_test_ghnSVUwORQe2wvRk3tY5f2oU';
+var qs = require('querystring');
+var request = require('request');
+var express = require('express');
+
+var TOKEN_URI = 'https://connect.stripe.com/oauth/token';
+var AUTHORIZE_URI = 'https://connect.stripe.com/oauth/authorize';
+
+var stripe = require('stripe')(API_KEY);
 
 
 
@@ -13,6 +23,7 @@ module.exports = function(app, passport, client) {
 
 //-------------------- AUTHENTICATION / LOGIN / SIGNUP ROUTES : START  ----------------//
 app.post('/register', function(req, res, next) {
+
 	if(!req.body.email || !req.body.password) {
 		return res.status(400).json({message: 'Please fill out all fields'})
 	}
@@ -47,6 +58,63 @@ app.post('/loginUser', function(req, res, next) {
 		}
 	})(req, res, next);
 });
+
+///go to stripe to signup
+	app.post('/authorize', function(req,res){
+
+        res.send(AUTHORIZE_URI + '?' + qs.stringify({
+          response_type: 'code',
+          scope: 'read_write',
+          client_id: CLIENT_ID
+        }));
+      })
+
+//
+// for getting a token after signingup
+app.post('/saveStripeInfo', function(req, res) {
+
+    var code = req.body.code;
+	var user = req.body.user
+    // Make /oauth/token endpoint POST request
+	// UserController.getStripeToken(req, res)
+	console.log(code, user, "GOING TO GET A TOKEN")
+    request.post({
+      url: TOKEN_URI,
+      form: {
+        grant_type: 'authorization_code',
+        client_id: CLIENT_ID,
+        code: code,
+        client_secret: API_KEY
+      }
+    }, function(err, r, body) {
+        if(err){
+        console.log(err)
+        return res.json(user);
+
+        } else{
+            var accessToken = JSON.parse(body).access_token;
+            var stripeInfo = JSON.parse(body)
+			console.log(body)
+            // For demo's sake, output in response:
+            User.findOne({_id: user._id}, function(err, foundUser){
+                  if(err) {
+                      console.log(err)
+                  }
+                  else{
+                        foundUser.Stripe = stripeInfo
+                        foundUser.save( function(err, success){
+                            if(err){
+                                console.log(err)
+                            } else{
+								console.log("AYEEEEEEEE", success)
+							    res.json(success);
+                            }
+                        })
+                  	}
+                })
+            }
+    });
+  });
 
 //~~~~~~~~~~~USER ROUTES
 
@@ -99,6 +167,8 @@ app.post("/findStudiosSimple", function(req, res){
     app.post('/updateSession', function(req, res){
         Session.update(req, res)
     })
+
+
 
 
 };

@@ -1002,3 +1002,8 @@ tr:focus {
   opacity:1;
   max-height:30px;
 }
+
+#connectStripeButton{
+    height: 50px;
+    width: 250px;
+}

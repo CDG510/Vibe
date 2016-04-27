@@ -29,6 +29,7 @@ var UserSchema = new mongoose.Schema({
 	gear: String,
 	gallery: Array,
 	numberOfRecordings: Number,
+	Stripe: Object,
 	sessions: [{type: Schema.ObjectId, ref: 'Session'}]
 })
 

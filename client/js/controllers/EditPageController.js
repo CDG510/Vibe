@@ -1,12 +1,14 @@
-vibe.controller("EditPageController", function($scope, StudiosFactory, auth, $routeParams, usersFactory, DatesFactory, $location){
+vibe.controller("EditPageController", function($scope, StudiosFactory, auth, $routeParams, usersFactory, DatesFactory, $location, $window){
 
   $scope.isLoggedIn = auth.isLoggedIn;
+  $scope.user = auth.currentUser()
+  console.log($scope.user)
   var clearKey = {key: null}
   $scope.logOut = function(){
     auth.logOut()
     $location.path("/").search(clearKey)
   }
-  
+
   if ($routeParams.session) {
       $scope.session = $routeParams.session
   }
@@ -16,6 +18,7 @@ vibe.controller("EditPageController", function($scope, StudiosFactory, auth, $ro
   usersFactory.getUserByName({username: $routeParams.id}, function(output) {
       $scope.currentUser = output
       $scope.newStudio = $scope.currentUser;
+      console.log($scope.currentUser)
       //if there is no profiletype yet
        if ($scope.currentUser.profileType == undefined || $scope.currentUser.profileType== ""){
       } else if ($scope.currentUser.profileType == "Studio") {
@@ -145,28 +148,34 @@ $scope.setAsArtist = function() {
         $scope.newStudio.profileImage = $scope.newStudio.profileImage.toString()
       }
       //set the form to current user...
-         $scope.newStudio.id = $scope.currentUser._id;
+         $scope.newStudio._id = $scope.currentUser._id;
           if ($scope.newStudio.profileType == "Artist") {
               usersFactory.updateUser($scope.newStudio, function(output) {
                   $scope.newStudio = output
-                  });
+                //   $location.path('/profile/'+$routeParams.id).search(clearKey);
+                });
           } else {
-          for (var i =0; i <= 7; i++){
-              //for any values not set, set them to a non-valid value so they don't get registered by calendar
-              if (!$scope.newStudio.schedule.offDays[i]){
-                  $scope.newStudio.schedule.offDays.push({});
-                  $scope.newStudio.schedule.offDays[i].value = 10;
-                  $scope.newStudio.schedule.offDays[i].noWork = false;
-              }
-          }
-          console.log($scope.newStudio)
-          //actually go update finally
-          usersFactory.updateUser($scope.newStudio, function(output) {
-                  $scope.newStudio = output
-              });
-          }
+                  for (var i =0; i <= 7; i++){
+                      //for any values not set, set them to a non-valid value so they don't get registered by calendar
+                      if (!$scope.newStudio.schedule.offDays[i]){
+                          $scope.newStudio.schedule.offDays.push({});
+                          $scope.newStudio.schedule.offDays[i].value = 10;
+                          $scope.newStudio.schedule.offDays[i].noWork = false;
+                      }
+                  }
+                  //actually go update finally
+                  usersFactory.updateUser($scope.newStudio, function(output) {
+                          $scope.newStudio = output
+                      });
+                  }
           //return to profile
-          $location.path('/profile/'+$routeParams.id).search(clearKey);
+        }
+
+        $scope.goToStripe = function(){
+            console.log($scope.user)
+            auth.stripeRegister($scope.user).then(function(results){
+                $window.location.href = results.data
+            })
         }
 
 

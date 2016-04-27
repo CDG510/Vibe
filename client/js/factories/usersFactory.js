@@ -3,6 +3,7 @@ vibe.factory("usersFactory", function ($http) {
 	var factory = {}
 
 	factory.updateUser = function(user, callback){
+		console.log(user);
 		$http.post("/updateProfile", user).success(function(output){
 			callback(output)
 		})
