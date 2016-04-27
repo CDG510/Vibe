@@ -21,13 +21,7 @@ vibe.factory('SessionsFactory', function ($http) {
 
 		}
 		//
-		// factory.getStudioFromSession = function(id, callback){
-		// 	console.log('checking sessions with', id)
-		// 	$http.post('/findStudiobySession', output) {
-		// 		Studios = output
-		// 		callback(ouput)
-		// 	}
-		// }
+
 
 		factory.checkSession = function(requestedSession, callback){
 			var today = new Date()
@@ -117,6 +111,14 @@ vibe.factory('SessionsFactory', function ($http) {
 			$http.post("/updateSession", event).success(function(output){
 				callback(output);
 			});
+		}
+
+		factory.payForSession = function(info, callback){
+			console.log(info);
+			$http.post('/payForSession', event).success(function(output){
+				console.log(output);
+				callback(ouput)
+			})
 		}
 
 		return factory

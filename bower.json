@@ -16,7 +16,6 @@
     "angular-bootstrap-calendar": "^0.18.9",
     "moment": "^2.11.2",
     "moment-timezone": "^0.5.0",
-    "ngCart": "ngcart#^1.0.0",
     "MultipleDatePicker": "^1.4.0"
   }
 }

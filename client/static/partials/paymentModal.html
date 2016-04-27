@@ -1,12 +1,41 @@
 <div class="modal-header">
-    <h4 class="text-center">Payment for {{studio.businessName}}</h4>
+    <h4 ng-hide="successfulPayment" class="text-center">Payment for {{studio.businessName}}</h4>
 </div>
-<div class="modal-body">
-<input type="text" placeholder="creditcard info" / />
-<input type="text" placeholder="other info"/>
-<input type="text" placeholder="security" / />
+<div class="modal-body text-center">
+
+<div class="row" ng-hide="successfulPayment">
+    <form stripe-form="stripeCallback" name="checkoutForm">
+        <div class="row">
+            <input ng-model="number" placeholder="Card Number"
+                     payments-format="card" payments-validate="card" name="card" />
+                     <div ng-if="checkoutForm.card.$invalid">
+                        Error: invalid card number!
+                    </div>
+        </div>
+        <div class='row'>
+            <input ng-model="expiry" placeholder="Expiration"
+                     payments-format="expiry" payments-validate="expiry"
+                     name="expiry" />
+                     <div ng-if="checkoutForm.expiry.$invalid">
+                        Error: Expired-card!
+                    </div>
+        </div>
+        <div class='row'>
+            <input ng-model="cvc" placeholder="CVC" payments-format="cvc" payments-validate="cvc" name="cvc" />
+        </div>
+
+
+        <button type="submit" class=" btn btn-default">Submit</button>
+    </form>
+</div>
+<div class="row" ng-show="successfulPayment">
+    <h5>Congrats! your reservation was a success! Contact the studio for any additonal info, otherwise click below to return to your profile!</h5>
+</div>
+
+</div>
+
 
  <div class="modal-footer">
-      <button class="btn btn-default btn-link" ng-click="cancel()">Back to profile</button>
-      <button class="btn btn-default btn-link" ng-click="pay()">Submit Payment</button>
+      <button class="btn btn-default btn-link pull-left" ng-click="cancel()">Back to profile</button>
+      <!-- <button class="btn btn-default btn-link pull-right" ng-click="pay()">Submit Payment</button> -->
 </div>

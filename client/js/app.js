@@ -1,5 +1,5 @@
 var vibe = angular.module('vibe', ['ngRoute', 'ui.bootstrap', 'mwl.calendar',
- 'duScroll', 'multipleDatePicker', 'ngAnimate', 'angularMoment']).value('duScrollDuration', 1500);;
+ 'duScroll', 'multipleDatePicker', 'ngAnimate', 'angularMoment', "angularPayments"]).value('duScrollDuration', 1500);;
 // 'ngCart'
 var PHONE_REGEXP = /^[(]{0,1}[0-9]{3}[)\.\- ]{0,1}[0-9]{3}[\.\- ]{0,1}[0-9]{4}$/;
 
@@ -7,6 +7,8 @@ vibe.config(function ($routeProvider, $locationProvider, calendarConfig) {
     var getPath = function(path) {
         return '/i' + (path.indexOf('/') === 0 ? path : '/' + path);
     };
+
+
     var config = {
         when: function(path, route) {
             if(route.overrideRoot) {

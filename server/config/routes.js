@@ -116,6 +116,15 @@ app.post('/saveStripeInfo', function(req, res) {
     });
   });
 
+  app.post('/payForSession', function(req, res){
+	  console.log(req.body)
+	//   stripe.charges.create({
+	//     amount: req.body.studio.price,
+	//     currency: 'usd',
+	//     source: req.body.token
+	//   }, {stripe_account: req.body.studio.stripe_user_id});
+  })
+
 //~~~~~~~~~~~USER ROUTES
 
 app.post("/findUser", function(req, res){

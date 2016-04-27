@@ -872,5 +872,8 @@ export default StyleSheet.create({
     "connectStripeButton": {
         "height": 50,
         "width": 250
+    },
+    "ng-invalid": {
+        "color": "red"
     }
 });

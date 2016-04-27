@@ -3,6 +3,8 @@ vibe.controller("ModalInstanceCtrl", function ($scope, $uibModalInstance, studio
 
     $scope.isLoggedIn = auth.isLoggedIn();
     $scope.studio = studio
+    console.log(studio) 
+
     var user = auth.currentUser()
         user.User = user._id
 //get logged in user Info
@@ -10,7 +12,7 @@ vibe.controller("ModalInstanceCtrl", function ($scope, $uibModalInstance, studio
             $scope.currentUser = output
       })
 
-
+      console.log(user);
       $scope.goToProfile = function(){
           $location.path('/#/profile/'+studio.title).search({key: null})
           $uibModalInstance.dismiss('cancel')
@@ -20,4 +22,8 @@ vibe.controller("ModalInstanceCtrl", function ($scope, $uibModalInstance, studio
     $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');
     };
+
+    $scope.pay= function(){
+
+    }
 });

@@ -12,12 +12,17 @@ vibe.controller('paymentController', function($scope, $location, $routeParams, S
 
   $scope.showForm = function () {
             var modalInstance = $uibModal.open({
-                templateUrl: 'static/partials/AddStudioTemplate.html',
-                controller: 'ModalInstanceCtrl',
+                templateUrl: 'static/partials/paymentModal.html',
+                controller: 'processPaymentController',
                 scope: $scope,
                 resolve: {
                     studio: function() {
                         return $scope.studio
+                    },
+                    session:{
+                        session: function(){
+                            return $scope.session
+                        }
                     }
                 }
             })

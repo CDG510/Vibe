@@ -1007,3 +1007,7 @@ tr:focus {
     height: 50px;
     width: 250px;
 }
+
+.ng-invalid {
+    color: red;
+}
