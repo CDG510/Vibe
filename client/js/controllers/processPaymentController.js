@@ -43,10 +43,10 @@ vibe.controller("processPaymentController", function ($scope, $uibModalInstance,
             token: result.id
         }
         console.log(info);
-        // SessionsFactory.payForSession(info, function(output){
-        //     console.log(output);
-        //     $scope.successfulPayment = true;
-        // })
+        SessionsFactory.payForSession(info, function(output){
+            console.log(output);
+            $scope.successfulPayment = true;
+        })
     }
 };
 

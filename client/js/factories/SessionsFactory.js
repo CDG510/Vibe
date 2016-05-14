@@ -115,7 +115,7 @@ vibe.factory('SessionsFactory', function ($http) {
 
 		factory.payForSession = function(info, callback){
 			console.log(info);
-			$http.post('/payForSession', event).success(function(output){
+			$http.post('/payForSession', info).success(function(output){
 				console.log(output);
 				callback(ouput)
 			})
